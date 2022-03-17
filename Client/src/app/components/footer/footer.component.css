@@ -1,0 +1,32 @@
+#rectangle {
+    background-color: #282a2c;
+}
+
+ul {
+    text-decoration: none;
+}
+
+a {
+    color: wheat;
+}
+
+#email {
+    color: white !important;
+}
+
+#contact {
+    list-style-type: none;
+}
+
+#horizontal > li {
+    float: left;
+    margin-left: 30px;
+}
+
+#horizontal > li > a {
+    color: white;
+}
+
+#horizontal > li:first-child {
+    list-style-type: none;
+}

@@ -1,0 +1,43 @@
+#imgLogo:hover {
+    cursor: pointer;
+    border: none;
+}
+  
+
+#imgLogo:focus {
+    outline: none;
+}
+
+ul > li > a:hover {
+    color: #343a40;
+}
+
+.navbar
+{
+    position: fixed;
+    display:inline-block;
+    z-index:2;
+}
+ 
+.navbar-toggler 
+{
+  background-color:gray;
+}
+     
+ul > li > a {
+  color: white;
+}
+
+@media (max-width: 767px) {
+  ul > li > a {
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  ul > li > a {
+    font-weight: bold;
+    font-size: medium;
+  }
+}

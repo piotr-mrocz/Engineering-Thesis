@@ -1,0 +1,15 @@
+<div class="container-fluid">
+
+  <div class="col-7 align-self-center mb-5" style="margin: auto;">
+    <h2>Nasza kadra</h2>
+    <hr>
+    <div class="row">
+      <div class="card m-2 hover-overlay" style="width: 15rem;" *ngFor="let person of persons | async" [routerLink]="['/persondetails', person.id]">
+        <img [src]="person.photo" class="card-img-top" alt="person" style="height: 160px;">
+        <div class="card-body bg-warning">
+          <p class="card-text text-center h5" id="personName">{{person.name}} {{person.lastname}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

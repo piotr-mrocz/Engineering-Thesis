@@ -1,0 +1,17 @@
+img {
+    width: 100%;
+}
+
+button {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+}
+
+button:hover {
+    color: #28a745;
+}
+
+button:focus {
+    outline: none;
+}

@@ -1,0 +1,46 @@
+
+<div class="container-fluid" *ngIf="personDetails | async as person">
+
+  
+  <app-divider></app-divider>
+
+  <div class="col-7 align-self-center mb-5" style="margin: auto;">
+    <h2>{{person.name}}</h2>
+    <hr>
+    <div class="card mb-3">
+      <div class="row">
+        <div class="col-5  p-0 m-0" style="background-color: wheat;">
+          <img class="img-responsive" [src]="person.photo" [alt]="person.name" style="width: 100%;"> 
+          <h4 class="mt-5 text-center">Informacje:</h4>
+          <ul>
+            <li>
+              <b>Imię: {{person.name}}</b>
+            </li>
+            <li>
+              <b>Wiek: {{person.age}}</b>
+            </li>
+            <li>
+              <b>W schronisku od: {{person.inShelter | date: 'dd.MM.yyyy'}}</b>
+            </li>
+            <li>
+              <b>Płeć: {{person.gender}}</b>
+            </li>
+          </ul>
+          <div class="d-flex justify-content-end m-4">
+            <button (click)="comeBack()" class="h5  rounded-pill">
+              <i class="bi bi-arrow-left-circle-fill text-success"></i>
+              Wróć
+            </button>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card-body">
+            <h5 class="card-title">{{person.name}}</h5>
+            <p class="card-text">{{person.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
