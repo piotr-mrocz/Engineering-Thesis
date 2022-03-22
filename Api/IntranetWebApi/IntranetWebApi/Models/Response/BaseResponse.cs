@@ -1,0 +1,16 @@
+﻿namespace IntranetWebApi.Models.Response;
+public class BaseResponse
+{
+    public bool Succeeded { get; set; }
+    public string Message { get; set; }
+
+    public BaseResponse()
+    {
+    }
+
+    public BaseResponse(bool succeeded, string message)
+    {
+        Message = message;
+        Succeeded = succeeded;
+    }
+}
