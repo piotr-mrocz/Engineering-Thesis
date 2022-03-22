@@ -1,26 +1,30 @@
-using IntranetWebApi;
+using IntranetWebApi.Data;
+using IntranetWebApi.Settings;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);  
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
+// database
+builder.Services.AddDbContext<IntranetDbContext>(x =>
+    x.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ConnectionString.JDPIntranet))));
 var app = builder.Build();
+
+// swagger
+app.UseSwaggerUI();
+app.UseSwagger(x => x.SerializeAsV2 = true);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseSwagger();
+    app.UseSwagger();
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseAuthorization();
-
-Endpoints.RegisterEndpoints(app);
 
 app.Run();
