@@ -25,6 +25,9 @@ if (!app.Environment.IsDevelopment())
     app.UseSwagger();
 }
 
+// register endpoints
+app.RegisterEndpoints();
+
 app.UseHttpsRedirection();
 
 app.Run();

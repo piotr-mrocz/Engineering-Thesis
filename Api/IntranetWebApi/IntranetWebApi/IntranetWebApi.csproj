@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -26,7 +27,6 @@
     <Folder Include="Features\TableFeatures\Query\" />
     <Folder Include="Models\Entities\" />
     <Folder Include="Models\Dto\" />
-    <Folder Include="Models\Response\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
