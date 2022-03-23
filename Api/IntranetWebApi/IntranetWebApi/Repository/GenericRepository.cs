@@ -1,9 +1,10 @@
 ﻿using IntranetWebApi.Data;
+using IntranetWebApi.Models.Response;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace IntranetWebApi.Repository;
-public class GenericRepository<T> where T : class
+public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly IntranetDbContext _dbContext;
 
@@ -12,38 +13,65 @@ public class GenericRepository<T> where T : class
         _dbContext = dbContext;
     }
 
-    public async Task<T> GetEntityByExpression(Expression<Func<T, bool>> expression, CancellationToken cancellationToken)
+    public async Task<Response<T>> GetEntityByExpression(Expression<Func<T, bool>> expression, CancellationToken cancellationToken)
     {
         var entity = await _dbContext.Set<T>().FirstOrDefaultAsync(expression, cancellationToken);
-        return entity;
+
+        return new Response<T>()
+        {
+            Succeeded = entity != null,
+            Message = entity != null ? "" : "Entity not found",
+            Data = entity
+        };
     }
 
-    public async Task<IEnumerable<T>> GetManyEntitiesByExpression(Expression<Func<T, bool>> expression, CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<T>>> GetManyEntitiesByExpression(Expression<Func<T, bool>> expression, CancellationToken cancellationToken)
     {
         var entities = await _dbContext.Set<T>().Where(expression).ToListAsync(cancellationToken);
-        return entities;
-    }
 
-    public async Task<bool> CreateEntity(T createEntity, CancellationToken cancellationToken)
-    {
-        try
+        return new Response<IEnumerable<T>>()
         {
+            Succeeded = entities != null && entities.Any(),
+            Message = entities != null ? "Ok" : "Entity not found",
+            Data = entities != null && entities.Any() ? entities : null
+        };
+    }
 
-        }
-        catch (Exception ex)
+    public async Task<ResponseStruct<int>> CreateEntity(T createEntity, CancellationToken cancellationToken)
+    {
+        await _dbContext.Set<T>().AddAsync(createEntity, cancellationToken);
+        var result = await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return new ResponseStruct<int>()
         {
-
-            throw;
-        }
+            Succeeded = result > 0,
+            Message = result > 0 ? "Ok" : "Can't add entity",
+            Data = result
+        };
     }
 
-    public async Task<bool> UpdateEntity(T updateEntity, CancellationToken cancellationToken)
+    public async Task<BaseResponse> UpdateEntity(T updateEntity, CancellationToken cancellationToken)
     {
+        _dbContext.Set<T>().Update(updateEntity);
+        var result = await _dbContext.SaveChangesAsync(cancellationToken);
 
+        return new BaseResponse()
+        {
+            Succeeded = result > 0,
+            Message = result > 0 ? "Ok" : "Can't update entity"
+        };
     }
 
-    public async Task<bool> DeleteEntity(T deleteEntity, CancellationToken cancellationToken)
+    public async Task<BaseResponse> DeleteEntity(T deleteEntity, CancellationToken cancellationToken)
     {
+         _dbContext.Set<T>().Remove(deleteEntity);
 
+        var result = await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return new BaseResponse()
+        {
+            Succeeded = result > 0,
+            Message = result > 0 ? "Ok" : "Can't update entity"
+        };
     }
 }
