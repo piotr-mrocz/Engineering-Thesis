@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -23,10 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\TableFeatures\Command\" />
-    <Folder Include="Features\TableFeatures\Query\" />
-    <Folder Include="Models\Entities\" />
+    <Folder Include="Features\TestowaTabelaFeatures\Query\" />
     <Folder Include="Models\Dto\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 

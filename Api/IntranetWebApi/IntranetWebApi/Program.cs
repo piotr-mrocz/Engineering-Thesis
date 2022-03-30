@@ -32,9 +32,6 @@ if (!app.Environment.IsDevelopment())
 }
 #endregion Configure the HTTP request pipeline.
 
-// register endpoints
-app.RegisterEndpoints();
-
 app.UseHttpsRedirection();
 
 app.Run();

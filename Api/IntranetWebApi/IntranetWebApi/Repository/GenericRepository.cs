@@ -54,7 +54,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         _dbContext.Set<T>().Update(updateEntity);
         var result = await _dbContext.SaveChangesAsync(cancellationToken);
-
+        
         return new BaseResponse()
         {
             Succeeded = result > 0,

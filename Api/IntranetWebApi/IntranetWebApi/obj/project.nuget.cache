@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "7c2vHZkK0fFuXvcaLDFi1EYzuy00DxPFvSy2x057jRRFmBmWJsT3VxFBqt0+oVb8DV0bf3MpFxKXl2rsNOMi1Q==",
+  "dgSpecHash": "3h0lqHCdz+Xu7cMC9M3P2WMm9kAepq1c+VTvlX4XIoad/RrrPSSflqZk7EKailvfv9wPK1887FPmisJAiJMH2A==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi\\IntranetWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mrocz\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\fluentvalidation\\10.0.4\\fluentvalidation.10.0.4.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.0.4\\fluentvalidation.dependencyinjectionextensions.10.0.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\mediatr.extensions.fluentvalidation.aspnetcore\\2.0.0\\mediatr.extensions.fluentvalidation.aspnetcore.2.0.0.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

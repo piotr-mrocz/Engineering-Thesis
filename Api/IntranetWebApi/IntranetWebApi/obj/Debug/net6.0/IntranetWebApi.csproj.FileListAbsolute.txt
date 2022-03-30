@@ -88,3 +88,12 @@ D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\ne
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\net6.0\IntranetWebApi.pdb
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\net6.0\IntranetWebApi.genruntimeconfig.cache
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\net6.0\ref\IntranetWebApi.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\EntityFramework.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\System.CodeDom.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
