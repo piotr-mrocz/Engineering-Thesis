@@ -2,6 +2,31 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "AutoMapper/11.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/11.0.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "11.0.0",
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "EntityFramework/6.4.4": {
         "type": "package",
         "dependencies": {
@@ -872,10 +897,86 @@
             "rid": "win"
           }
         }
+      },
+      "IntranetWebApi.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EntityFramework": "6.4.4",
+          "IntranetWebApi.Domain": "1.0.0",
+          "IntranetWebApi.Infrastructure": "1.0.0",
+          "MediatR": "10.0.1",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
+          "Microsoft.EntityFrameworkCore": "6.0.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.3"
+        },
+        "compile": {
+          "bin/placeholder/IntranetWebApi.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IntranetWebApi.Application.dll": {}
+        }
+      },
+      "IntranetWebApi.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/IntranetWebApi.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IntranetWebApi.Domain.dll": {}
+        }
+      },
+      "IntranetWebApi.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "IntranetWebApi.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.3",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.3"
+        },
+        "compile": {
+          "bin/placeholder/IntranetWebApi.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IntranetWebApi.Infrastructure.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "AutoMapper/11.0.1": {
+      "sha512": "WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
+      "type": "package",
+      "path": "automapper/11.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.11.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.dll",
+        "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/11.0.0": {
+      "sha512": "0asw5WxdCFh2OTi9Gv+oKyH9SzxwYQSnO8TV5Dd0GggovILzJW4UimP26JAcxc3yB5NnC5urooZ1BBs8ElpiBw==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/11.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
     "EntityFramework/6.4.4": {
       "sha512": "yj1+/4tci7Panu3jKDHYizxwVm0Jvm7b7m057b5h4u8NUHGCR8WIWirBTw+8EptRffwftIWPBeIRGNKD1ewEMQ==",
       "type": "package",
@@ -2625,11 +2726,28 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "IntranetWebApi.Application/1.0.0": {
+      "type": "project",
+      "path": "../IntranetWebApi.Application/IntranetWebApi.Application.csproj",
+      "msbuildProject": "../IntranetWebApi.Application/IntranetWebApi.Application.csproj"
+    },
+    "IntranetWebApi.Domain/1.0.0": {
+      "type": "project",
+      "path": "../IntranetWebApi.Domain/IntranetWebApi.Domain.csproj",
+      "msbuildProject": "../IntranetWebApi.Domain/IntranetWebApi.Domain.csproj"
+    },
+    "IntranetWebApi.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../IntranetWebApi.Infrastructure/IntranetWebApi.Infrastructure.csproj",
+      "msbuildProject": "../IntranetWebApi.Infrastructure/IntranetWebApi.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "EntityFramework >= 6.4.4",
+      "IntranetWebApi.Application >= 1.0.0",
+      "IntranetWebApi.Infrastructure >= 1.0.0",
       "MediatR >= 10.0.1",
       "MediatR.Extensions.FluentValidation.AspNetCore >= 2.0.0",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 10.0.1",
@@ -2673,7 +2791,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Application\\IntranetWebApi.Application.csproj": {
+              "projectPath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Application\\IntranetWebApi.Application.csproj"
+            },
+            "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Infrastructure\\IntranetWebApi.Infrastructure.csproj": {
+              "projectPath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Infrastructure\\IntranetWebApi.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

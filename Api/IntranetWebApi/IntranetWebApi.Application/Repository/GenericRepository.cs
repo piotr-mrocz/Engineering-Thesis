@@ -1,9 +1,10 @@
 ﻿using IntranetWebApi.Data;
+using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace IntranetWebApi.Repository;
+namespace IntranetWebApi.Application.Repository;
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly IntranetDbContext _dbContext;

@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntranetWebApi", "IntranetWebApi\IntranetWebApi.csproj", "{B83CC9FB-12A5-4B0C-B422-15A9FED5F105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntranetWebApi", "IntranetWebApi\IntranetWebApi.csproj", "{B83CC9FB-12A5-4B0C-B422-15A9FED5F105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntranetWebApi.Domain", "IntranetWebApi.Domain\IntranetWebApi.Domain.csproj", "{311ADD0E-D59E-44F8-8038-AD32396FBFE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntranetWebApi.Application", "IntranetWebApi.Application\IntranetWebApi.Application.csproj", "{F2D33E78-D854-4BA4-815A-02257A6D47AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntranetWebApi.Infrastructure", "IntranetWebApi.Infrastructure\IntranetWebApi.Infrastructure.csproj", "{2A8AB352-86BE-4434-A19B-4F72A8994F94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{B83CC9FB-12A5-4B0C-B422-15A9FED5F105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B83CC9FB-12A5-4B0C-B422-15A9FED5F105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B83CC9FB-12A5-4B0C-B422-15A9FED5F105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311ADD0E-D59E-44F8-8038-AD32396FBFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311ADD0E-D59E-44F8-8038-AD32396FBFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311ADD0E-D59E-44F8-8038-AD32396FBFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311ADD0E-D59E-44F8-8038-AD32396FBFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D33E78-D854-4BA4-815A-02257A6D47AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D33E78-D854-4BA4-815A-02257A6D47AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D33E78-D854-4BA4-815A-02257A6D47AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D33E78-D854-4BA4-815A-02257A6D47AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8AB352-86BE-4434-A19B-4F72A8994F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8AB352-86BE-4434-A19B-4F72A8994F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8AB352-86BE-4434-A19B-4F72A8994F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8AB352-86BE-4434-A19B-4F72A8994F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,12 @@
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\bin\Debug\net6.0\IntranetWebApi.Domain.deps.json
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\bin\Debug\net6.0\IntranetWebApi.Domain.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\bin\Debug\net6.0\IntranetWebApi.Domain.pdb
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.csproj.AssemblyReference.cache
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.AssemblyInfoInputs.cache
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.AssemblyInfo.cs
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.csproj.CoreCompileInputs.cache
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\refint\IntranetWebApi.Domain.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\IntranetWebApi.Domain.pdb
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi.Domain\obj\Debug\net6.0\ref\IntranetWebApi.Domain.dll

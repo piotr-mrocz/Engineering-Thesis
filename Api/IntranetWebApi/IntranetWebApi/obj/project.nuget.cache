@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "X6RBpDsjvNDGZ82DvoSytf8QR+LTe3pU0SvZlTVhFaOgp53ekAGUzzXJy+Y14BHMFLaDqn7IZa37K81VWnkm6w==",
+  "dgSpecHash": "Q4EiwmlzrQkYecXAy36wboUwbWMXsZBF9npoEVCeqstKtN/R4YoRVu+8RLjWmDidnbjeMQVh6LNPdgoSA/yP+Q==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi\\IntranetWebApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mrocz\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\fluentvalidation\\10.0.4\\fluentvalidation.10.0.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.0.4\\fluentvalidation.dependencyinjectionextensions.10.0.4.nupkg.sha512",

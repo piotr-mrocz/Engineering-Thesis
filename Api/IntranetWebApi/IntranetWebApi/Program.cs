@@ -1,8 +1,8 @@
+using IntranetWebApi.Application.Repository;
 using IntranetWebApi.Data;
-using IntranetWebApi.Repository;
+using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Settings;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -13,7 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddMediatR(typeof(Program).Assembly);
+
+var assembly = AppDomain.CurrentDomain.GetAssemblies();
+builder.Services.AddMediatR(assembly);
+//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 #endregion Add services to the container
 
 #region Database

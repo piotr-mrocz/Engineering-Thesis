@@ -1,11 +1,12 @@
-﻿using IntranetWebApi.Models.Entities;
+﻿using IntranetWebApi.Infrastructure.Repository;
+using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Response;
-using IntranetWebApi.Repository;
 using MediatR;
 
 namespace IntranetWebApi.Features.TestowaTabelaFeatures.Command;
 public class CreateTestowaTabelaCommand : IRequest<ResponseStruct<int>>
 {
+
     public string Name { get; set; } = null!;
     public int Number { get; set; }
 }

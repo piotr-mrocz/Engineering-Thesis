@@ -1,7 +1,7 @@
 ﻿using IntranetWebApi.Models.Response;
 using System.Linq.Expressions;
 
-namespace IntranetWebApi.Repository
+namespace IntranetWebApi.Infrastructure.Repository
 {
     public interface IGenericRepository<T> where T: class
     {

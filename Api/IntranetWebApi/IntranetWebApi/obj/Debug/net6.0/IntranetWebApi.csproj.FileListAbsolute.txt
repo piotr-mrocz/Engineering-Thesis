@@ -103,3 +103,11 @@ D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\ne
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\MediatR.Contracts.dll
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\MediatR.Extensions.FluentValidation.AspNetCore.dll
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\AutoMapper.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Application.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Domain.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Infrastructure.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Application.pdb
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Domain.pdb
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Infrastructure.pdb
