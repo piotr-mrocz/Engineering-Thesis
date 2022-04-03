@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using IntranetWebApi.Infrastructure.Repository;
+﻿using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Response;
 using MediatR;
@@ -14,19 +13,17 @@ namespace IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command
     public class UpdateTesowaTabelaCommand : IRequest<ResponseStruct<int>>
     {
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public int Number { get; set; }
+        public string Name { get; set; }
+        public int? Number { get; set; }
     }
 
     public class UpdateTesowaTabelaCommandHandler : IRequestHandler<UpdateTesowaTabelaCommand, ResponseStruct<int>>
     {
         private readonly IGenericRepository<Test> _repo;
-        private readonly IMapper _mapper;
 
-        public UpdateTesowaTabelaCommandHandler(IGenericRepository<Test> repo, IMapper mapper)
+        public UpdateTesowaTabelaCommandHandler(IGenericRepository<Test> repo)
         {
             _repo = repo;
-            _mapper = mapper;
         }
 
         public async Task<ResponseStruct<int>> Handle(UpdateTesowaTabelaCommand request, CancellationToken cancellationToken)
@@ -41,9 +38,10 @@ namespace IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command
                 };
             }
 
-            var testToUpdate = _mapper.Map(request, test.Data);
+            test.Data.Name = string.IsNullOrEmpty(request.Name) ? test.Data.Name : request.Name;
+            test.Data.Number = request.Number.HasValue ? request.Number.Value : test.Data.Number;
 
-            var response = await _repo.UpdateEntity(testToUpdate, cancellationToken);
+            var response = await _repo.UpdateEntity(test.Data, cancellationToken);
             return new ResponseStruct<int>()
             {
                 Succeeded = response.Succeeded,
