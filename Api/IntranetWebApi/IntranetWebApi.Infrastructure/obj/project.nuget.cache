@@ -1,12 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pUQxVC5QphAx1V+dpdpKIMo3tp3Fn7ruuL7z2NkrQVYsg/yQCnOxoloJq2NpOEx+A4rLnPOgN1toV7dv0smeFQ==",
+  "dgSpecHash": "Vj2AZD+b3riuuTmlKNvQU9zQGlKiYyAMsUh3vhJWXFthuWvGW9Ad4dO64nVd43uahe57zVtX82iL08SMpmT3Jg==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Infrastructure\\IntranetWebApi.Infrastructure.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\mrocz\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
-    "C:\\Users\\mrocz\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
-    "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.3\\microsoft.entityframeworkcore.6.0.3.nupkg.sha512",

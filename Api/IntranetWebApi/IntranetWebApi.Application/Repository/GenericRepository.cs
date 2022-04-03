@@ -21,7 +21,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new Response<T>()
         {
             Succeeded = entity != null,
-            Message = entity != null ? "" : "Entity not found",
+            Message = entity != null ? "Ok" : "Entity not found",
             Data = entity
         };
     }
