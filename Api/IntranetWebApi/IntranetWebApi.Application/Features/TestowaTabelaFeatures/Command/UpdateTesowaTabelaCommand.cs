@@ -38,7 +38,7 @@ namespace IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command
                 };
             }
 
-            test.Data.Name = string.IsNullOrEmpty(request.Name) ? test.Data.Name : request.Name;
+            test.Data.Name = string.IsNullOrEmpty(request.Name) ? test.Data.Name : request.Name; 
             test.Data.Number = request.Number.HasValue ? request.Number.Value : test.Data.Number;
 
             var response = await _repo.UpdateEntity(test.Data, cancellationToken);

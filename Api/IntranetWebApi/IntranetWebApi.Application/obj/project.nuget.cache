@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "yQdQMkeZAUNVCrj+iTW4+RDSYxz0QmzvuYX7EgfPgRt4NhntfVnzzQyL3q/Fon8wVfMdKzZBvEnLjuRpHw8cKA==",
+  "dgSpecHash": "J6H77UKnvnTiDet+3aJOCipr8WAlbAhv8Dn03O+OqigDxGbqyMwfYCAiW3T7Av4Oka6cBmR1BRrmB6csEsO0Fw==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Application\\IntranetWebApi.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mrocz\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",

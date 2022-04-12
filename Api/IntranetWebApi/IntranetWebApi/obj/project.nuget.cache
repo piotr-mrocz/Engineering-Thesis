@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LWDGEgH0d/upbOuqcJkmFtu+0ixfUeiVYgFg1ltd1mRsteZYMm914sh93Bk1Lr/vQN4ZhfxTVgfwmM1elcKhoQ==",
+  "dgSpecHash": "Zd97jQeFnQsSwSe1t5G/RiM8gO9sHdiM78N9PqvhvI9L1glNYtX/CFpxorNXI1pHMXWFfwGobZLN/88rwGvR2Q==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi\\IntranetWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mrocz\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\fluentvalidation\\10.0.4\\fluentvalidation.10.0.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.0.4\\fluentvalidation.dependencyinjectionextensions.10.0.4.nupkg.sha512",
