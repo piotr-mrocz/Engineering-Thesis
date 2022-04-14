@@ -43,11 +43,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         await _dbContext.Set<T>().AddAsync(createEntity, cancellationToken);
         var result = await _dbContext.SaveChangesAsync(cancellationToken);
 
+        int idProperty = (int)createEntity.GetType().GetProperty("Id").GetValue(createEntity, null);
+
         return new ResponseStruct<int>()
         {
             Succeeded = result > 0,
             Message = result > 0 ? "Ok" : "Can't add entity",
-            Data = result
+            Data = idProperty
         };
     }
 

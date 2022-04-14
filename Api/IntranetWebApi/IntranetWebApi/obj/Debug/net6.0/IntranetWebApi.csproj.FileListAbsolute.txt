@@ -111,3 +111,5 @@ D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\ne
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Application.pdb
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Domain.pdb
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Infrastructure.pdb
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\BCrypt.Net-Next.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\FluentValidation.AspNetCore.dll

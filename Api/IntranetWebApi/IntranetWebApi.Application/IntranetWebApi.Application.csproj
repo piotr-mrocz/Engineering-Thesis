@@ -31,8 +31,4 @@
     <ProjectReference Include="..\IntranetWebApi.Infrastructure\IntranetWebApi.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\TestowaTabelaFeatures\Validators\" />
-  </ItemGroup>
-
 </Project>

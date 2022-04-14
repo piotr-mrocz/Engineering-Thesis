@@ -14,6 +14,14 @@ public class IntranetDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Test>()
+            .Property(x => x.Name)
+            .IsRequired();
+
+        builder.Entity<Test>()
+            .Property(x => x.Number)
+            .IsRequired();
+
         base.OnModelCreating(builder);
     }
 }
