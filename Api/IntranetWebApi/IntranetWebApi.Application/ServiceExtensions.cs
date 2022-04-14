@@ -1,4 +1,5 @@
-﻿using IntranetWebApi.Application.Repository;
+﻿using FluentValidation;
+using IntranetWebApi.Application.Repository;
 using IntranetWebApi.Infrastructure.Repository;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ namespace IntranetWebApi.Application
             services.AddAutoMapper(assembly);
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
