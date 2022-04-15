@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using IntranetWebApi.Application.Extensions;
+using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Validators;
 using IntranetWebApi.Application.Repository;
 using IntranetWebApi.Infrastructure.Repository;
+using IntranetWebApi.Models.Entities;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntranetWebApi.Application
 {
@@ -21,6 +20,7 @@ namespace IntranetWebApi.Application
             services.AddAutoMapper(assembly);
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

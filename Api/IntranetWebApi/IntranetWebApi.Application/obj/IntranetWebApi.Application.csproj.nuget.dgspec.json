@@ -67,7 +67,15 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[10.4.0, )"
+            },
             "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[10.4.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[10.4.0, )"
             },
