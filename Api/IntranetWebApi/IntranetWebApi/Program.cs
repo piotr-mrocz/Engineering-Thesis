@@ -4,13 +4,14 @@ using IntranetWebApi.Data;
 using IntranetWebApi.Middleware;
 using IntranetWebApi.Settings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region Add services to the container
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Intranet API", Version = "v1" }));
 builder.Services.AddApplicationLayer();
 #endregion Add services to the container
 
@@ -24,8 +25,9 @@ var app = builder.Build();
 #region Swagger
 app.UseSwaggerUI(c =>
 {
-    //c.SwaggerEndpoint("/swagger/v1/swagger.json", "Intranet API v1");
-    //c.RoutePrefix = "docs";
+    // run automatically swagger when run project
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Intranet API v1");
+    c.RoutePrefix = "";
 });
 app.UseSwagger(x => x.SerializeAsV2 = true);
 #endregion Swagger
@@ -34,7 +36,7 @@ app.UseSwagger(x => x.SerializeAsV2 = true);
 if (!app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 #endregion Configure the HTTP request pipeline.
 
