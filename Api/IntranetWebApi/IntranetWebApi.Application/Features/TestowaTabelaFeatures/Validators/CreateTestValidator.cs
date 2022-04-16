@@ -14,7 +14,7 @@ namespace IntranetWebApi.Application.Features.TestowaTabelaFeatures.Validators
         public CreateTestValidator(IntranetDbContext dbContext)
         {
             RuleFor(x => x.Name)
-                .NotEmpty();
+                .NotEmpty().WithMessage("Buuu nie może być nullem");
 
             RuleFor(x => x.Number)
                 .NotEmpty();

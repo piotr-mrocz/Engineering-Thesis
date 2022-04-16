@@ -1,12 +1,14 @@
+using FluentValidation.AspNetCore;
 using IntranetWebApi.Application;
 using IntranetWebApi.Data;
+using IntranetWebApi.Middleware;
 using IntranetWebApi.Settings;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region Add services to the container
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationLayer();
@@ -38,5 +40,5 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.Run();

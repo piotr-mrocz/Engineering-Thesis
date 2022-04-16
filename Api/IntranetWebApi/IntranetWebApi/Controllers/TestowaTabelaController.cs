@@ -17,7 +17,7 @@ namespace IntranetWebApi.Controllers
 
         #region Commands
         [HttpPost]
-        public async Task<IActionResult> CreateTestowaTabela([FromQuery] CreateTestowaTabelaCommand request)
+        public async Task<IActionResult> CreateTestowaTabela([FromBody] CreateTestowaTabelaCommand request)
            => Ok(await _mediator.Send(request));
 
         [HttpPost]
