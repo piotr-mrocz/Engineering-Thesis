@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using IntranetWebApi.Application.Extensions;
+using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command;
 using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Validators;
 using IntranetWebApi.Application.Repository;
 using IntranetWebApi.Infrastructure.Repository;

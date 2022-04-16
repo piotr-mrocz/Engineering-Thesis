@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command;
 using IntranetWebApi.Data;
 using IntranetWebApi.Models.Entities;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IntranetWebApi.Application.Features.TestowaTabelaFeatures.Validators
 {
-    public class CreateTestValidator : AbstractValidator<Test>
+    public class CreateTestValidator : AbstractValidator<CreateTestowaTabelaCommand>
     {
         public CreateTestValidator(IntranetDbContext dbContext)
         {
