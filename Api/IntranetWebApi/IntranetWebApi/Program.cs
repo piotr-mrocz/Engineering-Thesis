@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using IntranetWebApi.Application;
 using IntranetWebApi.Data;
+using IntranetWebApi.Infrastructure.Data;
+using IntranetWebApi.Infrastructure.Extensions;
 using IntranetWebApi.Middleware;
 using IntranetWebApi.Settings;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,7 @@ builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Intranet API", Version = "v1" }));
 builder.Services.AddApplicationLayer();
+builder.Services.AddInfrastructureLayer();
 #endregion Add services to the container
 
 #region Database
@@ -40,7 +43,10 @@ if (!app.Environment.IsDevelopment())
 }
 #endregion Configure the HTTP request pipeline.
 
+IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Services.CreateScope());
+
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.Run();
+
