@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\IntranetWebApi.Application\IntranetWebApi.Application.csproj" />
     <ProjectReference Include="..\IntranetWebApi.Infrastructure\IntranetWebApi.Infrastructure.csproj" />
   </ItemGroup>

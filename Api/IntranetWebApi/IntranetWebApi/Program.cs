@@ -15,7 +15,7 @@ builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Intranet API", Version = "v1" }));
 builder.Services.AddApplicationLayer();
-builder.Services.AddInfrastructureLayer();
+builder.Services.AddInfrastructureLayer(builder.Configuration);
 #endregion Add services to the container
 
 #region Database
@@ -45,6 +45,7 @@ if (!app.Environment.IsDevelopment())
 
 IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Services.CreateScope());
 
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseMiddleware<ErrorHandlerMiddleware>();
