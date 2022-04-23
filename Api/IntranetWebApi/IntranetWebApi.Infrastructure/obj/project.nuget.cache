@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0cdXWkN7x2OwN0i1du2pKoHqCjxrZi+WDWepffTL0wuX3K2vS5CdahJPZuXKE266NmYq69hGuaR+V3LtSUZeJA==",
+  "dgSpecHash": "bnHZoi8VQ5XEC2HbWGpIV+Fka3sV0pWiK7Gd203x29nP6ckOKx9h9HTUTZi4YYitF2q4e6FK97YjD2ZZKmjptQ==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi.Infrastructure\\IntranetWebApi.Infrastructure.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mrocz\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.4\\microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

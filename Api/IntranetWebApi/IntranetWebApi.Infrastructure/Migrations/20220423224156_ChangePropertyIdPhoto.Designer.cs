@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntranetWebApi.Migrations
 {
     [DbContext(typeof(IntranetDbContext))]
-    [Migration("20220423210547_AddTablesUserAndPhoto")]
-    partial class AddTablesUserAndPhoto
+    [Migration("20220423224156_ChangePropertyIdPhoto")]
+    partial class ChangePropertyIdPhoto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace IntranetWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Photo");
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Role", b =>
@@ -106,7 +106,7 @@ namespace IntranetWebApi.Migrations
                     b.Property<int>("IdDepartment")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPhoto")
+                    b.Property<int?>("IdPhoto")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPosition")
@@ -124,7 +124,7 @@ namespace IntranetWebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhotoId")
+                    b.Property<int>("IdPhoto")
                         .HasColumnType("int");
 
                     b.Property<int>("RoleId")
@@ -132,7 +132,7 @@ namespace IntranetWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PhotoId");
+                    b.HasIndex("IdPhoto");
 
                     b.HasIndex("RoleId");
 
@@ -143,7 +143,7 @@ namespace IntranetWebApi.Migrations
                 {
                     b.HasOne("IntranetWebApi.Domain.Models.Entities.Photo", "Photo")
                         .WithMany()
-                        .HasForeignKey("PhotoId")
+                        .HasForeignKey("IdPhoto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

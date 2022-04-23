@@ -1,6 +1,7 @@
 ﻿using IntranetWebApi.Data;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Entities;
+using IntranetWebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntranetWebApi.Infrastructure.Data;
@@ -24,6 +25,20 @@ public class DatabaseSeeder
                 _dbContext.Roles.AddRange(roles);
                 _dbContext.SaveChanges();
             }
+
+            if (!_dbContext.Photos.Any())
+            {
+                var photos = GetPhotos();
+                _dbContext.Photos.AddRange(photos);
+                _dbContext.SaveChanges();
+            }
+
+            if (!_dbContext.Users.Any())
+            {
+                var users = GetUsers();
+                _dbContext.Users.AddRange(users);
+                _dbContext.SaveChanges();
+            }
         }
     }
 
@@ -37,5 +52,49 @@ public class DatabaseSeeder
             };
 
         return roles;
+    }
+
+    private IEnumerable<User> GetUsers()
+    {
+        var users = new List<User>()
+        {
+            new User()
+            {
+                FirstName = "Adam",
+                LastName = "Mickiewicz",
+                DateOfEmployment = new DateTime(2022, 4, 20),
+                IdPosition = 1,
+                IdDepartment = 1, // change harcoded parts
+                Login = "123",
+                Password = SecurePassword("123"),
+                RoleId = (int)RolesEnum.User,
+                //IdPhoto = 1
+            }
+        };
+
+        return users;
+    }
+
+    private IEnumerable<Photo> GetPhotos()
+    {
+        var photos = new List<Photo>()
+        {
+            new Photo()
+            {
+                Description = "Zdjęcie testowego usera Adama Mickiewicza",
+                Path = "Chwilowo jest tutaj testowy string"
+            }
+        };
+
+        return photos;
+    }
+
+    public string SecurePassword(string password)
+    {
+        var hasPassword = BCrypt.Net.BCrypt.HashPassword(password);
+        var saltPassword = BCrypt.Net.BCrypt.GenerateSalt();
+        var passwordEnhanced = BCrypt.Net.BCrypt.HashPassword(hasPassword, saltPassword, true);
+
+        return passwordEnhanced;
     }
 }

@@ -14,7 +14,7 @@ public class User
     public string Login { get; set; } = null!;
     public string Password { get; set; } = null!;
     public int RoleId { get; set; }
-    public int IdPhoto { get; set; }
+    public int? IdPhoto { get; set; } = null;
 
     public virtual Role Role { get; set; } = null!;
     public virtual Photo Photo { get; set; } = null!;

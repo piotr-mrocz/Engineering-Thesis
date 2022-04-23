@@ -13,6 +13,7 @@ public class IntranetDbContext : DbContext
     public DbSet<Test> TestowaTabela { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Photo> Photos { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -51,6 +52,10 @@ public class IntranetDbContext : DbContext
 
         builder.Entity<User>()
                .Property(u => u.DateOfEmployment)
+               .IsRequired(); 
+        
+        builder.Entity<Photo>()
+               .Property(p => p.Path)
                .IsRequired();
 
         base.OnModelCreating(builder);

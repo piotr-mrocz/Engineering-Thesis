@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -10,7 +9,7 @@ namespace IntranetWebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Photo",
+                name: "Photos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,7 +19,7 @@ namespace IntranetWebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Photo", x => x.Id);
+                    table.PrimaryKey("PK_Photos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,16 +38,15 @@ namespace IntranetWebApi.Migrations
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false),
-                    IdPhoto = table.Column<int>(type: "int", nullable: false),
-                    PhotoId = table.Column<int>(type: "int", nullable: false)
+                    IdPhoto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Photo_PhotoId",
-                        column: x => x.PhotoId,
-                        principalTable: "Photo",
+                        name: "FK_Users_Photos_IdPhoto",
+                        column: x => x.IdPhoto,
+                        principalTable: "Photos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -60,9 +58,9 @@ namespace IntranetWebApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_PhotoId",
+                name: "IX_Users_IdPhoto",
                 table: "Users",
-                column: "PhotoId");
+                column: "IdPhoto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
@@ -76,7 +74,7 @@ namespace IntranetWebApi.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Photo");
+                name: "Photos");
         }
     }
 }
