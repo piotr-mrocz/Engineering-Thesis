@@ -40,6 +40,10 @@ public static class ServiceExtensions
     public static void SeedDatabase(this IServiceScope scope)
     {
         var databaseSeeder = scope.ServiceProvider.GetService<DatabaseSeeder>();
-        databaseSeeder.Seed();
+
+        if (databaseSeeder is not null)
+        {
+            databaseSeeder.Seed();
+        }
     }
 }

@@ -113,3 +113,4 @@ D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\ne
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\IntranetWebApi.Infrastructure.pdb
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\BCrypt.Net-Next.dll
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

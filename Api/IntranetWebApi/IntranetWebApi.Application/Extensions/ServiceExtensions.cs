@@ -4,6 +4,8 @@ using IntranetWebApi.Application.Extensions;
 using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command;
 using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Validators;
 using IntranetWebApi.Application.Repository;
+using IntranetWebApi.Application.Services;
+using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Entities;
 using MediatR;
@@ -23,6 +25,7 @@ namespace IntranetWebApi.Application
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddScoped<IAccountService, AccountService>();
         }
     }
 }

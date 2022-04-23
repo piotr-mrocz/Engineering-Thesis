@@ -17,10 +17,9 @@ namespace IntranetWebApi.Application.Helpers
             return passwordEnhanced;
         }
 
-        public static bool ValidatePassword(string password)
+        public static bool ValidatePassword(string password, string userPassword)
         {
-            var passwordToVeryfyEnhancedHashed = BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(), true);
-            var veryfiedPasswordEnhanced = BCrypt.Net.BCrypt.Verify(password, passwordToVeryfyEnhancedHashed, true);
+            var veryfiedPasswordEnhanced = BCrypt.Net.BCrypt.Verify(password, userPassword, true);
 
             return veryfiedPasswordEnhanced;
         }

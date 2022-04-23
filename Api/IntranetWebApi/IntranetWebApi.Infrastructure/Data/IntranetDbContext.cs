@@ -12,6 +12,7 @@ public class IntranetDbContext : DbContext
     #region DbSets
     public DbSet<Test> TestowaTabela { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<User> Users { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -27,6 +28,30 @@ public class IntranetDbContext : DbContext
         builder.Entity<Role>()
             .Property(x => x.Name)
             .IsRequired();
+
+        builder.Entity<User>()
+               .Property(u => u.FirstName)
+               .IsRequired();
+
+        builder.Entity<User>()
+               .Property(u => u.LastName)
+               .IsRequired();
+
+        builder.Entity<User>()
+               .Property(u => u.Login)
+               .IsRequired();
+
+        builder.Entity<User>()
+               .Property(u => u.Password)
+               .IsRequired();
+
+        builder.Entity<User>()
+               .Property(u => u.RoleId)
+               .IsRequired();
+
+        builder.Entity<User>()
+               .Property(u => u.DateOfEmployment)
+               .IsRequired();
 
         base.OnModelCreating(builder);
     }
