@@ -9,6 +9,12 @@ public class Response<T> : BaseResponse where T : class
 
     }
 
+    public Response(string message)
+    {
+        Succeeded = false;
+        Message = message;
+    }
+
     public Response(bool suceedded, string message, T? data) : base(suceedded, message)
     {
         Data = data;

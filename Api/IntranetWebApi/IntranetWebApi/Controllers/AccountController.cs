@@ -1,5 +1,6 @@
 ﻿using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntranetWebApi.Controllers
@@ -16,6 +17,7 @@ namespace IntranetWebApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             string token = _accountService.GenerateToken(loginDto);

@@ -68,7 +68,7 @@ public class DatabaseSeeder
                 Login = "123",
                 Password = SecurePassword("123"),
                 RoleId = (int)RolesEnum.User,
-                //IdPhoto = 1
+                IdPhoto = 1
             }
         };
 
@@ -91,9 +91,8 @@ public class DatabaseSeeder
 
     public string SecurePassword(string password)
     {
-        var hasPassword = BCrypt.Net.BCrypt.HashPassword(password);
         var saltPassword = BCrypt.Net.BCrypt.GenerateSalt();
-        var passwordEnhanced = BCrypt.Net.BCrypt.HashPassword(hasPassword, saltPassword, true);
+        var passwordEnhanced = BCrypt.Net.BCrypt.HashPassword(password, saltPassword, true);
 
         return passwordEnhanced;
     }

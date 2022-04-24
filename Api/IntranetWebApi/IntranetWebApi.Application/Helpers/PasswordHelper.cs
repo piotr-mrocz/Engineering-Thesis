@@ -10,9 +10,8 @@ namespace IntranetWebApi.Application.Helpers
     {
         public static string SecurePassword(string password)
         {
-            var hasPassword = BCrypt.Net.BCrypt.HashPassword(password);
             var saltPassword = BCrypt.Net.BCrypt.GenerateSalt();
-            var passwordEnhanced = BCrypt.Net.BCrypt.HashPassword(hasPassword, saltPassword, true);
+            var passwordEnhanced = BCrypt.Net.BCrypt.HashPassword(password, saltPassword, true);
 
             return passwordEnhanced;
         }

@@ -47,6 +47,7 @@ IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Serv
 
 app.UseAuthentication();
 app.UseHttpsRedirection();
+app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.Run();
