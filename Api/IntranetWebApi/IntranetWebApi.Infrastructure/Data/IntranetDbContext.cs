@@ -14,6 +14,7 @@ public class IntranetDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Photo> Photos { get; set; }
+    public DbSet<Presence> Presences { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder builder)

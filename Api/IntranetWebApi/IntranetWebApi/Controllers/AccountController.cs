@@ -18,9 +18,9 @@ namespace IntranetWebApi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto, CancellationToken cancellationToken)
         {
-            string token = _accountService.GenerateToken(loginDto);
+            var token = await _accountService.GenerateToken(loginDto, cancellationToken);
             return Ok(token);
         }
     }

@@ -1,8 +1,10 @@
 ﻿using IntranetWebApi.Application.Exceptions;
 using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Data;
+using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Settings;
+using IntranetWebApi.Domain.Response;
 using IntranetWebApi.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,11 +24,11 @@ public class AccountService : IAccountService
         _authSettings = authSettings;
     }
 
-    public string GenerateToken(LoginDto dto)
+    public async Task<AuthenticationResponse> GenerateToken(LoginDto dto, CancellationToken cancellationToken)
     {
-        var user = _dbContext.Users
+        var user = await _dbContext.Users
             .Include(u => u.Role)
-            .FirstOrDefault(x => x.Login == dto.Login);
+            .FirstOrDefaultAsync(x => x.Login == dto.Login);
 
         if (user is null)
             throw new ApiException("Niepoprawny login lub hasło");
@@ -57,7 +59,13 @@ public class AccountService : IAccountService
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenString = tokenHandler.WriteToken(token);
 
-        return tokenString;
+        return new AuthenticationResponse()
+        {
+            Role = EnumHelper.GetEnumDescription((RolesEnum)user.IdRole),
+            Token = tokenString,
+            UserName = user.FirstName,
+            IsAuthorize = veryfiedPassword
+        };
     }
 }
 
