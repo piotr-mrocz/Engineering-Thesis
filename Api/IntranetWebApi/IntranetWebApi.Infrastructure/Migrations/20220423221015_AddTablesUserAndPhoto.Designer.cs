@@ -127,14 +127,14 @@ namespace IntranetWebApi.Migrations
                     b.Property<int>("IdPhoto")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int>("IdRole")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdPhoto");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("IdRole");
 
                     b.ToTable("Users");
                 });
@@ -149,7 +149,7 @@ namespace IntranetWebApi.Migrations
 
                     b.HasOne("IntranetWebApi.Domain.Models.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("IdRole")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

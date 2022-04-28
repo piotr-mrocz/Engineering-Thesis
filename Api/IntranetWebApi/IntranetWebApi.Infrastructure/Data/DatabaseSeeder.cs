@@ -67,7 +67,7 @@ public class DatabaseSeeder
                 IdDepartment = 1, // change harcoded parts
                 Login = "123",
                 Password = SecurePassword("123"),
-                RoleId = (int)RolesEnum.User,
+                IdRole = (int)RolesEnum.User,
                 IdPhoto = 1
             }
         };

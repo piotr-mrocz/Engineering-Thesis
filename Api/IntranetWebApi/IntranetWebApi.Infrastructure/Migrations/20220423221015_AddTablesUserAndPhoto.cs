@@ -37,7 +37,7 @@ namespace IntranetWebApi.Migrations
                     IdDepartment = table.Column<int>(type: "int", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    IdRole = table.Column<int>(type: "int", nullable: false),
                     IdPhoto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -50,8 +50,8 @@ namespace IntranetWebApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Users_Roles_RoleId",
-                        column: x => x.RoleId,
+                        name: "FK_Users_Roles_IdRole",
+                        column: x => x.IdRole,
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -63,9 +63,9 @@ namespace IntranetWebApi.Migrations
                 column: "IdPhoto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_RoleId",
+                name: "IX_Users_IdRole",
                 table: "Users",
-                column: "RoleId");
+                column: "IdRole");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

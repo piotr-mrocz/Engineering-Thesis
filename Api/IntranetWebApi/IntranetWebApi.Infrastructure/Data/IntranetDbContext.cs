@@ -48,7 +48,7 @@ public class IntranetDbContext : DbContext
                .IsRequired();
 
         builder.Entity<User>()
-               .Property(u => u.RoleId)
+               .Property(u => u.IdRole)
                .IsRequired();
 
         builder.Entity<User>()
