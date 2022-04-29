@@ -13,5 +13,5 @@ public class Department
     public string DepartmentName { get; set; } = null!;
     public int IdSupervisor { get; set; }
 
-    public virtual User IdUser { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

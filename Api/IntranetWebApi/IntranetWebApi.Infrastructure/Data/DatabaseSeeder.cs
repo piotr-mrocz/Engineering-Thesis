@@ -1,7 +1,9 @@
 ﻿using IntranetWebApi.Data;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Entities;
+using IntranetWebApi.Infrastructure.Helper;
 using IntranetWebApi.Models.Entities;
+using IntranetWebApi.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntranetWebApi.Infrastructure.Data;
@@ -37,6 +39,13 @@ public class DatabaseSeeder
             {
                 var users = GetUsers();
                 _dbContext.Users.AddRange(users);
+                _dbContext.SaveChanges();
+            }
+
+            if (!_dbContext.Departments.Any())
+            {
+                var departments = GetDepartments();
+                _dbContext.Departments.AddRange(departments);
                 _dbContext.SaveChanges();
             }
         }
@@ -95,5 +104,24 @@ public class DatabaseSeeder
         var passwordEnhanced = BCrypt.Net.BCrypt.HashPassword(password, saltPassword, true);
 
         return passwordEnhanced;
+    }
+
+    public IEnumerable<Department> GetDepartments()
+    {
+        var departments = new List<Department>()
+        {
+            new Department()
+            {
+                DepartmentName = EnumHelper.GetEnumDescription(DepartmentsEnum.Warehouse),
+                IdSupervisor = 1
+            },
+            new Department()
+            {
+                DepartmentName = EnumHelper.GetEnumDescription(DepartmentsEnum.It),
+                IdSupervisor = 1
+            }
+        };
+
+        return departments;
     }
 }
