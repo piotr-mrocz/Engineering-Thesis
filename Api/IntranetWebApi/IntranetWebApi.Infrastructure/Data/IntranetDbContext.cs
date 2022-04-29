@@ -15,21 +15,22 @@ public class IntranetDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Presence> Presences { get; set; }
+    public DbSet<Department> Departments { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Test>()
-            .Property(x => x.Name)
-            .IsRequired();
+                .Property(x => x.Name)
+                .IsRequired();
 
         builder.Entity<Test>()
-            .Property(x => x.Number)
-            .IsRequired();
+                .Property(x => x.Number)
+                .IsRequired();
 
         builder.Entity<Role>()
-            .Property(x => x.Name)
-            .IsRequired();
+                .Property(x => x.Name)
+                .IsRequired();
 
         builder.Entity<User>()
                .Property(u => u.FirstName)
@@ -53,8 +54,8 @@ public class IntranetDbContext : DbContext
 
         builder.Entity<User>()
                .Property(u => u.DateOfEmployment)
-               .IsRequired(); 
-        
+               .IsRequired();
+
         builder.Entity<Photo>()
                .Property(p => p.Path)
                .IsRequired();
