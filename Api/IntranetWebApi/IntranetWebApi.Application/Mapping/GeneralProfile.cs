@@ -18,6 +18,7 @@ public class GeneralProfile : Profile
         #region Presence
         CreateMap<PresenceDto, Presence>();
         CreateMap<CreateRangePresencesCommand, List<Presence>>();
+        CreateMap<List<PresenceDto>, List<Presence>>();
         #endregion Presence
 
         #region Test

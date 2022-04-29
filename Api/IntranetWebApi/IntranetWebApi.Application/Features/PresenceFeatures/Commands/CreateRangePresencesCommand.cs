@@ -1,4 +1,5 @@
-﻿using IntranetWebApi.Domain.Models.Dto;
+﻿using AutoMapper;
+using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
@@ -19,18 +20,21 @@ namespace IntranetWebApi.Application.Features.PresenceFeatures.Commands
     public class CreateRangePresencesHandler : IRequestHandler<CreateRangePresencesCommand, ResponseStruct<bool>>
     {
         private readonly IGenericRepository<Presence> _repo;
+        private readonly IMapper _mapper;
 
-        public CreateRangePresencesHandler(IGenericRepository<Presence> repo)
+        public CreateRangePresencesHandler(IGenericRepository<Presence> repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        public Task<ResponseStruct<bool>> Handle(CreateRangePresencesCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseStruct<bool>> Handle(CreateRangePresencesCommand request, CancellationToken cancellationToken)
         {
+            var listPresenceToAdd = _mapper.Map<List<PresenceDto>, List<Presence>>(request.ListOfPresences);
 
+            var response = await _repo.CreateRangeEntities(listPresenceToAdd, cancellationToken);
 
-
-            throw new NotImplementedException();
+            return response;
         }
     }
 }
