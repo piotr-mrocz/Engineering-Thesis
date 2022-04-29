@@ -13,15 +13,6 @@ public class CreateRangePresenceValidation : AbstractValidator<CreateRangePresen
 {
     public CreateRangePresenceValidation(IntranetDbContext dbContext)
     {
-        RuleFor(x => x.ListOfPresences)
-            .NotEmpty()
-            .WithMessage("Nie podano żadnych danych!");
-
-        RuleForEach(x => x.ListOfPresences.Select(x => x.Date))
-            .NotNull()
-            .NotEmpty()
-            .WithMessage("");
-
-        RuleForEach(x => x.ListOfPresences).SetValidator(new CreatePresenceValidation());
+        RuleForEach(x => x.ListOfPresences).SetValidator(new CreatePresenceValidation(dbContext));
     }
 }
