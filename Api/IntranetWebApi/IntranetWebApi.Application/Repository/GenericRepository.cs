@@ -53,6 +53,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         };
     }
 
+    public async Task<ResponseStruct<bool>> CreateRangeEntities(List<T> entitiesList, CancellationToken cancellationToken)
+    {
+        await _dbContext.Set<T>().AddRangeAsync(entitiesList, cancellationToken);
+        var result = await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return new ResponseStruct<bool>()
+        {
+            Succeeded = result > 0,
+            Message = result > 0 ? "Ok" : "Can't add range of entities",
+            Data = result > 0
+        };
+    }
+
     public async Task<BaseResponse> UpdateEntity(T updateEntity, CancellationToken cancellationToken)
     {
         _dbContext.Set<T>().Update(updateEntity);
