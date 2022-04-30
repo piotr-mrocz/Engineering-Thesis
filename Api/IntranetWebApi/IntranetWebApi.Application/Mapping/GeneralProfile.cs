@@ -19,6 +19,7 @@ public class GeneralProfile : Profile
         CreateMap<PresenceDto, Presence>();
         CreateMap<CreateRangePresencesCommand, List<Presence>>();
         CreateMap<List<PresenceDto>, List<Presence>>();
+        CreateMap<UpdatePresenceCommand, Presence>();
         #endregion Presence
 
         #region Test
@@ -27,4 +28,3 @@ public class GeneralProfile : Profile
         #endregion
     }
 }
- 
