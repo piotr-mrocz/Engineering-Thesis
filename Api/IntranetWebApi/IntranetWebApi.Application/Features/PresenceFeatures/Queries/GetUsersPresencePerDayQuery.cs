@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
+using IntranetWebApi.Domain.Models.Entities.Views;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Response;
@@ -19,28 +20,62 @@ public class GetUsersPresencePerDayQuery : IRequest<Response<UsersPresencesPerDa
 
 public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePerDayQuery, Response<UsersPresencesPerDayDto>>
 {
-    private readonly IGenericRepository<Presence> _presenceRepo;
-    private readonly IGenericRepository<User> _userRepo;
+    private readonly IGenericRepository<VUsersPresence> _vUsersPresenceRepo;
 
-    public GetUsersPresencePerDayHandler(IGenericRepository<Presence> presenceRepo, IGenericRepository<User> userRepo)
+    public GetUsersPresencePerDayHandler(IGenericRepository<VUsersPresence> vUsersPresenceRepo)
     {
-        _presenceRepo = presenceRepo;
-        _userRepo = userRepo;
+        _vUsersPresenceRepo = vUsersPresenceRepo;
     }
 
-    public Task<Response<UsersPresencesPerDayDto>> Handle(GetUsersPresencePerDayQuery request, CancellationToken cancellationToken)
+    public async Task<Response<UsersPresencesPerDayDto>> Handle(GetUsersPresencePerDayQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var date = request.Date.Date;
+        var vUsersPresences = await _vUsersPresenceRepo.GetManyEntitiesByExpression(x => x.Date == date, cancellationToken);
+
+        if (!vUsersPresences.Succeeded || vUsersPresences.Data is null || !vUsersPresences.Data.Any())
+        {
+            return new Response<UsersPresencesPerDayDto>()
+            {
+                Message = $"Nie odnaleziono żadnych wpisów obecności w dniu {request.Date.Date}",
+                Data = new UsersPresencesPerDayDto()
+            };
+        }
+
+        var response = GetUsersPresencesPerDayDto(vUsersPresences.Data);
+
+        return new Response<UsersPresencesPerDayDto>()
+        {
+            Succeeded = true,
+            Data = response
+        };
     }
 
-    //private async Task<Response<List<Presence>>> GetListPresenceByDate(DateTime date)
-    //{
+    private UsersPresencesPerDayDto GetUsersPresencesPerDayDto(IEnumerable<VUsersPresence> vUsersPresences)
+    {
+        if (!vUsersPresences.Any())
+            return new UsersPresencesPerDayDto();
 
-    //}
+        var vUsersPresenceList = new List<UserPresentsPerDayDto>();
 
-    //private async Task<Response<Dictionary<int, string>>> GetAllUsersInUsersPresencesList(List<int> idsUsersList,
-    //    CancellationToken cancellationToken)
-    //{
+        foreach (var vPresence in vUsersPresences)
+        {
+            var record = new UserPresentsPerDayDto()
+            {
+                StartTime = vPresence.StartTime,
+                EndTime = vPresence.EndTime,
+                UserName = vPresence.UserName,
+                IsPresent = vPresence.IsPresent,
+                AbsenceReason = vPresence.AbsenceReason,
+                WorkHours = vPresence.WorkHours,
+                ExtraWorkHours = vPresence.ExtraWorkHours
+            };
 
-    //}
+            vUsersPresenceList.Add(record);
+        }
+
+        return new UsersPresencesPerDayDto()
+        {
+            UsersPresencesList = vUsersPresenceList
+        };
+    }
 }
