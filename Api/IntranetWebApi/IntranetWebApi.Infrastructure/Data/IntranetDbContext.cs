@@ -1,4 +1,5 @@
 ﻿using IntranetWebApi.Domain.Models.Entities;
+using IntranetWebApi.Domain.Models.Entities.Views;
 using IntranetWebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,8 @@ public class IntranetDbContext : DbContext
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
-    #endregion
+    public DbSet<VUsersPresence> VUsersPresences { get; set; }
+    #endregion DbSets
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -59,6 +61,10 @@ public class IntranetDbContext : DbContext
         builder.Entity<Photo>()
                .Property(p => p.Path)
                .IsRequired();
+
+        builder.Entity<VUsersPresence>()
+            .ToView(nameof(VUsersPresences))
+            .HasKey(x => x.IdUser);
 
         base.OnModelCreating(builder);
     }
