@@ -15,7 +15,7 @@ public class GetUsersPresencePerDayValidation : AbstractValidator<GetUsersPresen
         RuleFor(x => x.Date)
             .NotNull()
             .NotEmpty()
-            .GreaterThanOrEqualTo(DateTime.Now.Date)
+            .LessThanOrEqualTo(DateTime.Now.Date)
             .WithMessage("Nieprawidłowa data!");
     }
 }
