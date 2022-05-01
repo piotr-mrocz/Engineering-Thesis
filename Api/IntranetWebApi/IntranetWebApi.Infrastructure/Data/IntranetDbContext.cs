@@ -18,6 +18,7 @@ public class IntranetDbContext : DbContext
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<VUsersPresence> VUsersPresences { get; set; }
+    public DbSet<RequestForLeave> RequestForLeaves { get; set; }
     #endregion DbSets
 
     protected override void OnModelCreating(ModelBuilder builder)

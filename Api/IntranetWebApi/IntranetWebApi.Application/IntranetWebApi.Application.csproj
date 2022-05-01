@@ -33,4 +33,9 @@
     <ProjectReference Include="..\IntranetWebApi.Infrastructure\IntranetWebApi.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\RequestForLeaveFeatures\Validations\" />
+    <Folder Include="Features\RequestForLeaveFeatures\Queries\" />
+  </ItemGroup>
+
 </Project>
