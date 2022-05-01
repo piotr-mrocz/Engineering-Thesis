@@ -23,5 +23,8 @@ public enum AbsenceReasonsEnum
     Delegation = 5,
 
     [Description("Nieusprawiedliwiona nieobecność")]
-    UnauthorizedAbsence = 6
+    UnauthorizedAbsence = 6,
+
+    [Description("Urlop bezpłatny")]
+    UnpaidLeave = 7
 }
