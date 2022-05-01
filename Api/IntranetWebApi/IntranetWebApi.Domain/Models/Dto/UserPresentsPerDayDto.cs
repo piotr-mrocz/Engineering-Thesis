@@ -12,7 +12,7 @@ public class UserPresentsPerDayDto
     public TimeSpan EndTime { get; set; }
     public string UserName { get; set; } = null!;
     public bool IsPresent { get; set; }
-    public int? AbsenceReason { get; set; }
+    public string AbsenceReason { get; set; }
     public decimal WorkHours { get; set; }
     public decimal ExtraWorkHours { get; set; }
 }

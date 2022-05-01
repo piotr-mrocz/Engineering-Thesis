@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
+using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Domain.Models.Entities.Views;
@@ -65,7 +67,9 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
                 EndTime = vPresence.EndTime,
                 UserName = vPresence.UserName,
                 IsPresent = vPresence.IsPresent,
-                AbsenceReason = vPresence.AbsenceReason,
+                AbsenceReason = vPresence.AbsenceReason.HasValue
+                              ? EnumHelper.GetEnumDescription((AbsenceReasonsEnum)vPresence.AbsenceReason.Value)
+                              : string.Empty,
                 WorkHours = vPresence.WorkHours,
                 ExtraWorkHours = vPresence.ExtraWorkHours
             };
