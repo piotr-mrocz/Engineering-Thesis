@@ -12,7 +12,7 @@ public class GetPresenceByIdUserDto
     public TimeSpan StartTime { get; set; }
     public TimeSpan EndTime { get; set; }
     public bool IsPresent { get; set; }
-    public int? AbsenceReason { get; set; }
+    public string AbsenceReason { get; set; }
     public decimal WorkHours { get; set; }
     public decimal ExtraWorkHours { get; set; }
 }
