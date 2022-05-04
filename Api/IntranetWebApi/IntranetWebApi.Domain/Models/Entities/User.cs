@@ -18,4 +18,5 @@ public class User
 
     public virtual Role Role { get; set; } = null!;
     public virtual Photo Photo { get; set; } = null!;
+    public virtual Department Department { get; set; } = null!;
 }

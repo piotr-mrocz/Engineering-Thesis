@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntranetWebApi.Migrations
 {
     [DbContext(typeof(IntranetDbContext))]
-    [Migration("20220429190459_AddDepartmentTable")]
-    partial class AddDepartmentTable
+    [Migration("20220504184056_TryToCorrectErrors")]
+    partial class TryToCorrectErrors
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,31 +23,6 @@ namespace IntranetWebApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("DepartmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdSupervisor")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Departments");
-                });
 
             modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Photo", b =>
                 {
@@ -107,6 +82,37 @@ namespace IntranetWebApi.Migrations
                     b.ToTable("Presences");
                 });
 
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.RequestForLeave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AbsenceType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AcceptedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdSupervisor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAcceptedBySupervisor")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RequestForLeaves");
+                });
+
             modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -122,6 +128,46 @@ namespace IntranetWebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Views.VUsersPresence", b =>
+                {
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUser"), 1L, 1);
+
+                    b.Property<int?>("AbsenceReason")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("Date");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<decimal>("ExtraWorkHours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IdDepartment")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsPresent")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("WorkHours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdUser");
+
+                    b.ToView("VUsersPresences");
                 });
 
             modelBuilder.Entity("IntranetWebApi.Models.Entities.Test", b =>
@@ -202,17 +248,6 @@ namespace IntranetWebApi.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Department", b =>
-                {
-                    b.HasOne("IntranetWebApi.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("IntranetWebApi.Models.Entities.User", b =>

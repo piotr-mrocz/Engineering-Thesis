@@ -6,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IntranetWebApi.Data;
 public class IntranetDbContext : DbContext
 {
-    public IntranetDbContext(DbContextOptions options) : base(options)
-    {
-    }
+    public IntranetDbContext(DbContextOptions options) : base(options) {}
 
     #region DbSets
     public DbSet<Test> TestowaTabela { get; set; }
@@ -32,8 +30,14 @@ public class IntranetDbContext : DbContext
                 .IsRequired();
 
         builder.Entity<Role>()
+            .HasKey(x => x.Id);
+
+        builder.Entity<Role>()
                 .Property(x => x.Name)
                 .IsRequired();
+
+        builder.Entity<User>()
+            .HasKey(x => x.Id);
 
         builder.Entity<User>()
                .Property(u => u.FirstName)
@@ -60,12 +64,19 @@ public class IntranetDbContext : DbContext
                .IsRequired();
 
         builder.Entity<Photo>()
+            .HasKey(x => x.Id);
+
+        builder.Entity<Photo>()
                .Property(p => p.Path)
                .IsRequired();
 
         builder.Entity<VUsersPresence>()
             .ToView(nameof(VUsersPresences))
             .HasKey(x => x.IdUser);
+
+        builder.Entity<Department>()
+           .ToView(nameof(Department))
+           .HasKey(x => x.Id);
 
         base.OnModelCreating(builder);
     }

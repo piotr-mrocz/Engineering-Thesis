@@ -73,7 +73,7 @@ public class DatabaseSeeder
                 LastName = "Mickiewicz",
                 DateOfEmployment = new DateTime(2022, 4, 20),
                 IdPosition = 1,
-                IdDepartment = 1, // change harcoded parts
+                IdDepartment = 1, // change harcoded parts in the future
                 Login = "123",
                 Password = SecurePassword("123"),
                 IdRole = (int)RolesEnum.User,

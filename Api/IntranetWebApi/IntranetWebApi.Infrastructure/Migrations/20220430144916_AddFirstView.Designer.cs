@@ -39,12 +39,12 @@ namespace IntranetWebApi.Migrations
                     b.Property<int>("IdSupervisor")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("IdUser")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("IdUser");
 
                     b.ToTable("Departments");
                 });
@@ -245,7 +245,7 @@ namespace IntranetWebApi.Migrations
                 {
                     b.HasOne("IntranetWebApi.Models.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("IdUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

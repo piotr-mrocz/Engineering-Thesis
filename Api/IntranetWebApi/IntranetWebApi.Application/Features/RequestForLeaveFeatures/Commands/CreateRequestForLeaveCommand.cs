@@ -40,17 +40,19 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
 
     private async Task<int> GetIdDepartmentFromUser(int idUser, CancellationToken cancellationToken)
     {
-
+        return 1;
     }
 
     private async Task<int> GetIdSupervisorDepartment(int idDepartment, CancellationToken cancellationToken)
     {
-
+        return 1;
     }
 
     private async Task<int> AddNewRequestForLeave(CreateRequestForLeaveCommand request, 
         CancellationToken cancellationToken)
     {
-
+        return 1;
     }
+
+    // add migrations o database
 }
