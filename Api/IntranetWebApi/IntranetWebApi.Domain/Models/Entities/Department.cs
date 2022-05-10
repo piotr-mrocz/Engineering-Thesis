@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,5 +14,5 @@ public class Department
     public string DepartmentName { get; set; } = null!;
     public int IdSupervisor { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public ICollection<User> Users { get; set; } = new List<User>();
 }

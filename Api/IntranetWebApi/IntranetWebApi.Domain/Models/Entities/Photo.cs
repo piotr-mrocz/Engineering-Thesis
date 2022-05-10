@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using IntranetWebApi.Models.Entities;
 
-namespace IntranetWebApi.Domain.Models.Entities
+namespace IntranetWebApi.Domain.Models.Entities;
+
+public class Photo
 {
-    public class Photo
-    {
-        public int Id { get; set; }
-        public string Description { get; set; } = null!;
-        public string Path { get; set; } = null!;
-    }
+    public int Id { get; set; }
+    public string Description { get; set; } = null!;
+    public string Path { get; set; } = null!;
+    public int IdUser { get; set; }
+
+    public User User { get; set; } = null!;
 }

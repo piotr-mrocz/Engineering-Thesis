@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IntranetWebApi.Data;
 public class IntranetDbContext : DbContext
 {
-    public IntranetDbContext(DbContextOptions options) : base(options) {}
+    public IntranetDbContext(DbContextOptions options) : base(options) { }
 
     #region DbSets
     public DbSet<Test> TestowaTabela { get; set; }
@@ -29,54 +29,35 @@ public class IntranetDbContext : DbContext
                 .Property(x => x.Number)
                 .IsRequired();
 
-        builder.Entity<Role>()
-            .HasKey(x => x.Id);
-
-        builder.Entity<Role>()
-                .Property(x => x.Name)
-                .IsRequired();
-
-        builder.Entity<User>()
-            .HasKey(x => x.Id);
-
-        builder.Entity<User>()
-               .Property(u => u.FirstName)
-               .IsRequired();
-
-        builder.Entity<User>()
-               .Property(u => u.LastName)
-               .IsRequired();
-
-        builder.Entity<User>()
-               .Property(u => u.Login)
-               .IsRequired();
-
-        builder.Entity<User>()
-               .Property(u => u.Password)
-               .IsRequired();
-
-        builder.Entity<User>()
-               .Property(u => u.IdRole)
-               .IsRequired();
-
-        builder.Entity<User>()
-               .Property(u => u.DateOfEmployment)
-               .IsRequired();
-
-        builder.Entity<Photo>()
-            .HasKey(x => x.Id);
-
-        builder.Entity<Photo>()
-               .Property(p => p.Path)
-               .IsRequired();
 
         builder.Entity<VUsersPresence>()
             .ToView(nameof(VUsersPresences))
             .HasKey(x => x.IdUser);
 
-        builder.Entity<Department>()
-           .ToView(nameof(Department))
-           .HasKey(x => x.Id);
+        builder.Entity<User>(user =>
+        {
+            user.HasOne(u => u.Role)
+            .WithOne(r => r.User)
+            .HasForeignKey<User>(x => x.IdRole);
+
+            user.HasOne(u => u.Photo)
+            .WithOne(p => p.User)
+            .HasForeignKey<Photo>(x => x.IdUser);
+
+            user.HasOne(u => u.Department)
+            .WithMany(d => d.Users)
+            .HasForeignKey(x => x.IdDepartment);
+        });
+
+        builder.Entity<RequestForLeave>()
+            .HasOne(r => r.Applicant)
+            .WithMany(u => u.RequestForLeaves)
+            .HasForeignKey(x => x.IdApplicant);
+
+        builder.Entity<Presence>()
+            .HasOne(p => p.User)
+            .WithMany(u => u.Presences)
+            .HasForeignKey(x => x.IdUser);
 
         base.OnModelCreating(builder);
     }

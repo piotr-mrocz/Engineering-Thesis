@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace IntranetWebApi.Migrations
+namespace IntranetWebApi.Infrastructure.Migrations
 {
     [DbContext(typeof(IntranetDbContext))]
-    [Migration("20220504184056_TryToCorrectErrors")]
-    partial class TryToCorrectErrors
+    [Migration("20220510182043_RecreateTables")]
+    partial class RecreateTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,26 @@ namespace IntranetWebApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("DepartmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdSupervisor")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
 
             modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Photo", b =>
                 {
@@ -36,11 +56,17 @@ namespace IntranetWebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdUser")
+                        .IsUnique();
 
                     b.ToTable("Photos");
                 });
@@ -79,6 +105,8 @@ namespace IntranetWebApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdUser");
+
                     b.ToTable("Presences");
                 });
 
@@ -93,22 +121,40 @@ namespace IntranetWebApi.Migrations
                     b.Property<int>("AbsenceType")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("AcceptedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdSupervisor")
+                    b.Property<DateTime?>("DateOfAcceptance")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOfCancel")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdApplicant")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdUser")
+                    b.Property<int>("IdSupervisor")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsAcceptedBySupervisor")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsCancel")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RejectionReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IdApplicant");
 
                     b.ToTable("RequestForLeaves");
                 });
@@ -214,14 +260,11 @@ namespace IntranetWebApi.Migrations
                     b.Property<int>("IdDepartment")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdPhoto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPosition")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdRole")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -235,38 +278,87 @@ namespace IntranetWebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhotoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PhotoId");
+                    b.HasIndex("IdDepartment");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("IdRole")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Photo", b =>
+                {
+                    b.HasOne("IntranetWebApi.Models.Entities.User", "User")
+                        .WithOne("Photo")
+                        .HasForeignKey("IntranetWebApi.Domain.Models.Entities.Photo", "IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Presence", b =>
+                {
+                    b.HasOne("IntranetWebApi.Models.Entities.User", "User")
+                        .WithMany("Presences")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.RequestForLeave", b =>
+                {
+                    b.HasOne("IntranetWebApi.Models.Entities.User", "Applicant")
+                        .WithMany("RequestForLeaves")
+                        .HasForeignKey("IdApplicant")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+                });
+
             modelBuilder.Entity("IntranetWebApi.Models.Entities.User", b =>
                 {
-                    b.HasOne("IntranetWebApi.Domain.Models.Entities.Photo", "Photo")
-                        .WithMany()
-                        .HasForeignKey("PhotoId")
+                    b.HasOne("IntranetWebApi.Domain.Models.Entities.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("IdDepartment")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IntranetWebApi.Domain.Models.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                        .WithOne("User")
+                        .HasForeignKey("IntranetWebApi.Models.Entities.User", "IdRole")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Photo");
+                    b.Navigation("Department");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Department", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Role", b =>
+                {
+                    b.Navigation("User")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("IntranetWebApi.Models.Entities.User", b =>
+                {
+                    b.Navigation("Photo")
+                        .IsRequired();
+
+                    b.Navigation("Presences");
+
+                    b.Navigation("RequestForLeaves");
                 });
 #pragma warning restore 612, 618
         }

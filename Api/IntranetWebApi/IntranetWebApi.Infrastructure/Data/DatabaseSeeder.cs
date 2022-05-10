@@ -19,36 +19,36 @@ public class DatabaseSeeder
 
     public void Seed()
     {
-        if (_dbContext.Database.CanConnect())
-        {
-            if (!_dbContext.Roles.Any())
-            {
-                var roles = GetRoles();
-                _dbContext.Roles.AddRange(roles);
-                _dbContext.SaveChanges();
-            }
+        //if (_dbContext.Database.CanConnect())
+        //{
+        //    if (!_dbContext.Roles.Any())
+        //    {
+        //        var roles = GetRoles();
+        //        _dbContext.Roles.AddRange(roles);
+        //        _dbContext.SaveChanges();
+        //    }
 
-            if (!_dbContext.Photos.Any())
-            {
-                var photos = GetPhotos();
-                _dbContext.Photos.AddRange(photos);
-                _dbContext.SaveChanges();
-            }
+        //    if (!_dbContext.Photos.Any())
+        //    {
+        //        var photos = GetPhotos();
+        //        _dbContext.Photos.AddRange(photos);
+        //        _dbContext.SaveChanges();
+        //    }
 
-            if (!_dbContext.Users.Any())
-            {
-                var users = GetUsers();
-                _dbContext.Users.AddRange(users);
-                _dbContext.SaveChanges();
-            }
+        //    if (!_dbContext.Users.Any())
+        //    {
+        //        var users = GetUsers();
+        //        _dbContext.Users.AddRange(users);
+        //        _dbContext.SaveChanges();
+        //    }
 
-            if (!_dbContext.Departments.Any())
-            {
-                var departments = GetDepartments();
-                _dbContext.Departments.AddRange(departments);
-                _dbContext.SaveChanges();
-            }
-        }
+        //    if (!_dbContext.Departments.Any())
+        //    {
+        //        var departments = GetDepartments();
+        //        _dbContext.Departments.AddRange(departments);
+        //        _dbContext.SaveChanges();
+        //    }
+        //}
     }
 
     private IEnumerable<Role> GetRoles()
@@ -72,12 +72,10 @@ public class DatabaseSeeder
                 FirstName = "Adam",
                 LastName = "Mickiewicz",
                 DateOfEmployment = new DateTime(2022, 4, 20),
-                IdPosition = 1,
                 IdDepartment = 1, // change harcoded parts in the future
                 Login = "123",
                 Password = SecurePassword("123"),
-                IdRole = (int)RolesEnum.User,
-                IdPhoto = 1
+                IdRole = (int)RolesEnum.User
             }
         };
 
@@ -91,7 +89,8 @@ public class DatabaseSeeder
             new Photo()
             {
                 Description = "Zdjęcie testowego usera Adama Mickiewicza",
-                Path = "Chwilowo jest tutaj testowy string"
+                Path = "Chwilowo jest tutaj testowy string",
+                IdUser = 1
             }
         };
 
