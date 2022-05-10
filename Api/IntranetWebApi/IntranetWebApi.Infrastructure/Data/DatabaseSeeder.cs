@@ -19,36 +19,36 @@ public class DatabaseSeeder
 
     public void Seed()
     {
-        //if (_dbContext.Database.CanConnect())
-        //{
-        //    if (!_dbContext.Roles.Any())
-        //    {
-        //        var roles = GetRoles();
-        //        _dbContext.Roles.AddRange(roles);
-        //        _dbContext.SaveChanges();
-        //    }
+        if (_dbContext.Database.CanConnect())
+        {
+            if (!_dbContext.Roles.Any())
+            {
+                var roles = GetRoles();
+                _dbContext.Roles.AddRange(roles);
+                _dbContext.SaveChanges();
+            }
 
-        //    if (!_dbContext.Photos.Any())
-        //    {
-        //        var photos = GetPhotos();
-        //        _dbContext.Photos.AddRange(photos);
-        //        _dbContext.SaveChanges();
-        //    }
+            if (!_dbContext.Photos.Any())
+            {
+                var photos = GetPhotos();
+                _dbContext.Photos.AddRange(photos);
+                _dbContext.SaveChanges();
+            }
 
-        //    if (!_dbContext.Users.Any())
-        //    {
-        //        var users = GetUsers();
-        //        _dbContext.Users.AddRange(users);
-        //        _dbContext.SaveChanges();
-        //    }
+            if (!_dbContext.Users.Any())
+            {
+                var users = GetUsers();
+                _dbContext.Users.AddRange(users);
+                _dbContext.SaveChanges();
+            }
 
-        //    if (!_dbContext.Departments.Any())
-        //    {
-        //        var departments = GetDepartments();
-        //        _dbContext.Departments.AddRange(departments);
-        //        _dbContext.SaveChanges();
-        //    }
-        //}
+            if (!_dbContext.Departments.Any())
+            {
+                var departments = GetDepartments();
+                _dbContext.Departments.AddRange(departments);
+                _dbContext.SaveChanges();
+            }
+        }
     }
 
     private IEnumerable<Role> GetRoles()
