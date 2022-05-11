@@ -28,10 +28,10 @@ public class DatabaseSeeder
                 _dbContext.SaveChanges();
             }
 
-            if (!_dbContext.Photos.Any())
+            if (!_dbContext.Departments.Any())
             {
-                var photos = GetPhotos();
-                _dbContext.Photos.AddRange(photos);
+                var departments = GetDepartments();
+                _dbContext.Departments.AddRange(departments);
                 _dbContext.SaveChanges();
             }
 
@@ -42,10 +42,10 @@ public class DatabaseSeeder
                 _dbContext.SaveChanges();
             }
 
-            if (!_dbContext.Departments.Any())
+            if (!_dbContext.Photos.Any())
             {
-                var departments = GetDepartments();
-                _dbContext.Departments.AddRange(departments);
+                var photos = GetPhotos();
+                _dbContext.Photos.AddRange(photos);
                 _dbContext.SaveChanges();
             }
         }
@@ -90,7 +90,7 @@ public class DatabaseSeeder
             {
                 Description = "Zdjęcie testowego usera Adama Mickiewicza",
                 Path = "Chwilowo jest tutaj testowy string",
-                IdUser = 1
+                IdUser = 2
             }
         };
 
