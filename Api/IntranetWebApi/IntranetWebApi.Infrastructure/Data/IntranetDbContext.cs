@@ -59,6 +59,11 @@ public class IntranetDbContext : DbContext
             .WithMany(u => u.Presences)
             .HasForeignKey(x => x.IdUser);
 
+        builder.Entity<Department>()
+            .HasOne(d => d.Supervisor)
+            .WithOne(u => u.DepartmentSupervisor)
+            .HasForeignKey<Department>(x => x.IdSupervisor);
+
         base.OnModelCreating(builder);
     }
 }

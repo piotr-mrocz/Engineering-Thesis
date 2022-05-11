@@ -15,4 +15,5 @@ public class Department
     public int IdSupervisor { get; set; }
 
     public ICollection<User> Users { get; set; } = new List<User>();
+    public User Supervisor { get; set; } = null!;
 }
