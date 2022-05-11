@@ -19,7 +19,6 @@ public class User
     public Role Role { get; set; } = null!;
     public Photo Photo { get; set; } = null!;
     public Department Department { get; set; } = null!;
-    public Department DepartmentSupervisor { get; set; } = null!;
     public ICollection<RequestForLeave> RequestForLeaves { get; set; } = new List<RequestForLeave>();
     public ICollection<Presence> Presences { get; set; } = new List<Presence>();
 

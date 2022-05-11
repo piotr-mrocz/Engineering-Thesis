@@ -16,6 +16,7 @@ public class IntranetDbContext : DbContext
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<VUsersPresence> VUsersPresences { get; set; }
+    DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
     #endregion DbSets
 
@@ -33,6 +34,10 @@ public class IntranetDbContext : DbContext
         builder.Entity<VUsersPresence>()
             .ToView(nameof(VUsersPresences))
             .HasKey(x => x.IdUser);
+
+        builder.Entity<VUsersRequestForLeave>()
+           .ToView(nameof(VUsersRequestsForLeave))
+           .HasKey(x => x.IdRequest);
 
         builder.Entity<User>(user =>
         {
@@ -58,11 +63,6 @@ public class IntranetDbContext : DbContext
             .HasOne(p => p.User)
             .WithMany(u => u.Presences)
             .HasForeignKey(x => x.IdUser);
-
-        builder.Entity<Department>()
-            .HasOne(d => d.Supervisor)
-            .WithOne(u => u.DepartmentSupervisor)
-            .HasForeignKey<Department>(x => x.IdSupervisor);
 
         base.OnModelCreating(builder);
     }

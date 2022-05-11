@@ -39,6 +39,9 @@ namespace IntranetWebApi.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdSupervisor")
+                        .IsUnique();
+
                     b.ToTable("Departments");
                 });
 
@@ -286,6 +289,17 @@ namespace IntranetWebApi.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Department", b =>
+                {
+                    b.HasOne("IntranetWebApi.Models.Entities.User", "Supervisor")
+                        .WithOne("DepartmentSupervisor")
+                        .HasForeignKey("IntranetWebApi.Domain.Models.Entities.Department", "IdSupervisor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supervisor");
+                });
+
             modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Photo", b =>
                 {
                     b.HasOne("IntranetWebApi.Models.Entities.User", "User")
@@ -351,6 +365,9 @@ namespace IntranetWebApi.Infrastructure.Migrations
 
             modelBuilder.Entity("IntranetWebApi.Models.Entities.User", b =>
                 {
+                    b.Navigation("DepartmentSupervisor")
+                        .IsRequired();
+
                     b.Navigation("Photo")
                         .IsRequired();
 

@@ -14,12 +14,18 @@ public class RequestForLeaveController : ControllerBase
     }
 
     #region Commands
+
     [HttpPost]
     public async Task<IActionResult> CreateRequestForLeave(CreateRequestForLeaveCommand request)
         => Ok(await _mediatr.Send(request));
+
     #endregion Commands
 
     #region Queries
+
+    [HttpPost]
+    public async Task<IActionResult> GetAllRequestsForLeaveByIdSupervisor(GetAllRequestsForLeaveByIdSupervisorQuery request)
+        => Ok (await _mediatr.Send(request));
 
     #endregion Queries
 }
