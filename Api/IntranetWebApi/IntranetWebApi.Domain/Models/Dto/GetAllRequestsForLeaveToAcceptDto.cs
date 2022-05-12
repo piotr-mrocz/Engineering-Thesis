@@ -14,8 +14,3 @@ public class GetAllRequestsForLeaveToAcceptDto
     public DateTime EndDate { get; set; }
     public string AbsenceType { get; set; } = null!;
 }
-
-public class GetAllRequestsForLeaveToAcceptListDto
-{
-    public List<GetAllRequestsForLeaveToAcceptDto> RequestsList { get; set; } = new();
-}
