@@ -1,4 +1,5 @@
 ﻿using IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands;
+using IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
