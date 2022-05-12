@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using IntranetWebApi.Domain.Models.Entities;
 
-namespace IntranetWebApi.Models.Entities;
+namespace IntranetWebApi.Domain.Models.Entities;
+
 public class User
 {
     public int Id { get; set; }
