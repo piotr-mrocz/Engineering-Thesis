@@ -14,6 +14,7 @@ import { PersonsListComponent } from './components/persons-list/persons-list.com
 import { PersonService } from './services/person-service';
 import { AuthenticationService } from './services/authentication.service';
 import { LoginComponent } from './components/login/login.component';
+import { PersonDetailsComponent } from './components/person-details/person-details.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LoginComponent } from './components/login/login.component';
     ProcessingOfPersonalDataComponent,
     PageNotFoundComponent,
     PersonsListComponent,
+    PersonDetailsComponent,
     LoginComponent
   ],
   imports: [

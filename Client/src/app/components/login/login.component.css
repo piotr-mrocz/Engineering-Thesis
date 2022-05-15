@@ -1,0 +1,8 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.changeBackgroundColor :hover {
+    background-color: #343a40;
+    color: #fff;
+}
