@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.modules';
 import { PersonsListComponent } from './components/persons-list/persons-list.component';
 import { PersonService } from './services/person-service';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { PersonService } from './services/person-service';
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [PersonService],
+  providers: [PersonService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
