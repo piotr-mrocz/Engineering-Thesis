@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.modules';
 import { PersonsListComponent } from './components/persons-list/persons-list.component';
 import { PersonService } from './services/person-service';
 import { AuthenticationService } from './services/authentication.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AuthenticationService } from './services/authentication.service';
     PrivacyPolicyComponent,
     ProcessingOfPersonalDataComponent,
     PageNotFoundComponent,
-    PersonsListComponent
+    PersonsListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
