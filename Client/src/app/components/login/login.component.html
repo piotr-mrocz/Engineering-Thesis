@@ -3,18 +3,21 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card shadow-2-strong bg-secondary" style="border-radius: 1rem;">
-            <form #loginForm="ngForm" (ngSubmit)="logIn()" class="card-body p-5 text-center">
+            <form #loginForm="ngForm" (ngSubmit)="logIn(login.value, password.value)" class="card-body p-5 text-center">
   
               <h3 class="mb-5">LOGOWANIE</h3>
               <div class="form-outline mb-4">
                 <label class="form-label" for="login">Login</label>
-                <input id="login" class="form-control form-control-lg" type="text" required />
+                <input id="login" class="form-control form-control-lg" type="text" required #login (keypress)="resetLoginError($event)" autocomplete="off" />
+                <div *ngIf="showLoginErrorMessage">
+                  <h5 style="color: #871717">{{ errorMessage }}</h5>
+                </div>
               </div>
   
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-5">
                 <label class="form-label" for="password">Hasło</label>
                 <div class="md-form input-group mb-3">
-                    <input id="password" class="form-control form-control-lg" [type]="passwordType" required />
+                    <input id="password" class="form-control form-control-lg" [type]="passwordType" required #password (keypress)="resetPasswordError($event)" />
                    <div class="input-group-append changeBackgroundColor" *ngIf="hiddenPassword" title="Pokaż hasło" (click)="showPassword()">
                      <span class="input-group-text md-addon cursor-pointer"><i class="bi bi-eye-fill"></i></span>
                    </div>
@@ -22,10 +25,12 @@
                     <span class="input-group-text md-addon cursor-pointer"><i class="bi bi-eye-slash-fill"></i></span>
                   </div>
                  </div>
+                 <div *ngIf="showPasswordErrorMessage" class="mb-1">
+                  <h5 style="color: #871717">{{ errorMessage }}</h5>
+                </div>
               </div>
               
-              <!-- <button class="btn btn-success btn-lg btn-block" type="submit" [disabled] = "!loginForm.valid" (click)="logIn()">Zaloguj się</button> -->
-              <button class="btn btn-success btn-lg btn-block" type="submit" [disabled] = "!loginForm.valid">Zaloguj się</button>
+              <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="!loginForm.valid">Zaloguj się</button>
             </form>
           </div>
         </div>
