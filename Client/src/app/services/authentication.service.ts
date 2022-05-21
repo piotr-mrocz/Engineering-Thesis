@@ -17,11 +17,6 @@ export class AuthenticationService {
 
   login(loginDto: LoginDto) {
     this.http.post(this.apiSettings.baseAddress + 'api/Account/Login', loginDto)
-    // .pipe(catchError((err) => {
-    //   alert('Niepoprawny login lub hasło!');
-
-    //   return err;
-    // }))
     .subscribe(response => {
       const responseApi = (<AuthenticationResponse>response);
         localStorage.setItem("jwt", responseApi.token);
@@ -33,10 +28,6 @@ export class AuthenticationService {
         this.router.navigate(["/home"]);
     },
     error => alert("Niepoprawny login lub hasło!")
-    // , (error) => {
-    //     this.invalidLogin = true;
-    //     alert("Niepoprawny login lub hasło!");
-    // }
     )
   }
 

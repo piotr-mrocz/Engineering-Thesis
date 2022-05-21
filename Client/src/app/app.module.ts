@@ -15,6 +15,8 @@ import { PersonService } from './services/person-service';
 import { AuthenticationService } from './services/authentication.service';
 import { LoginComponent } from './components/login/login.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { PersonDetailsComponent } from './components/person-details/person-detai
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    SimpleNotificationsModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [PersonService, AuthenticationService],
   bootstrap: [AppComponent]
