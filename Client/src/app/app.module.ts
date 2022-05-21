@@ -15,8 +15,9 @@ import { PersonService } from './services/person-service';
 import { AuthenticationService } from './services/authentication.service';
 import { LoginComponent } from './components/login/login.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
-import { SimpleNotificationsModule } from 'angular2-notifications';
+// import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorInterceptor } from './errorHandlers/errorInterceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PrivacyPolicyComponent,
     ProcessingOfPersonalDataComponent,
     PageNotFoundComponent,
-    PersonsListComponent,
+    PersonsListComponent, 
     PersonDetailsComponent,
     LoginComponent
   ],
@@ -36,10 +37,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    SimpleNotificationsModule.forRoot(),
+    // SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [PersonService, AuthenticationService],
+  providers: [
+    PersonService, AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
