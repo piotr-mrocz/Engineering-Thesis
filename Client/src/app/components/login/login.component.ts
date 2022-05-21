@@ -19,8 +19,6 @@ export class LoginComponent {
   hiddenPassword: boolean = true;
   passwordType: string = Types[Types.password];
 
-model: LoginDto;
-
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   showPassword() {
@@ -35,8 +33,9 @@ model: LoginDto;
 
   logIn(login: string, password: string) {
     if (this.validateInputs(login, password)) {
-      console.log(login);
-      console.log(password);
+      var dto = new LoginDto(login, password);
+
+      this.authService.login(dto);
     }
   }
 
