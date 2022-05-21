@@ -1,4 +1,4 @@
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using IntranetWebApi.Application;
 using IntranetWebApi.Data;
 using IntranetWebApi.Infrastructure.Data;
@@ -44,6 +44,8 @@ if (!app.Environment.IsDevelopment())
 #endregion Configure the HTTP request pipeline.
 
 IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Services.CreateScope());
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthentication();
 app.UseHttpsRedirection();
