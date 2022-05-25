@@ -32,14 +32,7 @@ export class AuthenticationService {
   }
 
   isUserAuthenticated(): boolean {
-    const token: string = localStorage.getItem("jwt");
-
-    if  (token) {
-      return true;
-    }
-    else {
-      return false;
-    }
+   return localStorage.getItem("jwt") != null;
   }
 
   logOut() {
