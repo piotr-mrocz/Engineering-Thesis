@@ -8,14 +8,16 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
-    {path: '', redirectTo: '/login', pathMatch: 'full'},
+    {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: HomePageComponent},
+    {path: 'home', component: HomePageComponent, canActivate: [AuthGuard]},
     {path: 'privacypolicy', component: PrivacyPolicyComponent},
     {path: 'processingofpersonaldata', component: ProcessingOfPersonalDataComponent},
-    {path: 'personslist', component: PersonsListComponent},
+    {path: 'personslist', component: PersonsListComponent, canActivate: [RoleGuard]},
     {path: 'persondetails/:id', component: PersonDetailsComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
