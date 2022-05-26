@@ -1,7 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+
+export const delayMs = 2000;
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +13,12 @@ export class TokenInterceptorService implements HttpInterceptor{
   constructor(private inject: Injector) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authService = this.inject.get(AuthenticationService);
-    console.log("first");
-    let jwtToken = req.clone({
-        setHeaders: {
-          Authorization: 'bearer ' + authService.getToken()
-        }
+ 
+    var token = 'Bearer' + authService.getToken();
+    req = req.clone({
+      headers: req.headers.set('Authorization', token)
     });
-console.log("jsdi");
-    return next.handle(jwtToken);
+
+    return next.handle(req);
   }
 }
