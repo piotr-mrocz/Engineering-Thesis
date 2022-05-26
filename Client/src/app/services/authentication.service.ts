@@ -21,9 +21,6 @@ export class AuthenticationService {
       const responseApi = (<AuthenticationResponse>response);
         if (responseApi.isAuthorize) {
            localStorage.setItem("jwt", responseApi.token);
-
-            localStorage.setItem("role", responseApi.role);
-            localStorage.setItem("userName", responseApi.userName);
       
             this.invalidLogin = false;
             this.router.navigate(["/home"]);
