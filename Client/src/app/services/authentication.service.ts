@@ -3,17 +3,21 @@ import { BackendSettings } from '../models/consts/backendSettings'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LoginDto } from '../models/dto/loginDto';
 import { AuthenticationResponse } from '../models/response/authenticationResponse';
-import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  constructor(private http: HttpClient, private router: Router) { }
-
   private apiSettings = new BackendSettings();
-  invalidLogin: boolean;
+  
+  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  public isLoggedIn$ = this._isLoggedIn$.asObservable();
+
+  constructor(private http: HttpClient) { 
+    const token = localStorage.getItem('jwt');
+    this._isLoggedIn$.next(!!token);
+  }
 
   login(loginDto: LoginDto) {
     this.http.post(this.apiSettings.baseAddress + 'api/Account/Login', loginDto)
@@ -21,16 +25,15 @@ export class AuthenticationService {
       const responseApi = (<AuthenticationResponse>response);
         if (responseApi.isAuthorize) {
            localStorage.setItem("jwt", responseApi.token);
-      
-            this.invalidLogin = false;
-            this.router.navigate(["/home"]);
-
+           this._isLoggedIn$.next(true);
            // this.haveAccess();
         }
         else {
             alert("Niepoprawny login lub hasło!");
         }
     });
+
+    return this.isLoggedIn$;
   }
   
 
@@ -40,8 +43,6 @@ export class AuthenticationService {
 
   logOut() {
     localStorage.removeItem("jwt");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userName");
   }
 
   getToken() {
