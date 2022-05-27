@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LoginDto } from '../models/dto/loginDto';
 import { AuthenticationResponse } from '../models/response/authenticationResponse';
 import { BehaviorSubject } from 'rxjs';
+import { ClaimsReponse } from '../models/response/claimsResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,12 @@ export class AuthenticationService {
   
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this._isLoggedIn$.asObservable();
+  user!: ClaimsReponse;
 
   constructor(private http: HttpClient) { 
     const token = localStorage.getItem('jwt');
     this._isLoggedIn$.next(!!token);
+    this.user = this.getUser(token);
   }
 
   login(loginDto: LoginDto) {
@@ -26,7 +29,8 @@ export class AuthenticationService {
         if (responseApi.isAuthorize) {
            localStorage.setItem("jwt", responseApi.token);
            this._isLoggedIn$.next(true);
-           // this.haveAccess();
+
+           this.user = this.getUser(responseApi.token);
         }
         else {
             alert("Niepoprawny login lub hasło!");
@@ -50,15 +54,22 @@ export class AuthenticationService {
     return localStorage.getItem("jwt") || '';
   }
 
-  haveAccess() {
-    var loginToken = this.getToken();
+  getUser(token: string) : ClaimsReponse {
+    token = localStorage.getItem("jwt");
 
-    if (loginToken == null || loginToken.length == 0) {
-      var extractedToken = loginToken.split('.')[1];
+    if (token != null && token.length != 0) {
+      var extractedToken = token.split('.')[1];
       var atobToken = atob(extractedToken);
       var finalData = JSON.parse(atobToken);
 
-      console.log(finalData);
+      var claims = new ClaimsReponse();
+      claims.id = finalData[Object.keys(finalData)[0]];
+      claims.userName = finalData[Object.keys(finalData)[1]];
+      claims.role = finalData[Object.keys(finalData)[2]];
+
+      return claims;
     }
+    
+    return null;
   }
 }
