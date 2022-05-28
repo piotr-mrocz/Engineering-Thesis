@@ -17,7 +17,6 @@ import { LoginComponent } from './components/login/login.component';
 import { PersonDetailsComponent } from './components/person-details/person-details.component';
 // import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ErrorInterceptor } from './interceptors/errorInterceptor';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({

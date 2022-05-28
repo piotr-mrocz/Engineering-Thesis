@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Types } from 'src/app/models/enums/types.enum';
 import { LoginDto } from 'src/app/models/dto/loginDto';
-import { FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 
@@ -19,7 +18,13 @@ export class LoginComponent {
   hiddenPassword: boolean = true;
   passwordType: string = Types[Types.password];
 
-  constructor(private authService: AuthenticationService, private router: Router) { }
+  constructor(private authService: AuthenticationService, private router: Router) {
+    var isLoggin = this.authService.isUserAuthenticated();
+
+      if (isLoggin) {
+        this.router.navigate(['/home']);
+      }
+   }
 
   showPassword() {
     this.hiddenPassword = false;
@@ -34,8 +39,11 @@ export class LoginComponent {
   logIn(login: string, password: string) {
     if (this.validateInputs(login, password)) {
       var dto = new LoginDto(login, password);
+      this.authService.login(dto);
+      
+      var isLoggin = this.authService.isUserAuthenticated();
 
-      var isLoggin = this.authService.login(dto);
+console.log(isLoggin);
 
       if (isLoggin) {
         this.router.navigate(['/home']);

@@ -14,10 +14,10 @@ import { RoleGuard } from './guards/role.guard';
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: HomePageComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
+    {path: 'home', component: HomePageComponent, canActivate: [AuthGuard]},
     {path: 'privacypolicy', component: PrivacyPolicyComponent},
     {path: 'processingofpersonaldata', component: ProcessingOfPersonalDataComponent},
-    {path: 'personslist', component: PersonsListComponent, canActivate: [RoleGuard]},
+    {path: 'personslist', component: PersonsListComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: 'persondetails/:id', component: PersonDetailsComponent},
     {path: '**', component: PageNotFoundComponent}
 ];

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BackendSettings } from '../models/consts/backendSettings'
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoginDto } from '../models/dto/loginDto';
 import { AuthenticationResponse } from '../models/response/authenticationResponse';
-import { BehaviorSubject } from 'rxjs';
 import { ClaimsReponse } from '../models/response/claimsResponse';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,32 +12,28 @@ import { ClaimsReponse } from '../models/response/claimsResponse';
 export class AuthenticationService {
   private apiSettings = new BackendSettings();
   
-  private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  public isLoggedIn$ = this._isLoggedIn$.asObservable();
   user!: ClaimsReponse;
+  public isLoggin: boolean;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private router: Router) { 
     const token = localStorage.getItem('jwt');
-    this._isLoggedIn$.next(!!token);
     this.user = this.getUser(token);
   }
 
   login(loginDto: LoginDto) {
-    this.http.post(this.apiSettings.baseAddress + 'api/Account/Login', loginDto)
+     this.http.post(this.apiSettings.baseAddress + 'api/Account/Login', loginDto)
     .subscribe(response => {
       const responseApi = (<AuthenticationResponse>response);
         if (responseApi.isAuthorize) {
            localStorage.setItem("jwt", responseApi.token);
-           this._isLoggedIn$.next(true);
 
            this.user = this.getUser(responseApi.token);
+           this.router.navigate(['/home']);
         }
         else {
             alert("Niepoprawny login lub hasło!");
         }
     });
-
-    return this.isLoggedIn$;
   }
   
 
