@@ -40,14 +40,6 @@ export class LoginComponent {
     if (this.validateInputs(login, password)) {
       var dto = new LoginDto(login, password);
       this.authService.login(dto);
-      
-      var isLoggin = this.authService.isUserAuthenticated();
-
-console.log(isLoggin);
-
-      if (isLoggin) {
-        this.router.navigate(['/home']);
-      }
     }
   }
 

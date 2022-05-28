@@ -3,7 +3,6 @@
     border: none;
 }
   
-
 #imgLogo:focus {
     outline: none;
 }
@@ -40,4 +39,8 @@ ul > li > a {
     font-weight: bold;
     font-size: medium;
   }
+}
+
+#menuList {
+  background-color: #111827;
 }

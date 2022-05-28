@@ -1,4 +1,4 @@
-<nav id="menuList" class="navbar navbar-expand-xl navbar-dark bg-success sticky-top fixed-top"> 
+<nav id="menuList" class="navbar navbar-expand-xl navbar-dark sticky-top fixed-top"> 
     <div class="container-fluid">
       <img id="imgLogo" class="navbar-brand rounded float-right" data-target=".navbar-collapse" style="width: 200px;"
            src="../../../assets/Images/logo.png" alt="logo" routerLink="/home"/>
@@ -35,8 +35,7 @@
                routerLink="/">Twoje zadania</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse"
-               routerLink="/">Wyloguj się</a>
+            <a class="nav-link btn" data-toggle="collapse" data-target=".navbar-collapse" (click)="logOut()">Wyloguj się</a>
           </li>
         </ul>
       </div>
