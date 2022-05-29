@@ -1,15 +1,33 @@
-<nav id="menuList" class="navbar navbar-expand-xl navbar-dark sticky-top fixed-top"> 
+<nav id="topNav" class="navbar navbar-dark sticky-top fixed-top"> 
+    <div class="text-right text-white mt-2">
+      <div id="navbarmenu" class=" justify-content-right">
+      <ul class="list-inline">
+        <li class="list-inline-item text-left pr-3">
+          <div>
+            <h5>Powiadomienia</h5>
+          </div>
+        </li>
+        <li class="list-inline-item"> <img class="rounded-circle" alt="100x100" width="100px" src="../../../assets/Images/People/Marian_Piotrowski.jpg"
+          data-holder-rendered="true"></li>
+        <li class="list-inline-item pl-3"> <h5>{{ userName }}</h5></li>
+     </ul>
+    </div>
+    </div>
+  </nav>
+  
+  <nav id="menuList" class="navbar navbar-expand-xl navbar-dark sticky-left fixed-left"> 
     <div class="container-fluid">
       <img id="imgLogo" class="navbar-brand rounded float-right" data-target=".navbar-collapse" style="width: 200px;"
            src="../../../assets/Images/logo.png" alt="logo" routerLink="/home"/>
-
+         
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmenu" aria-controls="navbarmenu" 
       aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			</button>
+      </button> 
+    </div>
 
       <div class="collapse navbar-collapse justify-content-center" id="navbarmenu">
-        <ul class="navbar-nav text-center">
+        <ul class="navbar-nav text-center flex-column">
           <li class="nav-item active">
             <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse"
                routerLink="/">Sprzęt</a>
@@ -38,6 +56,5 @@
             <a class="nav-link btn" data-toggle="collapse" data-target=".navbar-collapse" (click)="logOut()">Wyloguj się</a>
           </li>
         </ul>
-      </div>
     </div>
 </nav>

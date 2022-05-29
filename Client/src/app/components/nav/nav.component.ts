@@ -9,13 +9,15 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class NavComponent {
 
   public userRole: string;
+  public userName: string;
+  public userPhotoSource: string;
 
   constructor(private authService: AuthenticationService) {
     this.userRole = this.authService.user.role;
+    this.userName = this.authService.user.userName;
   }
 
   logOut() {
     this.authService.logOut();
   }
-  
 }

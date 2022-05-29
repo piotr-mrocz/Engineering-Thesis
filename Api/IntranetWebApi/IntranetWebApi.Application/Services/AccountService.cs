@@ -44,7 +44,7 @@ public class AccountService : IAccountService
             new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
             new Claim(ClaimTypes.Role, $"{user.Role.Name}")
         };
-
+        
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authSettings.JwtKey));
         var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.UtcNow.AddMinutes(_authSettings.DurationInMinutes);
@@ -58,7 +58,7 @@ public class AccountService : IAccountService
 
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenString = tokenHandler.WriteToken(token);
-
+       
         return new AuthenticationResponse()
         {
             Role = EnumHelper.GetEnumDescription((RolesEnum)user.IdRole),

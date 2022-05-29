@@ -41,6 +41,8 @@ ul > li > a {
   }
 }
 
-#menuList {
+#menuList, #topNav {
   background-color: #111827;
 }
+
+
