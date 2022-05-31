@@ -89,7 +89,7 @@ public class DatabaseSeeder
             new Photo()
             {
                 Description = "Zdjęcie testowego usera Adama Mickiewicza",
-                Path = "Chwilowo jest tutaj testowy string",
+                Name = "Chwilowo jest tutaj testowy string",
                 IdUser = 2
             }
         };
