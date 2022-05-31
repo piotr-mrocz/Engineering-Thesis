@@ -15,9 +15,15 @@ export class NavComponent {
   constructor(private authService: AuthenticationService) {
     this.userRole = this.authService.user.role;
     this.userName = this.authService.user.userName;
+
+    this.userPhotoSource = this.getUserPhotoSource();
   }
 
   logOut() {
     this.authService.logOut();
+  }
+
+  getUserPhotoSource() {
+    return "../../../assets/Images/People/Marian_Piotrowski.jpg";
   }
 }

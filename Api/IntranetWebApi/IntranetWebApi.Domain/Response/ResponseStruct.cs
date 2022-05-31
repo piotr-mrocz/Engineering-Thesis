@@ -1,6 +1,6 @@
 ﻿namespace IntranetWebApi.Models.Response
 {
-    public class ResponseStruct<T> : BaseResponse where T : struct
+    public class ResponseStruct<T> : BaseResponse
     {
         public T? Data { get; set; }
 

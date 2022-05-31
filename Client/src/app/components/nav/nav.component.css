@@ -41,10 +41,6 @@ ul > li > a {
   }
 }
 
-#menuList, #topNav {
-  background-color: #111827;
-}
-
-#formLogin {
+#menuList, #topNav, #formLogin {
   background-color: #111827;
 }
