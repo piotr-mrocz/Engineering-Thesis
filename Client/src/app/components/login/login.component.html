@@ -2,12 +2,12 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card shadow-2-strong bg-secondary" style="border-radius: 1rem;">
+          <div id="formLogin" class="card shadow-2-strong" style="border-radius: 1rem; background-color: #111827;">
             <form #loginForm="ngForm" (ngSubmit)="logIn(login.value, password.value)" class="card-body p-5 text-center">
   
-              <h3 class="mb-5">LOGOWANIE</h3>
+              <h3 class="mb-5 text-light">LOGOWANIE</h3>
               <div class="form-outline mb-4">
-                <label class="form-label" for="login">Login</label>
+                <label class="form-label text-light" for="login">Login</label>
                 <input id="login" class="form-control form-control-lg" type="text" required #login (keypress)="resetLoginError($event)" autocomplete="off" />
                 <div *ngIf="showLoginErrorMessage">
                   <h5 style="color: #871717">{{ errorMessage }}</h5>
@@ -15,7 +15,7 @@
               </div>
   
               <div class="form-outline mb-5">
-                <label class="form-label" for="password">Hasło</label>
+                <label class="form-label text-light" for="password">Hasło</label>
                 <div class="md-form input-group mb-3">
                     <input id="password" class="form-control form-control-lg" [type]="passwordType" required #password (keypress)="resetPasswordError($event)" />
                    <div class="input-group-append changeBackgroundColor" *ngIf="hiddenPassword" title="Pokaż hasło" (click)="showPassword()">
