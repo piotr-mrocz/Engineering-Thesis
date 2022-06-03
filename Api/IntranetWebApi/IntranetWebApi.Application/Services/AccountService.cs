@@ -28,6 +28,7 @@ public class AccountService : IAccountService
     {
         var user = await _dbContext.Users
             .Include(u => u.Role)
+            .Include(x => x.Photo)
             .FirstOrDefaultAsync(x => x.Login == dto.Login);
 
         if (user is null)
@@ -42,7 +43,8 @@ public class AccountService : IAccountService
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
-            new Claim(ClaimTypes.Role, $"{user.Role.Name}")
+            new Claim(ClaimTypes.Role, $"{user.Role.Name}"),
+            new Claim(ClaimTypes.UserData, user.Photo.Name)
         };
         
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authSettings.JwtKey));

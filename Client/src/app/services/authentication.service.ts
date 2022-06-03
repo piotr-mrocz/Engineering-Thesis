@@ -39,7 +39,6 @@ export class AuthenticationService {
         }
     });
   }
-  
 
   isUserAuthenticated(): boolean {
    return localStorage.getItem("jwt") != null;
@@ -68,6 +67,7 @@ export class AuthenticationService {
       claims.id = finalData[Object.keys(finalData)[0]];
       claims.userName = finalData[Object.keys(finalData)[1]];
       claims.role = finalData[Object.keys(finalData)[2]];
+      claims.photoName = finalData[Object.keys(finalData)[3]];
 
       return claims;
     }

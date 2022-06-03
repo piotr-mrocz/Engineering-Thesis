@@ -29,6 +29,7 @@ public class GetUserPhotoNameHandler : IRequestHandler<GetUserPhotoNameQuery, Re
 
         var namePhoto = photo.Succeeded && photo.Data != null
             ? photo.Data.Name
+
             : string.Empty;
 
         return new ResponseStruct<string>()

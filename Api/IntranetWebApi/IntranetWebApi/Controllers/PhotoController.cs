@@ -21,7 +21,7 @@ public class PhotoController : ControllerBase
     #region Queries
 
     [HttpPost]
-    public async Task<IActionResult> GetUserPhotoName(GetUserPhotoNameQuery request)
+    public async Task<IActionResult> GetUserPhotoName([FromBody] GetUserPhotoNameQuery request)
         => Ok(await _mediator.Send(request));
 
     #endregion Queries

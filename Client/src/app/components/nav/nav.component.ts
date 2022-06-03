@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -16,14 +16,14 @@ export class NavComponent {
     this.userRole = this.authService.user.role;
     this.userName = this.authService.user.userName;
 
-    this.userPhotoSource = this.getUserPhotoSource();
+    this.userPhotoSource = this.getUserPhotoSource(this.authService.user.photoName);
   }
 
   logOut() {
     this.authService.logOut();
   }
 
-  getUserPhotoSource() {
-    return "../../../assets/Images/People/Marian_Piotrowski.jpg";
+  getUserPhotoSource(photoName: string): string {
+    return "../../../assets/Images/People/" + photoName;
   }
 }
