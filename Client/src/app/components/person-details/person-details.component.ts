@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Person } from 'src/app/models/person';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { PersonService } from '../../services/person-service';
+import { UserDetailsDto } from 'src/app/models/userDetailsDto';
 
 @Component({
   selector: 'app-person-details',
@@ -13,7 +13,7 @@ import { PersonService } from '../../services/person-service';
 })
 export class PersonDetailsComponent implements OnInit {
 
-  personDetails: Observable<Person>;
+  personDetails: Observable<UserDetailsDto>;
 
   constructor(private http: PersonService, private route: ActivatedRoute, private location: Location) { }
 

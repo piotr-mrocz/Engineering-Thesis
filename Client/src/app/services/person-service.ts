@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Person } from '../models/person';
 import { Observable } from 'rxjs';
-import { tap, map, filter } from 'rxjs/operators';
+import { BackendSettings } from '../models/consts/backendSettings';
+import { UserDetailsDto } from '../models/userDetailsDto';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonService {
 
-  private url = 'http://localhost:5000/api/person';
+  private token;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private backendSettings: BackendSettings, private authService: AuthenticationService) {
+    this.token = this.authService.getToken();
+   }
 
-
-  getPersons(species: string): Observable<Person[]>{
-    return this.http.get<Person[]>(this.url);
+  getAllPersons(): Observable<UserDetailsDto[]>{
+    var url = this.backendSettings.baseAddress + "api/User/GetAllUsers";
+    return this.http.post<UserDetailsDto[]>(url, {});
   }
 
-  getPerson(id: string): Observable<Person> {
-    return this.http.get<Person>(this.url + '/' + id);
+  getPerson(id: string): Observable<UserDetailsDto> {
+    var url = "";
+    return this.http.get<UserDetailsDto>(url + '/' + id);
   }
 }

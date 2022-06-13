@@ -9,3 +9,9 @@
   background-color: #e8631b;
 }
 
+body {
+  background-image: linear-gradient(-130deg,  #004976 0%, #031b3f 51%, #501438 110%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+}

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({

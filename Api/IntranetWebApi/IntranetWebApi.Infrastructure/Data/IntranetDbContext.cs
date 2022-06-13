@@ -1,10 +1,11 @@
 ﻿using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Domain.Models.Entities.Views;
+using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntranetWebApi.Data;
-public class IntranetDbContext : DbContext
+public class IntranetDbContext : DbContext, IIntranetDbContext
 {
     public IntranetDbContext(DbContextOptions options) : base(options) { }
 
@@ -16,7 +17,7 @@ public class IntranetDbContext : DbContext
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<VUsersPresence> VUsersPresences { get; set; }
-    DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
+    public DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
     #endregion DbSets
 

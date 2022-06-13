@@ -1,7 +1,9 @@
-﻿using IntranetWebApi.Domain.Enums;
+﻿using IntranetWebApi.Data;
+using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Settings;
 using IntranetWebApi.Infrastructure.Data;
 using IntranetWebApi.Infrastructure.Helper;
+using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Models.Response;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +21,8 @@ public static class ServiceExtensions
     public static void AddInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<DatabaseSeeder>();
+
+        services.AddScoped<IIntranetDbContext, IntranetDbContext>();
 
         var authenticationSettings = new AuthenticationSettings();
 

@@ -1,5 +1,4 @@
 <body>
-    <!-- <div *ngIf="authService.isLoggin | async">some child component here</div> -->
     <app-nav *ngIf="authService.isLoggedIn$ | async"></app-nav>
     <router-outlet></router-outlet>
 </body>

@@ -17,7 +17,7 @@
   
   <nav id="menuList" class="navbar navbar-expand-xl navbar-dark sticky-left fixed-left"> 
     <div class="container-fluid">
-      <img id="imgLogo" class="navbar-brand rounded float-right" data-target=".navbar-collapse" style="width: 200px;"
+      <img id="imgLogo" class="navbar-brand rounded float-right" style="width: 200px;"
            src="../../../assets/Images/logo.png" alt="logo" routerLink="/home"/>
          
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmenu" aria-controls="navbarmenu" 
@@ -29,28 +29,19 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarmenu">
         <ul class="navbar-nav text-center flex-column">
           <li class="nav-item active">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse"
-               routerLink="/">Sprzęt</a>
+            <a class="nav-link" routerLink="/">Sprzęt</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" aria-current="page"
-               routerLink="/personslist">Pracownicy</a>
+            <a class="nav-link" aria-current="page" routerLink="/personslist" routerLinkActive="active">Pracownicy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" aria-current="page"
-               routerLink="/">Wiadomości</a>
+            <a class="nav-link" aria-current="page" routerLink="/login">Wiadomości</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" aria-current="page"
-               routerLink="/">Praca</a>
+            <a class="nav-link" routerLink="/">Wypisz urlop</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse"
-               routerLink="/">Wypisz urlop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse"
-               routerLink="/">Twoje zadania</a>
+            <a class="nav-link" routerLink="/">Twoje zadania</a>
           </li>
           <li class="nav-item">
             <a class="nav-link btn" data-toggle="collapse" data-target=".navbar-collapse" (click)="logOut()">Wyloguj się</a>

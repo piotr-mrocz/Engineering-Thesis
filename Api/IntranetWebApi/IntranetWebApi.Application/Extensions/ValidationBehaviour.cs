@@ -17,27 +17,6 @@ namespace IntranetWebApi.Application.Extensions
             _validators = validators;
         }
 
-        //public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
-        //{
-        //    if (_validators?.Any() == true)
-        //    {
-        //        var context = new ValidationContext<TRequest>(request);
-
-        //        var failures =
-        //            _validators
-        //            .Select(x => x.Validate(context))
-        //            .SelectMany(x => x.Errors)
-        //            .Where(_ => true)
-        //            .ToList();
-
-        //        if (failures.Count > 0)
-        //        {
-        //            throw new ValidationException(failures);
-        //        }
-        //    }
-
-        //    return await next();
-        //}
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             if (_validators.Any())

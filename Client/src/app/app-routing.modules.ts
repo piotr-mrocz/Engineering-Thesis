@@ -17,8 +17,8 @@ const routes: Routes = [
     {path: 'home', component: HomePageComponent, canActivate: [AuthGuard]},
     {path: 'privacypolicy', component: PrivacyPolicyComponent},
     {path: 'processingofpersonaldata', component: ProcessingOfPersonalDataComponent},
-    {path: 'personslist', component: PersonsListComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
-    {path: 'persondetails/:id', component: PersonDetailsComponent},
+    {path: 'personslist', component: PersonsListComponent, canActivate: [AuthGuard] },
+    {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];
 
