@@ -16,6 +16,8 @@ public class User
     public string Password { get; set; } = null!;
     public int IdRole { get; set; }
     public bool IsActive { get; set; } = true;
+    public string Phone { get; set; } = null!;
+    public string Email { get; set; } = null!;
 
     public Role Role { get; set; } = null!;
     public Photo Photo { get; set; } = null!;

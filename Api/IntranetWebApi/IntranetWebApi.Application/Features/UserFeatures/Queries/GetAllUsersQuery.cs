@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
+using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Interfaces;
@@ -52,11 +54,12 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, Response<List<U
                 Id = user.Id,
                 UserLastName = user.LastName,
                 UserName = user.FirstName,
-                //Email = user.Email,
-                //PhoneNumber = user.Phone,
+                Email = user.Email,
+                PhoneNumber = user.Phone,
                 PhotoName = user.Photo.Name,
                 Department = user.Department.DepartmentName,
-                IdRole = user.IdRole
+                IdRole = user.IdRole,
+                Role = EnumHelper.GetEnumDescription((RolesEnum)user.IdRole)
             };
 
             usersList.Add(rekord);

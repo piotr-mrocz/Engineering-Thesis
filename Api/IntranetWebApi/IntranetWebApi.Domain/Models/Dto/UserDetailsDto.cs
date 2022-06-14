@@ -16,4 +16,5 @@ public class UserDetailsDto
     public string PhotoName { get; set; } = null!;
     public string Department { get; set; } = null!;
     public int IdRole { get; set; }
+    public string Role { get; set; } = null!;
 }
