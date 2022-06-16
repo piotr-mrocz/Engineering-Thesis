@@ -34,6 +34,10 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetAllUsers(GetAllUsersQuery request)
         => Ok(await _mediator.Send(request));
 
+    [HttpPost]
+    public async Task<IActionResult> GetAllUsersByIdDepartment(GetAllUsersByIdDepartmentQuery request)
+        => Ok(await _mediator.Send(request));
+
     #endregion Queries
 }
 
