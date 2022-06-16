@@ -6,5 +6,6 @@ export interface UserDetailsDto {
     phoneNumber?: string,
     photoName?: string,
     department?: string,
-    idRole?: number
+    idRole?: number,
+    role?: string
 }

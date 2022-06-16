@@ -44,3 +44,7 @@ ul > li > a {
 #menuList, #topNav, #formLogin {
   background-color: #111827;
 }
+
+.activeLink:active {
+  color: #fd7e14 !important;
+}

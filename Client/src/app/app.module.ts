@@ -14,7 +14,6 @@ import { PersonsListComponent } from './components/persons-list/persons-list.com
 import { PersonService } from './services/person-service';
 import { AuthenticationService } from './services/authentication.service';
 import { LoginComponent } from './components/login/login.component';
-import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -28,7 +27,6 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     ProcessingOfPersonalDataComponent,
     PageNotFoundComponent,
     PersonsListComponent, 
-    PersonDetailsComponent,
     LoginComponent
   ],
   imports: [

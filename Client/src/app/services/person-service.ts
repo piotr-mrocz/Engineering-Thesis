@@ -20,9 +20,5 @@ export class PersonService {
     var url = this.backendSettings.baseAddress + "api/User/GetAllUsers";
     return this.http.post<UserDetailsDto[]>(url, {});
   }
-
-  getPerson(id: string): Observable<UserDetailsDto> {
-    var url = "";
-    return this.http.get<UserDetailsDto>(url + '/' + id);
-  }
 }
+ 

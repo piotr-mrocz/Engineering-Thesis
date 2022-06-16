@@ -1,4 +1,3 @@
-import { PersonDetailsComponent } from './components/person-details/person-details.component';
 import { PersonsListComponent } from './components/persons-list/persons-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProcessingOfPersonalDataComponent } from './components/processing-of-personal-data/processing-of-personal-data.component';
@@ -18,7 +17,7 @@ const routes: Routes = [
     {path: 'privacypolicy', component: PrivacyPolicyComponent},
     {path: 'processingofpersonaldata', component: ProcessingOfPersonalDataComponent},
     {path: 'personslist', component: PersonsListComponent, canActivate: [AuthGuard] },
-    {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
+    // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];
 
