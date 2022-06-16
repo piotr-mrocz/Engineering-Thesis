@@ -18,7 +18,9 @@ export class PersonService {
 
   getAllPersons(): Observable<UserDetailsDto[]>{
     var url = this.backendSettings.baseAddress + "api/User/GetAllUsers";
-    return this.http.post<UserDetailsDto[]>(url, {});
+    var response = this.http.post<UserDetailsDto[]>(url, {});
+
+    return response;
   }
 }
  
