@@ -14,7 +14,7 @@ constructor(private service: AuthenticationService, private router: Router) {}
       return true;
     }
     else {
-      this.router.navigate(["login"]);
+      this.service.logOut();
       return false;
     }
   }

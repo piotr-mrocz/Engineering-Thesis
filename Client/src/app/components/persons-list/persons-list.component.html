@@ -10,7 +10,7 @@
           </div>
         </div>
     </div>
-    <div class="row">
+    <div *ngIf="showUsers" class="row">
       <!-- <div class="card m-2 hover-overlay" style="width: 15rem;" *ngFor="let person of persons | async" [routerLink]="['/persondetails', person.id]">
         <img [src]="'../../../assets/Images/People/' + person.photoName" class="card-img-top" alt="person" style="height: 160px;">
         <div class="card-body bg-warning">

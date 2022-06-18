@@ -8,6 +8,8 @@ import { ClaimsReponse } from '../models/response/claimsResponse';
 import { Router } from '@angular/router';
 import { EndpointsUrl } from '../models/consts/endpointsUrl';
 
+import { JwtHelperService } from "@auth0/angular-jwt";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +19,8 @@ export class AuthenticationService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this._isLoggedIn$.asObservable();
   user!: ClaimsReponse;
+
+  helper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router, private endpoints: EndpointsUrl) { 
     const token = localStorage.getItem('jwt');
@@ -42,7 +46,9 @@ export class AuthenticationService {
   }
 
   isUserAuthenticated(): boolean {
-   return localStorage.getItem("jwt") != null;
+    var token = localStorage.getItem("jwt");
+    var isTokenExpired = this.isTokenExpired(token);
+   return isTokenExpired && token != null;
   }
 
   logOut() {
@@ -77,6 +83,7 @@ export class AuthenticationService {
   }
 
   isTokenExpired(token) : boolean {
-    return true;
+    var isExpired = this.helper.isTokenExpired(token);
+    return !isExpired;
   }
 }

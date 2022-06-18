@@ -13,6 +13,8 @@ import { DepartmentDto } from 'src/app/models/dto/departmentDto';
 })
 export class PersonsListComponent implements OnInit, OnDestroy  {
 
+  showUsers: boolean;
+
   persons: Observable<UserDetailsDto[]>;
   departmentResponse: BackendResponse<DepartmentDto[]>;
   
