@@ -1,5 +1,5 @@
-export class BackendResponse {
+export class BackendResponse<Type> {
     message?: string;
     succeeded?: boolean;
-    data?: any
+    data?: Type
 }

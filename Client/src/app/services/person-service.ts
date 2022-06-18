@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BackendSettings } from '../models/consts/backendSettings';
-import { UserDetailsDto } from '../models/userDetailsDto';
+import { UserDetailsDto } from '../models/dto/userDetailsDto';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({

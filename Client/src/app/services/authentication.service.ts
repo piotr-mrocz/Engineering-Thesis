@@ -6,6 +6,7 @@ import { AuthenticationResponse } from '../models/response/authenticationRespons
 import { BehaviorSubject } from 'rxjs';
 import { ClaimsReponse } from '../models/response/claimsResponse';
 import { Router } from '@angular/router';
+import { EndpointsUrl } from '../models/consts/endpointsUrl';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,14 @@ export class AuthenticationService {
   public isLoggedIn$ = this._isLoggedIn$.asObservable();
   user!: ClaimsReponse;
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private http: HttpClient, private router: Router, private endpoints: EndpointsUrl) { 
     const token = localStorage.getItem('jwt');
     this._isLoggedIn$.next(!!token);
     this.user = this.getUser(token);
   }
 
   login(loginDto: LoginDto) {
-    this.http.post(this.apiSettings.baseAddress + 'api/Account/Login', loginDto)
+    this.http.post(this.apiSettings.baseAddress + this.endpoints.loginEndpoint, loginDto)
     .subscribe(response => {
       const responseApi = (<AuthenticationResponse>response);
         if (responseApi.isAuthorize) {
@@ -73,5 +74,9 @@ export class AuthenticationService {
     }
     
     return null;
+  }
+
+  isTokenExpired(token) : boolean {
+    return true;
   }
 }

@@ -1,22 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { PersonService } from '../../services/person-service';
-import { UserDetailsDto } from 'src/app/models/userDetailsDto';
+import { UserDetailsDto } from 'src/app/models/dto/userDetailsDto';
 import { DepartmentService } from 'src/app/services/department.service';
+import { BackendResponse } from 'src/app/models/response/backendResponse';
+import { DepartmentDto } from 'src/app/models/dto/departmentDto';
 
 @Component({
   selector: 'app-persons-list',
   templateUrl: './persons-list.component.html',
   styleUrls: ['./persons-list.component.css']
 })
-export class PersonsListComponent implements OnInit {
+export class PersonsListComponent implements OnInit, OnDestroy  {
 
   persons: Observable<UserDetailsDto[]>;
+  departmentResponse: BackendResponse<DepartmentDto[]>;
+  
+  private subscription: Subscription;
   
   constructor(private personService: PersonService, private departmentService: DepartmentService) { }
 
-  ngOnInit() { 
+  ngOnInit() : void { 
     //this.persons = this.personService.getAllPersons();
-    var test = this.departmentService.getAllDepartments();
+    
+    this.departmentService.getAllDepartments();
+
+    this.subscription = this.departmentService.departmentsResponse$.subscribe(x => {
+      this.departmentResponse = x;
+    });
+  }
+
+  ngOnDestroy() : void {
+    this.subscription.unsubscribe();
   }
 }

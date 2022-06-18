@@ -4,13 +4,11 @@
     <h2 class="text-center">Nasi pracownicy</h2>
     <hr>
     <div class="row bg-primary p-1" style="height: 50px;">
-        <h3>ohsrguh</h3>
-        <div class="col">
-            <span>dział 1</span>
+        <div *ngFor="let department of departmentResponse.data">
+          <div class="col">
+            <button type="button" class="btn btn-primary">{{department.departmentName}}</button>
+          </div>
         </div>
-        <div class="col">
-          <span>dział 2</span>
-      </div>
     </div>
     <div class="row">
       <!-- <div class="card m-2 hover-overlay" style="width: 15rem;" *ngFor="let person of persons | async" [routerLink]="['/persondetails', person.id]">
