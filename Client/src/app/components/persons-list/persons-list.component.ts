@@ -13,26 +13,42 @@ import { DepartmentDto } from 'src/app/models/dto/departmentDto';
 })
 export class PersonsListComponent implements OnInit, OnDestroy  {
 
-  showUsers: boolean;
-
-  persons: Observable<UserDetailsDto[]>;
   departmentResponse: BackendResponse<DepartmentDto[]>;
+  userResponse: BackendResponse<UserDetailsDto[]>;
   
-  private subscription: Subscription;
+  private departmentSubscription: Subscription;
+ // private userSubscription: Subscription;
   
   constructor(private personService: PersonService, private departmentService: DepartmentService) { }
 
   ngOnInit() : void { 
-    //this.persons = this.personService.getAllPersons();
-    
     this.departmentService.getAllDepartments();
 
-    this.subscription = this.departmentService.departmentsResponse$.subscribe(x => {
+    this.departmentSubscription = this.departmentService.departmentsResponse$.subscribe(x => {
       this.departmentResponse = x;
     });
+
+    this.getAllUsers();
   }
 
   ngOnDestroy() : void {
-    this.subscription.unsubscribe();
+    this.departmentSubscription.unsubscribe();
+    //this.userSubscription.unsubscribe();
+  }
+
+  getUsersByIdDepartment(idDepartment: number) {
+    this.personService.getUsersByIdDepartment(idDepartment);
+
+    this.departmentSubscription = this.personService.usersResponse$.subscribe(x => {
+      this.userResponse = x;
+    });
+  }
+
+  getAllUsers() {
+      this.personService.getAllUsers();
+
+      this.departmentSubscription = this.personService.usersResponse$.subscribe(x => {
+          this.userResponse = x;
+      });
   }
 }

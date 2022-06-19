@@ -4,19 +4,24 @@
     <h2 class="text-center">Nasi pracownicy</h2>
     <hr>
     <div class="row bg-primary p-1" style="height: 50px;">
+      <div class="col">
+        <button type="button" class="btn btn-info w-25 p-1" (click)="getAllUsers()">Wszystkie</button>
+      </div>
         <div *ngFor="let department of departmentResponse.data">
           <div class="col">
-            <button type="button" class="btn btn-primary">{{department.departmentName}}</button>
+            <button type="button" class="btn btn-primary p-1" (click)="getUsersByIdDepartment(department.departmentId)">{{department.departmentName}}</button>
           </div>
         </div>
     </div>
-    <div *ngIf="showUsers" class="row">
-      <!-- <div class="card m-2 hover-overlay" style="width: 15rem;" *ngFor="let person of persons | async" [routerLink]="['/persondetails', person.id]">
-        <img [src]="'../../../assets/Images/People/' + person.photoName" class="card-img-top" alt="person" style="height: 160px;">
-        <div class="card-body bg-warning">
-          <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
-        </div>
-      </div> -->
+    <div *ngIf="userResponse.succeeded" class="row">
+      <div *ngFor="let person of userResponse.data">
+          <div class="card m-2 hover-overlay">
+            <img [src]="'../../../assets/Images/People/' + person.photoName" class="card-img-top" alt="person" style="height: 160px;">
+            <div class="card-body bg-warning">
+              <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </div>
