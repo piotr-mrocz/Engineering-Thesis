@@ -4,6 +4,7 @@ using IntranetWebApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntranetWebApi.Infrastructure.Migrations
 {
     [DbContext(typeof(IntranetDbContext))]
-    partial class IntranetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220619122502_AddPositionsTable")]
+    partial class AddPositionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,9 +221,6 @@ namespace IntranetWebApi.Infrastructure.Migrations
                     b.Property<int>("IdDepartment")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPosition")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdRole")
                         .HasColumnType("int");
 
@@ -247,8 +246,6 @@ namespace IntranetWebApi.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdDepartment");
-
-                    b.HasIndex("IdPosition");
 
                     b.HasIndex("IdRole")
                         .IsUnique();
@@ -388,12 +385,6 @@ namespace IntranetWebApi.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IntranetWebApi.Domain.Models.Entities.Position", "Position")
-                        .WithMany("Users")
-                        .HasForeignKey("IdPosition")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("IntranetWebApi.Domain.Models.Entities.Role", "Role")
                         .WithOne("User")
                         .HasForeignKey("IntranetWebApi.Domain.Models.Entities.User", "IdRole")
@@ -402,17 +393,10 @@ namespace IntranetWebApi.Infrastructure.Migrations
 
                     b.Navigation("Department");
 
-                    b.Navigation("Position");
-
                     b.Navigation("Role");
                 });
 
             modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Department", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("IntranetWebApi.Domain.Models.Entities.Position", b =>
                 {
                     b.Navigation("Users");
                 });

@@ -18,9 +18,11 @@ public class User
     public bool IsActive { get; set; } = true;
     public string Phone { get; set; } = null!;
     public string Email { get; set; } = null!;
+    public int IdPosition { get; set; }
 
     public Role Role { get; set; } = null!;
     public Photo Photo { get; set; } = null!;
+    public Position Position { get; set; } = null!;
     public Department Department { get; set; } = null!;
     public ICollection<RequestForLeave> RequestForLeaves { get; set; } = new List<RequestForLeave>();
     public ICollection<Presence> Presences { get; set; } = new List<Presence>();
