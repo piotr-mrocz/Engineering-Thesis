@@ -30,7 +30,7 @@ public class GetAllUsersByIdDepartmentHandler : IRequestHandler<GetAllUsersByIdD
     public async Task<Response<List<UserDetailsDto>>> Handle(GetAllUsersByIdDepartmentQuery request, CancellationToken cancellationToken)
     {
         var users = await _dbContext.Users
-            .Include(u => u.Role)
+            .Include(x => x.Position)
             .Include(x => x.Photo)
             .Include(x => x.Department)
             .Where(x => x.IdDepartment == request.IdDepartment)
@@ -60,7 +60,7 @@ public class GetAllUsersByIdDepartmentHandler : IRequestHandler<GetAllUsersByIdD
                 PhotoName = user.Photo.Name,
                 Department = user.Department.DepartmentName,
                 IdRole = user.IdRole,
-                Role = EnumHelper.GetEnumDescription((RolesEnum)user.IdRole)
+                Position = user.Position.Name
             };
 
             usersList.Add(rekord);

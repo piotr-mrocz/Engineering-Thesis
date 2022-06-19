@@ -30,7 +30,7 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, Response<List<U
     public async Task<Response<List<UserDetailsDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         var users = await _dbContext.Users
-            .Include(u => u.Role)
+            .Include(x => x.Position)
             .Include(x => x.Photo)
             .Include(x => x.Department)
             .ToListAsync(cancellationToken);
@@ -59,7 +59,7 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, Response<List<U
                 PhotoName = user.Photo.Name,
                 Department = user.Department.DepartmentName,
                 IdRole = user.IdRole,
-                Role = EnumHelper.GetEnumDescription((RolesEnum)user.IdRole)
+                Position = user.Position.Name
             };
 
             usersList.Add(rekord);

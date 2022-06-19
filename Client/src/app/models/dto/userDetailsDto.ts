@@ -7,5 +7,5 @@ export interface UserDetailsDto {
     photoName?: string,
     department?: string,
     idRole?: number,
-    role?: string
+    position?: string
 }
