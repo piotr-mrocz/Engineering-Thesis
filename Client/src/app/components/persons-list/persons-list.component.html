@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div style="height: 200px;">Nasi</div>
+  <div style="height: 200px;">Nasi</div>
   <div class="col-7 align-self-center mb-5" style="margin: auto;">
     <h2 class="text-center">Nasi pracownicy</h2>
     <hr>
@@ -7,20 +7,45 @@
       <div class="col">
         <button type="button" class="btn btn-info w-25 p-1" (click)="getAllUsers()">Wszystkie</button>
       </div>
-        <div *ngFor="let department of departmentResponse.data">
-          <div class="col">
-            <button type="button" class="btn btn-primary p-1" (click)="getUsersByIdDepartment(department.departmentId)">{{department.departmentName}}</button>
-          </div>
+      <div *ngFor="let department of departmentResponse.data">
+        <div class="col">
+          <button type="button" class="btn btn-primary p-1"
+            (click)="getUsersByIdDepartment(department.departmentId)">{{department.departmentName}}</button>
         </div>
+      </div>
     </div>
     <div *ngIf="userResponse.succeeded" class="row">
+      <div *ngIf="userResponse.data.length == 0" class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center">
+        <h2 class="text-center">Nie znaleziono użytkowników do wyświetlenia!</h2>
+      </div>
       <div *ngFor="let person of userResponse.data">
-          <div class="card m-2 hover-overlay">
-            <img [src]="'../../../assets/Images/People/' + person.photoName" class="card-img-top" alt="person" style="height: 160px;">
-            <div class="card-body bg-warning">
-              <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
+        <div class="btn m-2 hover-overlay" data-toggle="collapse" href="#collapseExample" role="button"
+          aria-expanded="false" aria-controls="collapseExample">
+          <img [src]="'../../../assets/Images/People/' + person.photoName" class="card-img-top" alt="person"
+            style="height: 160px;">
+          <div class="card-body bg-warning">
+            <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
+          </div>
+        </div>
+        <div id="collapseExample" class="card card-body collapse bg-dark">
+          <div class="row">
+            <div class="col text-light">
+              <ul>
+                <li>Dział: {{person.department}}</li>
+                <li>Stanowisko: {{person.role}}</li>
+              </ul>
+            </div>
+            <div class="col text-light">
+              <ul>
+                <li>Emial: {{person.email}}</li>
+                <li>Telefon: {{person.phoneNumber}}</li>
+              </ul>
             </div>
           </div>
+          <div *ngIf="userId == person.id" class="row mt-1 d-flex align-items-center justify-content-center">
+            <button class="btn-primary text-light">Rozmawiaj z użytkownikiem</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { UserDetailsDto } from 'src/app/models/dto/userDetailsDto';
 import { DepartmentService } from 'src/app/services/department.service';
 import { BackendResponse } from 'src/app/models/response/backendResponse';
 import { DepartmentDto } from 'src/app/models/dto/departmentDto';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-persons-list',
@@ -15,11 +16,14 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
 
   departmentResponse: BackendResponse<DepartmentDto[]>;
   userResponse: BackendResponse<UserDetailsDto[]>;
+  userId: number;
   
   private departmentSubscription: Subscription;
  // private userSubscription: Subscription;
   
-  constructor(private personService: PersonService, private departmentService: DepartmentService) { }
+  constructor(private personService: PersonService, 
+    private departmentService: DepartmentService,
+    private authService: AuthenticationService) { }
 
   ngOnInit() : void { 
     this.departmentService.getAllDepartments();
@@ -29,6 +33,7 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
     });
 
     this.getAllUsers();
+    this.userId = this.authService.user.id;
   }
 
   ngOnDestroy() : void {
