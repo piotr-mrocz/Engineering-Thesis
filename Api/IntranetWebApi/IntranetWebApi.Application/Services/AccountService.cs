@@ -29,7 +29,7 @@ public class AccountService : IAccountService
         var user = await _dbContext.Users
             .Include(u => u.Role)
             .Include(x => x.Photo)
-            .FirstOrDefaultAsync(x => x.Login == dto.Login);
+            .FirstOrDefaultAsync(x => x.Login == dto.Login && x.IsActive, cancellationToken);
 
         if (user is null)
             throw new ApiException("Niepoprawny login lub hasło");
