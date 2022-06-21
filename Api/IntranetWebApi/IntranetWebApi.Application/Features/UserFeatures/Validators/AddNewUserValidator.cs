@@ -40,18 +40,6 @@ public class AddNewUserValidator : AbstractValidator<AddNewUserCommand>
             .GreaterThan(0)
             .WithMessage("Nie podano roli.");
 
-        RuleFor(x => x.UserInfo.Phone)
-            .NotNull()
-            .NotEmpty()
-            .Length(9)
-            .WithMessage("Podano nieprawidłowy numer telefonu");
-
-        RuleFor(x => x.UserInfo.Email)
-            .NotNull()
-            .NotEmpty()
-            .EmailAddress()
-            .WithMessage("Podano nieprawidłowy email");
-
         RuleFor(x => x.UserInfo.IdPosition)
            .GreaterThan(0)
            .WithMessage("Nie podano stanowiska użytkownika.");
