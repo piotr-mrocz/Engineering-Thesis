@@ -3,8 +3,22 @@
     color: black;
 }
 
-
 .card:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+#addNewUser {
+    background: transparent !important;
+    border: none;
+    outline: none;
+}
+
+#addNewUser:hover {
+    color: #fd7e14 !important;
+}
+
+#addNewUser:focus, #addNewUser:active {
+    border: none;
+    outline: none;
 }

@@ -6,6 +6,8 @@ import { DepartmentService } from 'src/app/services/department.service';
 import { BackendResponse } from 'src/app/models/response/backendResponse';
 import { DepartmentDto } from 'src/app/models/dto/departmentDto';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ApplicationSettings } from 'src/app/models/consts/applicationSettings';
+import { Roles } from 'src/app/models/enums/roles.enum';
 
 @Component({
   selector: 'app-persons-list',
@@ -17,34 +19,45 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
   departmentResponse: BackendResponse<DepartmentDto[]>;
   userResponse: BackendResponse<UserDetailsDto[]>;
   userId: number;
-  
-  private departmentSubscription: Subscription;
- // private userSubscription: Subscription;
+  userRole: string;
+  photoBaseAddress: string;
+  isAuthorized: boolean;
+
+  private subscription: Subscription;
   
   constructor(private personService: PersonService, 
     private departmentService: DepartmentService,
-    private authService: AuthenticationService) { }
+    private authService: AuthenticationService,
+    private applicationSettings: ApplicationSettings) { }
 
   ngOnInit() : void { 
     this.departmentService.getAllDepartments();
 
-    this.departmentSubscription = this.departmentService.departmentsResponse$.subscribe(x => {
+    this.subscription = this.departmentService.departmentsResponse$.subscribe(x => {
       this.departmentResponse = x;
     });
 
     this.getAllUsers();
     this.userId = this.authService.user.id;
+    this.userRole = this.authService.user.role;
+    this.photoBaseAddress = this.applicationSettings.userPhotoBaseAddress;
+
+    this.isUserAuthorized();
   }
 
   ngOnDestroy() : void {
-    this.departmentSubscription.unsubscribe();
-    //this.userSubscription.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+
+  isUserAuthorized() : boolean {
+    this.isAuthorized = this.userRole == Roles.admin.toString();
+    return this.isAuthorized;
   }
 
   getUsersByIdDepartment(idDepartment: number) {
     this.personService.getUsersByIdDepartment(idDepartment);
 
-    this.departmentSubscription = this.personService.usersResponse$.subscribe(x => {
+    this.subscription = this.personService.usersResponse$.subscribe(x => {
       this.userResponse = x;
     });
   }
@@ -52,7 +65,7 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
   getAllUsers() {
       this.personService.getAllUsers();
 
-      this.departmentSubscription = this.personService.usersResponse$.subscribe(x => {
+      this.subscription = this.personService.usersResponse$.subscribe(x => {
           this.userResponse = x;
       });
   }
