@@ -56,15 +56,11 @@ public class AddNewUserValidator : AbstractValidator<AddNewUserCommand>
            .GreaterThan(0)
            .WithMessage("Nie podano stanowiska użytkownika.");
 
-        RuleFor(x => x.UserInfo.PhotoDetails.Name)
+        RuleFor(x => x.UserInfo.PhotoName)
             .NotNull()
             .NotEmpty()
             .MinimumLength(2)
             .WithMessage("Podano nieprawidłową nazwę zdjęcia");
-
-        RuleFor(x => x.UserInfo.PhotoDetails.IdUser)
-            .GreaterThan(0)
-            .WithMessage("Nie przypisano użytkownika.");
 
         RuleFor(x => x.UserInfo.Email)
             .Custom((value, context) =>
