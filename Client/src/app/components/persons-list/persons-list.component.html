@@ -17,7 +17,7 @@
     </div>
 
     <div *ngIf="!isAuthorized" class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
-      <button id="addNewUser" class="text-light rounded"><i class="bi bi-plus-circle-fill"></i> Dodaj nowego użytkownika</button>
+      <button id="addNewUser" class="text-light rounded"  data-toggle="modal" data-target="#exampleModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowego użytkownika</button>
     </div>
 
     <div *ngIf="userResponse.succeeded" class="row">
@@ -52,6 +52,21 @@
             <button class="btn-primary text-light rounded">Rozmawiaj z użytkownikiem</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Dodaj nowego użytkownika</h5>
+        <button type="button" class="btn btn-close float-right" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+          <!-- <h1>Jakiś tekst</h1> -->
+          <app-add-new-user></app-add-new-user>
       </div>
     </div>
   </div>

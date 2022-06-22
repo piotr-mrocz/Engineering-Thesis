@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, APP_BOOTSTRAP_LISTENER, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { PersonService } from '../../services/person-service';
 import { UserDetailsDto } from 'src/app/models/dto/userDetailsDto';
@@ -22,6 +22,7 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
   userRole: string;
   photoBaseAddress: string;
   isAuthorized: boolean;
+  showModalWindow: boolean = false;
 
   private subscription: Subscription;
   
@@ -69,4 +70,17 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
           this.userResponse = x;
       });
   }
+
+  openModal() {
+     this.showModalWindow = true;
+     console.log(this.showModalWindow);
+  }
+
+  addNewUser() {
+    this.openModal();
+
+    var button = document.getElementById("kurwa");
+    button.click();
+  }
+
 }

@@ -16,6 +16,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AddNewUserComponent } from './components/add-new-user/add-new-user.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     ProcessingOfPersonalDataComponent,
     PageNotFoundComponent,
     PersonsListComponent, 
-    LoginComponent
+    LoginComponent, 
+    AddNewUserComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
