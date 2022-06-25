@@ -1,4 +1,4 @@
 export interface DepartmentDto {
-    departmentId?: number,
+    id?: number,
     departmentName?: string
 }

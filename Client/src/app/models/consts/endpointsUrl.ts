@@ -9,4 +9,6 @@ export class EndpointsUrl {
     public readonly getAllUsersByIdDepartmentEndpoint = "api/User/GetAllUsersByIdDepartment";
     public readonly getAllUsersEndpoint = "api/User/GetAllUsers";
     public readonly loginEndpoint = "api/Account/Login";
+    public readonly getUsersPositionsAndDepartmentsAndRolesEndpoint = "api/User/GetUsersPositionsAndDepartmentsAndRoles";
+    public readonly addNewUser = "api/User/AddNewUser";
 }

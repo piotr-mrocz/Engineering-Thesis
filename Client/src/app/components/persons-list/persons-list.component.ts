@@ -8,16 +8,19 @@ import { DepartmentDto } from 'src/app/models/dto/departmentDto';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ApplicationSettings } from 'src/app/models/consts/applicationSettings';
 import { Roles } from 'src/app/models/enums/roles.enum';
+import { BaseBackendResponse } from 'src/app/models/response/BaseBackendResponse';
 
 @Component({
   selector: 'app-persons-list',
   templateUrl: './persons-list.component.html',
   styleUrls: ['./persons-list.component.css']
 })
-export class PersonsListComponent implements OnInit, OnDestroy  {
+export class PersonsListComponent implements OnInit, OnDestroy {
 
   departmentResponse: BackendResponse<DepartmentDto[]>;
   userResponse: BackendResponse<UserDetailsDto[]>;
+  addNewUserResponse: BaseBackendResponse;
+
   userId: number;
   userRole: string;
   photoBaseAddress: string;
@@ -25,13 +28,13 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
   showModalWindow: boolean = false;
 
   private subscription: Subscription;
-  
-  constructor(private personService: PersonService, 
+
+  constructor(private personService: PersonService,
     private departmentService: DepartmentService,
     private authService: AuthenticationService,
     private applicationSettings: ApplicationSettings) { }
 
-  ngOnInit() : void { 
+  ngOnInit(): void {
     this.departmentService.getAllDepartments();
 
     this.subscription = this.departmentService.departmentsResponse$.subscribe(x => {
@@ -46,11 +49,11 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
     this.isUserAuthorized();
   }
 
-  ngOnDestroy() : void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  isUserAuthorized() : boolean {
+  isUserAuthorized(): boolean {
     this.isAuthorized = this.userRole == Roles.admin.toString();
     return this.isAuthorized;
   }
@@ -64,16 +67,16 @@ export class PersonsListComponent implements OnInit, OnDestroy  {
   }
 
   getAllUsers() {
-      this.personService.getAllUsers();
+    this.personService.getAllUsers();
 
-      this.subscription = this.personService.usersResponse$.subscribe(x => {
-          this.userResponse = x;
-      });
+    this.subscription = this.personService.usersResponse$.subscribe(x => {
+      this.userResponse = x;
+    });
   }
 
   openModal() {
-     this.showModalWindow = true;
-     console.log(this.showModalWindow);
+    this.showModalWindow = true;
+    console.log(this.showModalWindow);
   }
 
   addNewUser() {

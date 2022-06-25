@@ -53,19 +53,25 @@ public class AddNewUserValidator : AbstractValidator<AddNewUserCommand>
         RuleFor(x => x.UserInfo.Email)
             .Custom((value, context) =>
             {
-                var user = dbContext.Users.FirstOrDefault(u => u.Email.Trim().ToLower() == value.Trim().ToLower());
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var user = dbContext.Users.FirstOrDefault(u => u.Email.Trim().ToLower() == value.Trim().ToLower());
 
-                if (user is not null)
-                    context.AddFailure(nameof(user.Email), "Taki adres email znajduje się już w bazie danych.");
+                    if (user is not null)
+                        context.AddFailure(nameof(user.Email), "Taki adres email znajduje się już w bazie danych.");
+                }
             });
 
         RuleFor(x => x.UserInfo.Phone)
             .Custom((value, context) =>
             {
-                var user = dbContext.Users.FirstOrDefault(u => u.Phone.Trim().ToLower() == value.Trim().ToLower());
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var user = dbContext.Users.FirstOrDefault(u => u.Phone.Trim().ToLower() == value.Trim().ToLower());
 
-                if (user is not null)
-                    context.AddFailure(nameof(user.Phone), "Taki numer telefonu znajduje się już w bazie danych.");
+                    if (user is not null)
+                        context.AddFailure(nameof(user.Phone), "Taki numer telefonu znajduje się już w bazie danych.");
+                }
             });
     }
 }

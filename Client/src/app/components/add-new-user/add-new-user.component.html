@@ -1,62 +1,99 @@
-<!-- <form #newUserForm="ngForm">
-
-</form> -->
-
-<div class="container register-form">
+<form #newUserForm="ngForm" *ngIf="responseSelect.succeeded" class="container register-form" 
+(ngSubmit)="addNewUser(newUserForm.value)">
     <div class="form">
         <div class="form-content">
-            <div class="row">
+            <div class="col">
                 <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Imię *" value=""/>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Imię *" value="" 
+                                autocomplete="off" ngModel name="firstName" required />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nazwisko *" value=""/>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nazwisko *" value=""
+                                autocomplete="off" ngModel name="lastName" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Data urodzenia *" value=""
+                                autocomplete="off" ngModel name="dateOfBirth" required />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" ngModel name="idDepartment" required>
+                                <option *ngFor="let department of responseSelect.data.departments" value="{{department.id}}">
+                                    {{department.departmentName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" ngModel name="idPosition" required>
+                                <option *ngFor="let position of responseSelect.data.positions" value="{{position.id}}">
+                                    {{position.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" ngModel name="idRole" required>
+                                <option *ngFor="let role of responseSelect.data.roles" value="{{role.id}}">
+                                    {{role.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Numer telefonu" value=""
+                                autocomplete="off" ngModel name="phone" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email" value="" autocomplete="off" ngModel name="email" />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Data urodzenia *" value=""/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Dział *" value=""/>
-                    </div>
+            <input id="fileInput" type='file' accept="image/*" (change)="onFileChange($event)" directory style="display: none" #fileInput required />
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col">
+                    <button type="button" class="btn btn-primary rounded w-100" (click)="fileInput.click()">Dodaj zdjęcie</button>
+                </div>
+                <div class="col">
+                    <img className="align-self-center" width='40%' src="{{imageUrl}}" />
                 </div>
             </div>
-            <div class="row">
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Stanowisko *" value=""/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Rola *" value=""/>
-                    </div>
+            <div class="row mt-3">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-danger rounded w-100" data-dismiss="modal">Anuluj</button>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success rounded w-100">Dodaj użytkownika</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Numer telefonu" value=""/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Email" value=""/>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Zdjęcie *" value=""/>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Dodaj użytkownika</button>
         </div>
     </div>
-    <hr />
-    <div class="row">
-       <h6>* pole wymagane</h6>
-    </div>
+</form>
+<hr />
+<div *ngIf="responseSelect.succeeded" class="row">
+    <h6>* pole wymagane</h6>
 </div>
+<div *ngIf="!responseSelect.succeeded">
+    <h3 class="text-danger">Nie udało się pobrać potrzebnych danych, by dodać użytkownika. Sprawdź połączenie z backendem.</h3>
+</div>
+

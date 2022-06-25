@@ -22,7 +22,7 @@ public class UserController : ControllerBase
     #region Commands
     [HttpPost]
     //[Authorize(Roles = RolesConst.Admin)]
-    public async Task<IActionResult> AddNewUser(AddNewUserCommand request)
+    public async Task<IActionResult> AddNewUser([FromBody] AddNewUserCommand request)
         => Ok(await _mediator.Send(request));
     #endregion Commands
 

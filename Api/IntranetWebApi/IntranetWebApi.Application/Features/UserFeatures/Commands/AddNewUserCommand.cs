@@ -60,6 +60,16 @@ public class AddNewUserHandler : IRequestHandler<AddNewUserCommand, BaseResponse
     {
         var loginForNewUser = $"{name.ToLower()[0]}.{lastName.Trim().ToLower()}";
 
+        loginForNewUser = loginForNewUser
+            .Replace("ą", "a")
+            .Replace("ę", "e")
+            .Replace("ć", "c")
+            .Replace("ł", "l")
+            .Replace("ó", "o")
+            .Replace("ś", "s")
+            .Replace("ż", "z")
+            .Replace("ź", "z");
+
         var usersWithTheSameLogin = await _userRepo.GetManyEntitiesByExpression(x => x.Login.Trim().ToLower() == loginForNewUser, cancellationToken);
 
         if (usersWithTheSameLogin is not null && usersWithTheSameLogin.Succeeded &&

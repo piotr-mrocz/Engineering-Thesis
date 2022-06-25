@@ -11,7 +11,7 @@
       <div *ngFor="let department of departmentResponse.data">
         <div class="col">
           <button type="button" class="btn btn-primary p-1"
-            (click)="getUsersByIdDepartment(department.departmentId)">{{department.departmentName}}</button>
+            (click)="getUsersByIdDepartment(department.id)">{{department.departmentName}}</button>
         </div>
       </div>
     </div>
@@ -58,14 +58,13 @@
 </div>
 
 <div class="modal fade" id="exampleModal">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content bg-dark">
       <div class="modal-header">
         <h5 class="modal-title">Dodaj nowego użytkownika</h5>
-        <button type="button" class="btn btn-close float-right" data-dismiss="modal">x</button>
+        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
       </div>
       <div class="modal-body">
-          <!-- <h1>Jakiś tekst</h1> -->
           <app-add-new-user></app-add-new-user>
       </div>
     </div>
