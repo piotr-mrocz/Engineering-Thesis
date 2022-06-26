@@ -44,8 +44,8 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
         builder.Entity<User>(user =>
         {
             user.HasOne(u => u.Role)
-            .WithOne(r => r.User)
-            .HasForeignKey<User>(x => x.IdRole);
+            .WithMany(r => r.Users)
+            .HasForeignKey(x => x.IdRole);
 
             user.HasOne(u => u.Photo)
             .WithOne(p => p.User)
