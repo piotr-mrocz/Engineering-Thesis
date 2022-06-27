@@ -27,8 +27,7 @@
       <div *ngFor="let person of userResponse.data">
         <div class="btn m-2 hover-overlay" data-toggle="collapse" href="#collapseExample" role="button"
           aria-expanded="false" aria-controls="collapseExample">
-          <img [src]="photoBaseAddress + person.photoName" class="card-img-top" alt="person"
-            style="height: 160px;">
+          <img [src]="photoBaseAddress + person.photoName" class="card-img-top" alt="person" >
           <div class="card-body bg-warning">
             <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
           </div>
