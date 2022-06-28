@@ -28,6 +28,7 @@
                     <div class="col">
                         <div class="form-group">
                             <select class="form-control" ngModel name="idDepartment" required>
+                                <option value="" disabled selected>Dział *</option>
                                 <option *ngFor="let department of responseSelect.data.departments" value="{{department.id}}">
                                     {{department.departmentName}}
                                 </option>
@@ -39,6 +40,7 @@
                     <div class="col">
                         <div class="form-group">
                             <select class="form-control" ngModel name="idPosition" required>
+                                <option value="" disabled selected>Stanowisko *</option>
                                 <option *ngFor="let position of responseSelect.data.positions" value="{{position.id}}">
                                     {{position.name}}
                                 </option>
@@ -48,6 +50,7 @@
                     <div class="col">
                         <div class="form-group">
                             <select class="form-control" ngModel name="idRole" required>
+                                <option value="" disabled selected>Rola w aplikacji *</option>
                                 <option *ngFor="let role of responseSelect.data.roles" value="{{role.id}}">
                                     {{role.name}}
                                 </option>
