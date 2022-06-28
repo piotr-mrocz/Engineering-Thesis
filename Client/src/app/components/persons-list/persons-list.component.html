@@ -16,8 +16,8 @@
       </div>
     </div>
 
-    <div *ngIf="!isAuthorized" class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
-      <button id="addNewUser" class="text-light rounded"  data-toggle="modal" data-target="#exampleModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowego użytkownika</button>
+    <div *ngIf="isAuthorized" class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
+      <button id="addNewUser" class="text-light rounded"  data-toggle="modal" data-target="#addNewUserModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowego użytkownika</button>
     </div>
 
     <div *ngIf="userResponse.succeeded" class="row">
@@ -25,38 +25,52 @@
         <h2 class="text-center">Nie znaleziono użytkowników do wyświetlenia!</h2>
       </div>
       <div *ngFor="let person of userResponse.data">
-        <div class="btn m-2 hover-overlay" data-toggle="collapse" href="#collapseExample" role="button"
-          aria-expanded="false" aria-controls="collapseExample">
-          <img [src]="photoBaseAddress + person.photoName" class="card-img-top" alt="person" >
+        <a class="btn m-2 hover-overlay" role="button" data-toggle="modal" href="#showUserDetailsModal_{{person.id}}">
+          <img [src]="photoBaseAddress + person.photoName" class="card-img-top" alt="person" style="height: 200px; width: 360px;">
           <div class="card-body bg-warning">
             <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
           </div>
+        </a>
+
+        <div class="modal fade" id="showUserDetailsModal_{{person.id}}">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+              <div class="modal-header">
+                <h5 class="modal-title">{{person.userName}} {{person.userLastName}}</h5>
+                <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col text-light">
+                    <ul>
+                      <li>Dział: {{person.department}}</li>
+                      <li>Stanowisko: {{person.position}}</li>
+                    </ul>
+                  </div>
+                  <div class="col text-light">
+                    <ul>
+                      <li>Emial: {{person.email}}</li>
+                      <li>Telefon: {{person.phoneNumber}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div *ngIf="userId != person.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">
+                  <button class="btn-primary text-light rounded">Rozmawiaj z użytkownikiem</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="collapseExample" class="card card-body collapse bg-dark">
-          <div class="row">
-            <div class="col text-light">
-              <ul>
-                <li>Dział: {{person.department}}</li>
-                <li>Stanowisko: {{person.position}}</li>
-              </ul>
-            </div>
-            <div class="col text-light">
-              <ul>
-                <li>Emial: {{person.email}}</li>
-                <li>Telefon: {{person.phoneNumber}}</li>
-              </ul>
-            </div>
-          </div>
-          <div *ngIf="userId == person.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">
-            <button class="btn-primary text-light rounded">Rozmawiaj z użytkownikiem</button>
-          </div>
+
+        <div id="collapseCard_{{person.id}}" class="card card-body collapse bg-dark"> Zrobić jako modalny widok
+          
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal">
+<div class="modal fade" id="addNewUserModal">
   <div class="modal-dialog modal-lg">
     <div class="modal-content bg-dark">
       <div class="modal-header">

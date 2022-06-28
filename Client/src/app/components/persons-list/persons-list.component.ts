@@ -25,7 +25,6 @@ export class PersonsListComponent implements OnInit, OnDestroy {
   userRole: string;
   photoBaseAddress: string;
   isAuthorized: boolean;
-  showModalWindow: boolean = false;
 
   private subscription: Subscription;
 
@@ -73,17 +72,4 @@ export class PersonsListComponent implements OnInit, OnDestroy {
       this.userResponse = x;
     });
   }
-
-  openModal() {
-    this.showModalWindow = true;
-    console.log(this.showModalWindow);
-  }
-
-  addNewUser() {
-    this.openModal();
-
-    var button = document.getElementById("kurwa");
-    button.click();
-  }
-
 }
