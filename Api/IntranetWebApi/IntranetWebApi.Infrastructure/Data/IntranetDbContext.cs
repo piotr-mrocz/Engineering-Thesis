@@ -20,6 +20,7 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
     public DbSet<VUsersPresence> VUsersPresences { get; set; }
     public DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
+    public DbSet<Message> Messages { get; set; }
     #endregion DbSets
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -69,6 +70,9 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
             .HasOne(p => p.User)
             .WithMany(u => u.Presences)
             .HasForeignKey(x => x.IdUser);
+
+        builder.Entity<Message>()
+            .HasKey(x => x.Id);
 
         base.OnModelCreating(builder);
     }
