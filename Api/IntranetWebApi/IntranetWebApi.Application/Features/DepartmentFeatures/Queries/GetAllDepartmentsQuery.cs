@@ -43,7 +43,7 @@ namespace IntranetWebApi.Application.Features.RoleFeatures.Queries
             {
                 var departmentDto = new DepartmentDto()
                 {
-                    DepartmentId = department.Id,
+                    Id = department.Id,
                     DepartmentName = department.DepartmentName
                 };
 

@@ -6,12 +6,12 @@
 
     <div class="row bg-primary p-1 rounded" style="height: 50px;">
       <div class="col">
-        <button type="button" class="btn btn-info w-25 p-1" (click)="getAllUsers()">Wszystkie</button>
+        <button id="allUsers" type="button" class="btn p-1 btn-primary getUsersButton" (click)="getAllUsers('allUsers')">Wszystkie</button>
       </div>
       <div *ngFor="let department of departmentResponse.data">
         <div class="col">
-          <button type="button" class="btn btn-primary p-1"
-            (click)="getUsersByIdDepartment(department.id)">{{department.departmentName}}</button>
+          <button id="{{department.id}}" type="button" class="btn btn-primary p-1 getUsersButton"
+            (click)="getUsersByIdDepartment(department.id, department.id)">{{department.departmentName}}</button>
         </div>
       </div>
     </div>

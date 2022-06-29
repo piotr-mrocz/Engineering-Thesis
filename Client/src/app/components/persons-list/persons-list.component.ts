@@ -40,7 +40,7 @@ export class PersonsListComponent implements OnInit, OnDestroy {
       this.departmentResponse = x;
     });
 
-    this.getAllUsers();
+    this.getAllUsers("allUsers");
     this.userId = this.authService.user.id;
     this.userRole = this.authService.user.role;
     this.photoBaseAddress = this.applicationSettings.userPhotoBaseAddress;
@@ -57,7 +57,9 @@ export class PersonsListComponent implements OnInit, OnDestroy {
     return this.isAuthorized;
   }
 
-  getUsersByIdDepartment(idDepartment: number) {
+  getUsersByIdDepartment(idDepartment: number, idClickedButton: string) {
+    this.changeClickedButtonBackgroundColor(idClickedButton);
+
     this.personService.getUsersByIdDepartment(idDepartment);
 
     this.subscription = this.personService.usersResponse$.subscribe(x => {
@@ -65,11 +67,31 @@ export class PersonsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAllUsers() {
+  getAllUsers(idClickedButton: string) {
+
+    if (idClickedButton) {
+      this.changeClickedButtonBackgroundColor(idClickedButton);
+    }
+    
     this.personService.getAllUsers();
 
     this.subscription = this.personService.usersResponse$.subscribe(x => {
       this.userResponse = x;
     });
+  }
+
+  changeClickedButtonBackgroundColor(idClickedButton: string) {
+    var buttons = (<HTMLScriptElement[]><any>document.getElementsByClassName("getUsersButton"));
+    
+    //reset styles all buttons
+    for (let i = 0; i < buttons.length; i++) {
+      var button = buttons[i];
+      button.style.backgroundColor = "";
+    }
+
+    var clickedButton = (<HTMLScriptElement><any>document.getElementById(idClickedButton));
+
+    //set background color clicked button
+    clickedButton.style.backgroundColor = "#17a2b8";
   }
 }
