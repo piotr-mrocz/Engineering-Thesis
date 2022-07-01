@@ -17,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AddNewUserComponent } from './components/add-new-user/add-new-user.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AddNewUserComponent } from './components/add-new-user/add-new-user.comp
     PageNotFoundComponent,
     PersonsListComponent, 
     LoginComponent, 
-    AddNewUserComponent
+    AddNewUserComponent, ChatComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
