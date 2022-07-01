@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AddNewUserComponent } from './components/add-new-user/add-new-user.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ChatComponent } from './components/chat/chat.component';
     ReactiveFormsModule
   ],
   providers: [
-    PersonService, AuthenticationService,
+    PersonService, AuthenticationService, MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]

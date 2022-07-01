@@ -47,7 +47,7 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, Response<List<U
             };
         }
 
-        foreach (var user in users)
+        foreach (var user in users.OrderBy(x => new { FirstName = x.FirstName, LastName = x.LastName }))
         {
             var rekord = new UserDetailsDto()
             {

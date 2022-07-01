@@ -10,5 +10,7 @@ export class EndpointsUrl {
     public readonly getAllUsersEndpoint = "api/User/GetAllUsers";
     public readonly loginEndpoint = "api/Account/Login";
     public readonly getUsersPositionsAndDepartmentsAndRolesEndpoint = "api/User/GetUsersPositionsAndDepartmentsAndRoles";
-    public readonly addNewUser = "api/User/AddNewUser";
+    public readonly addNewUserEndpoint = "api/User/AddNewUser";
+    public readonly getAllUserConversationEndpoint = "api/Message/GetConversation";
+    public readonly addNewMessageEndpoint = "api/Message/AddNewMessage";
 }

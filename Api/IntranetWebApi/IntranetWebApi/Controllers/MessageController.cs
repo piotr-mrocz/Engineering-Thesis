@@ -15,7 +15,7 @@ public class MessageController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
+    [HttpPost]
     public async Task<IActionResult> GetConversation(GetUserConversationQuery request)
         => Ok(await _mediator.Send(request));
 

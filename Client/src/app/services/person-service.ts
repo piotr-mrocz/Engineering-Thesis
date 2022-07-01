@@ -44,7 +44,7 @@ export class PersonService {
    }
 
    private addNewUserResponse(data: AddNewUserDto) : Observable<BaseBackendResponse> {
-    var url = this.backendSettings.baseAddress + this.endpoints.addNewUser;
+    var url = this.backendSettings.baseAddress + this.endpoints.addNewUserEndpoint;
     return this.http.post<BaseBackendResponse>(url, {UserInfo: data});
    }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Infrastructure.Repository;
@@ -21,11 +22,15 @@ public class GetUserConversationHandler : IRequestHandler<GetUserConversationQue
 {
     private IGenericRepository<Message> _messageRepo;
     private IGenericRepository<User> _userRepo;
+    private IGenericRepository<Photo> _photoRepo;
 
-    public GetUserConversationHandler(IGenericRepository<Message> messageRepo, IGenericRepository<User> userRepo)
+    public GetUserConversationHandler(IGenericRepository<Message> messageRepo, 
+        IGenericRepository<User> userRepo,
+        IGenericRepository<Photo> photoRepo)
     {
         _messageRepo = messageRepo; 
         _userRepo = userRepo;
+        _photoRepo = photoRepo;
     }
 
     public async Task<Response<List<UserConversationDto>>> Handle(GetUserConversationQuery request, CancellationToken cancellationToken)
@@ -69,10 +74,15 @@ public class GetUserConversationHandler : IRequestHandler<GetUserConversationQue
 
         var usersConversationsDto = new List<UserConversationDto>();
 
+        var photos = await _photoRepo.GetManyEntitiesByExpression(x => x.IdUser == request.IdSender || x.IdUser == request.IdAddressee, cancellationToken);
+
         foreach (var message in messages)
         {
             var sender = users.Data.FirstOrDefault(x => x.Id == message.IdSender);
             var addressee = users.Data.FirstOrDefault(x => x.Id == message.IdAddressee);
+            var photoSender = photos.Succeeded && photos.Data != null && photos.Data.Any()
+                ? photos.Data.FirstOrDefault(x => x.IdUser == message.IdSender)
+                : null;
 
             var messageDetails = new UserConversationDto()
             {
@@ -81,7 +91,8 @@ public class GetUserConversationHandler : IRequestHandler<GetUserConversationQue
                 Sender = $"{sender.FirstName} {sender.LastName}",
                 Adressee = $"{addressee.FirstName} {addressee.LastName}",
                 Content = message.Content,
-                SendDate = message.SendDate
+                SendDate = message.SendDate,
+                SenderPhotoName = photoSender.Name
             };
 
             usersConversationsDto.Add(messageDetails);
@@ -89,15 +100,5 @@ public class GetUserConversationHandler : IRequestHandler<GetUserConversationQue
 
         return usersConversationsDto;
     }
-}
-
-public class UserConversationDto
-{
-    public int IdSender { get; set; }   
-    public string Sender { get; set; } = null!;
-    public int IdAddressee { get; set; }
-    public string Adressee { get; set; } = null!;
-    public string Content { get; set; } = null!;
-    public DateTime SendDate { get; set; }
 }
 
