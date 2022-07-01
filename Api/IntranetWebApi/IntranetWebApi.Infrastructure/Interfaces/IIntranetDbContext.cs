@@ -18,7 +18,9 @@ public interface IIntranetDbContext
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
+    public DbSet<Position> Positions { get; set; }
     public DbSet<VUsersPresence> VUsersPresences { get; set; }
     public DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
+    public DbSet<Message> Messages { get; set; }
 }
