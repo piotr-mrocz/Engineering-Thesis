@@ -9,6 +9,7 @@ using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -26,6 +27,7 @@ namespace IntranetWebApi.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddScoped<IAccountService, AccountService>();
+            services.AddSignalR();
         }
     }
 }

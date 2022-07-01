@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VPXI/UjRQ/Uz2CQP7J9e5/sRsNy7AjYbjpGGCRUK/x5U8cR8cq/wIpFVXXR9skzUBGEKR3zi5yduzC9sGkXLxA==",
+  "dgSpecHash": "/LEC1de0sX9ApjAJuOd4NcQONqeirUFtub7BCVBwKUjFygeIGQ07nmR15dlWIFDT6+cpMJUX+69dXbiKD/8MHQ==",
   "success": true,
   "projectFilePath": "D:\\Nauka\\Repos\\Engineering-Thesis\\Api\\IntranetWebApi\\IntranetWebApi\\IntranetWebApi.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\mrocz\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\mediatr.extensions.fluentvalidation.aspnetcore\\2.0.0\\mediatr.extensions.fluentvalidation.aspnetcore.2.0.0.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
+    "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.aspnet.signalr\\2.4.3\\microsoft.aspnet.signalr.2.4.3.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.4\\microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.aspnetcore.spaservices.extensions\\6.0.5\\microsoft.aspnetcore.spaservices.extensions.6.0.5.nupkg.sha512",
     "C:\\Users\\mrocz\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

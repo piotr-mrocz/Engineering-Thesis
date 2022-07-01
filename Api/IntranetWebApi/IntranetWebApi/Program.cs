@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using IntranetWebApi.Application;
+using IntranetWebApi.Application.Extensions;
 using IntranetWebApi.Data;
 using IntranetWebApi.Infrastructure.Data;
 using IntranetWebApi.Infrastructure.Extensions;
@@ -46,11 +47,10 @@ if (!app.Environment.IsDevelopment())
 IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Services.CreateScope());
 
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
+WebApplicationExtensions.AddWebApplicationExtensions(app);
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.Run();
-
