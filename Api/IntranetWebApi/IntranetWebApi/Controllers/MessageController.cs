@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IntranetWebApi.Controllers;
 
+[ApiController]
+[Route("api/[controller]/[action]")]
 public class MessageController : ControllerBase
 {
     private readonly IMediator _mediator;

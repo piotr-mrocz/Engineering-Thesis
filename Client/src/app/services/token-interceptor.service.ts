@@ -21,8 +21,6 @@ export class TokenInterceptorService implements HttpInterceptor{
         req = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
-    
-    //return next.handle(req);
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {

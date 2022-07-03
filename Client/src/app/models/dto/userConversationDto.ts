@@ -4,6 +4,6 @@ export interface UserConversationDto {
     idAddressee?: number,
     addressee?: string,
     content?: string,
-    sendDate?: Date,
+    sendDate?: string,
     senderPhotoName?: string
 }

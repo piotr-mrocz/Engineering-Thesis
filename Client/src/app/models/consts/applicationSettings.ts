@@ -6,4 +6,6 @@ import { Injectable } from "@angular/core";
 
 export class ApplicationSettings {
     public readonly userPhotoBaseAddress = "../../../assets/Images/People/";
+    public readonly logoBaseAddress = "../../../assets/Images/";
+
 }

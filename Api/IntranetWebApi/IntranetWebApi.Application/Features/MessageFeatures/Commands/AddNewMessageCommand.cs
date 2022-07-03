@@ -49,7 +49,7 @@ public class AddNewMessageHandler : IRequestHandler<AddNewMessageCommand, BaseRe
             };
         }
 
-        await _messageHub.Clients.All.NewMessageWasSend(); // for test
+        await _messageHub.Clients.All.NewMessageWasSend();
        
         return new BaseResponse()
         {

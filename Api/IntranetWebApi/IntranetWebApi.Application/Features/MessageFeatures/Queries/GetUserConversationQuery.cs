@@ -91,7 +91,7 @@ public class GetUserConversationHandler : IRequestHandler<GetUserConversationQue
                 Sender = $"{sender.FirstName} {sender.LastName}",
                 Adressee = $"{addressee.FirstName} {addressee.LastName}",
                 Content = message.Content,
-                SendDate = message.SendDate,
+                SendDate = message.SendDate.ToString("dddd, dd MMMM yyyy HH:mm"),
                 SenderPhotoName = photoSender.Name
             };
 

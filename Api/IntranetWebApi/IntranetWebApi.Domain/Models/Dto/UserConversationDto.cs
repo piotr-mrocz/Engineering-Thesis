@@ -13,6 +13,6 @@ public class UserConversationDto
     public int IdAddressee { get; set; }
     public string Adressee { get; set; } = null!;
     public string Content { get; set; } = null!;
-    public DateTime SendDate { get; set; }
+    public string SendDate { get; set; } = null!;
     public string SenderPhotoName { get; set; } = null!;
 }

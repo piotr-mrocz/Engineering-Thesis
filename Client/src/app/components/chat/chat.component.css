@@ -1,0 +1,14 @@
+#userConversation {
+    background: transparent !important;
+    border: none;
+    outline: none;
+}
+
+#userConversation:hover {
+    color: #fd7e14 !important;
+}
+
+#userConversation:focus, #addNewUser:active {
+    border: none;
+    outline: none;
+}

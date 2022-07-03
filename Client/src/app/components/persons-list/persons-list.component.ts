@@ -19,7 +19,6 @@ export class PersonsListComponent implements OnInit, OnDestroy {
 
   departmentResponse: BackendResponse<DepartmentDto[]>;
   userResponse: BackendResponse<UserDetailsDto[]>;
-  addNewUserResponse: BaseBackendResponse;
 
   userId: number;
   userRole: string;

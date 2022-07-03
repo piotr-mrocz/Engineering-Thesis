@@ -1,5 +1,5 @@
-export interface MessageDto {
-    idSender?: number,
-    idAddressee?: number,
-    content?: string
+export class MessageDto {
+    idSender?: number;
+    idAddressee?: number;
+    content?: string;
 }

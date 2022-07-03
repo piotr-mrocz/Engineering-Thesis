@@ -11,6 +11,6 @@ public static class WebApplicationExtensions
 {
     public static void AddWebApplicationExtensions(WebApplication app)
     {
-        app.MapHub<MessageHubClient>("/message");
+        app.MapHub<MessageHubClient>("/conversation");
     }
 }
