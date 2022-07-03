@@ -10,7 +10,7 @@ namespace IntranetWebApi.Application.Features.TaskFeatures.Validations;
 
 public class AddNewTaskValidator : AbstractValidator<AddNewTaskCommand>
 {
-    public AddNewTaskValidator(IntranetDbContext dbContext)
+    public AddNewTaskValidator()
     {
         RuleFor(x => x.Title)
             .NotNull()

@@ -1,5 +1,4 @@
 ﻿using IntranetWebApi.Application.Features.TaskFeatures;
-using IntranetWebApi.Application.Features.TaskFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,5 +21,9 @@ public class TaskController : Controller
 
     [HttpPost]
     public async Task<IActionResult> AddNewTask(AddNewTaskCommand request)
+        => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateTask(UpdateTaskCommand request)
         => Ok(await _mediator.Send(request));
 }

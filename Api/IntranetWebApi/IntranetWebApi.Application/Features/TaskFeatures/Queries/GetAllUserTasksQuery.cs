@@ -9,7 +9,7 @@ using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
 
-namespace IntranetWebApi.Application.Features.TaskFeatures.Queries;
+namespace IntranetWebApi.Application.Features.TaskFeatures;
 
     public class GetAllUserTasksQuery : IRequest<Response<TasksListDto>>
     {
