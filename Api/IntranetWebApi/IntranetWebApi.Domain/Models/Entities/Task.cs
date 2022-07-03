@@ -6,7 +6,7 @@ public class Task
     public int IdUser { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public DateTime Deadline { get; set; }
+    public DateTime? Deadline { get; set; }
     public DateTime AddedDate { get; set; }
     public DateTime? ProgressDate { get; set; }
     public DateTime? FinishDate { get; set; }
