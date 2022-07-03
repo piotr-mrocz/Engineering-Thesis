@@ -26,4 +26,8 @@ public class TaskController : Controller
     [HttpPost]
     public async Task<IActionResult> UpdateTask(UpdateTaskCommand request)
         => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteTask(DeleteTaskCommand request)
+        => Ok(await _mediator.Send(request));
 }

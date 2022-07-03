@@ -87,7 +87,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new BaseResponse()
         {
             Succeeded = result > 0,
-            Message = result > 0 ? "Ok" : "Can't update entity"
+            Message = result > 0 ? "Ok" : "Can't delete entity"
         };
     }
 }
