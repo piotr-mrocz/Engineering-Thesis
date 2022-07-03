@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using IntranetWebApi;
 using IntranetWebApi.Application;
 using IntranetWebApi.Application.Extensions;
 using IntranetWebApi.Data;
@@ -45,9 +46,8 @@ if (!app.Environment.IsDevelopment())
 #endregion Configure the HTTP request pipeline.
 
 IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Services.CreateScope());
-
+app.MapHub<MessageHubClient>("/conversation");
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-WebApplicationExtensions.AddWebApplicationExtensions(app);
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseAuthorization();

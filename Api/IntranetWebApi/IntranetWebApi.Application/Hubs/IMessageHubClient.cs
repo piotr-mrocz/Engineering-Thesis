@@ -2,5 +2,5 @@
 
 public interface IMessageHubClient
 {
-    Task NewMessageWasSend();
+    Task NewMessage();
 }

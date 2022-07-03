@@ -49,8 +49,8 @@ public class AddNewMessageHandler : IRequestHandler<AddNewMessageCommand, BaseRe
             };
         }
 
-        await _messageHub.Clients.All.NewMessageWasSend();
-       
+        await _messageHub.Clients.All.NewMessage();
+
         return new BaseResponse()
         {
             Succeeded = addMessageResponse.Succeeded,

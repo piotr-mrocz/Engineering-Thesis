@@ -45,12 +45,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getAllUsers();
     this.startConnection();
-alert(this.idAddressee);
-    // if (this.idAddressee != null) {
-    //   this.connection.on("NewMessageWasSend", () => {
-    //     this.getUserConversation(this.idAddressee);
-    //   });
-    // }
+    this.message = "";
+
+    if (this.idAddressee != null) {
+      this.connection.on("NewMessage", () => {
+        this.getUserConversation(this.idAddressee);
+      });
+
+      console.log(this.idAddressee); // because (I really don't know why, but signalR doesn't work without this)
+    }
+
+    var element = document.getElementById("messagesList");
+element.scrollTop = element.scrollHeight;
   }
 
   ngOnDestroy() {
@@ -69,13 +75,16 @@ alert(this.idAddressee);
 
   getUserConversation(idAddressee: number) {
     this.idAddressee = idAddressee;
-    this.messageService.getUserConversation(this.idAddressee);
 
-    this.messageSubscription = this.messageService.messagesResponse$.subscribe(x => {
-      this.messageResponse = x;
-    });
+    if (idAddressee != null) {
+      this.messageService.getUserConversation(this.idAddressee);
 
-    this.showMessages = this.messageResponse.succeeded;
+      this.messageSubscription = this.messageService.messagesResponse$.subscribe(x => {
+        this.messageResponse = x;
+      });
+
+      this.showMessages = this.messageResponse.succeeded;
+    }
   }
 
   sendMessage() {
@@ -106,6 +115,8 @@ alert(this.idAddressee);
           alert(x.message);
         }
     });
+
+    this.ngOnInit();
   }
 
   public startConnection = () => {

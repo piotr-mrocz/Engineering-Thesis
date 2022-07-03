@@ -12,3 +12,15 @@
     border: none;
     outline: none;
 }
+
+#messagesList, #messagesList:not(#noMessages) {
+    height: 500px;
+    overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/* #messagesList {
+    height: 500px; 
+    overflow-y: scroll;
+} */
