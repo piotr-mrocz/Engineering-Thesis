@@ -19,6 +19,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AddNewUserComponent } from './components/add-new-user/add-new-user.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageService } from './services/message.service';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TasksService } from './services/tasks.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MessageService } from './services/message.service';
     PageNotFoundComponent,
     PersonsListComponent, 
     LoginComponent, 
-    AddNewUserComponent, ChatComponent
+    AddNewUserComponent, 
+    ChatComponent, 
+    TasksComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,7 +46,7 @@ import { MessageService } from './services/message.service';
     ReactiveFormsModule
   ],
   providers: [
-    PersonService, AuthenticationService, MessageService,
+    PersonService, AuthenticationService, MessageService, TasksService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]

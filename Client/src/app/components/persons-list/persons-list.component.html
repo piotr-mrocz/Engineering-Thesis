@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div style="height: 200px;">Nasi</div>
+  <div style="height: 200px;"></div>
   <div class="col-7 align-self-center mb-5" style="margin: auto;">
     <h2 class="text-center">Nasi pracownicy</h2>
     <hr>
@@ -55,15 +55,13 @@
                   </div>
                 </div>
                 <div *ngIf="userId != person.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">
-                  <button class="btn-primary text-light rounded">Rozmawiaj z użytkownikiem</button>
+                  <button class="btn-primary text-light rounded" aria-current="page" routerLink="/chat">Rozmawiaj z użytkownikiem</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div id="collapseCard_{{person.id}}" class="card card-body collapse bg-dark"> Zrobić jako modalny widok
-          
+        <div id="collapseCard_{{person.id}}" class="card card-body collapse bg-dark">
         </div>
       </div>
     </div>

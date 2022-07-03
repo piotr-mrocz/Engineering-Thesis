@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div style="height: 200px;"></div>
+    <div class="col-7 align-self-center mb-5" style="margin: auto;">
+        <h2 class="text-center">Twoje zadania</h2>
+        <hr>
+
+        <div class="row bg-primary p-1 rounded" style="height: 50px;">
+            <div class="col d-flex align-items-center justify-content-center">
+                <button id="allUsers" type="button" class="btn p-1 btn-primary getTasksButton">Zadania do zrobienia</button>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary p-1 getTasksButton">W trakcie wykonywania</button>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary p-1 getTasksButton">Wykonane</button>
+            </div>
+        </div>
+
+        <div class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
+            <div class="row">
+                <div class="col-5">
+                    <button id="addNewTask" class="text-light rounded" data-toggle="modal" data-target="#addNewUserModal"><i
+                        class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie</button>
+                </div>
+                <div class="col-7">
+                    <button id="addNewTaskForUser" class="text-light rounded" data-toggle="modal" data-target="#addNewUserModal"><i
+                        class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie dla użytkownika</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

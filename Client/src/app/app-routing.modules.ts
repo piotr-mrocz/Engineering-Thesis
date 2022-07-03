@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { ChatComponent } from './components/chat/chat.component';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -19,6 +20,7 @@ const routes: Routes = [
     {path: 'processingofpersonaldata', component: ProcessingOfPersonalDataComponent},
     {path: 'personslist', component: PersonsListComponent, canActivate: [AuthGuard] },
     {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
+    {path: 'tasks', component: TasksComponent, canActivate: [AuthGuard]},
     // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];

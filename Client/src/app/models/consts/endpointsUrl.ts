@@ -13,4 +13,8 @@ export class EndpointsUrl {
     public readonly addNewUserEndpoint = "api/User/AddNewUser";
     public readonly getAllUserConversationEndpoint = "api/Message/GetConversation";
     public readonly addNewMessageEndpoint = "api/Message/AddNewMessage";
+    public readonly getAllUserTasks = "api/Task/GetAllUserTasks";
+    public readonly addNewTask = "api/Task/AddNewTask";
+    public readonly updateTask = "api/Task/UpdateTask";
+    public readonly deleteTask = "api/Task/DeleteTask";
 }
