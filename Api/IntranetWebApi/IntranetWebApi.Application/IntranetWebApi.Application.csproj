@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <Folder Include="Features\RequestForLeaveFeatures\Validations\" />
-    <Folder Include="Features\TaskFeatures\Queries\" />
   </ItemGroup>
 
 </Project>
