@@ -26,6 +26,7 @@ public class User
     public Department Department { get; set; } = null!;
     public ICollection<RequestForLeave> RequestForLeaves { get; set; } = new List<RequestForLeave>();
     public ICollection<Presence> Presences { get; set; } = new List<Presence>();
+    public ICollection<Task> Tasks { get; set; } = new List<Task>();
 
 
 }

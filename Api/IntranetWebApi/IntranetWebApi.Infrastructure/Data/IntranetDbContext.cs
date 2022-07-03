@@ -21,6 +21,7 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
     public DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
     public DbSet<Message> Messages { get; set; }
+    public DbSet<Domain.Models.Entities.Task> Tasks { get; set; }
     #endregion DbSets
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -73,6 +74,11 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
 
         builder.Entity<Message>()
             .HasKey(x => x.Id);
+
+        builder.Entity<Domain.Models.Entities.Task>()
+            .HasOne(t => t.User)
+            .WithMany(u => u.Tasks)
+            .HasForeignKey(x => x.IdUser);
 
         base.OnModelCreating(builder);
     }
