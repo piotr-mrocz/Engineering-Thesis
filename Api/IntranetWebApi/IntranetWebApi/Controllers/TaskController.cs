@@ -1,0 +1,21 @@
+﻿using IntranetWebApi.Application.Features.TaskFeatures;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace IntranetWebApi.Controllers;
+
+[ApiController]
+[Route("api/[controller]/[action]")]
+public class TaskController : Controller
+{
+    private readonly IMediator _mediator;
+
+    public TaskController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNewTask(AddNewTaskCommand request)
+        => Ok(await _mediator.Send(request));
+}
