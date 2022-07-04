@@ -21,6 +21,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MessageService } from './services/message.service';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TasksService } from './services/tasks.service';
+import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { TasksService } from './services/tasks.service';
     LoginComponent, 
     AddNewUserComponent, 
     ChatComponent, 
-    TasksComponent
+    TasksComponent, AddNewTaskComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

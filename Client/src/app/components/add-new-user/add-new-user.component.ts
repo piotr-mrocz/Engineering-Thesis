@@ -82,7 +82,7 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
   private addNewUserAfterValidation(newUserModel: AddNewUserDto) {
     this.personService.addNewUser(newUserModel);
 
-    var response = this.personService.addUserResponse$.subscribe(x => {
+    this.personService.addUserResponse$.subscribe(x => {
         alert(x.message);
     });
   }

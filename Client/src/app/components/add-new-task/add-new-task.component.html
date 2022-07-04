@@ -1,0 +1,58 @@
+<form id="addNewTaskForm" *ngIf="priorityDtoArray.succeeded" #newTaskForm="ngForm" class="container register-form" 
+(ngSubmit)="addNewTask(newTaskForm.value)">
+    <div class="form">
+        <div class="form-content">
+            <div class="col">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Tytuł *" value="" 
+                                autocomplete="off" ngModel name="title" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <textarea type="text" class="form-control" placeholder="Opis zadania" value=""
+                                autocomplete="off" ngModel name="description" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" placeholder="Ważność *" value="" ngModel name="priority">
+                                <option value="" disabled selected>Ważność *</option>
+                                <option *ngFor="let priority of priorityDtoArray.data" value="{{priority.id}}">
+                                    {{priority.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="datetime-local" class="form-control" placeholder="Termin" value="" autocomplete="off" ngModel name="deadline" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="reset" class="btn btn-danger rounded w-100" data-dismiss="modal" (click)="resetForm('addNewTaskForm')">Anuluj</button>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success rounded w-100">Dodaj zadanie</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div class="row">
+    <h6>* pole wymagane</h6>
+</div>
+<div *ngIf="!priorityDtoArray.succeeded">
+    <h3 class="text-danger">Nie udało się pobrać potrzebnych danych, by dodać zadanie. Sprawdź połączenie z serwerem.</h3>
+</div>

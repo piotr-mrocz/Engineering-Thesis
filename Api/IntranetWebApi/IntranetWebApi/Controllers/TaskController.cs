@@ -1,4 +1,5 @@
 ﻿using IntranetWebApi.Application.Features.TaskFeatures;
+using IntranetWebApi.Application.Features.TaskFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,10 @@ public class TaskController : Controller
 
     [HttpPost]
     public async Task<IActionResult> GetAllUserTasks(GetAllUserTasksQuery request)
+        => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> GetAllPriority(GetAllPriorityQuery request)
         => Ok(await _mediator.Send(request));
 
     [HttpPost]

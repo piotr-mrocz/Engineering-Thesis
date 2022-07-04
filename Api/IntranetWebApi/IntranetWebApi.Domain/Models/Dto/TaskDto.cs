@@ -12,7 +12,7 @@ public class TaskDto
     public int IdUser { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public DateTime? Deadline { get; set; }
+    public string Deadline { get; set; } = null!;
     public string AddedDate { get; set; } = null!;
     public string ProgressDate { get; set; } = null!;
     public string FinishDate { get; set; } = null!;

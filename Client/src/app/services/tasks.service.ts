@@ -9,6 +9,7 @@ import { BaseBackendResponse } from '../models/response/BaseBackendResponse';
 import { NewTaskDto } from '../models/dto/newTaskDto';
 import { UpdateTaskDto } from '../models/dto/updateTaskDto';
 import { Task } from '../models/dto/task';
+import { PriorityDto } from '../models/dto/priorityDto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,29 +25,35 @@ export class TasksService {
     this.token = this.authService.getToken();
   }
 
+  priorityResponse$ = new BehaviorSubject<BackendResponse<PriorityDto[]>>({});
   tasksResponse$ = new BehaviorSubject<BackendResponse<Task[]>>({});
   addNewTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   updateTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   deleteTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
   private getAllUserTasksResponse(idUser: number, status: number) : Observable<BackendResponse<Task[]>> {
-    var url = this.backendSettings.baseAddress + this.endpoints.getAllUserTasks;
+    var url = this.backendSettings.baseAddress + this.endpoints.getAllUserTasksEndpoint;
     return this.http.post<BackendResponse<Task[]>>(url, {IdUser: idUser, Status: status});
   }
 
   private addNewTaskResponse(newTaskDto: NewTaskDto) : Observable<BaseBackendResponse> {
-    var url = this.backendSettings.baseAddress + this.endpoints.addNewTask;
+    var url = this.backendSettings.baseAddress + this.endpoints.addNewTaskEndpoint;
     return this.http.post<BaseBackendResponse>(url, newTaskDto);
   }
 
   private updateTaskResponse(updateTaskDto: UpdateTaskDto) : Observable<BaseBackendResponse> {
-    var url = this.backendSettings.baseAddress + this.endpoints.updateTask;
+    var url = this.backendSettings.baseAddress + this.endpoints.updateTaskEndpoint;
     return this.http.post<BaseBackendResponse>(url, updateTaskDto);
   }
 
   private deleteTaskResponse(idTask: number) : Observable<BaseBackendResponse> {
-    var url = this.backendSettings.baseAddress + this.endpoints.deleteTask;
+    var url = this.backendSettings.baseAddress + this.endpoints.deleteTaskEndpoint;
     return this.http.post<BaseBackendResponse>(url, idTask);
+  }
+
+  private getAllPriorityResponse() : Observable<BackendResponse<PriorityDto[]>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getAllPriorityEndpoint;
+    return this.http.post<BackendResponse<PriorityDto[]>>(url, {});
   }
 
   getAllUserTasks(idUser: number, status: number) {
@@ -70,6 +77,12 @@ export class TasksService {
   deleteTask(idTask: number) {
     this.deleteTaskResponse(idTask).subscribe(x => {
       this.deleteTaskResponse$.next(x);
+    });
+  }
+
+  getAllPriority() {
+    this.getAllPriorityResponse().subscribe(x => {
+      this.priorityResponse$.next(x);
     });
   }
 }

@@ -3,10 +3,11 @@ export interface Task {
     idUser?: number,
     title?: string
     description?: string,
-    deadline?: Date,
-    addedDate?: Date,
-    ProgressDate?: Date,
-    FinishDate?: Date,
+    deadline?: string,
+    addedDate?: string,
+    progressDate?: string,
+    finishDate?: string,
     status?: number,
-    priority?: string
+    priorityDescription?: string,
+    priority?: number
 }
