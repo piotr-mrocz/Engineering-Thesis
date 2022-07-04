@@ -8,5 +8,5 @@ export interface Task {
     ProgressDate?: Date,
     FinishDate?: Date,
     status?: number,
-    priority?: number
+    priority?: string
 }
