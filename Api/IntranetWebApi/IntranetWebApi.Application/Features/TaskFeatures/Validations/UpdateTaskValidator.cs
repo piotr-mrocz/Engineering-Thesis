@@ -25,5 +25,10 @@ public class UpdateTaskValidator : AbstractValidator<UpdateTaskCommand>
             .NotNull()
             .GreaterThan(0)
             .WithMessage("Nie podano nowego statusu wykonania!");
+
+        RuleFor(x => x.Priority)
+            .NotNull()
+            .GreaterThan(0)
+            .WithMessage("Nie podano ważności zadania!");
     }
 }

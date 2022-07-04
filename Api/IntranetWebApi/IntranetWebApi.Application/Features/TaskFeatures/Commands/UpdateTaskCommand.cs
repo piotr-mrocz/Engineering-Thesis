@@ -16,6 +16,7 @@ public class UpdateTaskCommand : IRequest<BaseResponse>
     public string NewDescription { get; set; } = null!;
     public DateTime? Deadline { get; set; }
     public int Status { get; set; }
+    public int Priority { get; set; }
 }
 
 public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, BaseResponse>
@@ -43,6 +44,7 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, BaseResponse
         taskToUpdate.Data.Description = request.NewDescription;
         taskToUpdate.Data.Deadline = request.Deadline;
         taskToUpdate.Data.Status = request.Status;
+        taskToUpdate.Data.Priority = request.Priority;
 
         var response = await _taskRepo.UpdateEntity(taskToUpdate.Data, cancellationToken);
 

@@ -21,5 +21,10 @@ public class AddNewTaskValidator : AbstractValidator<AddNewTaskCommand>
             .NotNull()
             .GreaterThan(0)
             .WithMessage("Nie podano użytkownika, który ma wykonać to zadanie");
+
+        RuleFor(x => x.Priority)
+            .NotNull()
+            .GreaterThan(0)
+            .WithMessage("Nie podano ważności zadania");
     }
 }

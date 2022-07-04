@@ -15,6 +15,7 @@ public class AddNewTaskCommand : IRequest<BaseResponse>
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public DateTime? Deadline { get; set; }
+    public int Priority { get; set; }
 }
 
 public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse>
@@ -37,7 +38,8 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
             AddedDate = DateTime.Now,
             ProgressDate = null,
             FinishDate = null,
-            Status = (int)TaskStatusEnum.ToDo
+            Status = (int)TaskStatusEnum.ToDo,
+            Priority = request.Priority
         };
 
         var response = await _taskRepo.CreateEntity(taskToAdd, cancellationToken);
