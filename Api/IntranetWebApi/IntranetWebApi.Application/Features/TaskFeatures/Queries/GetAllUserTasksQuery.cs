@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Infrastructure.Repository;
@@ -12,22 +13,22 @@ using Task = IntranetWebApi.Domain.Models.Entities.Task;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 
-    public class GetAllUserTasksQuery : IRequest<Response<List<Task>>>
+    public class GetAllUserTasksQuery : IRequest<Response<List<TaskDto>>>
     {
     public int IdUser { get; set; }
     public int Status { get; set; }
 }
 
-public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Response<List<Task>>>
+public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Response<List<TaskDto>>>
 {
-    private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
+    private readonly IGenericRepository<Task> _taskRepo;
 
-    public GetAllUserTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo)
+    public GetAllUserTaskHandler(IGenericRepository<Task> taskRepo)
     {
         _taskRepo = taskRepo;
     }
 
-    public async Task<Response<List<Task>>> Handle(GetAllUserTasksQuery request, CancellationToken cancellationToken)
+    public async Task<Response<List<TaskDto>>> Handle(GetAllUserTasksQuery request, CancellationToken cancellationToken)
     {
         var tasks = await _taskRepo.GetManyEntitiesByExpression(x => 
             x.IdUser == request.IdUser &&
@@ -35,11 +36,68 @@ public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Respo
 
         var succeeded = tasks.Succeeded && tasks.Data != null;
 
-        return new Response<List<Task>>()
+        if (!succeeded)
+        {
+            return new Response<List<TaskDto>>()
+            {
+                Message = "Wystąpił błąd podczas wyszukiwania zadań!",
+                Data = new List<TaskDto>()
+            };
+        }
+
+        var tasksDto = PrepareReturnList(tasks.Data, request.Status);
+
+        return new Response<List<TaskDto>>()
         {
             Succeeded = succeeded,
-            Message = succeeded ? "Ok" : tasks.Message,
-            Data = succeeded ? tasks.Data.ToList() : new List<Task>()
+            Data = tasksDto
         };
+    }
+
+    private List<TaskDto> PrepareReturnList(IEnumerable<Task> tasks, int status)
+    {
+        if (!tasks.Any())
+            return new List<TaskDto>();
+
+        tasks = GetOrderByTasks(tasks, status);
+
+        var returnList = new List<TaskDto>();
+
+        foreach (var task in tasks)
+        {
+            var taskDetails = new TaskDto()
+            {
+                Id = task.Id,
+                IdUser = task.IdUser,
+                Title = task.Title,
+                Description = task.Description,
+                Deadline = task.Deadline,
+                AddedDate = task.AddedDate.ToString("dd MMMM yyyy HH:mm"),
+                ProgressDate = task.ProgressDate.HasValue ? task.ProgressDate.Value.ToString("dd MMMM yyyy HH:mm") : string.Empty,
+                FinishDate = task.FinishDate.HasValue ? task.FinishDate.Value.ToString("dd MMMM yyyy HH:mm") : string.Empty,
+                Status = task.Status,
+                Priority = task.Priority,
+                PriorityDescription = EnumHelper.GetEnumDescription((PriorityEnum)task.Priority)
+            };
+
+            returnList.Add(taskDetails);
+        }
+
+        return returnList;
+    }
+
+    private List<Task> GetOrderByTasks(IEnumerable<Task> tasks, int status)
+    {
+        switch (status)
+        {
+            case (int)TaskStatusEnum.Done:
+                return tasks.OrderBy(x => x.FinishDate).ThenBy(x => x.AddedDate).ToList();
+
+            case (int)TaskStatusEnum.InProgress:
+                return tasks.OrderBy(x => x.Priority).ThenBy(x => x.ProgressDate).ToList();
+
+            default:
+                return tasks.OrderBy(x => x.Priority).ThenBy(x => x.AddedDate).ToList();
+        }
     }
 }
