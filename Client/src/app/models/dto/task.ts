@@ -7,5 +7,6 @@ export interface Task {
     addedDate?: Date,
     ProgressDate?: Date,
     FinishDate?: Date,
-    status?: number
+    status?: number,
+    priority?: number
 }

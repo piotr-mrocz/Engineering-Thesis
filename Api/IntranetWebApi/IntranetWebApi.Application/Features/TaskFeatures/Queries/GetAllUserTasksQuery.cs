@@ -8,15 +8,17 @@ using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
+using Task = IntranetWebApi.Domain.Models.Entities.Task;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 
-    public class GetAllUserTasksQuery : IRequest<Response<TasksListDto>>
+    public class GetAllUserTasksQuery : IRequest<Response<List<Task>>>
     {
     public int IdUser { get; set; }
+    public int Status { get; set; }
 }
 
-public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Response<TasksListDto>>
+public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Response<List<Task>>>
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
 
@@ -25,60 +27,19 @@ public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Respo
         _taskRepo = taskRepo;
     }
 
-    public async Task<Response<TasksListDto>> Handle(GetAllUserTasksQuery request, CancellationToken cancellationToken)
+    public async Task<Response<List<Task>>> Handle(GetAllUserTasksQuery request, CancellationToken cancellationToken)
     {
-        var tasks = await _taskRepo.GetManyEntitiesByExpression(x => x.IdUser == request.IdUser, cancellationToken);
+        var tasks = await _taskRepo.GetManyEntitiesByExpression(x => 
+            x.IdUser == request.IdUser &&
+            x.Status == request.Status, cancellationToken);
 
-        if (!tasks.Succeeded)
+        var succeeded = tasks.Succeeded && tasks.Data != null;
+
+        return new Response<List<Task>>()
         {
-            return new()
-            {
-                Message = tasks.Message,
-                Data = new TasksListDto()
-            };
-        }
-
-        var tasksListDto = GetTasksListDto(tasks.Data);
-
-        return new Response<TasksListDto>()
-        {
-            Succeeded = true,
-            Data = tasksListDto
-        };
-    }
-
-    private TasksListDto GetTasksListDto(IEnumerable<IntranetWebApi.Domain.Models.Entities.Task> tasks)
-    {
-        if (tasks == null || !tasks.Any())
-            return new();
-
-        var tasksToDo = new List<IntranetWebApi.Domain.Models.Entities.Task>();
-        var tasksInProgress = new List<IntranetWebApi.Domain.Models.Entities.Task>();
-        var tasksDone = new List<IntranetWebApi.Domain.Models.Entities.Task>();
-
-        foreach (var task in tasks.OrderBy(x => x.AddedDate))
-        {
-            switch (task.Status)
-            {
-                case (int)TaskStatusEnum.ToDo:
-                    tasksToDo.Add(task);
-                    break;
-
-                case (int)TaskStatusEnum.InProgress:
-                    tasksInProgress.Add(task);
-                    break;
-
-                case (int)TaskStatusEnum.Done:
-                    tasksDone.Add(task);
-                    break;
-            }
-        }
-
-        return new TasksListDto()
-        {
-            ToDoTasks = tasksToDo,
-            InProgressTasks = tasksInProgress,
-            DoneTasks = tasksDone
+            Succeeded = succeeded,
+            Message = succeeded ? "Ok" : tasks.Message,
+            Data = succeeded ? tasks.Data.ToList() : new List<Task>()
         };
     }
 }

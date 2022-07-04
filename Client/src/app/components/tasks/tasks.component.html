@@ -1,32 +1,84 @@
-<div class="container-fluid">
-    <div style="height: 200px;"></div>
-    <div class="col-7 align-self-center mb-5" style="margin: auto;">
-        <h2 class="text-center">Twoje zadania</h2>
+<div class="container-fluid py-5">
+    <div class="col-7 align-self-center mb-5 mt-5" style="margin: auto;">
+        <h2 class="text-center py-5">Twoje zadania</h2>
         <hr>
 
         <div class="row bg-primary p-1 rounded" style="height: 50px;">
             <div class="col d-flex align-items-center justify-content-center">
-                <button id="allUsers" type="button" class="btn p-1 btn-primary getTasksButton">Zadania do zrobienia</button>
+                <button id="tasksToDo" type="button" class="btn p-1 btn-primary getTasksButton"
+                    (click)="getToDoTasks('tasksToDo')">Zadania do zrobienia</button>
             </div>
             <div class="col d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-primary p-1 getTasksButton">W trakcie wykonywania</button>
+                <button id="inProgressTasks" type="button" class="btn btn-primary p-1 getTasksButton"
+                    (click)="getToDoTasks('inProgressTasks')">W trakcie wykonywania</button>
             </div>
             <div class="col d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-primary p-1 getTasksButton">Wykonane</button>
+                <button id="doneTasks" type="button" class="btn btn-primary p-1 getTasksButton"
+                    (click)="getToDoTasks('doneTasks')">Wykonane</button>
             </div>
         </div>
 
         <div class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
             <div class="row">
                 <div class="col-5">
-                    <button id="addNewTask" class="text-light rounded" data-toggle="modal" data-target="#addNewUserModal"><i
-                        class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie</button>
+                    <button id="addNewTask" class="text-light rounded" data-toggle="modal"
+                        data-target="#addNewTaskModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowe
+                        zadanie</button>
                 </div>
                 <div class="col-7">
-                    <button id="addNewTaskForUser" class="text-light rounded" data-toggle="modal" data-target="#addNewUserModal"><i
-                        class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie dla użytkownika</button>
+                    <button id="addNewTaskForUser" class="text-light rounded" data-toggle="modal"
+                        data-target="#addNewTaskModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie dla
+                        użytkownika</button>
                 </div>
             </div>
         </div>
+
+        <div *ngIf="tasksResponse.succeeded" class="row">
+
+            <div *ngIf="tasksResponse.data.length == 0" class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center rounded">
+              <h2 class="text-center">Nie znaleziono użytkowników do wyświetlenia!</h2>
+            </div>
+
+            <div *ngFor="let task of tasksResponse.data">
+              <a class="btn m-2 hover-overlay" role="button" data-toggle="modal" href="#showTaskDetailsModal_{{task.id}}">
+                <div class="card-body bg-warning">
+                  <p class="card-text text-center h5" id="personName">{{task.userName}} {{task.userLastName}}</p>
+                </div>
+              </a>
+      
+              <div class="modal fade" id="showTaskDetailsModal_{{task.id}}">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                      <h5 class="modal-title">{{task.userName}} {{task.userLastName}}</h5>
+                      <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col text-light">
+                          <ul>
+                            <li>Dział: {{task.department}}</li>
+                            <li>Stanowisko: {{task.position}}</li>
+                          </ul>
+                        </div>
+                        <div class="col text-light">
+                          <ul>
+                            <li>Emial: {{task.email}}</li>
+                            <li>Telefon: {{task.phoneNumber}}</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div *ngIf="userId != task.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">
+                        <button class="btn-primary text-light rounded" aria-current="page" routerLink="/chat">Rozmawiaj z użytkownikiem</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="collapseCard_{{task.id}}" class="card card-body collapse bg-dark">
+              </div>
+            </div>
+          </div>
+
     </div>
 </div>

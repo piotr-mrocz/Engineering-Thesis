@@ -5,10 +5,10 @@ import { AuthenticationService } from './authentication.service';
 import { EndpointsUrl } from '../models/consts/endpointsUrl';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BackendResponse } from '../models/response/backendResponse';
-import { TasksListDto } from '../models/dto/tasksListDto';
 import { BaseBackendResponse } from '../models/response/BaseBackendResponse';
 import { NewTaskDto } from '../models/dto/newTaskDto';
 import { UpdateTaskDto } from '../models/dto/updateTaskDto';
+import { Task } from '../models/dto/task';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +24,14 @@ export class TasksService {
     this.token = this.authService.getToken();
   }
 
-  tasksResponse$ = new BehaviorSubject<BackendResponse<TasksListDto>>({});
+  tasksResponse$ = new BehaviorSubject<BackendResponse<Task[]>>({});
   addNewTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   updateTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   deleteTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
-  private getAllUserTasksResponse(idUser: number) : Observable<BackendResponse<TasksListDto>> {
+  private getAllUserTasksResponse(idUser: number, status: number) : Observable<BackendResponse<Task[]>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getAllUserTasks;
-    return this.http.post<BackendResponse<TasksListDto>>(url, {IdUser: idUser});
+    return this.http.post<BackendResponse<Task[]>>(url, {IdUser: idUser, Status: status});
   }
 
   private addNewTaskResponse(newTaskDto: NewTaskDto) : Observable<BaseBackendResponse> {
@@ -49,8 +49,8 @@ export class TasksService {
     return this.http.post<BaseBackendResponse>(url, idTask);
   }
 
-  getAllUserTasks(idUser: number) {
-    this.getAllUserTasksResponse(idUser).subscribe(x => {
+  getAllUserTasks(idUser: number, status: number) {
+    this.getAllUserTasksResponse(idUser, status).subscribe(x => {
       this.tasksResponse$.next(x);
     });
   }
