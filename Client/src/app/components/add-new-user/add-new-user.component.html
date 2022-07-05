@@ -1,4 +1,4 @@
-<form #newUserForm="ngForm" *ngIf="responseSelect.succeeded" class="container register-form" 
+<form id="addNewUserForm" #newUserForm="ngForm" *ngIf="responseSelect.succeeded" class="container register-form" 
 (ngSubmit)="addNewUser(newUserForm.value)">
     <div class="form">
         <div class="form-content">
@@ -83,7 +83,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn btn-danger rounded w-100" data-dismiss="modal">Anuluj</button>
+                    <button type="reset" class="btn btn-danger rounded w-100" data-dismiss="modal" (click)="resetForm('addNewUserForm')">Anuluj</button>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center">
                     <button type="submit" class="btn btn-success rounded w-100">Dodaj użytkownika</button>

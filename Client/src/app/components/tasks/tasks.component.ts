@@ -5,6 +5,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TasksStatus } from 'src/app/models/enums/tasksStatus.enum';
 import { Task } from 'src/app/models/dto/task';
+import { Priority } from 'src/app/models/enums/priority.enum';
 
 @Component({
   selector: 'app-tasks',
@@ -18,9 +19,19 @@ export class TasksComponent implements OnInit, OnDestroy {
   
   userId: number;
 
+  veryUrgentStatus: number = Priority.veryUrgent;
+  urgentStatus: number = Priority.urgent;
+  importantStatus: number = Priority.important;
+  canWaitStatus: number = Priority.canWait;
+
+  toDoStatus: number = TasksStatus.toDo;
+  inProgressStatus: number = TasksStatus.inProgress;
+  doneStatus: number = TasksStatus.done;
+
   constructor(private tasksService: TasksService,
     private authService: AuthenticationService) { 
       this.userId = this.authService.user.id;
+
     }
     
   ngOnInit() {
@@ -70,4 +81,33 @@ export class TasksComponent implements OnInit, OnDestroy {
     clickedButton.style.backgroundColor = "#17a2b8";
   }
 
+  startTask(taskId: number) {
+    this.changeStatusTask(taskId, this.inProgressStatus);
+  }
+
+  finishTask(taskId: number) {
+    this.changeStatusTask(taskId, this.doneStatus);
+  }
+
+  changeStatusTask(taskId: number, newStatus: number) {
+    this.tasksService.updateStatusTask(taskId, newStatus);
+    this.tasksService.updateStatusTaskResponse$.subscribe(x => {
+      alert(x.message);
+
+      if (x.succeeded) {
+        this.ngOnInit();
+      }
+    });
+  }
+
+  deleteTask(taskId: number) {
+    this.tasksService.deleteTask(taskId);
+    this.tasksService.deleteTaskResponse$.subscribe(x => {
+      alert(x.message);
+
+      if (x.succeeded) {
+        this.ngOnInit();
+      }
+    });
+  }
 }

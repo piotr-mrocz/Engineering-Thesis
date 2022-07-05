@@ -29,6 +29,7 @@ export class TasksService {
   tasksResponse$ = new BehaviorSubject<BackendResponse<Task[]>>({});
   addNewTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   updateTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
+  updateStatusTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   deleteTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
   private getAllUserTasksResponse(idUser: number, status: number) : Observable<BackendResponse<Task[]>> {
@@ -46,9 +47,14 @@ export class TasksService {
     return this.http.post<BaseBackendResponse>(url, updateTaskDto);
   }
 
+  private updateStatusTaskResponse(idTask: number, status: number) : Observable<BaseBackendResponse> {
+    var url = this.backendSettings.baseAddress + this.endpoints.updateStatusTaskEndpoint;
+    return this.http.post<BaseBackendResponse>(url, {IdTask: idTask,Status: status});
+  }
+
   private deleteTaskResponse(idTask: number) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.deleteTaskEndpoint;
-    return this.http.post<BaseBackendResponse>(url, idTask);
+    return this.http.post<BaseBackendResponse>(url, {IdTask: idTask});
   }
 
   private getAllPriorityResponse() : Observable<BackendResponse<PriorityDto[]>> {
@@ -71,6 +77,12 @@ export class TasksService {
   updateTask(updateTaskDto: UpdateTaskDto) {
     this.updateTaskResponse(updateTaskDto).subscribe(x => {
       this.updateTaskResponse$.next(x);
+    });
+  }
+
+  updateStatusTask(idTask: number, status: number) {
+    this.updateStatusTaskResponse(idTask, status).subscribe(x => {
+      this.updateStatusTaskResponse$.next(x);
     });
   }
 

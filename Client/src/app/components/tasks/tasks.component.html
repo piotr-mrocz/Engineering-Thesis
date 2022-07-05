@@ -1,94 +1,137 @@
 <div class="container-fluid py-5">
-    <div class="col-7 align-self-center mb-5 mt-5" style="margin: auto;">
-        <h2 class="text-center py-5">Twoje zadania</h2>
-        <hr>
+  <div class="col-7 align-self-center mb-5 mt-5" style="margin: auto;">
+    <h2 class="text-center py-5">Twoje zadania</h2>
+    <hr>
 
-        <div class="row bg-primary p-1 rounded" style="height: 50px;">
-            <div class="col d-flex align-items-center justify-content-center">
-                <button id="tasksToDo" type="button" class="btn p-1 btn-primary getTasksButton"
-                    (click)="getToDoTasks('tasksToDo')">Zadania do zrobienia</button>
-            </div>
-            <div class="col d-flex align-items-center justify-content-center">
-                <button id="inProgressTasks" type="button" class="btn btn-primary p-1 getTasksButton"
-                    (click)="getInProgressTasks('inProgressTasks')">W trakcie wykonywania</button>
-            </div>
-            <div class="col d-flex align-items-center justify-content-center">
-                <button id="doneTasks" type="button" class="btn btn-primary p-1 getTasksButton"
-                    (click)="getDoneTasks('doneTasks')">Wykonane</button>
-            </div>
-        </div>
-
-        <div class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
-            <div class="row">
-                <div class="col-5">
-                    <button id="addNewTask" class="text-light rounded" data-toggle="modal"
-                        data-target="#addNewTaskModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowe
-                        zadanie</button>
-                </div>
-                <div class="col-7">
-                    <button id="addNewTaskForUser" class="text-light rounded" data-toggle="modal"
-                        data-target="#addNewTaskModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie dla
-                        użytkownika</button>
-                </div>
-            </div>
-        </div>
-
-        <div *ngIf="tasksResponse.succeeded; else noTasks" class="row">
-            <div *ngFor="let task of tasksResponse.data">
-              <a class="btn m-2 hover-overlay" role="button" data-toggle="modal" href="#showTaskDetailsModal_{{task.id}}">
-                <div class="card-body bg-warning">
-                  <p id="taskName" class="card-text text-center h5">{{task.title}} {{task.priorityDescription}}</p>
-                </div>
-              </a>
-      
-              <div class="modal fade" id="showTaskDetailsModal_{{task.id}}">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content bg-dark">
-                    <div class="modal-header">
-                      <h5 class="modal-title">{{task.title}} {{task.addedDate}}</h5>
-                      <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col text-light">
-                          <ul>
-                            <li>Opis: {{task.description}}</li>
-                          </ul>
-                        </div>
-                        <div *ngIf="task.progressDate.length > 0 || task.finishDate.length > 0" class="col text-light">
-                          <ul>
-                            <li *ngIf="task.progressDate.length > 0">Data rozpoczęcia: {{task.progressDate}}</li>
-                            <li *ngIf="task.finishDate.length > 0">Data zakończenia: {{task.finishDate}}</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="collapseCard_{{task.id}}" class="card card-body collapse bg-dark">
-              </div>
-            </div>
-          </div>
-
-          <ng-template #noTasks class="m-3 bg-dark text-danger bg-dark d-flex align-items-center justify-content-center rounded">
-              <hr />
-            <h2 class="text-center text-danger">Nie znaleziono zadań do wyświetlenia!</h2>
-          </ng-template>
-
+    <div class="row bg-primary p-1 rounded" style="height: 50px;">
+      <div class="col d-flex align-items-center justify-content-center">
+        <button id="tasksToDo" type="button" class="btn p-1 btn-primary getTasksButton"
+          (click)="getToDoTasks('tasksToDo')">Zadania do zrobienia</button>
+      </div>
+      <div class="col d-flex align-items-center justify-content-center">
+        <button id="inProgressTasks" type="button" class="btn btn-primary p-1 getTasksButton"
+          (click)="getInProgressTasks('inProgressTasks')">W trakcie wykonywania</button>
+      </div>
+      <div class="col d-flex align-items-center justify-content-center">
+        <button id="doneTasks" type="button" class="btn btn-primary p-1 getTasksButton"
+          (click)="getDoneTasks('doneTasks')">Wykonane</button>
+      </div>
     </div>
-</div>
 
-<div class="modal fade" id="addNewTaskModal">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content bg-dark">
-        <div class="modal-header">
-          <h5 class="modal-title">Dodaj nowe zadanie</h5>
-          <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+    <div class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
+      <div class="row">
+        <div class="col-5">
+          <button id="addNewTask" class="text-light rounded" data-toggle="modal" data-target="#addNewTaskModal"><i
+              class="bi bi-plus-circle-fill"></i> Dodaj nowe
+            zadanie</button>
         </div>
-        <div class="modal-body">
-            <app-add-new-task></app-add-new-task>
+        <div class="col-7">
+          <button id="addNewTaskForUser" class="text-light rounded" data-toggle="modal"
+            data-target="#addNewTaskModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowe zadanie dla
+            użytkownika</button>
         </div>
       </div>
     </div>
+
+    <div *ngIf="tasksResponse.succeeded; else noTasks" class="col">
+      <div *ngFor="let task of tasksResponse.data" class=" p-0">
+        <a class="btn hover-overlay w-100" role="button" data-toggle="modal" href="#showTaskDetailsModal_{{task.id}}">
+          <div class="row card-body align-items-center w-100">
+            <div class="card w-100">
+              <div *ngIf="task.priority === veryUrgentStatus"
+                class="card-header d-flex justify-content-between p-3 bg-danger">
+                <p class="fw-bold mb-0 h5">{{ task.priorityDescription }}</p>
+                <p class="text-dark h5 mb-0"><i class="far fa-clock"></i> {{ task.addedDate }}</p>
+              </div>
+              <div *ngIf="task.priority === urgentStatus"
+                class="card-header d-flex justify-content-between p-3 bg-warning">
+                <p class="fw-bold mb-0 h5">{{ task.priorityDescription }}</p>
+                <p class="text-dark h5 mb-0"><i class="far fa-clock"></i> {{ task.addedDate }}</p>
+              </div>
+              <div *ngIf="task.priority === importantStatus"
+                class="card-header d-flex justify-content-between p-3 bg-primary">
+                <p class="fw-bold mb-0 h5">{{ task.priorityDescription }}</p>
+                <p class="text-dark h5 mb-0"><i class="far fa-clock"></i> {{ task.addedDate }}</p>
+              </div>
+              <div *ngIf="task.priority === canWaitStatus"
+                class="card-header d-flex justify-content-between p-3 bg-success">
+                <p class="fw-bold mb-0 h5">{{ task.priorityDescription }}</p>
+                <p class="text-dark h5 mb-0"><i class="far fa-clock"></i> {{ task.addedDate }}</p>
+              </div>
+              <div class="card-body bg-light text-left">
+                <div class="row-10">
+                  <p class="mb-0">
+                    {{ task.title }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="row mb-5 d-flex justify-content-center ">
+          <div class="row text-center">
+            <div class="mr-2 text-success rounded border-0 cursorPointer mr-4" *ngIf="task.status == toDoStatus"
+              (click)="startTask(task.id)" title="Rozpocznij zadanie">
+              <i class="bi bi-check-circle-fill"> Rozpocznij</i>
+            </div>
+            <div class="mr-2 text-info rounded border-0 cursorPointer mr-4" *ngIf="task.status == inProgressStatus"
+              (click)="finishTask(task.id)" title="Zakończ zadanie">
+              <i class="bi bi-check-circle-fill"> Zakończ</i>
+            </div>
+            <div class="mr-2 text-danger rounded border-0 cursorPointer" *ngIf="task.status != doneStatus"
+              (click)="deleteTask(task.id)" title="Usuń zadanie">
+              <i class="bi bi-check-circle-fill"> Usuń</i>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="showTaskDetailsModal_{{task.id}}">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+              <div class="modal-header">
+                <h5 class="modal-title">{{task.title}} {{task.addedDate}}</h5>
+                <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col text-light">
+                    <ul>
+                      <li>Opis: {{task.description}}</li>
+                    </ul>
+                  </div>
+                  <div *ngIf="task.progressDate.length > 0 || task.finishDate.length > 0" class="col text-light">
+                    <ul>
+                      <li *ngIf="task.progressDate.length > 0">Data rozpoczęcia: {{task.progressDate}}</li>
+                      <li *ngIf="task.finishDate.length > 0">Data zakończenia: {{task.finishDate}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noTasks
+      class="m-3 bg-dark text-danger bg-dark d-flex align-items-center justify-content-center rounded">
+      <hr />
+      <h2 class="text-center text-danger">Nie znaleziono zadań do wyświetlenia!</h2>
+    </ng-template>
+
   </div>
+</div>
+
+<div class="modal fade" id="addNewTaskModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Dodaj nowe zadanie</h5>
+        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+      </div>
+      <div class="modal-body">
+        <app-add-new-task></app-add-new-task>
+      </div>
+    </div>
+  </div>
+</div>

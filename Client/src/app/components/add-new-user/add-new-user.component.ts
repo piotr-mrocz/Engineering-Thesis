@@ -86,4 +86,9 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
         alert(x.message);
     });
   }
+
+  resetForm(idForm: string) {
+    var form = <HTMLFormElement>document.getElementById(idForm);
+    form.reset();
+  }
 }
