@@ -7,23 +7,18 @@ using FluentValidation;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures.Validations;
 
-public class UpdateTaskValidator : AbstractValidator<UpdateTaskCommand>
+public class UpdateStatusTaskValidator : AbstractValidator<UpdateStatusTaskCommand>
 {
-    public UpdateTaskValidator()
+    public UpdateStatusTaskValidator()
     {
-        RuleFor(x => x.NewTitle)
+        RuleFor(x => x.Status)
             .NotNull()
-            .NotEmpty()
-            .WithMessage("Podano niepoprawny tytuł zadania!");
+            .GreaterThan(0)
+            .WithMessage("Nie podano nowego statusu wykonania!");
 
         RuleFor(x => x.IdTask)
             .NotNull()
             .GreaterThan(0)
             .WithMessage("Nie podano numeru zadania!");
-
-        RuleFor(x => x.Priority)
-            .NotNull()
-            .GreaterThan(0)
-            .WithMessage("Nie podano ważności zadania!");
     }
 }
