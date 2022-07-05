@@ -9,6 +9,7 @@ import { BackendResponse } from '../models/response/backendResponse';
 import { PositionsAndDepartmentsAndRoleDto } from '../models/dto/positionsAndDepartmentsAndRolesDto';
 import { AddNewUserDto } from '../models/dto/addNewUserDto';
 import { BaseBackendResponse } from '../models/response/BaseBackendResponse';
+import { UserDto } from '../models/dto/userDto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class PersonService {
    }
 
    usersResponse$ = new BehaviorSubject<BackendResponse<UserDetailsDto[]>>({});
+   usersDepartmentResponse$ = new BehaviorSubject<BackendResponse<UserDto[]>>({});
    selectsResponse$ = new BehaviorSubject<BackendResponse<PositionsAndDepartmentsAndRoleDto>>({});
    addUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
@@ -36,6 +38,11 @@ export class PersonService {
    private getUsersByIdDepartmentResponse(idDepartment: number) : Observable<BackendResponse<UserDetailsDto[]>> {
       var url = this.backendSettings.baseAddress + this.endpoints.getAllUsersByIdDepartmentEndpoint;
       return this.http.post<BackendResponse<UserDetailsDto[]>>(url, {IdDepartment: idDepartment});
+   }
+
+   private getUsersInDepartmentByIdSupervisorResponse(idSupervisor: number) : Observable<BackendResponse<UserDto[]>> {
+      var url = this.backendSettings.baseAddress + this.endpoints.getAllUserInDepartmentByIdSupervisorEndpoint;
+      return this.http.post<BackendResponse<UserDto[]>>(url, {IdSupervisor: idSupervisor});
    }
 
    private getAllValuesForSelectsResponse() : Observable<BackendResponse<PositionsAndDepartmentsAndRoleDto>> {
@@ -51,6 +58,12 @@ export class PersonService {
   getAllUsers() {
     this.getAllUsersResponse().subscribe(x => {
       this.usersResponse$.next(x);
+    });
+  }
+
+  getUsersInDepartmentByIdSupervisor(idSupervisor: number) {
+    this.getUsersInDepartmentByIdSupervisorResponse(idSupervisor).subscribe(x => {
+      this.usersDepartmentResponse$.next(x);
     });
   }
 

@@ -3,8 +3,19 @@
     <div class="form">
         <div class="form-content">
             <div class="col">
+                <div class="row" *ngIf="allUsersInDepartmentResponse.succeeded">
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" value="" ngModel name="idUser">
+                                <option value="" disabled selected>User *</option>
+                                <option *ngFor="let user of allUsersInDepartmentResponse.data" value="{{user.idUser}}">
+                                    {{user.userName}} 
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-
                     <div class="col">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Tytuł *" value="" 

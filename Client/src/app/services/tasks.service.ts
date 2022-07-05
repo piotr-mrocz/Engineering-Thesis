@@ -26,6 +26,8 @@ export class TasksService {
     this.token = this.authService.getToken();
   }
 
+  isTaskAddBySupervisor: boolean = false;
+
   priorityResponse$ = new BehaviorSubject<BackendResponse<PriorityDto[]>>({});
   tasksResponse$ = new BehaviorSubject<BackendResponse<Task[]>>({});
   tasksForSupervisorResponse$ = new BehaviorSubject<BackendResponse<TaskUserDto[]>>({});
@@ -39,9 +41,9 @@ export class TasksService {
     return this.http.post<BackendResponse<Task[]>>(url, {IdUser: idUser, Status: status});
   }
 
-  private getAllUserTasksForSupervisorResponse(idSupervisor: number, status: number) : Observable<BackendResponse<Task[]>> {
+  private getAllUserTasksForSupervisorResponse(idSupervisor: number, status: number) : Observable<BackendResponse<TaskUserDto[]>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getUsersTasksForSupervisorEndpoint;
-    return this.http.post<BackendResponse<Task[]>>(url, {IdSupervisor: idSupervisor, Status: status});
+    return this.http.post<BackendResponse<TaskUserDto[]>>(url, {IdSupervisor: idSupervisor, Status: status});
   }
 
   private addNewTaskResponse(newTaskDto: NewTaskDto) : Observable<BaseBackendResponse> {

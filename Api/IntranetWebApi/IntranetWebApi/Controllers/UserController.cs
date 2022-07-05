@@ -20,10 +20,12 @@ public class UserController : ControllerBase
     }
 
     #region Commands
+
     [HttpPost]
     //[Authorize(Roles = RolesConst.Admin)]
     public async Task<IActionResult> AddNewUser([FromBody] AddNewUserCommand request)
         => Ok(await _mediator.Send(request));
+
     #endregion Commands
 
     #region Queries
@@ -39,6 +41,10 @@ public class UserController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> GetUsersPositionsAndDepartmentsAndRoles(GetUsersPositionsAndDepartmentsAndRolesQuery request)
+        => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> GetAllUserInDepartmentByIdSupervisor(GetAllUserInDepartmentByIdSupervisorQuery request)
         => Ok(await _mediator.Send(request));
 
     #endregion Queries

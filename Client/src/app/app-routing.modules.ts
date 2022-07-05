@@ -11,6 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { ChatComponent } from './components/chat/chat.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { UsersTasksListComponent } from './components/users-tasks-list/users-tasks-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path: 'personslist', component: PersonsListComponent, canActivate: [AuthGuard] },
     {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
     {path: 'tasks', component: TasksComponent, canActivate: [AuthGuard]},
+    {path: 'tasks-users', component: UsersTasksListComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
     // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];

@@ -6,6 +6,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Subscription } from 'rxjs';
 import { BackendResponse } from 'src/app/models/response/backendResponse';
+import { PersonService } from 'src/app/services/person-service';
+import { UserDto } from 'src/app/models/dto/userDto';
 
 @Component({
   selector: 'app-add-new-task',
@@ -15,16 +17,24 @@ import { BackendResponse } from 'src/app/models/response/backendResponse';
 export class AddNewTaskComponent implements OnInit, OnDestroy {
 
   priorityDtoArray = new BackendResponse<PriorityDto[]>();
+  allUsersInDepartmentResponse = new BackendResponse<UserDto[]>();
   userId: number;
   private subscription: Subscription;
+  isTaskAddBySupervisor: boolean = false;
 
   constructor(private authService: AuthenticationService,
-    private taskService: TasksService) {
+    private taskService: TasksService,
+    private userService: PersonService) {
     this.userId = this.authService.user.id;
   }
 
   ngOnInit() {
     this.createListOfPriority();
+    this.isTaskAddBySupervisor = this.taskService.isTaskAddBySupervisor;
+    
+    if (this.isTaskAddBySupervisor) {
+      this.getAllUsersInDepartmentByIdSupervisor();
+    }
   }
 
   ngOnDestroy() {
@@ -38,12 +48,20 @@ export class AddNewTaskComponent implements OnInit, OnDestroy {
     });
   }
 
+  getAllUsersInDepartmentByIdSupervisor() {
+    this.userService.getUsersInDepartmentByIdSupervisor(this.userId);
+
+    this.userService.usersDepartmentResponse$.subscribe(x => {
+      this.allUsersInDepartmentResponse = x;
+    });
+  }
+
   addNewTask(data) {
     var newTask = new NewTaskDto();
-    newTask.idUser = this.userId;
+    newTask.idUser = this.isTaskAddBySupervisor ? data.idUser : this.userId;
     newTask.title = data.title;
     newTask.description = data.description;
-    newTask.deadline = data.deadline;
+    newTask.deadline = data.deadline.length > 0 ? data.deadline : null;
     newTask.priority = data.priority;
 
     var validation = this.validateForm(newTask);
@@ -57,6 +75,10 @@ export class AddNewTaskComponent implements OnInit, OnDestroy {
   }
 
   validateForm(newTask: NewTaskDto) : boolean {
+    if (this.isTaskAddBySupervisor && (newTask.idUser == 0 || newTask.idUser == null)) {
+      return false;
+    }
+
     if (newTask.title && newTask.priority && newTask.idUser) {
           return true;
         }
