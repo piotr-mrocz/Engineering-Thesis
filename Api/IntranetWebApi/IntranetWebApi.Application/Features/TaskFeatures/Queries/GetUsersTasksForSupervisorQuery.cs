@@ -68,7 +68,16 @@ public class GetUsersTasksForSupervisorHandler : IRequestHandler<GetUsersTasksFo
 
         var succeeded = tasks.Succeeded && tasks.Data != null;
 
-        if (!succeeded || tasks.Data is null)
+        if (tasks.Data == null || !tasks.Data.Any())
+        {
+            return new Response<List<TaskUserDto>>()
+            {
+                Message = "Brak zadań do wyświetlenia",
+                Data = new List<TaskUserDto>()
+            };
+        }
+
+        if (!succeeded)
         {
             return new Response<List<TaskUserDto>>()
             {
