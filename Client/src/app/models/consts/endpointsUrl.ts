@@ -19,4 +19,5 @@ export class EndpointsUrl {
     public readonly deleteTaskEndpoint = "api/Task/DeleteTask";
     public readonly getAllPriorityEndpoint = "api/Task/GetAllPriority";
     public readonly updateStatusTaskEndpoint = "api/Task/UpdateStatusTask";
+    public readonly getUsersTasksForSupervisorEndpoint = "api/Task/GetUsersTasksForSupervisor";
 }

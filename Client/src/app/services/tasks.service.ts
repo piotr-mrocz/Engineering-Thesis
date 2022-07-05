@@ -10,6 +10,7 @@ import { NewTaskDto } from '../models/dto/newTaskDto';
 import { UpdateTaskDto } from '../models/dto/updateTaskDto';
 import { Task } from '../models/dto/task';
 import { PriorityDto } from '../models/dto/priorityDto';
+import { TaskUserDto } from '../models/dto/taskUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class TasksService {
 
   priorityResponse$ = new BehaviorSubject<BackendResponse<PriorityDto[]>>({});
   tasksResponse$ = new BehaviorSubject<BackendResponse<Task[]>>({});
+  tasksForSupervisorResponse$ = new BehaviorSubject<BackendResponse<TaskUserDto[]>>({});
   addNewTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   updateTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   updateStatusTaskResponse$ = new BehaviorSubject<BaseBackendResponse>({});
@@ -35,6 +37,11 @@ export class TasksService {
   private getAllUserTasksResponse(idUser: number, status: number) : Observable<BackendResponse<Task[]>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getAllUserTasksEndpoint;
     return this.http.post<BackendResponse<Task[]>>(url, {IdUser: idUser, Status: status});
+  }
+
+  private getAllUserTasksForSupervisorResponse(idSupervisor: number, status: number) : Observable<BackendResponse<Task[]>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getUsersTasksForSupervisorEndpoint;
+    return this.http.post<BackendResponse<Task[]>>(url, {IdSupervisor: idSupervisor, Status: status});
   }
 
   private addNewTaskResponse(newTaskDto: NewTaskDto) : Observable<BaseBackendResponse> {
@@ -65,6 +72,12 @@ export class TasksService {
   getAllUserTasks(idUser: number, status: number) {
     this.getAllUserTasksResponse(idUser, status).subscribe(x => {
       this.tasksResponse$.next(x);
+    });
+  }
+
+  getAllUserTasksForSupervisor(idSupervisor: number, status: number) {
+    this.getAllUserTasksForSupervisorResponse(idSupervisor, status).subscribe(x => {
+      this.tasksForSupervisorResponse$.next(x);
     });
   }
 
