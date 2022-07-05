@@ -33,6 +33,10 @@ public class TaskController : Controller
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
+    public async Task<IActionResult> UpdateStatusTask(UpdateStatusTaskCommand request)
+       => Ok(await _mediator.Send(request));
+
+    [HttpPost]
     public async Task<IActionResult> DeleteTask(DeleteTaskCommand request)
         => Ok(await _mediator.Send(request));
 }

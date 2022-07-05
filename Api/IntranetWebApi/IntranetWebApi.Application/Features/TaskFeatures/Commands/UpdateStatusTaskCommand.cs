@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 
-public class UpdateTaskCommand : IRequest<BaseResponse>
+public class UpdateStatusTaskCommand : IRequest<BaseResponse>
 {
     public int IdTask { get; set; }
-    public string NewTitle { get; set; } = null!;
-    public string NewDescription { get; set; } = null!;
-    public DateTime? Deadline { get; set; }
-    public int Priority { get; set; }
+    public int Status { get; set; }
 }
 
-public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, BaseResponse>
+public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, BaseResponse>
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
 
-    public UpdateTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo)
+    public UpdateStatusTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo)
     {
         _taskRepo = taskRepo;
     }
 
-    public async Task<BaseResponse> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse> Handle(UpdateStatusTaskCommand request, CancellationToken cancellationToken)
     {
         var taskToUpdate = await _taskRepo.GetEntityByExpression(x => x.Id == request.IdTask, cancellationToken);
 
@@ -39,10 +37,13 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, BaseResponse
             };
         }
 
-        taskToUpdate.Data.Title = request.NewTitle;
-        taskToUpdate.Data.Description = request.NewDescription;
-        taskToUpdate.Data.Deadline = request.Deadline;
-        taskToUpdate.Data.Priority = request.Priority;
+        taskToUpdate.Data.Status = request.Status;
+
+        if (request.Status == (int)TaskStatusEnum.InProgress)
+            taskToUpdate.Data.ProgressDate = DateTime.Now;
+
+        if (request.Status == (int)TaskStatusEnum.Done)
+            taskToUpdate.Data.FinishDate = DateTime.Now;
 
         var response = await _taskRepo.UpdateEntity(taskToUpdate.Data, cancellationToken);
 
