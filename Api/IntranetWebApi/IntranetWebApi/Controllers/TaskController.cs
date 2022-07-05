@@ -25,6 +25,10 @@ public class TaskController : Controller
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
+    public async Task<IActionResult> GetUsersTasksForSupervisor(GetUsersTasksForSupervisorQuery request)
+         => Ok(await _mediator.Send(request));
+
+    [HttpPost]
     public async Task<IActionResult> AddNewTask(AddNewTaskCommand request)
         => Ok(await _mediator.Send(request));
 

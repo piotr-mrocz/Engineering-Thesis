@@ -13,8 +13,8 @@ using Task = IntranetWebApi.Domain.Models.Entities.Task;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 
-    public class GetAllUserTasksQuery : IRequest<Response<List<TaskDto>>>
-    {
+public class GetAllUserTasksQuery : IRequest<Response<List<TaskDto>>>
+{
     public int IdUser { get; set; }
     public int Status { get; set; }
 }
@@ -30,7 +30,7 @@ public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Respo
 
     public async Task<Response<List<TaskDto>>> Handle(GetAllUserTasksQuery request, CancellationToken cancellationToken)
     {
-        var tasks = await _taskRepo.GetManyEntitiesByExpression(x => 
+        var tasks = await _taskRepo.GetManyEntitiesByExpression(x =>
             x.IdUser == request.IdUser &&
             x.Status == request.Status, cancellationToken);
 
