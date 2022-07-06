@@ -13,14 +13,9 @@
     outline: none;
 }
 
-#messagesList, #messagesList:not(#noMessages) {
+.reverse {
     height: 500px;
     overflow: auto;
-  display: flex;
-  flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column-reverse;
 }
-
-/* #messagesList {
-    height: 500px; 
-    overflow-y: scroll;
-} */

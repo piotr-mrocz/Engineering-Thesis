@@ -23,7 +23,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   basePhotoAddress: string;
   baseLogoAddress: string;
   showMessages: boolean = false;
-  showTextArea: boolean = true;
+  showTextArea: boolean = false;
   userId: number;
   message: string;
 
@@ -52,11 +52,11 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.getUserConversation(this.idAddressee);
       });
 
-      console.log(this.idAddressee); // because (I really don't know why, but signalR doesn't work without this)
+      console.log(this.idAddressee); // because (I really don't know why) signalR doesn't work without this
     }
 
     var element = document.getElementById("messagesList");
-element.scrollTop = element.scrollHeight;
+    element.scrollTop = element.scrollHeight;
   }
 
   ngOnDestroy() {
@@ -84,6 +84,7 @@ element.scrollTop = element.scrollHeight;
       });
 
       this.showMessages = this.messageResponse.succeeded;
+      this.showTextArea = true;
     }
   }
 
@@ -131,11 +132,5 @@ element.scrollTop = element.scrollHeight;
     this.connection.start()
       .then(() => console.log("Connection started"))
       .catch(err => console.log("Error while starting connection: " + err))
-  }
-
-  checkIfSystem() {
-    if (this.idAddressee == 0) { // think about System as a user
-      this.showTextArea = false;
-    }
   }
 }
