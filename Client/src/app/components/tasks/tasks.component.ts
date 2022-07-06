@@ -31,10 +31,10 @@ export class TasksComponent implements OnInit, OnDestroy {
   constructor(private tasksService: TasksService,
     private authService: AuthenticationService) { 
       this.userId = this.authService.user.id;
-
-    }
+  }
     
   ngOnInit() {
+    this.tasksService.isTaskAddBySupervisor = false;
     this.getToDoTasks("tasksToDo");
   }
 
