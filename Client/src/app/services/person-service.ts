@@ -29,6 +29,7 @@ export class PersonService {
    usersDepartmentResponse$ = new BehaviorSubject<BackendResponse<UserDto[]>>({});
    selectsResponse$ = new BehaviorSubject<BackendResponse<PositionsAndDepartmentsAndRoleDto>>({});
    addUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
+   releaseUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
    private getAllUsersResponse() : Observable<BackendResponse<UserDetailsDto[]>> {
       var url = this.backendSettings.baseAddress + this.endpoints.getAllUsersEndpoint;
@@ -53,6 +54,11 @@ export class PersonService {
    private addNewUserResponse(data: AddNewUserDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.addNewUserEndpoint;
     return this.http.post<BaseBackendResponse>(url, {UserInfo: data});
+   }
+
+   private releaseUserResponse(idUser: number) : Observable<BaseBackendResponse> {
+    var url = this.backendSettings.baseAddress + this.endpoints.releaseUserEndpoint;
+    return this.http.post<BaseBackendResponse>(url, {IdUser: idUser});
    }
 
   getAllUsers() {
@@ -80,9 +86,14 @@ export class PersonService {
   }
 
   addNewUser(data: AddNewUserDto) {
-    console.log(data);
     this.addNewUserResponse(data).subscribe(x => {
       this.addUserResponse$.next(x);
+    });
+  }
+
+  releaseUser(idUser: number) {
+    this.releaseUserResponse(idUser).subscribe(x => {
+      this.releaseUserResponse$.next(x);
     });
   }
 }

@@ -21,10 +21,13 @@
     </div>
 
     <div *ngIf="userResponse.succeeded" class="row">
+
       <div *ngIf="userResponse.data.length == 0" class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center rounded">
         <h2 class="text-center">Nie znaleziono użytkowników do wyświetlenia!</h2>
       </div>
+
       <div *ngFor="let person of userResponse.data">
+
         <a class="btn m-2 hover-overlay" role="button" data-toggle="modal" href="#showUserDetailsModal_{{person.id}}">
           <img [src]="photoBaseAddress + person.photoName" class="card-img-top" alt="person" style="height: 200px; width: 360px;">
           <div class="card-body bg-warning">
@@ -52,6 +55,18 @@
                       <li>Emial: {{person.email}}</li>
                       <li>Telefon: {{person.phoneNumber}}</li>
                     </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col d-flex justify-content-end">
+                    <div class="mr-2 text-success rounded border-0 cursorPointer" title="Usuń zadanie">
+                      <i class="bi bi-pencil-fill"> Edytuj</i>
+                   </div>
+                  </div>
+                  <div class="col d-flex justify-content-end">
+                    <div class="mr-2 text-danger rounded border-0 cursorPointer" title="Usuń zadanie" (click)="releaseUser(person.id)">
+                      <i class="bi bi-trash-fill"> Zwolnij</i>
+                   </div>
                   </div>
                 </div>
                 <div *ngIf="userId != person.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">

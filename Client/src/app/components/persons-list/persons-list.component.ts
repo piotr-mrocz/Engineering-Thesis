@@ -93,4 +93,8 @@ export class PersonsListComponent implements OnInit, OnDestroy {
     //set background color clicked button
     clickedButton.style.backgroundColor = "#17a2b8";
   }
+
+  releaseUser(personId) {
+    console.log(personId);
+  }
 }
