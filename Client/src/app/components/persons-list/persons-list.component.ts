@@ -95,6 +95,17 @@ export class PersonsListComponent implements OnInit, OnDestroy {
   }
 
   releaseUser(personId) {
-    console.log(personId);
+    var answer = confirm("Czy jesteś pewny?");
+
+    if (answer) {
+      this.personService.releaseUser(personId);
+      this.personService.releaseUserResponse$.subscribe(x => {
+      alert(x.message);
+      
+      if (x.succeeded) {
+        window.location.reload();
+      }
+    });
+    }
   }
 }

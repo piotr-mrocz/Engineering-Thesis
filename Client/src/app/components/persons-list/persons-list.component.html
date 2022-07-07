@@ -57,20 +57,22 @@
                     </ul>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col d-flex justify-content-end">
-                    <div class="mr-2 text-success rounded border-0 cursorPointer" title="Usuń zadanie">
+                
+                <div *ngIf="userId != person.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">
+                  <button class="btn-primary text-light rounded" aria-current="page" routerLink="/chat">Rozmawiaj z użytkownikiem</button>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col d-flex justify-content-start">
+                    <div class="mr-2 text-success rounded border-0 cursorPointer" title="Edytuj informacje o pracowniku">
                       <i class="bi bi-pencil-fill"> Edytuj</i>
                    </div>
                   </div>
                   <div class="col d-flex justify-content-end">
-                    <div class="mr-2 text-danger rounded border-0 cursorPointer" title="Usuń zadanie" (click)="releaseUser(person.id)">
+                    <div class="mr-2 text-danger rounded border-0 cursorPointer" title="Zwolnij pracownika" (click)="releaseUser(person.id)">
                       <i class="bi bi-trash-fill"> Zwolnij</i>
                    </div>
                   </div>
-                </div>
-                <div *ngIf="userId != person.id" class="row mt-1 d-flex align-items-center justify-content-center rounded">
-                  <button class="btn-primary text-light rounded" aria-current="page" routerLink="/chat">Rozmawiaj z użytkownikiem</button>
                 </div>
               </div>
             </div>
