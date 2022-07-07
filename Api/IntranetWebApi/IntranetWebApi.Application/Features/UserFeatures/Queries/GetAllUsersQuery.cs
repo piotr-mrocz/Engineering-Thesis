@@ -33,6 +33,7 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, Response<List<U
             .Include(x => x.Position)
             .Include(x => x.Photo)
             .Include(x => x.Department)
+            .Where(x => x.IsActive)
             .ToListAsync(cancellationToken);
 
         var usersList = new List<UserDetailsDto>();

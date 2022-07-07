@@ -33,7 +33,7 @@ public class GetAllUsersByIdDepartmentHandler : IRequestHandler<GetAllUsersByIdD
             .Include(x => x.Position)
             .Include(x => x.Photo)
             .Include(x => x.Department)
-            .Where(x => x.IdDepartment == request.IdDepartment)
+            .Where(x => x.IdDepartment == request.IdDepartment && x.IsActive)
             .ToListAsync(cancellationToken);
 
         var usersList = new List<UserDetailsDto>();

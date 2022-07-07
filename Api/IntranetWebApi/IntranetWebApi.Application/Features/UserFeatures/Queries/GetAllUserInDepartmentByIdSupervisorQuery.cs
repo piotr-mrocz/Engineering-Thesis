@@ -40,8 +40,7 @@ public class GetAllUserInDepartmentByIdSupervisorHandler : IRequestHandler<GetAl
         }
 
         var allDepartmentUsers = await _userRepo.GetManyEntitiesByExpression(x =>
-                x.IdDepartment == department.Data.IdDepartment &&
-                x.Id != request.IdSupervisor, cancellationToken);
+                x.IdDepartment == department.Data.IdDepartment && x.Id != request.IdSupervisor && x.IsActive, cancellationToken);
 
         if (allDepartmentUsers is null || !allDepartmentUsers.Succeeded || allDepartmentUsers.Data is null || !allDepartmentUsers.Data.Any())
         {
