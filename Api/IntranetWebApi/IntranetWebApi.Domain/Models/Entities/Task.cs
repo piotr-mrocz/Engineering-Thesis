@@ -4,6 +4,7 @@ public class Task
 {
     public int Id { get; set; }
     public int IdUser { get; set; }
+    public int WhoAdd { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public DateTime? Deadline { get; set; }

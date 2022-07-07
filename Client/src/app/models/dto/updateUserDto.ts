@@ -2,7 +2,6 @@ export class UpdateUserDto {
     idUser?: number;
     firstName?: string;
     lastName?: string;
-    dateOfBirth?: Date;
     idDepartment?: number;
     idPosition?: number;
     idRole?: number;
