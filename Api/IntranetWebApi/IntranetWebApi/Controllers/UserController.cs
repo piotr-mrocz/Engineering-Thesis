@@ -26,6 +26,10 @@ public class UserController : ControllerBase
     public async Task<IActionResult> AddNewUser([FromBody] AddNewUserCommand request)
         => Ok(await _mediator.Send(request));
 
+    [HttpPost]
+    public async Task<IActionResult> ReleaseUser(ReleaseUserCommand request)
+        => Ok(await _mediator.Send(request));
+
     #endregion Commands
 
     #region Queries
