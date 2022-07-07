@@ -68,6 +68,14 @@
                     </div>
                 </a>
 
+                <div class="row mb-5 d-flex justify-content-center ">
+                    <div class="row text-center">
+                      <div class="mr-2 text-danger rounded border-0 cursorPointer" *ngIf="task.status != doneStatus && task.whoAdded == userId"
+                        (click)="deleteTask(task.id)" title="Usuń zadanie">
+                        <i class="bi bi-trash-fill"> Usuń</i>
+                      </div>
+                    </div>
+
                 <div class="modal fade" id="showTaskDetailsModal_{{task.id}}">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content bg-dark">

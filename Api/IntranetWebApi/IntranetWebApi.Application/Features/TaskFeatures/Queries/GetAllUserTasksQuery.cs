@@ -69,6 +69,7 @@ public class GetAllUserTaskHandler : IRequestHandler<GetAllUserTasksQuery, Respo
             {
                 Id = task.Id,
                 IdUser = task.IdUser,
+                WhoAdded = task.WhoAdd,
                 Title = task.Title,
                 Description = task.Description,
                 Deadline = task.Deadline.HasValue ? task.Deadline.Value.ToString("dd MMMM yyyy HH:mm") : string.Empty,

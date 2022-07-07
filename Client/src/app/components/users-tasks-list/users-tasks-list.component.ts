@@ -82,4 +82,15 @@ export class UsersTasksListComponent implements OnInit, OnDestroy {
     //set background color clicked button
     clickedButton.style.backgroundColor = "#17a2b8";
   }
+
+  deleteTask(taskId: number) {
+    this.tasksService.deleteTask(taskId);
+    this.tasksService.deleteTaskResponse$.subscribe(x => {
+      alert(x.message);
+
+      if (x.succeeded) {
+        this.ngOnInit();
+      }
+    });
+  }
 }

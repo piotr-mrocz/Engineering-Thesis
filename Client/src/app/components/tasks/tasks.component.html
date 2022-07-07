@@ -73,7 +73,7 @@
               (click)="finishTask(task.id)" title="Zakończ zadanie">
               <i class="bi bi-check-circle-fill"> Zakończ</i>
             </div>
-            <div class="mr-2 text-danger rounded border-0 cursorPointer" *ngIf="task.status != doneStatus"
+            <div class="mr-2 text-danger rounded border-0 cursorPointer" *ngIf="task.status != doneStatus && task.whoAdded == userId"
               (click)="deleteTask(task.id)" title="Usuń zadanie">
               <i class="bi bi-trash-fill"> Usuń</i>
             </div>

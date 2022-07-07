@@ -162,6 +162,7 @@ public class GetUsersTasksForSupervisorHandler : IRequestHandler<GetUsersTasksFo
             {
                 Id = task.Id,
                 IdUser = task.IdUser,
+                WhoAdded = task.WhoAdd,
                 User = $"{user.FirstName} {user.LastName}",
                 PhotoName = photo.Name,
                 Title = task.Title,

@@ -10,6 +10,7 @@ public class TaskUserDto
 {
     public int Id { get; set; }
     public int IdUser { get; set; }
+    public int WhoAdded { get; set; }
     public string User { get; set; } = null!;
     public string PhotoName { get; set; } = null!;
     public string Title { get; set; } = null!;

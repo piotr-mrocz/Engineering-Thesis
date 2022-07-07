@@ -65,6 +65,7 @@ export class AddNewTaskComponent implements OnInit, OnDestroy {
     newTask.description = data.description;
     newTask.deadline = data.deadline.length > 0 ? data.deadline : null;
     newTask.priority = data.priority;
+    newTask.whoAdd = this.userId;
 
     var validation = this.validateForm(newTask);
 

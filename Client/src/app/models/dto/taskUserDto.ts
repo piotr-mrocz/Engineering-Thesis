@@ -1,6 +1,7 @@
 export interface TaskUserDto {
     id?: number,
     idUser?: number,
+    whoAdded?: number,
     user?: string,
     photoName?: string,
     title?: string

@@ -1,6 +1,7 @@
 export interface Task {
     id?: number,
     idUser?: number,
+    whoAdded?: number,
     title?: string
     description?: string,
     deadline?: string,
