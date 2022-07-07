@@ -1,0 +1,96 @@
+<form id="editUserForm" #editUserForm="ngForm" *ngIf="responseSelect.succeeded" class="container register-form" 
+(ngSubmit)="editUser(editUserForm.value)">
+    <div class="form">
+        <div class="form-content">
+            <div class="col">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="{{person.userName}}" 
+                                autocomplete="off" [(ngModel)]="person.userName" name="firstName" required />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nazwisko *" [value]="person.userLastName"
+                                autocomplete="off" [(ngModel)]="person.userLastName" name="lastName" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" [(ngModel)]="person.department" name="idDepartment" required [value]="person.department">
+                                <option value="" disabled selected>Dział *</option>
+                                <option *ngFor="let department of responseSelect.data.departments" value="{{department.id}}">
+                                    {{department.departmentName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" [(ngModel)]="person.position" name="idPosition" required [value]="person.position">
+                                <option value="" disabled selected>Stanowisko *</option>
+                                <option *ngFor="let position of responseSelect.data.positions" value="{{position.id}}">
+                                    {{position.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" [(ngModel)]="person.idRole" name="idRole" required [value]="person.idRole">
+                                <option value="" disabled selected>Rola w aplikacji *</option>
+                                <option *ngFor="let role of responseSelect.data.roles" value="{{role.id}}">
+                                    {{role.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Numer telefonu" [value]="person.phoneNumber"
+                                autocomplete="off" [(ngModel)]="person.phoneNumber" name="phone" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email" [(ngModel)]="person.email" [value]="person.email" autocomplete="off" name="email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="fileInput" type='file' accept="image/*" (change)="onFileChange($event)" directory style="display: none" #fileInput required />
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col">
+                    <button type="button" class="btn btn-primary rounded w-100" (click)="fileInput.click()">Dodaj zdjęcie</button>
+                </div>
+                <div class="col">
+                    <img className="align-self-center" width='40%' src="{{imageUrl}}" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="reset" class="btn btn-danger rounded w-100" data-dismiss="modal" (click)="resetForm('editUserForm')">Anuluj</button>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success rounded w-100">Edytuj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div *ngIf="responseSelect.succeeded" class="row">
+    <h6>* pole wymagane</h6>
+</div>
+<div *ngIf="!responseSelect.succeeded">
+    <h3 class="text-danger">Nie udało się pobrać potrzebnych danych, by dodać użytkownika. Sprawdź połączenie z serwerem.</h3>
+</div>
+

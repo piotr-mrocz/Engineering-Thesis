@@ -22,4 +22,5 @@ export class EndpointsUrl {
     public readonly getUsersTasksForSupervisorEndpoint = "api/Task/GetUsersTasksForSupervisor";
     public readonly getAllUserInDepartmentByIdSupervisorEndpoint = "api/User/GetAllUserInDepartmentByIdSupervisor";
     public readonly releaseUserEndpoint = "api/User/ReleaseUser";
+    public readonly updateUserDataEndpoint = "api/User/UpdateUserData";
 }

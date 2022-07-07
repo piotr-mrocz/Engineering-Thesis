@@ -32,7 +32,9 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription != undefined) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onFileChange(event : any) {

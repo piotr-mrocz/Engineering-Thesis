@@ -10,6 +10,7 @@ import { PositionsAndDepartmentsAndRoleDto } from '../models/dto/positionsAndDep
 import { AddNewUserDto } from '../models/dto/addNewUserDto';
 import { BaseBackendResponse } from '../models/response/BaseBackendResponse';
 import { UserDto } from '../models/dto/userDto';
+import { UpdateUserDto } from '../models/dto/updateUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class PersonService {
    selectsResponse$ = new BehaviorSubject<BackendResponse<PositionsAndDepartmentsAndRoleDto>>({});
    addUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
    releaseUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
+   updateUserDataResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
    private getAllUsersResponse() : Observable<BackendResponse<UserDetailsDto[]>> {
       var url = this.backendSettings.baseAddress + this.endpoints.getAllUsersEndpoint;
@@ -59,6 +61,11 @@ export class PersonService {
    private releaseUserResponse(idUser: number) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.releaseUserEndpoint;
     return this.http.post<BaseBackendResponse>(url, {IdUser: idUser});
+   }
+
+   private updateUserResponse(data: UpdateUserDto) : Observable<BaseBackendResponse> {
+    var url = this.backendSettings.baseAddress + this.endpoints.updateUserDataEndpoint;
+    return this.http.post<BaseBackendResponse>(url, {UserInfo: data});
    }
 
   getAllUsers() {
@@ -94,6 +101,12 @@ export class PersonService {
   releaseUser(idUser: number) {
     this.releaseUserResponse(idUser).subscribe(x => {
       this.releaseUserResponse$.next(x);
+    });
+  }
+
+  updateUser(data: UpdateUserDto) {
+    this.updateUserResponse(data).subscribe(x => {
+      this.updateUserDataResponse$.next(x);
     });
   }
 }

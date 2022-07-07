@@ -64,9 +64,9 @@
 
                 <div class="row mt-3">
                   <div class="col d-flex justify-content-start">
-                    <div class="mr-2 text-success rounded border-0 cursorPointer" title="Edytuj informacje o pracowniku">
+                    <a class="mr-2 text-success rounded border-0 cursorPointer" title="Edytuj informacje o pracowniku" data-toggle="modal" href="#editUserDataModal_{{person.id}}">
                       <i class="bi bi-pencil-fill"> Edytuj</i>
-                   </div>
+                    </a>
                   </div>
                   <div class="col d-flex justify-content-end">
                     <div class="mr-2 text-danger rounded border-0 cursorPointer" title="Zwolnij pracownika" (click)="releaseUser(person.id)">
@@ -74,6 +74,35 @@
                    </div>
                   </div>
                 </div>
+
+                <div class="modal fade" id="addNewUserModal">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content bg-dark">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Dodaj nowego użytkownika</h5>
+                        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+                      </div>
+                      <div class="modal-body">
+                          <app-add-new-user></app-add-new-user>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="editUserDataModal_{{person.id}}">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content bg-dark">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Edytuj dane użytkownika</h5>
+                        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+                      </div>
+                      <div class="modal-body">
+                          <app-edit-user [person]="person"></app-edit-user>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -85,16 +114,3 @@
   </div>
 </div>
 
-<div class="modal fade" id="addNewUserModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content bg-dark">
-      <div class="modal-header">
-        <h5 class="modal-title">Dodaj nowego użytkownika</h5>
-        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
-      </div>
-      <div class="modal-body">
-          <app-add-new-user></app-add-new-user>
-      </div>
-    </div>
-  </div>
-</div>
