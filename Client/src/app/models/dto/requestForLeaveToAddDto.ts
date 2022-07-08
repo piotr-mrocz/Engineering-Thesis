@@ -3,4 +3,5 @@ export class RequestForLeaveToAddDto {
     startDate?: Date;
     endDate?: Date;
     absenceType?: number;
+    isManager?: boolean;
 }

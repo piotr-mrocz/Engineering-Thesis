@@ -61,7 +61,7 @@ public class GetAllRequestsForLeaveToAcceptByManagerHandler : IRequestHandler<Ge
         {
             return new Response<List<GetAllRequestsForLeaveToAcceptDto>>()
             {
-                Message = "Nie ma żadnych wniosków o urlop do zaakceptowania",
+                Message = "Nie ma żadnych wniosków o urlop do rozpatrzenia",
                 Data = new List<GetAllRequestsForLeaveToAcceptDto>()
             };
         }

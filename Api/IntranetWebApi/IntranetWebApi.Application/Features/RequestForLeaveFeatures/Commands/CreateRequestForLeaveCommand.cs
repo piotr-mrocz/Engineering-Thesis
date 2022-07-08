@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
@@ -44,6 +45,18 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             };
         }
 
+        var totalDaysVacation = (int)(request.RequestInfo.EndDate.Date - request.RequestInfo.StartDate.Date).TotalDays;
+
+        var canAddRequest = await CheckIfUserHaveEnoughFreeDays(totalDaysVacation, cancellationToken);
+
+        if (!canAddRequest)
+        {
+            return new BaseResponse()
+            {
+                Message = "Nie masz wystarczającej ilości dni urlopowych do wykorzystania w tym roku! Procedura wstrzymana"
+            };
+        }
+
         var newRequest = new RequestForLeave()
         {
             IdApplicant = request.RequestInfo.IdUser,
@@ -53,8 +66,15 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             AbsenceType = request.RequestInfo.AbsenceType,
             StartDate = request.RequestInfo.StartDate,
             EndDate = request.RequestInfo.EndDate,
-            DaysAbsence = (int)(request.RequestInfo.EndDate.Date - request.RequestInfo.StartDate.Date).TotalDays
+            DaysAbsence = totalDaysVacation
         };
+
+        // when user is manager, his request is automatically accepted
+        if (request.RequestInfo.IsManager)
+        {
+            newRequest.Status = (int)RequestStatusEnum.AcceptedBySupervisor;
+            newRequest.ActionDate = DateTime.Now;
+        }
 
         var response = await _requestForLeaveRepo.CreateEntity(newRequest, cancellationToken);
 
@@ -94,5 +114,10 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             Succeeded = true,
             Data = department.Data.IdSupervisor
         };
+    }
+
+    private async Task<bool> CheckIfUserHaveEnoughFreeDays(int totalDaysVacation, CancellationToken cancellationToken)
+    {
+        return false;
     }
 }

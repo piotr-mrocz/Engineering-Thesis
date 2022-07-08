@@ -12,4 +12,5 @@ public class RequestForLeaveToAddDto
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public int AbsenceType { get; set; }
+    public bool IsManager { get; set; }
 }

@@ -43,7 +43,7 @@ public class GetAllRequestsForLeaveByIdSupervisorHandler : IRequestHandler<GetAl
             Succeeded = response.Any(),
             Message = response.Any()
                     ? string.Empty
-                    : "Nie ma żadnych wniosków urlopowych do akceptacji",
+                    : "Nie ma żadnych wniosków urlopowych do rozpatrzenia",
             Data = response.Any()
                  ? response
                  : new List<GetAllRequestsForLeaveToAcceptDto>()
