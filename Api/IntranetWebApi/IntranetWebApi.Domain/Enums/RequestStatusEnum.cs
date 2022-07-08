@@ -19,5 +19,5 @@ public enum RequestStatusEnum
     RejectedBySupervisor = 3,
 
     [Description("Wycofany przez użytkownika")]
-    RemoveByUser = 4
+    RemovedByUser = 4
 }

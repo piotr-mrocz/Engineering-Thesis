@@ -28,6 +28,10 @@ public class RequestForLeaveController : ControllerBase
     public async Task<IActionResult> RejectRequestForLeave(RejectRequestForLeaveCommand request)
         => Ok(await _mediatr.Send(request));
 
+    [HttpPost]
+    public async Task<IActionResult> RemoveRequestForLeave(RemoveRequestForLeaveCommand request)
+        => Ok(await _mediatr.Send(request));
+
     #endregion Commands
 
     #region Queries
