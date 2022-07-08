@@ -48,6 +48,7 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
         {
             IdApplicant = request.RequestInfo.IdUser,
             CreateDate = DateTime.Now,
+            ActionDate = DateTime.Now,
             IdSupervisor = supervisorDepartment.Data,
             AbsenceType = request.RequestInfo.AbsenceType,
             StartDate = request.RequestInfo.StartDate,

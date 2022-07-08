@@ -9,11 +9,9 @@ public class RequestForLeave
     public DateTime CreateDate { get; set; }
     public int IdSupervisor { get; set; }
     public int AbsenceType { get; set; } // I created special enum for this
-    public bool? IsAcceptedBySupervisor { get; set; }  // null - when new request
-    public DateTime? DateOfAcceptance { get; set; }
-    public string RejectionReason { get; set; } = null!;
-    public bool IsCancel { get; set; }
-    public DateTime? DateOfCancel { get; set; }
+    public int Status { get; set; } // I created special enum for this
+    public DateTime ActionDate { get; set; }
+    public string RejectReason { get; set; } = null!;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public int DaysAbsence { get; set; }
