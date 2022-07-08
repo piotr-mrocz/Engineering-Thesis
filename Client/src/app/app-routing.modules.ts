@@ -12,6 +12,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { UsersTasksListComponent } from './components/users-tasks-list/users-tasks-list.component';
 import { WorkRegulationsyComponent } from './components/work-regulations/work-regulations.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -24,6 +25,7 @@ const routes: Routes = [
     {path: 'tasks-users', component: UsersTasksListComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
     {path: 'processing-of-personal-data', component: ProcessingOfPersonalDataComponent, canActivate: [AuthGuard]},
     {path: 'work-regulations', component: WorkRegulationsyComponent, canActivate: [AuthGuard]},
+    {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
     // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];

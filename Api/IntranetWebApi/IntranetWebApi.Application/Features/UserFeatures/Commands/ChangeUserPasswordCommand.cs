@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Consts;
+using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Infrastructure.Repository;
@@ -15,10 +16,7 @@ namespace IntranetWebApi.Application.Features.UserFeatures.Commands;
 
 public class ChangeUserPasswordCommand : IRequest<BaseResponse>
 {
-    public int IdUser { get; set; }
-    public string OldPassword { get; set; } = null!;
-    public string NewPassword { get; set; } = null!;
-    public string ConfirmNewPassword { get; set; } = null!;
+    public ChangeUserPasswordDto UserPasswordInfo { get; set; } = null!;
 }
 
 public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordCommand, BaseResponse>
@@ -32,7 +30,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
 
     public async Task<BaseResponse> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userRepo.GetEntityByExpression(x => x.Id == request.IdUser, cancellationToken);
+        var user = await _userRepo.GetEntityByExpression(x => x.Id == request.UserPasswordInfo.IdUser, cancellationToken);
 
         if (user == null || !user.Succeeded || user.Data == null)
         {
@@ -42,15 +40,15 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        request.NewPassword = RemoveWhitespace(request.NewPassword);
-        request.ConfirmNewPassword = RemoveWhitespace(request.ConfirmNewPassword);
+        request.UserPasswordInfo.NewPassword = RemoveWhitespace(request.UserPasswordInfo.NewPassword);
+        request.UserPasswordInfo.ConfirmNewPassword = RemoveWhitespace(request.UserPasswordInfo.ConfirmNewPassword);
 
         var checkNewPasswordResponse = ComparePassword(request, user.Data.Password);
 
         if (!checkNewPasswordResponse.Succeeded)
             return checkNewPasswordResponse;
 
-        var newPasswordHash = PasswordHelper.SecurePassword(request.NewPassword);
+        var newPasswordHash = PasswordHelper.SecurePassword(request.UserPasswordInfo.NewPassword);
 
         user.Data.Password = newPasswordHash;
 
@@ -72,7 +70,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
 
     private BaseResponse ComparePassword(ChangeUserPasswordCommand request, string userPassword)
     {
-        if (!PasswordHelper.ValidatePassword(request.OldPassword, userPassword))
+        if (!PasswordHelper.ValidatePassword(request.UserPasswordInfo.OldPassword, userPassword))
         {
             return new BaseResponse()
             {
@@ -80,7 +78,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        if (PasswordHelper.ValidatePassword(request.NewPassword, userPassword))
+        if (PasswordHelper.ValidatePassword(request.UserPasswordInfo.NewPassword, userPassword))
         {
             return new BaseResponse()
             {
@@ -88,7 +86,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        if (request.NewPassword != request.ConfirmNewPassword)
+        if (request.UserPasswordInfo.NewPassword != request.UserPasswordInfo.ConfirmNewPassword)
         {
             return new BaseResponse()
             {
@@ -96,7 +94,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        if (!request.NewPassword.Any(char.IsUpper))
+        if (!request.UserPasswordInfo.NewPassword.Any(char.IsUpper))
         {
             return new BaseResponse()
             {
@@ -104,7 +102,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        if (!request.NewPassword.Any(char.IsDigit))
+        if (!request.UserPasswordInfo.NewPassword.Any(char.IsDigit))
         {
             return new BaseResponse()
             {
@@ -112,7 +110,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        if (request.NewPassword.Length < 6)
+        if (request.UserPasswordInfo.NewPassword.Length < 6)
         {
             return new BaseResponse()
             {
@@ -120,7 +118,7 @@ public class ChangeUserPasswordHandler : IRequestHandler<ChangeUserPasswordComma
             };
         }
 
-        if (!request.NewPassword.Any(x => PasswordSpecialCharConst.PossibleChars.Contains(x)))
+        if (!request.UserPasswordInfo.NewPassword.Any(x => PasswordSpecialCharConst.PossibleChars.Contains(x)))
         {
             return new BaseResponse()
             {
