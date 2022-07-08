@@ -21,7 +21,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new Response<T>()
         {
             Succeeded = entity != null,
-            Message = entity != null ? "Ok" : "Entity not found",
+            Message = entity != null ? "Operacja zakończona powodzeniem" : "Entity not found",
             Data = entity
         };
     }
@@ -33,7 +33,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new Response<IEnumerable<T>>()
         {
             Succeeded = entities != null && entities.Any(),
-            Message = entities != null ? "Ok" : "Entity not found",
+            Message = entities != null ? "Operacja zakończona powodzeniem" : "Entity not found",
             Data = entities != null && entities.Any() ? entities : null
         };
     }
@@ -48,7 +48,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new ResponseStruct<int>()
         {
             Succeeded = result > 0,
-            Message = result > 0 ? "Ok" : "Can't add entity",
+            Message = result > 0 ? "Operacja zakończona powodzeniem" : "Can't add entity",
             Data = idProperty
         };
     }
@@ -61,7 +61,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new ResponseStruct<bool>()
         {
             Succeeded = result > 0,
-            Message = result > 0 ? "Ok" : "Can't add range of entities",
+            Message = result > 0 ? "Operacja zakończona powodzeniem" : "Can't add range of entities",
             Data = result > 0
         };
     }
@@ -74,7 +74,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new BaseResponse()
         {
             Succeeded = result > 0,
-            Message = result > 0 ? "Ok" : "Can't update entity"
+            Message = result > 0 ? "Operacja zakończona powodzeniem" : "Can't update entity"
         };
     }
 
@@ -87,7 +87,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new BaseResponse()
         {
             Succeeded = result > 0,
-            Message = result > 0 ? "Ok" : "Can't delete entity"
+            Message = result > 0 ? "Operacja zakończona powodzeniem" : "Can't delete entity"
         };
     }
 }
