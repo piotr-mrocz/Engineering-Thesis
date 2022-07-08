@@ -78,7 +78,7 @@ public class DatabaseSeeder
                 IdRole = (int)RolesEnum.User,
                 VacationDaysThisYear = 26,
                 VacationDaysLastYear = 0,
-                VacationDaysEveryYear = 26,
+                VacationDaysInRequests = 0,
             }
         };
 

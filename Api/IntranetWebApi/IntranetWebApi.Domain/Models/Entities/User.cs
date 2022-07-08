@@ -21,7 +21,7 @@ public class User
     public int IdPosition { get; set; }
     public int VacationDaysThisYear { get; set; }
     public int VacationDaysLastYear { get; set; }
-    public int VacationDaysEveryYear { get; set; }
+    public int VacationDaysInRequests { get; set; }
 
     public Role Role { get; set; } = null!;
     public Photo Photo { get; set; } = null!;
