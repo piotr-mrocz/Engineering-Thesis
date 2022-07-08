@@ -11,8 +11,8 @@ public class Task
     public DateTime AddedDate { get; set; }
     public DateTime? ProgressDate { get; set; }
     public DateTime? FinishDate { get; set; }
-    public int Status { get; set; } // I create special enum for this
-    public int Priority { get; set; } // I create special enum for this
+    public int Status { get; set; } // I created special enum for this
+    public int Priority { get; set; } // I created special enum for this
 
     public User User { get; set; } = null!;
 }

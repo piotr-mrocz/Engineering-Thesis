@@ -1,6 +1,5 @@
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProcessingOfPersonalDataComponent } from './components/processing-of-personal-data/processing-of-personal-data.component';
-import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -24,6 +23,7 @@ import { TasksService } from './services/tasks.service';
 import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
 import { UsersTasksListComponent } from './components/users-tasks-list/users-tasks-list.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { WorkRegulationsyComponent } from './components/work-regulations/work-regulations.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     NavComponent,
     FooterComponent,
     HomePageComponent,
-    PrivacyPolicyComponent,
+    WorkRegulationsyComponent,
     ProcessingOfPersonalDataComponent,
     PageNotFoundComponent,
     PersonsListComponent, 
