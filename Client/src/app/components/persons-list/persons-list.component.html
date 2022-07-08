@@ -67,6 +67,9 @@
                     <a class="mr-2 text-success rounded border-0 cursorPointer" title="Edytuj informacje o pracowniku" data-toggle="modal" href="#editUserDataModal_{{person.id}}">
                       <i class="bi bi-pencil-fill"> Edytuj</i>
                     </a>
+                    <div class="mr-2 text-primary rounded border-0 cursorPointer ml-2" title="Resetuj hasło" (click)="resetUserPassword(person.id)">
+                      <i class="bi bi-arrow-repeat"> Resetuj hasło</i>
+                   </div>
                   </div>
                   <div class="col d-flex justify-content-end">
                     <div class="mr-2 text-danger rounded border-0 cursorPointer" title="Zwolnij pracownika" (click)="releaseUser(person.id)">

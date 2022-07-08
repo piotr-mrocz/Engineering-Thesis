@@ -4,6 +4,7 @@ import { ChangeUserPasswordDto } from 'src/app/models/dto/changeUserPasswordDto'
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PersonService } from 'src/app/services/person-service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-change-password',
@@ -26,6 +27,8 @@ export class ChangePasswordComponent implements OnInit {
   typeConfirmPassword: string = Types[Types.password];
   userId: number;
 
+  private subscription: Subscription;
+
   constructor(private authService: AuthenticationService,
     private personService: PersonService,
     private router: Router) {
@@ -33,6 +36,12 @@ export class ChangePasswordComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription != undefined) {
+      this.subscription.unsubscribe();
+    }
   }
 
   changePassword(oldPassword: string, newPassword: string, confirmPassword: string)
@@ -65,7 +74,7 @@ export class ChangePasswordComponent implements OnInit {
 
   changePasswordAfterValidation(changeUserPasswordModel: ChangeUserPasswordDto) {
     this.personService.changeUserPassword(changeUserPasswordModel);
-    this.personService.changeUserPasswordResponse$.subscribe(x => {
+    this.subscription = this.personService.changeUserPasswordResponse$.subscribe(x => {
       alert(x.message);
 
       if(x.succeeded) {
