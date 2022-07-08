@@ -34,6 +34,7 @@ export class PersonService {
    releaseUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
    updateUserDataResponse$ = new BehaviorSubject<BaseBackendResponse>({});
    changeUserPasswordResponse$ = new BehaviorSubject<BaseBackendResponse>({});
+   resetUserPasswordResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
    private getAllUsersResponse() : Observable<BackendResponse<UserDetailsDto[]>> {
       var url = this.backendSettings.baseAddress + this.endpoints.getAllUsersEndpoint;
@@ -73,6 +74,11 @@ export class PersonService {
    private changeUserPasswordResponse(data: ChangeUserPasswordDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.changeUserPasswordEndpoint;
     return this.http.post<BaseBackendResponse>(url, {UserPasswordInfo: data});
+   }
+
+   private resetUserPasswordResponse(idUser: number) : Observable<BaseBackendResponse> {
+    var url = this.backendSettings.baseAddress + this.endpoints.resetUserPasswordEndpoint;
+    return this.http.post<BaseBackendResponse>(url, {IdUser: idUser});
    }
 
   getAllUsers() {
@@ -120,6 +126,12 @@ export class PersonService {
   changeUserPassword(data: ChangeUserPasswordDto) {
     this.changeUserPasswordResponse(data).subscribe(x => {
       this.changeUserPasswordResponse$.next(x);
+    });
+  }
+
+  resetUserPassword(idUser: number) {
+    this.resetUserPasswordResponse(idUser).subscribe(x => {
+      this.resetUserPasswordResponse$.next(x);
     });
   }
 }
