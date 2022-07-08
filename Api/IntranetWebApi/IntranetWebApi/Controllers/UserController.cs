@@ -34,6 +34,10 @@ public class UserController : ControllerBase
     public async Task<IActionResult> UpdateUserData(UpdateUserDataCommand request)
         => Ok(await _mediator.Send(request));
 
+    [HttpPost]
+    public async Task<IActionResult> ChangeUserPassword(ChangeUserPasswordCommand request)
+         => Ok(await _mediator.Send(request));
+
     #endregion Commands
 
     #region Queries
