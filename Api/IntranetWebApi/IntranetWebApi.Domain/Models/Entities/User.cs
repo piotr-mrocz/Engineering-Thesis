@@ -19,6 +19,9 @@ public class User
     public string Phone { get; set; } = null!;
     public string Email { get; set; } = null!;
     public int IdPosition { get; set; }
+    public int VacationDaysThisYear { get; set; }
+    public int VacationDaysLastYear { get; set; }
+    public int VacationDaysEveryYear { get; set; }
 
     public Role Role { get; set; } = null!;
     public Photo Photo { get; set; } = null!;

@@ -75,7 +75,10 @@ public class DatabaseSeeder
                 IdDepartment = 1, // change harcoded parts in the future
                 Login = "123",
                 Password = SecurePassword("123"),
-                IdRole = (int)RolesEnum.User
+                IdRole = (int)RolesEnum.User,
+                VacationDaysThisYear = 26,
+                VacationDaysLastYear = 0,
+                VacationDaysEveryYear = 26,
             }
         };
 
