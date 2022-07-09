@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
@@ -46,7 +47,7 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             };
         }
 
-        var totalDaysVacation = (int)(request.RequestInfo.EndDate.Date - request.RequestInfo.StartDate.Date).TotalDays + 1;
+        var totalDaysVacation = DateTimeHelper.CalculateTotalDaysBetweenDatesWithoutWeekends(request.RequestInfo.StartDate, request.RequestInfo.EndDate);
 
         var canAddRequest = await CheckIfUserHaveEnoughFreeDays(totalDaysVacation, supervisorDepartment.Data.User, cancellationToken);
 

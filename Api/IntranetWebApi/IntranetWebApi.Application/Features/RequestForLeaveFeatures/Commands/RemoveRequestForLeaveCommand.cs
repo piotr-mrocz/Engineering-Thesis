@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
@@ -42,7 +43,7 @@ public class RemoveRequestForLeaveHandler : IRequestHandler<RemoveRequestForLeav
         requestForLeave.Data.Status = (int)RequestStatusEnum.RemovedByUser;
         requestForLeave.Data.ActionDate = DateTime.Now;
 
-        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays + 1;
+        var totalDaysVacation = DateTimeHelper.CalculateTotalDaysBetweenDatesWithoutWeekends(requestForLeave.Data.StartDate.Date, requestForLeave.Data.EndDate.Date);
 
         var response = await _requestRepo.UpdateEntity(requestForLeave.Data, cancellationToken);
 
