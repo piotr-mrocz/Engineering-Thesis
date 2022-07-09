@@ -13,13 +13,13 @@ using MediatR;
 
 namespace IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries;
 
-public class GetAllUserRequestsForLeaveCommand : IRequest<Response<List<GetAllUserRequestsForLeaveDto>>>
+public class GetAllUserRequestsForLeaveQuery : IRequest<Response<List<GetAllUserRequestsForLeaveDto>>>
 {
     public int IdUser { get; set; }
     public int Year { get; set; }
 }
 
-public class GetAllUserRequestsForLeaveHandler : IRequestHandler<GetAllUserRequestsForLeaveCommand, Response<List<GetAllUserRequestsForLeaveDto>>>
+public class GetAllUserRequestsForLeaveHandler : IRequestHandler<GetAllUserRequestsForLeaveQuery, Response<List<GetAllUserRequestsForLeaveDto>>>
 {
     private readonly IGenericRepository<RequestForLeave> _requestRepo;
 
@@ -28,7 +28,7 @@ public class GetAllUserRequestsForLeaveHandler : IRequestHandler<GetAllUserReque
         _requestRepo = requestRepo;
     }
 
-    public async Task<Response<List<GetAllUserRequestsForLeaveDto>>> Handle(GetAllUserRequestsForLeaveCommand request, CancellationToken cancellationToken)
+    public async Task<Response<List<GetAllUserRequestsForLeaveDto>>> Handle(GetAllUserRequestsForLeaveQuery request, CancellationToken cancellationToken)
     {
         var requestForLeaveList = await _requestRepo.GetManyEntitiesByExpression(x =>
              x.IdApplicant == request.IdUser && x.StartDate.Year == request.Year, cancellationToken);
