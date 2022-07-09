@@ -6,6 +6,8 @@ import { EndpointsUrl } from '../models/consts/endpointsUrl';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseBackendResponse } from '../models/response/BaseBackendResponse';
 import { RequestForLeaveToAddDto } from '../models/dto/requestForLeaveToAddDto';
+import { BackendResponse } from '../models/response/backendResponse';
+import { GetAllUserRequestsForLeaveDto } from '../models/dto/getAllUserRequestsForLeaveDto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,7 @@ export class RequestForLeaveService {
   acceptRequestForLeaveResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   rejectRequestForLeaveResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   removeRequestForLeaveByUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
+  getAllUserRequestForLeaveResponse$ = new BehaviorSubject<BackendResponse<GetAllUserRequestsForLeaveDto[]>>({});
 
   private createRequestForLeaveResponse(newRequestForLeave: RequestForLeaveToAddDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.createRequestForLeaveEndpoint;
@@ -44,6 +47,11 @@ export class RequestForLeaveService {
   private removeRequestForLeaveByUserResponse(idRequest: number) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.removeRequestForLeaveEndpoint;
     return this.http.post<BaseBackendResponse>(url, {IdRequest: idRequest});
+  }
+
+  private getAllUserRequestsForLeaveResponse(idUser: number, year: number) : Observable<BackendResponse<GetAllUserRequestsForLeaveDto[]>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getUserRequestsForLeaveEndpoint;
+    return this.http.post<BackendResponse<GetAllUserRequestsForLeaveDto[]>>(url, {IdUser: idUser, Year: year});
   }
 
   createRequestForLeave(newRequestForLeave: RequestForLeaveToAddDto) {
@@ -67,6 +75,12 @@ export class RequestForLeaveService {
   removeRequestForLeaveByUser(idRequest: number) {
     this.removeRequestForLeaveByUserResponse(idRequest).subscribe(x => {
       this.removeRequestForLeaveByUserResponse$.next(x);
+    });
+  }
+
+  getAllUserRequestsForLeave(idUser: number, year: number) {
+    this.getAllUserRequestsForLeaveResponse(idUser, year).subscribe(x => {
+      this.getAllUserRequestForLeaveResponse$.next(x);
     });
   }
 }
