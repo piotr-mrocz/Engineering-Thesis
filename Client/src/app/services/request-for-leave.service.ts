@@ -8,6 +8,7 @@ import { BaseBackendResponse } from '../models/response/BaseBackendResponse';
 import { RequestForLeaveToAddDto } from '../models/dto/requestForLeaveToAddDto';
 import { BackendResponse } from '../models/response/backendResponse';
 import { GetAllUserRequestsForLeaveDto } from '../models/dto/getAllUserRequestsForLeaveDto';
+import { UserVacationInfoDto } from '../models/dto/userVacationInfoDto';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class RequestForLeaveService {
   rejectRequestForLeaveResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   removeRequestForLeaveByUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   getAllUserRequestForLeaveResponse$ = new BehaviorSubject<BackendResponse<GetAllUserRequestsForLeaveDto[]>>({});
+  getInformationAboutUserVacationDaysResponse$ = new BehaviorSubject<BackendResponse<UserVacationInfoDto>>({});
 
   private createRequestForLeaveResponse(newRequestForLeave: RequestForLeaveToAddDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.createRequestForLeaveEndpoint;
@@ -52,6 +54,11 @@ export class RequestForLeaveService {
   private getAllUserRequestsForLeaveResponse(idUser: number, year: number) : Observable<BackendResponse<GetAllUserRequestsForLeaveDto[]>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getUserRequestsForLeaveEndpoint;
     return this.http.post<BackendResponse<GetAllUserRequestsForLeaveDto[]>>(url, {IdUser: idUser, Year: year});
+  }
+
+  private getInformationAboutUserVacationDaysResponse(idUser: number) : Observable<BackendResponse<UserVacationInfoDto>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getInformationAboutUserVacationDaysEndpoint;
+    return this.http.post<BackendResponse<UserVacationInfoDto>>(url, {IdUser: idUser});
   }
 
   createRequestForLeave(newRequestForLeave: RequestForLeaveToAddDto) {
@@ -81,6 +88,12 @@ export class RequestForLeaveService {
   getAllUserRequestsForLeave(idUser: number, year: number) {
     this.getAllUserRequestsForLeaveResponse(idUser, year).subscribe(x => {
       this.getAllUserRequestForLeaveResponse$.next(x);
+    });
+  }
+
+  getInformationAboutUserVacationDays(idUser: number) {
+    this.getInformationAboutUserVacationDaysResponse(idUser).subscribe(x => {
+      this.getInformationAboutUserVacationDaysResponse$.next(x);
     });
   }
 }

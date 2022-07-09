@@ -41,4 +41,5 @@ export class EndpointsUrl {
     public readonly rejectRequestForLeaveEndpoint = "api/RequestForLeave/RejectRequestForLeave";
     public readonly removeRequestForLeaveEndpoint = "api/RequestForLeave/RemoveRequestForLeave";
     public readonly getUserRequestsForLeaveEndpoint = "api/RequestForLeave/GetUserRequestsForLeave";
+    public readonly getInformationAboutUserVacationDaysEndpoint = "api/RequestForLeave/GetInformationAboutUserVacationDays";
 }
