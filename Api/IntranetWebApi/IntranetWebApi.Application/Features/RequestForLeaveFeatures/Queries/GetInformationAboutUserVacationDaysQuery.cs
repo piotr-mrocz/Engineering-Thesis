@@ -41,7 +41,8 @@ public class GetInformationAboutUserVacationDaysHandler : IRequestHandler<GetInf
         {
             VacationDaysInRequests = user.Data.VacationDaysInRequests,
             VacationDaysThisYear = user.Data.VacationDaysThisYear,
-            VacationDaysLastYear = user.Data.VacationDaysLastYear
+            VacationDaysLastYear = user.Data.VacationDaysLastYear,
+            StartJobYear = user.Data.DateOfEmployment.Year
         };
 
         return new()
@@ -57,4 +58,5 @@ public class UserVacationInfoDto
     public int VacationDaysThisYear { get; set; }
     public int VacationDaysLastYear { get; set; }
     public int VacationDaysInRequests { get; set; }
+    public int StartJobYear { get; set; }
 }

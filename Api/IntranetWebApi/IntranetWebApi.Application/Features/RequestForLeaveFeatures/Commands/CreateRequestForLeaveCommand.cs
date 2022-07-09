@@ -76,6 +76,7 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
         {
             newRequest.Status = (int)RequestStatusEnum.AcceptedBySupervisor;
             newRequest.ActionDate = DateTime.Now;
+            newRequest.IdSupervisor = request.RequestInfo.IdUser;
         }
 
         var response = await _requestForLeaveRepo.CreateEntity(newRequest, cancellationToken);
@@ -111,12 +112,29 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             };
         }
 
+        var idSupervisor = department.Data.IdSupervisor;
+
+        if (idUser == department.Data.IdSupervisor)
+        {
+            var supervisor = await _userRepo.GetEntityByExpression(x => x.IdRole == (int)RolesEnum.Manager, cancellationToken);
+
+            if (supervisor == null || !supervisor.Succeeded || supervisor.Data == null)
+            {
+                return new()
+                {
+                    Message = "Nie udało się odnaleźć członka zarządu!"
+                };
+            }
+
+            idSupervisor = supervisor.Data.Id;
+        }
+
         return new()
         {
             Succeeded = true,
             Data = new UsersDepartmentVM()
             {
-                IdSupervisor = department.Data.IdSupervisor,
+                IdSupervisor = idSupervisor,
                 User = user.Data
             }
         };

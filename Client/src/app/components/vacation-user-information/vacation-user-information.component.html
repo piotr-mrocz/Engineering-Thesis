@@ -1,0 +1,57 @@
+<div class="container-fluid mb-5 p-5">
+
+    <div *ngIf="userVacationInfoResponse.succeeded" class="col-7 align-self-center mb-5 mt-5 p-5" style="margin: auto;">
+        <h2>Informacje na temat dni urlopowych</h2>
+        <div class="row">
+            <div class="col mt-2">
+                <div class="row text-center">
+                    <div class="col border border-success rounded p-1">
+                        <label>Dostępne dni za obecny rok</label>
+                        <br />
+                        <strong>{{userVacationInfoResponse.data.vacationDaysThisYear}}</strong>
+                    </div>
+
+                    <div class="col border border-primary rounded ml-2 p-1">
+                        <label>Dostępne dni za poprzedni rok</label>
+                        <br />
+                        <strong>{{userVacationInfoResponse.data.vacationDaysLastYear}}</strong>
+                    </div>
+
+                    <div class="col border border-danger rounded ml-2 p-1">
+                        <label>Dni we wnioskach</label>
+                        <br />
+                        <strong>{{userVacationInfoResponse.data.vacationDaysInRequests}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5 d-flex align-items-center justify-content-center">
+            <button id="addNewRequest" class="text-light rounded" data-toggle="modal" data-target="#addNewRequestModal"><i
+                class="bi bi-plus-circle-fill"></i> Wypisz wniosek urlopowy</button>
+        </div>
+        <div class="row">
+            <h3>Wnioski urlopowe w roku 2022 - później trzeba zrobić select {{userVacationInfoResponse.data.startJobYear}}</h3>
+            <div *ngIf="userRequestsForLeaveResponse.succeeded; else noRequest">
+
+            </div>
+            <ng-template #noRequest>
+            {{userRequestsForLeaveResponse.message}}
+            </ng-template>
+        </div>
+
+        <div class="modal fade" id="addNewRequestModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  <h5 class="modal-title">Wypisz wniosek urlopowy</h5>
+                  <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+                </div>
+                <div class="modal-body">
+                    <app-add-new-request></app-add-new-request>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+</div>

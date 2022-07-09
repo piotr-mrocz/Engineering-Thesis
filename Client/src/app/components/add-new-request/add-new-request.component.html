@@ -1,0 +1,54 @@
+<form id="addNewRequestForm" #newRequestForm="ngForm" *ngIf="absenceTypesResponse.succeeded" class="container register-form" 
+(ngSubmit)="addNewRequest(newRequestForm.value)">
+    <div class="form">
+        <div class="form-content">
+            <div class="col">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="form-group">
+                            <input id="startDate" class="form-control" placeholder="Od kiedy *" value=""
+                                type="text" onfocus="(this.type='date')" onblur="(this.type='text')" 
+                                autocomplete="off" ngModel name="startDate" required />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Do kiedy *" value="" 
+                                type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                autocomplete="off" ngModel name="endDate" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" ngModel name="absenceType" required>
+                                <option value="" disabled selected>Rodzaj urlopu *</option>
+                                <option *ngFor="let absence of absenceTypesResponse.data" value="{{absence.id}}">
+                                    {{absence.absenceName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="reset" class="btn btn-danger rounded w-100" data-dismiss="modal" (click)="resetForm('addNewRequestForm')">Anuluj</button>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-success rounded w-100">Prześlij wniosek do przełożonego</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div *ngIf="absenceTypesResponse.succeeded" class="row">
+    <h6>* pole wymagane</h6>
+</div>
+<div *ngIf="!absenceTypesResponse.succeeded">
+    <h3 class="text-danger">Nie udało się pobrać potrzebnych danych, by dodać użytkownika. Sprawdź połączenie z serwerem.</h3>
+</div>
+

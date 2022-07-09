@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IntranetWebApi.Controllers;
 
+[ApiController]
+[Route("api/[controller]/[action]")]
 public class RequestForLeaveController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -51,6 +53,10 @@ public class RequestForLeaveController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> GetInformationAboutUserVacationDays(GetInformationAboutUserVacationDaysQuery request)
          => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> GetAllPossibleAbsenceTypeToChoose(GetAllPossibleAbsenceTypeToChooseCommand request)
+        => Ok(await _mediator.Send(request));
 
     #endregion Queries
 }

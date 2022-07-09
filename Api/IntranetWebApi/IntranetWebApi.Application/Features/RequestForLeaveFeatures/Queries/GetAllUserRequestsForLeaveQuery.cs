@@ -38,7 +38,7 @@ public class GetAllUserRequestsForLeaveHandler : IRequestHandler<GetAllUserReque
         {
             return new()
             {
-                Message = "Nie udało się odnaleźć wniosku w bazie danych!",
+                Message = "Nie ma żadnych wniosków w bazie danych",
                 Data = new()
             };
         }

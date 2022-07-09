@@ -9,6 +9,7 @@ import { RequestForLeaveToAddDto } from '../models/dto/requestForLeaveToAddDto';
 import { BackendResponse } from '../models/response/backendResponse';
 import { GetAllUserRequestsForLeaveDto } from '../models/dto/getAllUserRequestsForLeaveDto';
 import { UserVacationInfoDto } from '../models/dto/userVacationInfoDto';
+import { PossibleAbsenceToChooseDto } from '../models/dto/possibleAbsenceToChooseDto';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class RequestForLeaveService {
   removeRequestForLeaveByUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   getAllUserRequestForLeaveResponse$ = new BehaviorSubject<BackendResponse<GetAllUserRequestsForLeaveDto[]>>({});
   getInformationAboutUserVacationDaysResponse$ = new BehaviorSubject<BackendResponse<UserVacationInfoDto>>({});
+  getAllPossibleAbsenceTypeToChooseResponse$ = new BehaviorSubject<BackendResponse<PossibleAbsenceToChooseDto[]>>({});
 
   private createRequestForLeaveResponse(newRequestForLeave: RequestForLeaveToAddDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.createRequestForLeaveEndpoint;
@@ -59,6 +61,11 @@ export class RequestForLeaveService {
   private getInformationAboutUserVacationDaysResponse(idUser: number) : Observable<BackendResponse<UserVacationInfoDto>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getInformationAboutUserVacationDaysEndpoint;
     return this.http.post<BackendResponse<UserVacationInfoDto>>(url, {IdUser: idUser});
+  }
+
+  private getAllPossibleAbsenceTypeToChooseResponse() : Observable<BackendResponse<PossibleAbsenceToChooseDto[]>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getAllPossibleAbsenceTypeToChooseEndpoint;
+    return this.http.post<BackendResponse<PossibleAbsenceToChooseDto[]>>(url, {});
   }
 
   createRequestForLeave(newRequestForLeave: RequestForLeaveToAddDto) {
@@ -94,6 +101,12 @@ export class RequestForLeaveService {
   getInformationAboutUserVacationDays(idUser: number) {
     this.getInformationAboutUserVacationDaysResponse(idUser).subscribe(x => {
       this.getInformationAboutUserVacationDaysResponse$.next(x);
+    });
+  }
+
+  getAllPossibleAbsenceTypeToChoose() {
+    this.getAllPossibleAbsenceTypeToChooseResponse().subscribe(x => {
+      this.getAllPossibleAbsenceTypeToChooseResponse$.next(x);
     });
   }
 }

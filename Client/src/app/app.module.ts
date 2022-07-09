@@ -25,6 +25,8 @@ import { UsersTasksListComponent } from './components/users-tasks-list/users-tas
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { WorkRegulationsyComponent } from './components/work-regulations/work-regulations.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { VacationUserInformationComponent } from './components/vacation-user-information/vacation-user-information.component';
+import { AddNewRequestComponent } from './components/add-new-request/add-new-request.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     AddNewTaskComponent, 
     UsersTasksListComponent, 
     EditUserComponent, 
-    ChangePasswordComponent
+    ChangePasswordComponent, VacationUserInformationComponent, AddNewRequestComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
