@@ -47,7 +47,7 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
 
         var totalDaysVacation = (int)(request.RequestInfo.EndDate.Date - request.RequestInfo.StartDate.Date).TotalDays;
 
-        var canAddRequest = await CheckIfUserHaveEnoughFreeDays(totalDaysVacation, cancellationToken);
+        var canAddRequest = await CheckIfUserHaveEnoughFreeDays(totalDaysVacation, supervisorDepartment.Data.User, cancellationToken);
 
         if (!canAddRequest)
         {
@@ -62,7 +62,7 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             IdApplicant = request.RequestInfo.IdUser,
             CreateDate = DateTime.Now,
             ActionDate = DateTime.Now,
-            IdSupervisor = supervisorDepartment.Data,
+            IdSupervisor = supervisorDepartment.Data.IdSupervisor,
             AbsenceType = request.RequestInfo.AbsenceType,
             StartDate = request.RequestInfo.StartDate,
             EndDate = request.RequestInfo.EndDate,
@@ -85,13 +85,13 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
         };
     }
 
-    private async Task<ResponseStruct<int>> GetIdSupervisorDepartment(int idUser, CancellationToken cancellationToken)
+    private async Task<Response<UsersDepartmentVM>> GetIdSupervisorDepartment(int idUser, CancellationToken cancellationToken)
     {
         var user = await _userRepo.GetEntityByExpression(x => x.Id == idUser, cancellationToken);
 
         if (user == null || !user.Succeeded || user.Data == null)
         {
-            return new ResponseStruct<int>()
+            return new()
             {
                 Message = "Nie udało się odnaleźć użytkownika w bazie danych!"
             };
@@ -103,21 +103,52 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
 
         if (department == null || !department.Succeeded || department.Data == null)
         {
-            return new ResponseStruct<int>()
+            return new()
             {
                 Message = "Nie udało się odnaleźć działu w bazie danych!"
             };
         }
 
-        return new ResponseStruct<int>()
+        return new()
         {
             Succeeded = true,
-            Data = department.Data.IdSupervisor
+            Data = new UsersDepartmentVM()
+            {
+                IdSupervisor = department.Data.IdSupervisor,
+                User = user.Data
+            }
         };
     }
 
-    private async Task<bool> CheckIfUserHaveEnoughFreeDays(int totalDaysVacation, CancellationToken cancellationToken)
+    private async Task<bool> CheckIfUserHaveEnoughFreeDays(int totalDaysVacation, User user, CancellationToken cancellationToken)
     {
-        return false;
+        var isEnoughDays = (user.VacationDaysThisYear + user.VacationDaysLastYear - totalDaysVacation) >= 0;
+
+        if (!isEnoughDays)
+            return isEnoughDays;
+
+        var isLastYearDaysEnough = user.VacationDaysLastYear - totalDaysVacation >= 0;
+
+        if (isLastYearDaysEnough)
+        {
+            user.VacationDaysLastYear = user.VacationDaysLastYear - totalDaysVacation;
+        }
+        else
+        {
+            user.VacationDaysLastYear = 0;
+            user.VacationDaysThisYear = user.VacationDaysThisYear + user.VacationDaysLastYear - totalDaysVacation;
+        }
+
+        user.VacationDaysInRequests = totalDaysVacation;
+
+        await _userRepo.UpdateEntity(user, cancellationToken);
+
+        return true;
     }
+}
+
+public class UsersDepartmentVM
+{
+    public int IdSupervisor { get; set; }
+    public User User { get; set; } = new();
 }
