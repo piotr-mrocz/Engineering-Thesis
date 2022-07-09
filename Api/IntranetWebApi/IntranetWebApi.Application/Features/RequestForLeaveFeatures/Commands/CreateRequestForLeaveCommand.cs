@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
+using IntranetWebApi.Domain.Models.ViewModels;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Response;
@@ -45,7 +46,7 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             };
         }
 
-        var totalDaysVacation = (int)(request.RequestInfo.EndDate.Date - request.RequestInfo.StartDate.Date).TotalDays;
+        var totalDaysVacation = (int)(request.RequestInfo.EndDate.Date - request.RequestInfo.StartDate.Date).TotalDays + 1;
 
         var canAddRequest = await CheckIfUserHaveEnoughFreeDays(totalDaysVacation, supervisorDepartment.Data.User, cancellationToken);
 
@@ -147,8 +148,4 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
     }
 }
 
-public class UsersDepartmentVM
-{
-    public int IdSupervisor { get; set; }
-    public User User { get; set; } = new();
-}
+

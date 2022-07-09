@@ -48,7 +48,7 @@ public class RejectRequestForLeaveHandler : IRequestHandler<RejectRequestForLeav
             };
         }
 
-        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays;
+        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays + 1;
 
         requestForLeave.Data.Status = (int)RequestStatusEnum.RejectedBySupervisor;
         requestForLeave.Data.ActionDate = DateTime.Now;

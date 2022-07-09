@@ -37,6 +37,10 @@ public class RequestForLeaveController : ControllerBase
     #region Queries
 
     [HttpPost]
+    public async Task<IActionResult> GetUserRequestsForLeave(GetAllUserRequestsForLeaveCommand request)
+        => Ok(await _mediatr.Send(request));
+
+    [HttpPost]
     public async Task<IActionResult> GetAllRequestsForLeaveToAcceptByIdSupervisor(GetAllRequestsForLeaveByIdSupervisorQuery request)
         => Ok (await _mediatr.Send(request));
 

@@ -39,7 +39,7 @@ public class AcceptRequestForLeaveHandler : IRequestHandler<AcceptRequestForLeav
             };
         }
 
-        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays;
+        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays + 1;
 
         requestForLeave.Data.Status = (int)RequestStatusEnum.AcceptedBySupervisor;
         requestForLeave.Data.ActionDate = DateTime.Now;

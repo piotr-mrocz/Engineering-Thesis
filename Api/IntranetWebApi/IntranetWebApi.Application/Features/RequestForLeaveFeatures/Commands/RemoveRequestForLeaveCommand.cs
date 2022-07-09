@@ -42,7 +42,7 @@ public class RemoveRequestForLeaveHandler : IRequestHandler<RemoveRequestForLeav
         requestForLeave.Data.Status = (int)RequestStatusEnum.RemovedByUser;
         requestForLeave.Data.ActionDate = DateTime.Now;
 
-        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays;
+        var totalDaysVacation = (int)(requestForLeave.Data.EndDate.Date - requestForLeave.Data.StartDate.Date).TotalDays + 1;
 
         var response = await _requestRepo.UpdateEntity(requestForLeave.Data, cancellationToken);
 
