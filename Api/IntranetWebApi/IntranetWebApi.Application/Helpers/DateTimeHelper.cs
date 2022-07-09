@@ -12,11 +12,11 @@ public static class DateTimeHelper
     {
         var totalDaysVacation = (int)(endDate.Date - startDate.Date).TotalDays + 1;
 
-        for (DateTime i = startDate.Date; i <= endDate.Date; i.Date.AddDays(1))
+        for (var day = startDate.Date; day <= endDate.Date; day = day.Date.AddDays(1))
         {
-            if (i.DayOfWeek == DayOfWeek.Saturday || i.DayOfWeek == DayOfWeek.Sunday)
+            if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
             {
-                totalDaysVacation = totalDaysVacation--;
+                totalDaysVacation = totalDaysVacation - 1;
             }
         }
 
