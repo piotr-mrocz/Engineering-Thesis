@@ -38,7 +38,8 @@ export class VacationSupervisorComponent implements OnInit, OnDestroy {
   }
 
   isUserAuthorized(): boolean {
-    this.isAuthorized = this.userRole == Roles.manager.toString();
+    var manager: string = Roles[Roles.user];
+    this.isAuthorized = this.userRole.toLocaleLowerCase() == manager.toLocaleLowerCase();
     return this.isAuthorized;
   }
 

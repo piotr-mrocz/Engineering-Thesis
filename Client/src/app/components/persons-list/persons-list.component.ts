@@ -54,7 +54,8 @@ export class PersonsListComponent implements OnInit, OnDestroy {
   }
 
   isUserAuthorized(): boolean {
-    this.isAuthorized = this.userRole == Roles.admin.toString();
+    var admin = Roles[Roles.admin];
+    this.isAuthorized = this.userRole.toLocaleLowerCase() == admin.toLocaleLowerCase();
     return this.isAuthorized;
   }
 

@@ -31,7 +31,7 @@ const routes: Routes = [
     {path: 'vacation-info', component: VacationUserInformationComponent, canActivate: [AuthGuard]},
     {path: 'vacation-info/:id', component: VacationUserInformationComponent, canActivate: [AuthGuard]},
     {path: 'vacation-supervisor', component: VacationSupervisorComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
-    // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
+    // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Roles.admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];
 

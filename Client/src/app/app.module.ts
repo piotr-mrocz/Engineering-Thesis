@@ -28,6 +28,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { VacationUserInformationComponent } from './components/vacation-user-information/vacation-user-information.component';
 import { AddNewRequestComponent } from './components/add-new-request/add-new-request.component';
 import { VacationSupervisorComponent } from './components/vacation-supervisor/vacation-supervisor.component';
+import { ImportantInfoService } from './services/important-info.service';
+import { RequestForLeaveService } from './services/request-for-leave.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,7 @@ import { VacationSupervisorComponent } from './components/vacation-supervisor/va
     ReactiveFormsModule
   ],
   providers: [
-    PersonService, AuthenticationService, MessageService, TasksService,
+    PersonService, AuthenticationService, MessageService, TasksService, RequestForLeaveService, ImportantInfoService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
