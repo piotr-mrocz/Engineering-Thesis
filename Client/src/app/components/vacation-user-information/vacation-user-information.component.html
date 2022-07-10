@@ -26,59 +26,74 @@
             </div>
         </div>
         <div class="row mt-5 mb-5 d-flex align-items-center justify-content-center">
-            <button id="addNewRequest" class="text-light rounded" data-toggle="modal" data-target="#addNewRequestModal"><i
-                class="bi bi-plus-circle-fill"></i> Wypisz wniosek urlopowy</button>
+            <button id="addNewRequest" class="text-light rounded" data-toggle="modal"
+                data-target="#addNewRequestModal"><i class="bi bi-plus-circle-fill"></i> Wypisz wniosek
+                urlopowy</button>
         </div>
         <div class="row">
-            <h3>Wnioski urlopowe w roku 2022 - później trzeba zrobić select {{userVacationInfoResponse.data.startJobYear}}</h3>
-            <div *ngIf="userRequestsForLeaveResponse.succeeded; else noRequest">
+            <div class="col-10">
+                <h3>Wnioski urlopowe w roku {{thisYear}}</h3>
+            </div>
+            <div class="col-2">
+                <select (change)="loadRequests($event.target.value)" id="yearsSelect" class="rounded">
+                    <option *ngFor="let year of years">{{year}}</option>
+                </select>
+            </div>
+            <div class="row" *ngIf="userRequestsForLeaveResponse.succeeded">
                 <table class="table table-bordered table-dark">
                     <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Od kiedy</th>
-                        <th scope="col">Do kiedy</th>
-                        <th scope="col">Ilość dni</th>
-                        <th scope="col">Status wniosku</th>
-                        <th scope="col">Akcje</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Od kiedy</th>
+                            <th scope="col">Do kiedy</th>
+                            <th scope="col">Ilość dni</th>
+                            <th scope="col">Status wniosku</th>
+                            <th scope="col">Akcje</th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let request of userRequestsForLeaveResponse.data; let number = index">
-                        <th scope="row">{{number + 1}}</th>
-                        <td>{{request.startDate}}</td>
-                        <td>{{request.endDate}}</td>
-                        <td >{{request.totalDays}}</td>
-                        <td *ngIf="request.status == forConsiderationStatus" class="text-light">{{request.statusDescription}}</td>
-                        <td *ngIf="request.status == acceptedBySupervisorStatus" class="text-success">{{request.statusDescription}}</td>
-                        <td *ngIf="request.status == rejectedBySupervisorStatus" class="text-danger">{{request.statusDescription}}</td>
-                        <td *ngIf="request.status == removedByUserStatus" class="text-info">{{request.statusDescription}}</td>
-                        <td><div class="mr-2 text-primary rounded border-0 cursorPointer" 
-                            *ngIf="request.status == forConsiderationStatus"
-                            (click)="removeRequest(request.idRequest)" title="Wycofaj wniosek">
-                            <i class="bi bi-arrow-counterclockwise"> Wycofaj wniosek</i>
-                          </div></td>
-                      </tr>
+                        <tr *ngFor="let request of userRequestsForLeaveResponse.data; let number = index">
+                            <th scope="row">{{number + 1}}</th>
+                            <td>{{request.startDate}}</td>
+                            <td>{{request.endDate}}</td>
+                            <td>{{request.totalDays}}</td>
+                            <td *ngIf="request.status == forConsiderationStatus" class="text-light">
+                                {{request.statusDescription}}</td>
+                            <td *ngIf="request.status == acceptedBySupervisorStatus" class="text-success">
+                                {{request.statusDescription}}</td>
+                            <td *ngIf="request.status == rejectedBySupervisorStatus" class="text-danger">
+                                {{request.statusDescription}}</td>
+                            <td *ngIf="request.status == removedByUserStatus" class="text-info">
+                                {{request.statusDescription}}</td>
+                            <td>
+                                <div class="mr-2 text-primary rounded border-0 cursorPointer"
+                                    *ngIf="request.status == forConsiderationStatus"
+                                    (click)="removeRequest(request.idRequest)" title="Wycofaj wniosek">
+                                    <i class="bi bi-arrow-counterclockwise"> Wycofaj wniosek</i>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
-                  </table>
+                </table>
             </div>
-            <ng-template #noRequest>
+        </div>
+        <div class="row mt-3" *ngIf="!userRequestsForLeaveResponse.succeeded">
+            <br /><br />
             {{userRequestsForLeaveResponse.message}}
-            </ng-template>
         </div>
 
         <div class="modal fade" id="addNewRequestModal">
             <div class="modal-dialog modal-lg">
-              <div class="modal-content bg-dark">
-                <div class="modal-header">
-                  <h5 class="modal-title">Wypisz wniosek urlopowy</h5>
-                  <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Wypisz wniosek urlopowy</h5>
+                        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <app-add-new-request></app-add-new-request>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <app-add-new-request></app-add-new-request>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
 </div>

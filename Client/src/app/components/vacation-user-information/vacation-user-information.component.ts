@@ -16,6 +16,9 @@ import { RequestStatusEnum } from 'src/app/models/enums/requestStatus.enum';
 export class VacationUserInformationComponent implements OnInit, OnDestroy {
 
   userId: number;
+  thisYear: number;
+  startJobYear: number;
+  years = new Array();
   userVacationInfoResponse: BackendResponse<UserVacationInfoDto>;
   userRequestsForLeaveResponse: BackendResponse<GetAllUserRequestsForLeaveDto[]>;
 
@@ -29,11 +32,14 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   constructor(private requestService: RequestForLeaveService,
     private authService: AuthenticationService) {
       this.userId = this.authService.user.id;
-   }
+      this.thisYear = (new Date()).getFullYear();
+  }
 
   ngOnInit() {
     this.getUserVacationDaysInfo();
     this.getAllUserRequestsForLeave((new Date()).getFullYear());
+    this.createYearsArray();
+
     this.forConsiderationStatus = RequestStatusEnum.forConsideration;
     this.acceptedBySupervisorStatus = RequestStatusEnum.acceptedBySupervisor;
     this.rejectedBySupervisorStatus = RequestStatusEnum.rejectedBySupervisor;
@@ -44,6 +50,18 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
     if (this.subscription != undefined) {
       this.subscription.unsubscribe();
     }
+  }
+
+  loadRequests(year) {
+    this.thisYear = year;
+    this.getAllUserRequestsForLeave(year);
+  }
+
+  createYearsArray() {
+      var lastFiveYears = this.thisYear - 4;
+      for(let i = this.thisYear; i >= lastFiveYears; i--) { 
+        this.years.push(i);
+      } 
   }
 
   getUserVacationDaysInfo() {
@@ -71,6 +89,5 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
         alert(x.message);
       }
     });
-
   }
 }
