@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
-using IntranetWebApi.Domain.Models.Entities.Views;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
@@ -24,77 +23,81 @@ public class GetPresenceByIdUserQuery : IRequest<Response<GetPresenceByIdUserLis
 
 public class GetPresenceByIdUserHandler : IRequestHandler<GetPresenceByIdUserQuery, Response<GetPresenceByIdUserListDto>>
 {
-    private readonly IGenericRepository<VUsersPresence> _vUsersPresenceRepo;
+    //private readonly IGenericRepository<VUsersPresence> _vUsersPresenceRepo;
 
-    public GetPresenceByIdUserHandler(IGenericRepository<VUsersPresence> vUsersPresenceRepo)
+    //public GetPresenceByIdUserHandler(IGenericRepository<VUsersPresence> vUsersPresenceRepo)
+    //{
+    //    _vUsersPresenceRepo = vUsersPresenceRepo;
+    //}
+
+    //public async Task<Response<GetPresenceByIdUserListDto>> Handle(GetPresenceByIdUserQuery request, CancellationToken cancellationToken)
+    //{
+    //    Expression<Func<VUsersPresence, bool>> expression = x => x.IdUser == request.IdUser;
+
+    //    if (request.Date.HasValue)
+    //    {
+    //        expression = x => x.IdUser == request.IdUser && 
+    //                     x.Date == request.Date.Value.Date;
+    //    }
+    //    else if(request.StartDate.HasValue && request.EndDate.HasValue)
+    //    {
+    //        expression = x => x.IdUser == request.IdUser &&
+    //                     x.Date >= request.StartDate.Value.Date &&
+    //                     x.Date <= request.EndDate.Value.Date;
+    //    }
+
+    //    var usersPresence = await _vUsersPresenceRepo.GetManyEntitiesByExpression(expression, cancellationToken);
+
+    //    if (usersPresence is null || !usersPresence.Succeeded || usersPresence.Data is null || !usersPresence.Data.Any())
+    //    {
+    //        return new Response<GetPresenceByIdUserListDto>()
+    //        {
+    //            Message = "Nie odnaleziono obecności użytkownika!",
+    //            Data = new GetPresenceByIdUserListDto()
+    //        };
+    //    }
+
+    //    var response = GetGetPresenceByIdUserListDto(usersPresence.Data);
+
+    //    return new Response<GetPresenceByIdUserListDto>()
+    //    {
+    //        Succeeded = true,
+    //        Data = response
+    //    };
+    //}
+
+    //private GetPresenceByIdUserListDto GetGetPresenceByIdUserListDto(IEnumerable<VUsersPresence> vUsersPresences)
+    //{
+    //    if (!vUsersPresences.Any())
+    //        return new GetPresenceByIdUserListDto();
+
+    //    var usersPresenceDtoList = new List<GetPresenceByIdUserDto>();
+
+    //    foreach (var userPresence in vUsersPresences.OrderBy(x => x.Date))
+    //    {
+    //        var record = new GetPresenceByIdUserDto()
+    //        {
+    //            Date = userPresence.Date,
+    //            StartTime = userPresence.StartTime,
+    //            EndTime = userPresence.EndTime,
+    //            IsPresent = userPresence.IsPresent,
+    //            AbsenceReason = userPresence.AbsenceReason.HasValue 
+    //                          ? EnumHelper.GetEnumDescription((AbsenceReasonsEnum)userPresence.AbsenceReason.Value)
+    //                          : string.Empty,
+    //            WorkHours = userPresence.WorkHours,
+    //            ExtraWorkHours = userPresence.ExtraWorkHours
+    //        };
+
+    //        usersPresenceDtoList.Add(record);
+    //    }
+
+    //    return new GetPresenceByIdUserListDto()
+    //    {
+    //        UserPresencesList = usersPresenceDtoList
+    //    };
+    //}
+    public Task<Response<GetPresenceByIdUserListDto>> Handle(GetPresenceByIdUserQuery request, CancellationToken cancellationToken)
     {
-        _vUsersPresenceRepo = vUsersPresenceRepo;
-    }
-
-    public async Task<Response<GetPresenceByIdUserListDto>> Handle(GetPresenceByIdUserQuery request, CancellationToken cancellationToken)
-    {
-        Expression<Func<VUsersPresence, bool>> expression = x => x.IdUser == request.IdUser;
-
-        if (request.Date.HasValue)
-        {
-            expression = x => x.IdUser == request.IdUser && 
-                         x.Date == request.Date.Value.Date;
-        }
-        else if(request.StartDate.HasValue && request.EndDate.HasValue)
-        {
-            expression = x => x.IdUser == request.IdUser &&
-                         x.Date >= request.StartDate.Value.Date &&
-                         x.Date <= request.EndDate.Value.Date;
-        }
-
-        var usersPresence = await _vUsersPresenceRepo.GetManyEntitiesByExpression(expression, cancellationToken);
-
-        if (usersPresence is null || !usersPresence.Succeeded || usersPresence.Data is null || !usersPresence.Data.Any())
-        {
-            return new Response<GetPresenceByIdUserListDto>()
-            {
-                Message = "Nie odnaleziono obecności użytkownika!",
-                Data = new GetPresenceByIdUserListDto()
-            };
-        }
-
-        var response = GetGetPresenceByIdUserListDto(usersPresence.Data);
-
-        return new Response<GetPresenceByIdUserListDto>()
-        {
-            Succeeded = true,
-            Data = response
-        };
-    }
-
-    private GetPresenceByIdUserListDto GetGetPresenceByIdUserListDto(IEnumerable<VUsersPresence> vUsersPresences)
-    {
-        if (!vUsersPresences.Any())
-            return new GetPresenceByIdUserListDto();
-
-        var usersPresenceDtoList = new List<GetPresenceByIdUserDto>();
-
-        foreach (var userPresence in vUsersPresences.OrderBy(x => x.Date))
-        {
-            var record = new GetPresenceByIdUserDto()
-            {
-                Date = userPresence.Date,
-                StartTime = userPresence.StartTime,
-                EndTime = userPresence.EndTime,
-                IsPresent = userPresence.IsPresent,
-                AbsenceReason = userPresence.AbsenceReason.HasValue 
-                              ? EnumHelper.GetEnumDescription((AbsenceReasonsEnum)userPresence.AbsenceReason.Value)
-                              : string.Empty,
-                WorkHours = userPresence.WorkHours,
-                ExtraWorkHours = userPresence.ExtraWorkHours
-            };
-
-            usersPresenceDtoList.Add(record);
-        }
-
-        return new GetPresenceByIdUserListDto()
-        {
-            UserPresencesList = usersPresenceDtoList
-        };
+        throw new NotImplementedException();
     }
 }

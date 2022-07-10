@@ -1,5 +1,4 @@
 ﻿using IntranetWebApi.Domain.Models.Entities;
-using IntranetWebApi.Domain.Models.Entities.Views;
 using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +16,10 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<Position> Positions { get; set; }
-    public DbSet<VUsersPresence> VUsersPresences { get; set; }
-    public DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Domain.Models.Entities.Task> Tasks { get; set; }
+    public DbSet<ImportantInfo> ImportantInfos { get; set; }
     #endregion DbSets
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -33,15 +31,6 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
         builder.Entity<Test>()
                 .Property(x => x.Number)
                 .IsRequired();
-
-
-        builder.Entity<VUsersPresence>()
-            .ToView(nameof(VUsersPresences))
-            .HasKey(x => x.IdUser);
-
-        builder.Entity<VUsersRequestForLeave>()
-           .ToView(nameof(VUsersRequestsForLeave))
-           .HasKey(x => x.IdRequest);
 
         builder.Entity<User>(user =>
         {
@@ -79,6 +68,12 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
             .HasOne(t => t.User)
             .WithMany(u => u.Tasks)
             .HasForeignKey(x => x.IdUser);
+
+        builder.Entity<ImportantInfo>()
+            .HasOne(i => i.WhoAdded)
+            .WithMany(u => u.ImportantInfos)
+            .HasForeignKey(x => x.IdWhoAdded);
+            
 
         base.OnModelCreating(builder);
     }

@@ -30,6 +30,7 @@ public class User
     public ICollection<RequestForLeave> RequestForLeaves { get; set; } = new List<RequestForLeave>();
     public ICollection<Presence> Presences { get; set; } = new List<Presence>();
     public ICollection<Task> Tasks { get; set; } = new List<Task>();
+    public ICollection<ImportantInfo> ImportantInfos { get; set; } = new List<ImportantInfo>();
 
 
 }

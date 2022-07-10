@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IntranetWebApi.Domain.Models.Entities;
-using IntranetWebApi.Domain.Models.Entities.Views;
 using IntranetWebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,8 +18,7 @@ public interface IIntranetDbContext
     public DbSet<Presence> Presences { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<Position> Positions { get; set; }
-    public DbSet<VUsersPresence> VUsersPresences { get; set; }
-    public DbSet<VUsersRequestForLeave> VUsersRequestsForLeave { get; set; }
     public DbSet<RequestForLeave> RequestForLeaves { get; set; }
     public DbSet<Message> Messages { get; set; }
+    public DbSet<ImportantInfo> ImportantInfos { get; set; }
 }
