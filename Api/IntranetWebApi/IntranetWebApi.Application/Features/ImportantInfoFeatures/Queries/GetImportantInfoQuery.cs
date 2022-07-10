@@ -28,10 +28,10 @@ public class GetImportantInfoHandler : IRequestHandler<GetImportantInfoQuery, Re
 
     public async Task<Response<List<GetImportantInfoDto>>> Handle(GetImportantInfoQuery request, CancellationToken cancellationToken)
     {
-        var today = DateTime.Now;
+        var today = DateTime.Now.Date;
 
         var infos = await _infoRepo.GetManyEntitiesByExpression(x =>
-                x.StartDate.Date >= today.Date && x.EndDate.Date <= today.Date, cancellationToken);
+                x.StartDate.Date <= today && x.EndDate.Date >= today, cancellationToken);
 
         if (infos == null || !infos.Succeeded || infos.Data == null || !infos.Data.Any())
         {

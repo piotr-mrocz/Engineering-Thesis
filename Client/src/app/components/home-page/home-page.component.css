@@ -1,0 +1,18 @@
+#addNewInfo {
+    background: transparent !important;
+    border: none;
+    outline: none;
+}
+
+#addNewInfo:hover {
+    color: #fd7e14 !important;
+}
+
+#addNewInfo:focus, #addNewInfo:active {
+    border: none;
+    outline: none;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}

@@ -26,6 +26,8 @@ export class AuthenticationService {
     const token = localStorage.getItem('jwt');
     this._isLoggedIn$.next(!!token);
     this.user = this.getUser(token);
+
+    console.log(this.user);
   }
 
   login(loginDto: LoginDto) {

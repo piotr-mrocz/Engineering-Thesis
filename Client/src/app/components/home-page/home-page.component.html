@@ -1,13 +1,87 @@
-<div style="height: 200px;">Nasi</div>
-
-<div class="container-fluid mt-7">
-  <div class="col-7 align-self-center" style="margin: auto;">
-    <h1>Ważny komunikat</h1>
+<div class="container-fluid">
+  <div style="height: 200px;"></div>
+  <div class="col-7 align-self-center mb-5" style="margin: auto;">
+    <h2 class="text-center">Ważny komunikat</h2>
     <hr>
-    <div class="col">
-      <!-- <div class="row" *ngFor="let info of ">
 
-      </div> -->
+    <div *ngIf="isAuthorized" class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
+      <button id="addNewInfo" class="text-light rounded" data-toggle="modal" data-target="#addNewInfoModal">
+        <i class="bi bi-plus-circle-fill"></i> Dodaj nowy komunikat</button>
     </div>
+
+    <div *ngIf="!infoResponse.succeeded"
+      class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center rounded">
+      <h2 class="text-center">{{infoResponse.message}}</h2>
+    </div>
+
+    <div *ngIf="infoResponse.succeeded" class="row mt-5 d-flex align-items-center justify-content-center">
+      <ul *ngFor="let info of infoResponse.data" class="list-unstyled w-100">
+        <li class="col bg-dark mb-1 p-4 border border-primary rounded">
+          <div class="row">
+            {{info.info}}
+          </div>
+          <div class="row text-muted d-flex align-items-center justify-content-end">
+            ~ {{info.userName}}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="modal fade" id="addNewInfoModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+            <h5 class="modal-title">Dodaj nowy komunikat</h5>
+            <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+          </div>
+          <div class="modal-body">
+            <form id="addNewInfo" #addNewInfoForm="ngForm" class="container register-form"
+              (ngSubmit)="addNewImportantInfo(addNewInfoForm.value)">
+              <div class="form">
+                <div class="form-content">
+                  <div class="col">
+                    <div class="row">
+
+                      <div class="col">
+                        <div class="form-group">
+                          <input id="startDate" class="form-control" placeholder="Od kiedy *" value="" type="text"
+                            onfocus="(this.type='date')" onblur="(this.type='text')" autocomplete="off" ngModel
+                            name="startDate" required [min]="today" />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <input class="form-control" placeholder="Do kiedy *" value="" type="text"
+                            onfocus="(this.type='date')" onblur="(this.type='text')" autocomplete="off" ngModel
+                            name="endDate" required [min]="today" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <textarea #rejectReason class="form-control rounded w-100" type="text"
+                            placeholder="Komunikat *" ngModel name="info" required></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col d-flex align-items-center justify-content-center">
+                      <button type="reset" class="btn btn-danger rounded w-100" data-dismiss="modal"
+                        (click)="resetForm('addNewInfo')">Anuluj</button>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-center">
+                      <button type="submit" class="btn btn-success rounded w-100">Dodaj komunikat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

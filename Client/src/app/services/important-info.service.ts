@@ -31,7 +31,7 @@ export class ImportantInfoService {
     return this.http.post<BaseBackendResponse>(url, { ImportantInfoDetails: newInfo });
   }
 
-  getInfos(o) {
+  getInfos() {
     this.getInfosResponse().subscribe(x => {
       this.getInfosResponse$.next(x);
     });

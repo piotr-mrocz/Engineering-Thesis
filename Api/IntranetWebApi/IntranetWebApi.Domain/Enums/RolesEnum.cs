@@ -14,5 +14,5 @@ public enum RolesEnum
     Admin = 3,
 
     [Description("Kierownik")]
-    Supervisor = 4
+    Supervisor = 1002
 }
