@@ -16,4 +16,5 @@ public class GetAllUserRequestsForLeaveDto
     public string AbsenceType { get; set; } = null!;
     public int Status { get; set; }
     public string StatusDescription { get; set; } = null!;
+    public string Reason { get; set; } = null!;
 }

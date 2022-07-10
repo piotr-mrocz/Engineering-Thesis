@@ -6,5 +6,6 @@ export interface GetAllUserRequestsForLeaveDto {
     totalDays?: number,
     absenceType?: string,
     status?: number,
-    statusDescription?: string
+    statusDescription?: string,
+    reason?: string
 }

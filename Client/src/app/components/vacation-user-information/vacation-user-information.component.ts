@@ -7,6 +7,7 @@ import { BackendResponse } from 'src/app/models/response/backendResponse';
 import { GetAllUserRequestsForLeaveDto } from 'src/app/models/dto/getAllUserRequestsForLeaveDto';
 import { PossibleAbsenceToChooseDto } from 'src/app/models/dto/possibleAbsenceToChooseDto';
 import { RequestStatusEnum } from 'src/app/models/enums/requestStatus.enum';
+import { ParamMap, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vacation-user-information',
@@ -15,6 +16,7 @@ import { RequestStatusEnum } from 'src/app/models/enums/requestStatus.enum';
 })
 export class VacationUserInformationComponent implements OnInit, OnDestroy {
 
+  idUserRoute: number;
   userId: number;
   thisYear: number;
   startJobYear: number;
@@ -28,11 +30,18 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   removedByUserStatus: number;
 
   private subscription: Subscription;
+  routeSub: Subscription;
 
   constructor(private requestService: RequestForLeaveService,
-    private authService: AuthenticationService) {
-      this.userId = this.authService.user.id;
+    private authService: AuthenticationService,
+    private route: ActivatedRoute) {
       this.thisYear = (new Date()).getFullYear();
+
+      this.routeSub = this.route.params.subscribe(params => {
+        this.idUserRoute = params['id'];
+      });
+
+      this.userId = this.idUserRoute != undefined ? this.idUserRoute : this.authService.user.id;
   }
 
   ngOnInit() {
@@ -49,6 +58,10 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription != undefined) {
       this.subscription.unsubscribe();
+    }
+
+    if (this.routeSub != undefined) {
+      this.routeSub.unsubscribe();
     }
   }
 

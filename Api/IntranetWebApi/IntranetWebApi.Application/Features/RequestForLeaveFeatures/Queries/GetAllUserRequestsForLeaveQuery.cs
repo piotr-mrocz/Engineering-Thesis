@@ -58,7 +58,10 @@ public class GetAllUserRequestsForLeaveHandler : IRequestHandler<GetAllUserReque
                 TotalDays = totalDaysVacation,
                 AbsenceType = EnumHelper.GetEnumDescription((AbsenceReasonsEnum)requestForLeave.AbsenceType),
                 Status = requestForLeave.Status,
-                StatusDescription = EnumHelper.GetEnumDescription((RequestStatusEnum)requestForLeave.Status)
+                StatusDescription = EnumHelper.GetEnumDescription((RequestStatusEnum)requestForLeave.Status),
+                Reason = requestForLeave.Status == (int)RequestStatusEnum.RejectedBySupervisor 
+                        ? requestForLeave.RejectReason
+                        : string.Empty
             };
 
             requestsDtoList.Add(record);

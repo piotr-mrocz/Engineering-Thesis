@@ -10,6 +10,7 @@ import { BackendResponse } from '../models/response/backendResponse';
 import { GetAllUserRequestsForLeaveDto } from '../models/dto/getAllUserRequestsForLeaveDto';
 import { UserVacationInfoDto } from '../models/dto/userVacationInfoDto';
 import { PossibleAbsenceToChooseDto } from '../models/dto/possibleAbsenceToChooseDto';
+import { GetAllRequestsForLeaveToAcceptDto } from '../models/dto/getAllRequestsForLeaveToAcceptDto';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,8 @@ export class RequestForLeaveService {
   getAllUserRequestForLeaveResponse$ = new BehaviorSubject<BackendResponse<GetAllUserRequestsForLeaveDto[]>>({});
   getInformationAboutUserVacationDaysResponse$ = new BehaviorSubject<BackendResponse<UserVacationInfoDto>>({});
   getAllPossibleAbsenceTypeToChooseResponse$ = new BehaviorSubject<BackendResponse<PossibleAbsenceToChooseDto[]>>({});
+  getAllRequestToConfirmResponse$ = new BehaviorSubject<BackendResponse<GetAllRequestsForLeaveToAcceptDto[]>>({});
+  getAllRequestToConfirmByManagerResponse$ = new BehaviorSubject<BackendResponse<GetAllRequestsForLeaveToAcceptDto[]>>({});
 
   private createRequestForLeaveResponse(newRequestForLeave: RequestForLeaveToAddDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.createRequestForLeaveEndpoint;
@@ -66,6 +69,16 @@ export class RequestForLeaveService {
   private getAllPossibleAbsenceTypeToChooseResponse() : Observable<BackendResponse<PossibleAbsenceToChooseDto[]>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getAllPossibleAbsenceTypeToChooseEndpoint;
     return this.http.post<BackendResponse<PossibleAbsenceToChooseDto[]>>(url, {});
+  }
+
+  private getAllRequestToConfirmResponse(idUser: number) : Observable<BackendResponse<GetAllRequestsForLeaveToAcceptDto[]>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getAllRequestsForLeaveToAcceptByIdSupervisorEndpoint;
+    return this.http.post<BackendResponse<GetAllRequestsForLeaveToAcceptDto[]>>(url, {IdSupervisor: idUser});
+  }
+
+  private getAllRequestsForLeaveToAcceptByManagerResponse() : Observable<BackendResponse<GetAllRequestsForLeaveToAcceptDto[]>> {
+    var url = this.backendSettings.baseAddress + this.endpoints.getAllRequestsForLeaveToAcceptByManagerEndpoint;
+    return this.http.post<BackendResponse<GetAllRequestsForLeaveToAcceptDto[]>>(url, {});
   }
 
   createRequestForLeave(newRequestForLeave: RequestForLeaveToAddDto) {
@@ -107,6 +120,18 @@ export class RequestForLeaveService {
   getAllPossibleAbsenceTypeToChoose() {
     this.getAllPossibleAbsenceTypeToChooseResponse().subscribe(x => {
       this.getAllPossibleAbsenceTypeToChooseResponse$.next(x);
+    });
+  }
+
+  getAllRequestToConfirm(idUser: number) {
+    this.getAllRequestToConfirmResponse(idUser).subscribe(x => {
+      this.getAllRequestToConfirmResponse$.next(x);
+    });
+  }
+
+  getAllRequestsForLeaveToConfirmtByManager() {
+    this.getAllRequestsForLeaveToAcceptByManagerResponse().subscribe(x => {
+      this.getAllRequestToConfirmByManagerResponse$.next(x);
     });
   }
 }

@@ -10,7 +10,10 @@ public class GetAllRequestsForLeaveToAcceptDto
 {
     public int IdRequest { get; set; }
     public string DisplayUserName { get; set; } = null!;
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public int IdApplicant { get; set; }
+    public string StartDate { get; set; } = null!;
+    public string EndDate { get; set; } = null!;
+    public string AddedDate { get; set; } = null!;
+    public int TotalDays { get; set; }
     public string AbsenceType { get; set; } = null!;
 }

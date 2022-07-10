@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
@@ -51,12 +52,4 @@ public class GetInformationAboutUserVacationDaysHandler : IRequestHandler<GetInf
             Data = userDto
         };
     }
-}
-
-public class UserVacationInfoDto
-{
-    public int VacationDaysThisYear { get; set; }
-    public int VacationDaysLastYear { get; set; }
-    public int VacationDaysInRequests { get; set; }
-    public int StartJobYear { get; set; }
 }

@@ -15,121 +15,82 @@ public class GetAllRequestsForLeaveToAcceptByManagerQuery : IRequest<Response<Li
 
 public class GetAllRequestsForLeaveToAcceptByManagerHandler : IRequestHandler<GetAllRequestsForLeaveToAcceptByManagerQuery, Response<List<GetAllRequestsForLeaveToAcceptDto>>>
 {
-    private readonly IGenericRepository<VUsersRequestForLeave> _vUsersRequestForLeaveRepo;
-    private readonly IGenericRepository<Presence> _presenceRepo;
+    private readonly IGenericRepository<RequestForLeave> _requestRepo;
     private readonly IGenericRepository<User> _userRepo;
-    private readonly IMediator _mediator;
 
-    public GetAllRequestsForLeaveToAcceptByManagerHandler(IGenericRepository<VUsersRequestForLeave> vUsersRequestForLeaveRepo,
-        IGenericRepository<Presence> presenceRepo,
-        IGenericRepository<User> userRepo,
-        IMediator mediator)
+    public GetAllRequestsForLeaveToAcceptByManagerHandler(IGenericRepository<RequestForLeave> requestRepo, IGenericRepository<User> userRepo)
     {
-        _vUsersRequestForLeaveRepo = vUsersRequestForLeaveRepo;
-        _presenceRepo = presenceRepo;
+        _requestRepo = requestRepo;
         _userRepo = userRepo;
-        _mediator = mediator;
     }
 
     public async Task<Response<List<GetAllRequestsForLeaveToAcceptDto>>> Handle(GetAllRequestsForLeaveToAcceptByManagerQuery request, CancellationToken cancellationToken)
     {
-        var idsSupervisor = await GetIdsSupervisors(cancellationToken);
+        var usersRequestForLeaveList = await GetAllRequest(cancellationToken);
 
-        if (!idsSupervisor.Any())
+        if (!usersRequestForLeaveList.Any())
         {
             return new Response<List<GetAllRequestsForLeaveToAcceptDto>>()
             {
-                Message = "Nie udało się odnaleźć kierowników w bazie danych",
+                Message = "Nie ma żadnych wniosków urlopowych do rozpatrzenia",
                 Data = new List<GetAllRequestsForLeaveToAcceptDto>()
             };
         }
 
-        var absentSupervisor = await GetAbsentSupervisors(idsSupervisor, cancellationToken);
-        
-        if (!absentSupervisor.Any())
-        {
-            return new Response<List<GetAllRequestsForLeaveToAcceptDto>>()
-            {
-                Message = "Wszyscy kierownicy są dzisiaj obecni",
-                Data = new List<GetAllRequestsForLeaveToAcceptDto>()
-            };
-        }
-
-        var requests = await GetAllVUsersRequestForLeaveByIdSupervisor(idsSupervisor, cancellationToken);
-
-        if (!requests.Any())
-        {
-            return new Response<List<GetAllRequestsForLeaveToAcceptDto>>()
-            {
-                Message = "Nie ma żadnych wniosków o urlop do rozpatrzenia",
-                Data = new List<GetAllRequestsForLeaveToAcceptDto>()
-            };
-        }
-
-        var resposne = GetGetAllRequestsForLeaveToAcceptListDto(requests);
+        var response = await GetGetAllRequestsForLeaveToAcceptListDto(usersRequestForLeaveList, cancellationToken);
 
         return new Response<List<GetAllRequestsForLeaveToAcceptDto>>()
         {
-            Succeeded = true,
-            Data = resposne
+            Succeeded = response.Any(),
+            Message = response.Any()
+                    ? string.Empty
+                    : "Nie ma żadnych wniosków urlopowych do rozpatrzenia",
+            Data = response.Any()
+                 ? response
+                 : new List<GetAllRequestsForLeaveToAcceptDto>()
         };
     }
 
-    private async Task<List<int>> GetIdsSupervisors(CancellationToken cancellationToken)
+    private async Task<List<RequestForLeave>> GetAllRequest(CancellationToken cancellationToken)
     {
-        var users = await _userRepo.GetManyEntitiesByExpression(x => x.IdRole == (int)RolesEnum.Supervisor, cancellationToken);
+        var requests = await _requestRepo.GetManyEntitiesByExpression(x =>
 
-        return users.Succeeded && users.Data.Any()
-            ? users.Data.Select(x => x.Id).ToList()
-            : new List<int>();
+
+                x.Status == (int)RequestStatusEnum.ForConsideration,
+                cancellationToken);
+
+        return requests == null || !requests.Succeeded || requests.Data == null || !requests.Data.Any()
+            ? new List<RequestForLeave>()
+            : requests.Data.ToList();
     }
 
-    private async Task<List<int>> GetAbsentSupervisors(List<int> idsSupervisors, CancellationToken cancellationToken)
-    {
-        if (!idsSupervisors.Any())
-            return new List<int>();
-
-        // get all absent supervisors today
-        var presences = await _presenceRepo.GetManyEntitiesByExpression(x => 
-        idsSupervisors.Contains(x.IdUser) && 
-        x.Date.Date == DateTime.Now.Date &&
-        !x.IsPresent, 
-        cancellationToken);
-
-        return presences.Succeeded && presences.Data.Any()
-            ? presences.Data.Select(x => x.IdUser).ToList()
-            : new List<int>();
-    }
-
-    private async Task<List<VUsersRequestForLeave>> GetAllVUsersRequestForLeaveByIdSupervisor(List<int> idsSupervisors, CancellationToken cancellationToken)
-    {
-        if (!idsSupervisors.Any())
-            return new List<VUsersRequestForLeave>();
-
-        var usersRequestForLeaveList = await _vUsersRequestForLeaveRepo.GetManyEntitiesByExpression(x =>
-            idsSupervisors.Contains(x.IdSupervisor), cancellationToken);
-
-        return usersRequestForLeaveList.Succeeded && usersRequestForLeaveList.Data.Any()
-            ? usersRequestForLeaveList.Data.ToList()
-            : new List<VUsersRequestForLeave>();
-    }
-
-    private List<GetAllRequestsForLeaveToAcceptDto> GetGetAllRequestsForLeaveToAcceptListDto(List<VUsersRequestForLeave> usersRequestList)
+    private async Task<List<GetAllRequestsForLeaveToAcceptDto>> GetGetAllRequestsForLeaveToAcceptListDto(List<RequestForLeave> usersRequestList, CancellationToken cancellationToken)
     {
         if (!usersRequestList.Any())
             return new List<GetAllRequestsForLeaveToAcceptDto>();
 
         var requestListDto = new List<GetAllRequestsForLeaveToAcceptDto>();
 
+        var idsUsers = usersRequestList.Select(x => x.IdApplicant).ToList();
+        var users = await _userRepo.GetManyEntitiesByExpression(x => idsUsers.Contains(x.Id), cancellationToken);
+
+        if (users == null || !users.Succeeded || users.Data == null || !users.Data.Any())
+            return new List<GetAllRequestsForLeaveToAcceptDto>();
+
         foreach (var request in usersRequestList)
         {
+            var user = users.Data.FirstOrDefault(x => x.Id == request.IdApplicant);
+
             var record = new GetAllRequestsForLeaveToAcceptDto()
             {
-                IdRequest = request.IdRequest,
-                DisplayUserName = request.DisplayUserName,
-                EndDate = request.EndDate,
-                StartDate = request.StartDate,
-                AbsenceType = EnumHelper.GetEnumDescription((AbsenceReasonsEnum)request.AbsenceType)
+                IdRequest = request.Id,
+                DisplayUserName = user != null ? $"{user.FirstName} {user.LastName}" : "Brak danych",
+                IdApplicant = request.IdApplicant,
+                EndDate = request.EndDate.ToString("dd.MM.yyyy"),
+                StartDate = request.StartDate.ToString("dd.MM.yyyy"),
+                AddedDate = request.CreateDate.ToString("dd.MM.yyyy  HH:mm"),
+                AbsenceType = EnumHelper.GetEnumDescription((AbsenceReasonsEnum)request.AbsenceType),
+                TotalDays = DateTimeHelper.CalculateTotalDaysBetweenDatesWithoutWeekends(request.StartDate, request.EndDate)
             };
 
             requestListDto.Add(record);

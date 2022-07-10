@@ -25,12 +25,12 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5 mb-5 d-flex align-items-center justify-content-center">
+        <div class="row mt-5 d-flex align-items-center justify-content-center" *ngIf="idUserRoute == undefined">
             <button id="addNewRequest" class="text-light rounded" data-toggle="modal"
                 data-target="#addNewRequestModal"><i class="bi bi-plus-circle-fill"></i> Wypisz wniosek
                 urlopowy</button>
         </div>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-10">
                 <h3>Wnioski urlopowe w roku {{thisYear}}</h3>
             </div>
@@ -48,7 +48,7 @@
                             <th scope="col">Do kiedy</th>
                             <th scope="col">Ilość dni</th>
                             <th scope="col">Status wniosku</th>
-                            <th scope="col">Akcje</th>
+                            <th scope="col" *ngIf="idUserRoute == undefined">Akcje</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,11 +61,11 @@
                                 {{request.statusDescription}}</td>
                             <td *ngIf="request.status == acceptedBySupervisorStatus" class="text-success">
                                 {{request.statusDescription}}</td>
-                            <td *ngIf="request.status == rejectedBySupervisorStatus" class="text-danger">
-                                {{request.statusDescription}}</td>
+                            <td *ngIf="request.status == rejectedBySupervisorStatus">
+                                <span class="text-danger">{{request.statusDescription}}</span> - {{request.reason}}</td>
                             <td *ngIf="request.status == removedByUserStatus" class="text-info">
                                 {{request.statusDescription}}</td>
-                            <td>
+                            <td *ngIf="idUserRoute == undefined">
                                 <div class="mr-2 text-primary rounded border-0 cursorPointer"
                                     *ngIf="request.status == forConsiderationStatus"
                                     (click)="removeRequest(request.idRequest)" title="Wycofaj wniosek">

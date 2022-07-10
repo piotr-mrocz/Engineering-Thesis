@@ -14,6 +14,7 @@ import { UsersTasksListComponent } from './components/users-tasks-list/users-tas
 import { WorkRegulationsyComponent } from './components/work-regulations/work-regulations.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { VacationUserInformationComponent } from './components/vacation-user-information/vacation-user-information.component';
+import { VacationSupervisorComponent } from './components/vacation-supervisor/vacation-supervisor.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -28,6 +29,8 @@ const routes: Routes = [
     {path: 'work-regulations', component: WorkRegulationsyComponent, canActivate: [AuthGuard]},
     {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
     {path: 'vacation-info', component: VacationUserInformationComponent, canActivate: [AuthGuard]},
+    {path: 'vacation-info/:id', component: VacationUserInformationComponent, canActivate: [AuthGuard]},
+    {path: 'vacation-supervisor', component: VacationSupervisorComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
     // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];
