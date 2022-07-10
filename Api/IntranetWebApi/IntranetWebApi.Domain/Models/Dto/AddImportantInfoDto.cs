@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntranetWebApi.Domain.Models.Entities;
+namespace IntranetWebApi.Domain.Models.Dto;
 
-public class ImportantInfo
+public class AddImportantInfoDto
 {
-    public int Id { get; set; }
     public string Info { get; set; } = null!;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public int IdWhoAdded { get; set; }
-
-    public User WhoAdded { get; set; } = null!;
+    public int IdUser { get; set; }
 }
