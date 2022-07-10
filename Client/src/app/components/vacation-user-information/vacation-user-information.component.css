@@ -3,3 +3,11 @@
     border: none;
     outline: none;
 }
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+.cursorPointer:hover {
+    color: #dc3545 !important;
+}

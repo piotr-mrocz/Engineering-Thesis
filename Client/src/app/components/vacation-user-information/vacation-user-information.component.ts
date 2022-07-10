@@ -6,6 +6,7 @@ import { UserVacationInfoDto } from 'src/app/models/dto/userVacationInfoDto';
 import { BackendResponse } from 'src/app/models/response/backendResponse';
 import { GetAllUserRequestsForLeaveDto } from 'src/app/models/dto/getAllUserRequestsForLeaveDto';
 import { PossibleAbsenceToChooseDto } from 'src/app/models/dto/possibleAbsenceToChooseDto';
+import { RequestStatusEnum } from 'src/app/models/enums/requestStatus.enum';
 
 @Component({
   selector: 'app-vacation-user-information',
@@ -17,6 +18,12 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   userId: number;
   userVacationInfoResponse: BackendResponse<UserVacationInfoDto>;
   userRequestsForLeaveResponse: BackendResponse<GetAllUserRequestsForLeaveDto[]>;
+
+  forConsiderationStatus: number;
+  acceptedBySupervisorStatus: number;
+  rejectedBySupervisorStatus: number;
+  removedByUserStatus: number;
+
   private subscription: Subscription;
 
   constructor(private requestService: RequestForLeaveService,
@@ -27,6 +34,10 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUserVacationDaysInfo();
     this.getAllUserRequestsForLeave((new Date()).getFullYear());
+    this.forConsiderationStatus = RequestStatusEnum.forConsideration;
+    this.acceptedBySupervisorStatus = RequestStatusEnum.acceptedBySupervisor;
+    this.rejectedBySupervisorStatus = RequestStatusEnum.rejectedBySupervisor;
+    this.removedByUserStatus = RequestStatusEnum.removedByUser;
   }
 
   ngOnDestroy() {
@@ -47,5 +58,19 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
     this.subscription = this.requestService.getAllUserRequestForLeaveResponse$.subscribe(x => {
       this.userRequestsForLeaveResponse = x;
     });
+  }
+
+  removeRequest(requestId: number) {
+    this.requestService.removeRequestForLeaveByUser(requestId);
+    this.subscription = this.requestService.removeRequestForLeaveByUserResponse$.subscribe(x => {
+      if (x.succeeded != undefined) {
+        if (x.succeeded) {
+          window.location.reload();
+        }
+
+        alert(x.message);
+      }
+    });
+
   }
 }

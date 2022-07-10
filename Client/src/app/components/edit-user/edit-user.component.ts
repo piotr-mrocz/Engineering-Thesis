@@ -15,6 +15,8 @@ import { UpdateUserDto } from 'src/app/models/dto/updateUserDto';
 export class EditUserComponent implements OnInit, OnDestroy {
 
   @Input() person: UserDetailsDto;
+
+  personActualDate: UserDetailsDto = this.person;
   responseSelect: BackendResponse<PositionsAndDepartmentsAndRoleDto>;
   private subscription: Subscription;
   public imageUrl = "";
@@ -87,16 +89,19 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.personService.updateUser(updateUserModel);
 
     this.personService.updateUserDataResponse$.subscribe(x => {
-        alert(x.message);
-
+      if (x.succeeded != undefined) {
         if (x.succeeded) {
           window.location.reload();
+          alert(x.message);
         }
+        else {
+          alert(x.message);
+        }
+      }
     });
   }
 
   resetForm(idForm: string) {
-    var form = <HTMLFormElement>document.getElementById(idForm);
-    form.reset();
+    window.location.reload();
   }
 }

@@ -9,14 +9,14 @@
                         <div class="form-group">
                             <input id="startDate" class="form-control" placeholder="Od kiedy *" value=""
                                 type="text" onfocus="(this.type='date')" onblur="(this.type='text')" 
-                                autocomplete="off" ngModel name="startDate" required />
+                                autocomplete="off" ngModel name="startDate" required [min]="today" />
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <input class="form-control" placeholder="Do kiedy *" value="" 
                                 type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                autocomplete="off" ngModel name="endDate" required />
+                                autocomplete="off" ngModel name="endDate" required [min]="today" />
                         </div>
                     </div>
                 </div>

@@ -83,9 +83,14 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
 
   private addNewUserAfterValidation(newUserModel: AddNewUserDto) {
     this.personService.addNewUser(newUserModel);
-
     this.personService.addUserResponse$.subscribe(x => {
+      if (x.succeeded != undefined) {
+        if (x.succeeded) {
+          window.location.reload();
+        }
+
         alert(x.message);
+      }
     });
   }
 

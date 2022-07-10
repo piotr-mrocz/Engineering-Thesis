@@ -32,7 +32,35 @@
         <div class="row">
             <h3>Wnioski urlopowe w roku 2022 - później trzeba zrobić select {{userVacationInfoResponse.data.startJobYear}}</h3>
             <div *ngIf="userRequestsForLeaveResponse.succeeded; else noRequest">
-
+                <table class="table table-bordered table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Od kiedy</th>
+                        <th scope="col">Do kiedy</th>
+                        <th scope="col">Ilość dni</th>
+                        <th scope="col">Status wniosku</th>
+                        <th scope="col">Akcje</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let request of userRequestsForLeaveResponse.data; let number = index">
+                        <th scope="row">{{number + 1}}</th>
+                        <td>{{request.startDate}}</td>
+                        <td>{{request.endDate}}</td>
+                        <td >{{request.totalDays}}</td>
+                        <td *ngIf="request.status == forConsiderationStatus" class="text-light">{{request.statusDescription}}</td>
+                        <td *ngIf="request.status == acceptedBySupervisorStatus" class="text-success">{{request.statusDescription}}</td>
+                        <td *ngIf="request.status == rejectedBySupervisorStatus" class="text-danger">{{request.statusDescription}}</td>
+                        <td *ngIf="request.status == removedByUserStatus" class="text-info">{{request.statusDescription}}</td>
+                        <td><div class="mr-2 text-primary rounded border-0 cursorPointer" 
+                            *ngIf="request.status == forConsiderationStatus"
+                            (click)="removeRequest(request.idRequest)" title="Wycofaj wniosek">
+                            <i class="bi bi-arrow-counterclockwise"> Wycofaj wniosek</i>
+                          </div></td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
             <ng-template #noRequest>
             {{userRequestsForLeaveResponse.message}}
@@ -52,6 +80,5 @@
               </div>
             </div>
           </div>
-
     </div>
 </div>

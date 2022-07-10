@@ -18,6 +18,7 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
   userId: number;
   userRole: string;
   absenceTypesResponse: BackendResponse<PossibleAbsenceToChooseDto[]>;
+  today: string;
 
   constructor(private requestService: RequestForLeaveService,
     private authService: AuthenticationService) {
@@ -27,6 +28,7 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAllPossibleAbsenceTypeToChoose();
+    this.today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
   }
 
   ngOnDestroy(): void {
@@ -45,10 +47,10 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
 
     var validation = this.validateForm(newRequest);
 
-    // if (!validation) {
-    //   alert("Nie uzupełniono wszystkich wymaganych pól!");
-    //   return;
-    // }
+    if (!validation) {
+      alert("Nie uzupełniono wszystkich wymaganych pól!");
+      return;
+    }
 
     this.addNewRequestAfterValidation(newRequest);
   }

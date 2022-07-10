@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div *ngIf="isAuthorized" class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
+    <div *ngIf="!isAuthorized" class="row p-1 mt-2 d-flex align-items-center justify-content-center rounded">
       <button id="addNewUser" class="text-light rounded"  data-toggle="modal" data-target="#addNewUserModal"><i class="bi bi-plus-circle-fill"></i> Dodaj nowego użytkownika</button>
     </div>
 
@@ -34,6 +34,20 @@
             <p class="card-text text-center h5" id="personName">{{person.userName}} {{person.userLastName}}</p>
           </div>
         </a>
+
+        <div class="modal fade" id="addNewUserModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark">
+              <div class="modal-header">
+                <h5 class="modal-title">Dodaj nowego pracownika</h5>
+                <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
+              </div>
+              <div class="modal-body">
+                  <app-add-new-user></app-add-new-user>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="modal fade" id="showUserDetailsModal_{{person.id}}">
           <div class="modal-dialog modal-lg">
@@ -75,20 +89,6 @@
                     <div class="mr-2 text-danger rounded border-0 cursorPointer" title="Zwolnij pracownika" (click)="releaseUser(person.id)">
                       <i class="bi bi-trash-fill"> Zwolnij</i>
                    </div>
-                  </div>
-                </div>
-
-                <div class="modal fade" id="addNewUserModal">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content bg-dark">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Dodaj nowego użytkownika</h5>
-                        <button type="button" class="btn btn-close float-right" data-dismiss="modal">X</button>
-                      </div>
-                      <div class="modal-body">
-                          <app-add-new-user></app-add-new-user>
-                      </div>
-                    </div>
                   </div>
                 </div>
 

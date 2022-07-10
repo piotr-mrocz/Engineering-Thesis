@@ -68,7 +68,9 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
             AbsenceType = request.RequestInfo.AbsenceType,
             StartDate = request.RequestInfo.StartDate,
             EndDate = request.RequestInfo.EndDate,
-            DaysAbsence = totalDaysVacation
+            DaysAbsence = totalDaysVacation,
+            RejectReason = string.Empty,
+            Status = (int)RequestStatusEnum.ForConsideration
         };
 
         // when user is manager, his request is automatically accepted
