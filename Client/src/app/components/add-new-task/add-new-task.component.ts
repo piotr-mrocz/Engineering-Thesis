@@ -31,7 +31,7 @@ export class AddNewTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createListOfPriority();
     this.isTaskAddBySupervisor = this.taskService.isTaskAddBySupervisor;
-    
+
     if (this.isTaskAddBySupervisor) {
       this.getAllUsersInDepartmentByIdSupervisor();
     }
@@ -77,14 +77,14 @@ export class AddNewTaskComponent implements OnInit, OnDestroy {
     this.addNewUserAfterValidation(newTask);
   }
 
-  validateForm(newTask: NewTaskDto) : boolean {
+  validateForm(newTask: NewTaskDto): boolean {
     if (this.isTaskAddBySupervisor && (newTask.idUser == 0 || newTask.idUser == null)) {
       return false;
     }
 
     if (newTask.title && newTask.priority && newTask.idUser) {
-          return true;
-        }
+      return true;
+    }
     else {
       return false;
     }
@@ -94,11 +94,13 @@ export class AddNewTaskComponent implements OnInit, OnDestroy {
     this.taskService.addNewTask(newTask);
 
     this.taskService.addNewTaskResponse$.subscribe(x => {
+      if (x.succeeded != undefined) {
         alert(x.message);
 
         if (x.succeeded) {
           window.location.reload();
         }
+      }
     });
   }
 

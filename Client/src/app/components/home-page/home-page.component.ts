@@ -24,14 +24,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   constructor(private infoService: ImportantInfoService,
     private authService: AuthenticationService) {
-      this.userId = this.authService.user.id;
-      this.userRole = this.authService.user.role;
-    }
+    this.userId = this.authService.user.id;
+    this.userRole = this.authService.user.role;
+  }
 
   ngOnInit() {
     this.getImportantInfos();
     this.isUserAuthorized();
-    this.today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+    this.today = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
   }
 
   ngOnDestroy(): void {
@@ -45,8 +45,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     var manager = Roles[Roles.manager];
     var supervisor = Roles[Roles.supervisor];
     this.isAuthorized = (this.userRole.toLocaleLowerCase() == admin.toLocaleLowerCase() ||
-                         this.userRole.toLocaleLowerCase() == manager.toLocaleLowerCase() ||
-                         this.userRole.toLocaleLowerCase() == supervisor.toLocaleLowerCase());
+      this.userRole.toLocaleLowerCase() == manager.toLocaleLowerCase() ||
+      this.userRole.toLocaleLowerCase() == supervisor.toLocaleLowerCase());
     return this.isAuthorized;
   }
 
@@ -57,7 +57,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
   }
 
-  addNewImportantInfo(newInfo) {  
+  addNewImportantInfo(newInfo) {
     var newUserModel = new AddImportantInfoDto();
     newUserModel.info = newInfo.info;
     newUserModel.startDate = newInfo.startDate;
@@ -74,10 +74,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.addNewUserAfterValidation(newUserModel);
   }
 
-  validateForm(newInfo: AddImportantInfoDto) : boolean {
+  validateForm(newInfo: AddImportantInfoDto): boolean {
     if (newInfo) {
-          return true;
-        }
+      return true;
+    }
     else {
       return false;
     }
@@ -87,11 +87,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.infoService.addNewInfo(newInfo);
     this.infoService.addNewInfoResponse$.subscribe(x => {
       if (x.succeeded != undefined) {
+        alert(x.message);
+
         if (x.succeeded) {
           window.location.reload();
         }
-
-        alert(x.message);
       }
     });
   }

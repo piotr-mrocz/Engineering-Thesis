@@ -18,7 +18,7 @@ export class NavComponent {
 
     this.userPhotoSource = this.getUserPhotoSource(this.authService.user.photoName);
   }
-
+  
   logOut() {
     this.authService.logOut();
   }

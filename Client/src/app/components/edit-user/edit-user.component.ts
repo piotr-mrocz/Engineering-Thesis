@@ -75,11 +75,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.updateUserAfterValidation(updateUserModel);
   }
 
-  validateForm(updateUserModel: UpdateUserDto) : boolean {
-    if (updateUserModel.firstName && updateUserModel.lastName && updateUserModel.photoName && 
-      updateUserModel.idDepartment > 0  && updateUserModel.idPosition > 0 && updateUserModel.idRole > 0) {
-          return true;
-        }
+  validateForm(updateUserModel: UpdateUserDto): boolean {
+    if (updateUserModel.firstName && updateUserModel.lastName && updateUserModel.photoName &&
+      updateUserModel.idDepartment > 0 && updateUserModel.idPosition > 0 && updateUserModel.idRole > 0) {
+      return true;
+    }
     else {
       return false;
     }
@@ -90,12 +90,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
     this.personService.updateUserDataResponse$.subscribe(x => {
       if (x.succeeded != undefined) {
+        alert(x.message);
+
         if (x.succeeded) {
           window.location.reload();
-          alert(x.message);
-        }
-        else {
-          alert(x.message);
         }
       }
     });

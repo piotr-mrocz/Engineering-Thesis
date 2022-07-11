@@ -35,13 +35,13 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   constructor(private requestService: RequestForLeaveService,
     private authService: AuthenticationService,
     private route: ActivatedRoute) {
-      this.thisYear = (new Date()).getFullYear();
+    this.thisYear = (new Date()).getFullYear();
 
-      this.routeSub = this.route.params.subscribe(params => {
-        this.idUserRoute = params['id'];
-      });
+    this.routeSub = this.route.params.subscribe(params => {
+      this.idUserRoute = params['id'];
+    });
 
-      this.userId = this.idUserRoute != undefined ? this.idUserRoute : this.authService.user.id;
+    this.userId = this.idUserRoute != undefined ? this.idUserRoute : this.authService.user.id;
   }
 
   ngOnInit() {
@@ -71,17 +71,17 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
   }
 
   createYearsArray() {
-      var lastFiveYears = this.thisYear - 4;
-      for(let i = this.thisYear; i >= lastFiveYears; i--) { 
-        this.years.push(i);
-      } 
+    var lastFiveYears = this.thisYear - 4;
+    for (let i = this.thisYear; i >= lastFiveYears; i--) {
+      this.years.push(i);
+    }
   }
 
   getUserVacationDaysInfo() {
     this.requestService.getInformationAboutUserVacationDays(this.userId);
     this.subscription = this.requestService.getInformationAboutUserVacationDaysResponse$.subscribe(x => {
       this.userVacationInfoResponse = x;
-    });    
+    });
   }
 
   getAllUserRequestsForLeave(year: number) {
@@ -95,11 +95,11 @@ export class VacationUserInformationComponent implements OnInit, OnDestroy {
     this.requestService.removeRequestForLeaveByUser(requestId);
     this.subscription = this.requestService.removeRequestForLeaveByUserResponse$.subscribe(x => {
       if (x.succeeded != undefined) {
+        alert(x.message);
+
         if (x.succeeded) {
           window.location.reload();
         }
-
-        alert(x.message);
       }
     });
   }

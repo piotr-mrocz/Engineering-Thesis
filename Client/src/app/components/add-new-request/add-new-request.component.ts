@@ -28,7 +28,7 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAllPossibleAbsenceTypeToChoose();
-    this.today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+    this.today = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
   }
 
   ngOnDestroy(): void {
@@ -67,13 +67,12 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
   private addNewRequestAfterValidation(newRequestModel: RequestForLeaveToAddDto) {
     this.requestService.createRequestForLeave(newRequestModel);
     this.subscription = this.requestService.createRequestForLeaveResponse$.subscribe(x => {
-
       if (x.succeeded != undefined) {
+        alert(x.message);
+
         if (x.succeeded) {
           window.location.reload();
         }
-
-        alert(x.message);
       }
     });
   }

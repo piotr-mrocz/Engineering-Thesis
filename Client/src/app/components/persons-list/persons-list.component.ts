@@ -74,7 +74,7 @@ export class PersonsListComponent implements OnInit, OnDestroy {
     if (idClickedButton) {
       this.changeClickedButtonBackgroundColor(idClickedButton);
     }
-    
+
     this.personService.getAllUsers();
 
     this.subscription = this.personService.usersResponse$.subscribe(x => {
@@ -84,7 +84,7 @@ export class PersonsListComponent implements OnInit, OnDestroy {
 
   changeClickedButtonBackgroundColor(idClickedButton: string) {
     var buttons = (<HTMLScriptElement[]><any>document.getElementsByClassName("getUsersButton"));
-    
+
     //reset styles all buttons
     for (let i = 0; i < buttons.length; i++) {
       var button = buttons[i];
@@ -103,10 +103,12 @@ export class PersonsListComponent implements OnInit, OnDestroy {
     if (answer) {
       this.personService.releaseUser(personId);
       this.subscription = this.personService.releaseUserResponse$.subscribe(x => {
-        alert(x.message);
-        
-        if (x.succeeded) {
-          window.location.reload();
+        if (x.succeeded != undefined) {
+          alert(x.message);
+
+          if (x.succeeded) {
+            window.location.reload();
+          }
         }
       });
     }
@@ -116,10 +118,10 @@ export class PersonsListComponent implements OnInit, OnDestroy {
     this.personService.resetUserPassword(idUser);
     this.subscription = this.personService.resetUserPasswordResponse$.subscribe(x => {
       alert(x.message);
-        
-        if (x.succeeded) {
-          window.location.reload();
-        }
+
+      if (x.succeeded) {
+        window.location.reload();
+      }
     });
   }
 }

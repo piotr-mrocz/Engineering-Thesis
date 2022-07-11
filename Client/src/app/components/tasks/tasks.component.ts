@@ -94,10 +94,12 @@ export class TasksComponent implements OnInit, OnDestroy {
   changeStatusTask(taskId: number, newStatus: number) {
     this.tasksService.updateStatusTask(taskId, newStatus);
     this.tasksService.updateStatusTaskResponse$.subscribe(x => {
-      alert(x.message);
+      if (x.succeeded != undefined) {
+        alert(x.message);
 
-      if (x.succeeded) {
-        this.ngOnInit();
+        if (x.succeeded) {
+          this.ngOnInit();
+        }
       }
     });
   }

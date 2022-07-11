@@ -29,8 +29,8 @@ export class UsersTasksListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private tasksService: TasksService,
-    private authService: AuthenticationService) { 
-      this.userId = this.authService.user.id;
+    private authService: AuthenticationService) {
+    this.userId = this.authService.user.id;
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class UsersTasksListComponent implements OnInit, OnDestroy {
     this.changeClickedButtonBackgroundColor(idClickedButton);
 
     this.tasksService.getAllUserTasksForSupervisor(this.userId, status);
-    this.subscription = this.tasksService.tasksForSupervisorResponse$.subscribe(x  => {
+    this.subscription = this.tasksService.tasksForSupervisorResponse$.subscribe(x => {
       this.tasksResponse = x;
     });
   }
@@ -70,7 +70,7 @@ export class UsersTasksListComponent implements OnInit, OnDestroy {
 
   changeClickedButtonBackgroundColor(idClickedButton: string) {
     var buttons = (<HTMLScriptElement[]><any>document.getElementsByClassName("getTasksButton"));
-    
+
     //reset styles all buttons
     for (let i = 0; i < buttons.length; i++) {
       var button = buttons[i];
@@ -86,10 +86,12 @@ export class UsersTasksListComponent implements OnInit, OnDestroy {
   deleteTask(taskId: number) {
     this.tasksService.deleteTask(taskId);
     this.tasksService.deleteTaskResponse$.subscribe(x => {
-      alert(x.message);
+      if (x.succeeded != undefined) {
+        alert(x.message);
 
-      if (x.succeeded) {
-        this.ngOnInit();
+        if (x.succeeded) {
+          this.ngOnInit();
+        }
       }
     });
   }

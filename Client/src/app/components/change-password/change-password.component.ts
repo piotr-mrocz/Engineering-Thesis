@@ -75,10 +75,12 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordAfterValidation(changeUserPasswordModel: ChangeUserPasswordDto) {
     this.personService.changeUserPassword(changeUserPasswordModel);
     this.subscription = this.personService.changeUserPasswordResponse$.subscribe(x => {
-      alert(x.message);
+      if (x.succeeded != undefined) {
+        alert(x.message);
 
-      if(x.succeeded) {
-        this.router.navigate(['/home']);
+        if (x.succeeded) {
+          this.router.navigate(['/home']);
+        }
       }
     });
   }

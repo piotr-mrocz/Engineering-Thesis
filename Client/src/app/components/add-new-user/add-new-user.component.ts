@@ -16,7 +16,7 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
   file: any;
   responseSelect: BackendResponse<PositionsAndDepartmentsAndRoleDto>;
   public imageUrl = "";
-  public fileImage : any;
+  public fileImage: any;
 
   private subscription: Subscription;
   photoName: any;
@@ -26,8 +26,8 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.personService.getAllValuesForSelects();
 
-    this.subscription = this.personService.selectsResponse$.subscribe(x => { 
-        this.responseSelect = x;
+    this.subscription = this.personService.selectsResponse$.subscribe(x => {
+      this.responseSelect = x;
     });
   }
 
@@ -37,17 +37,17 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFileChange(event : any) {
+  onFileChange(event: any) {
     this.fileImage = event.target.files[0];
     this.photoName = event.target.files[0].name;
     var reader = new FileReader();
-    reader.onload = (event:any) => {
-      this.imageUrl = event.target.result as string;   
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result as string;
     }
-  
+
     reader.readAsDataURL(this.fileImage);
   }
-  
+
   addNewUser(data) {
     var newUserModel = new AddNewUserDto();
     newUserModel.firstName = data.firstName;
@@ -70,12 +70,12 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
     this.addNewUserAfterValidation(newUserModel);
   }
 
-  validateForm(newUserModel: AddNewUserDto) : boolean {
-    if (newUserModel.firstName && newUserModel.lastName && newUserModel.photoName && 
-        newUserModel.idDepartment > 0  && newUserModel.idPosition > 0 && newUserModel.idRole > 0 &&
-        newUserModel.dateOfBirth) {
-          return true;
-        }
+  validateForm(newUserModel: AddNewUserDto): boolean {
+    if (newUserModel.firstName && newUserModel.lastName && newUserModel.photoName &&
+      newUserModel.idDepartment > 0 && newUserModel.idPosition > 0 && newUserModel.idRole > 0 &&
+      newUserModel.dateOfBirth) {
+      return true;
+    }
     else {
       return false;
     }
@@ -85,11 +85,11 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
     this.personService.addNewUser(newUserModel);
     this.personService.addUserResponse$.subscribe(x => {
       if (x.succeeded != undefined) {
+        alert(x.message);
+
         if (x.succeeded) {
           window.location.reload();
         }
-
-        alert(x.message);
       }
     });
   }

@@ -76,17 +76,17 @@ export class VacationSupervisorComponent implements OnInit, OnDestroy {
   }
 
   removeRequest(idRequest: number, reason: string) {
-    if(reason) {
+    if (reason) {
       this.requestService.rejectRequestForLeave(idRequest, reason);
-    this.subscription = this.requestService.rejectRequestForLeaveResponse$.subscribe(x => {
-      if (x.succeeded != undefined) {
-        if (x.succeeded) {
-          window.location.reload();
-        }
+      this.subscription = this.requestService.rejectRequestForLeaveResponse$.subscribe(x => {
+        if (x.succeeded != undefined) {
+          alert(x.message);
 
-        alert(x.message);
-      }
-    });
+          if (x.succeeded) {
+            window.location.reload();
+          }
+        }
+      });
     }
     else {
       alert("Nie podano powodu odrzucenia wniosku!");

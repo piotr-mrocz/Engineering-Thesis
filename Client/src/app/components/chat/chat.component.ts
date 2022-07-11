@@ -118,9 +118,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.messageService.addNewMessage(newMessage);
 
     this.messageService.messagesResponse$.subscribe(x => {
+      if (x.succeeded != undefined) {
         if (!x.succeeded) {
           alert(x.message);
         }
+      }
     });
 
     this.ngOnInit();
