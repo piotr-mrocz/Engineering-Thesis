@@ -8,50 +8,26 @@ using IntranetWebApi.Application.Features.PresenceFeatures.Queries;
 
 namespace IntranetWebApi.Application.Features.PresenceFeatures.Validations;
 
-public class GetPresenceByIdUserValidator : AbstractValidator<GetPresenceByIdUserQuery>
+public class GetPresenceByIdUserValidator : AbstractValidator<GetPresencesUsersPerMonthQuery>
 {
     public GetPresenceByIdUserValidator()
     {
         RuleFor(x => x.IdUser)
             .NotNull()
             .NotEmpty()
-            .GreaterThanOrEqualTo(0)
+            .GreaterThan(0)
             .WithMessage("Nie wybrano użytkownika");
 
-        RuleFor(x => x.Date)
-            .Custom((value, context) =>
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value >= DateTime.Now)
-                    {
-                        context.AddFailure("Date", "Niepoprawna data ");
-                    }
-                }
-            });
+        RuleFor(x => x.MonthNumber)
+            .NotNull()
+            .NotEmpty()
+            .GreaterThan(0)
+            .WithMessage("Nie wybrano miesiąca");
 
-        RuleFor(x => x.StartDate)
-            .Custom((value, context) =>
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value >= DateTime.Now)
-                    {
-                        context.AddFailure("Date", "Niepoprawna data ");
-                    }
-                }
-            });
-
-        RuleFor(x => x.EndDate)
-            .Custom((value, context) =>
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value >= DateTime.Now)
-                    {
-                        context.AddFailure("Date", "Niepoprawna data ");
-                    }
-                }
-            });
+        RuleFor(x => x.Year)
+            .NotNull()
+            .NotEmpty()
+            .GreaterThan(0)
+            .WithMessage("Nie wybrano miesiąca");
     }
 }

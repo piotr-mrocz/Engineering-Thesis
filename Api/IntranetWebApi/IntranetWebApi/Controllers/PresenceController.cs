@@ -1,4 +1,5 @@
-﻿using IntranetWebApi.Application.Features.PresenceFeatures.Commands;
+﻿
+using IntranetWebApi.Application.Features.PresenceFeatures.Commands;
 using IntranetWebApi.Application.Features.PresenceFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ public class PresenceController : ControllerBase
 
     #region Commands
     [HttpPost]
-    public async Task<IActionResult> CrreateRangePresences(CreateRangePresencesCommand request)
+    public async Task<IActionResult> CreatePresence(CreatePresenceCommand request)
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
@@ -31,7 +32,7 @@ public class PresenceController : ControllerBase
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
-    public async Task<IActionResult> GetPresencesByIdUser(GetPresenceByIdUserQuery request)
+    public async Task<IActionResult> GetPresencesUsersPerMonth(GetPresencesUsersPerMonthQuery request)
         => Ok(await _mediator.Send(request));
     #endregion Queries
 }

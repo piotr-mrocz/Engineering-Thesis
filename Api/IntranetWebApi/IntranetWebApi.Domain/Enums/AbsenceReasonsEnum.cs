@@ -26,5 +26,11 @@ public enum AbsenceReasonsEnum
     UnauthorizedAbsence = 6,
 
     [Description("Urlop bezpłatny")]
-    UnpaidLeave = 7
+    UnpaidLeave = 7,
+
+    [Description("Obecny")]
+    Present = 8,
+
+    [Description("Święto")]
+    FreeDay = 9
 }

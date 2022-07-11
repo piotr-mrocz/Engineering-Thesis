@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
@@ -13,32 +14,23 @@ namespace IntranetWebApi.Application.Features.PresenceFeatures.Commands;
 
 public class UpdatePresenceCommand : IRequest<BaseResponse>
 {
-    public int Id { get; set; }
-    public TimeSpan StartTime { get; set; }
-    public TimeSpan EndTime { get; set; }
-    public int IdUser { get; set; }
-    public bool IsPresent { get; set; }
-    public int? AbsenceReason { get; set; }
-    public decimal WorkHours { get; set; }
-    public decimal ExtraWorkHours { get; set; }
+    public PresenceToUpdateDto PresenceToUpdate { get; set; } = null!;
 }
 
 public class UpdatePresenceHandler : IRequestHandler<UpdatePresenceCommand, BaseResponse>
 {
     private readonly IGenericRepository<Presence> _repo;
-    private readonly IMapper _mapper;
 
-    public UpdatePresenceHandler(IGenericRepository<Presence> repo, IMapper mapper)
+    public UpdatePresenceHandler(IGenericRepository<Presence> repo)
     {
         _repo = repo;
-        _mapper = mapper;
     }
 
     public async Task<BaseResponse> Handle(UpdatePresenceCommand request, CancellationToken cancellationToken)
     {
-        var presenceToUpdate = await _repo.GetEntityByExpression(x => x.Id == request.Id, cancellationToken);
+        var presenceToUpdate = await _repo.GetEntityByExpression(x => x.Id == request.PresenceToUpdate.Id, cancellationToken);
 
-        if (presenceToUpdate is null)
+        if (presenceToUpdate is null || !presenceToUpdate.Succeeded || presenceToUpdate.Data is null)
         {
             return new BaseResponse()
             {
@@ -47,11 +39,11 @@ public class UpdatePresenceHandler : IRequestHandler<UpdatePresenceCommand, Base
             };
         }
 
-        var presence = _mapper.Map<UpdatePresenceCommand, Presence>(request);
+        presenceToUpdate.Data.IsPresent = request.PresenceToUpdate.IsPresent;
+        presenceToUpdate.Data.AbsenceReason = request.PresenceToUpdate.AbsenceReason;
 
-        var repsonse = await _repo.UpdateEntity(presence, cancellationToken);
+        var repsonse = await _repo.UpdateEntity(presenceToUpdate.Data, cancellationToken);
 
         return repsonse;
     }
 }
-

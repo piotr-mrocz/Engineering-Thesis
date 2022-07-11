@@ -8,11 +8,13 @@ namespace IntranetWebApi.Domain.Models.Dto;
 
 public class GetPresenceByIdUserDto
 {
-    public DateTime Date { get; set; }
-    public TimeSpan StartTime { get; set; }
-    public TimeSpan EndTime { get; set; }
+    public string Date { get; set; } = null!;
+    public bool IsFreeDay { get; set; } = true;
     public bool IsPresent { get; set; }
-    public string AbsenceReason { get; set; }
-    public decimal WorkHours { get; set; }
-    public decimal ExtraWorkHours { get; set; }
+    public int PresentType { get; set; }
+    public string AbsenceReason { get; set; } = null;
+    public string StartTime { get; set; } = null!;
+    public string EndTime { get; set; } = null!;
+    public string WorkHours { get; set; } = null!;
+    public string ExtraWorkHours { get; set; } = null!;
 }
