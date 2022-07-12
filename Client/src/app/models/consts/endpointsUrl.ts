@@ -49,4 +49,10 @@ export class EndpointsUrl {
     // important info
     public readonly addImportantInfoEndpoint = "api/ImportantInfo/AddImportantInfo";
     public readonly getImportantInfoEndpoint = "api/ImportantInfo/GetImportantInfo";
+
+    //presence
+    public readonly createPresenceEndpoint = "api/Presence/CreatePresence";
+    public readonly updatePresenceEndpoint = "api/Presence/UpdatePresence";
+    public readonly getPresencesUsersPerMonthEndpoint = "api/Presence/GetPresencesUsersPerMonth";
+    public readonly getUsersPresencePerDayEndpoint = "api/Presence/GetUsersPresencePerDay";
 }

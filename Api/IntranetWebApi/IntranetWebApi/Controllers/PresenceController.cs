@@ -28,7 +28,7 @@ public class PresenceController : ControllerBase
 
     #region Queries
     [HttpPost]
-    public async Task<IActionResult> GetUsersPresensePerDay(GetUsersPresencePerDayQuery request)
+    public async Task<IActionResult> GetUsersPresencePerDay(GetUsersPresencePerDayQuery request)
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
