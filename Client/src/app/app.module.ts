@@ -30,6 +30,8 @@ import { AddNewRequestComponent } from './components/add-new-request/add-new-req
 import { VacationSupervisorComponent } from './components/vacation-supervisor/vacation-supervisor.component';
 import { ImportantInfoService } from './services/important-info.service';
 import { RequestForLeaveService } from './services/request-for-leave.service';
+import { UserPresenceComponent } from './components/user-presence/user-presence.component';
+import { UserPresenceSupervisorComponent } from './components/user-presence-supervisor/user-presence-supervisor.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import { RequestForLeaveService } from './services/request-for-leave.service';
     ChangePasswordComponent, 
     VacationUserInformationComponent, 
     AddNewRequestComponent, 
-    VacationSupervisorComponent
+    VacationSupervisorComponent, UserPresenceComponent, UserPresenceSupervisorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

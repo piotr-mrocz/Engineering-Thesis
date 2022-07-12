@@ -15,6 +15,8 @@ import { WorkRegulationsyComponent } from './components/work-regulations/work-re
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { VacationUserInformationComponent } from './components/vacation-user-information/vacation-user-information.component';
 import { VacationSupervisorComponent } from './components/vacation-supervisor/vacation-supervisor.component';
+import { UserPresenceComponent } from './components/user-presence/user-presence.component';
+import { UserPresenceSupervisorComponent } from './components/user-presence-supervisor/user-presence-supervisor.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -31,6 +33,8 @@ const routes: Routes = [
     {path: 'vacation-info', component: VacationUserInformationComponent, canActivate: [AuthGuard]},
     {path: 'vacation-info/:id', component: VacationUserInformationComponent, canActivate: [AuthGuard]},
     {path: 'vacation-supervisor', component: VacationSupervisorComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
+    {path: 'user-work', component: UserPresenceComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
+    {path: 'users-work-supervisor', component: UserPresenceSupervisorComponent, canActivate: [AuthGuard]}, // dodać później ograniczenia tylko dla kierowników
     // {path: 'persondetails/:id', component: PersonDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['Roles.admin']}},
     {path: '**', component: PageNotFoundComponent}
 ];

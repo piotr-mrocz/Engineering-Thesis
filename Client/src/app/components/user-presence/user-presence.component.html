@@ -1,0 +1,105 @@
+<div class="container-fluid mb-5 p-5">
+
+
+    <div class="col-7 align-self-center mb-5 mt-5 p-5" style="margin: auto;">
+        <h2>Twój czas pracy</h2>
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <h3 *ngIf="month > 9 || month[0] == 0">Data: {{month}}.{{year}}</h3>
+                <h3 *ngIf="month <= 9 && month[0] != 0">Data: 0{{month}}.{{year}}</h3>
+            </div>
+            <div class="col">
+                <input #date class="rounded text-light bg-dark" type="month" id="start" name="start" [max]="maxDate"
+                    [value]="maxDate" (change)="selectMonth(date.value)">
+            </div>
+        </div>
+
+        <div *ngIf="!presenceResponse.succeeded"
+            class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center rounded">
+            <h2 class="text-center">{{presenceResponse.message}}</h2>
+        </div>
+
+        <div class="row mt-5 mb-5" *ngIf="presenceResponse.succeeded">
+            <div class="col  border boder-secondary rounded">
+                <div class="row  d-flex align-items-center justify-content-center">
+                    <h5>Przepracowane godziny: </h5>
+                </div>
+                <div class="row  d-flex align-items-center justify-content-center">
+                    {{presenceResponse.data.totalWorkHour}}
+                </div>
+            </div>
+            <div class="col  border boder-secondary rounded">
+                <div class="row d-flex align-items-center justify-content-center ">
+                    <h5>Godziny nadliczbowe: </h5>
+                </div>
+                <div class="row d-flex align-items-center justify-content-center ">
+                    {{presenceResponse.data.totalWorkExtraHour}}
+                </div>
+
+            </div>
+        </div>
+
+        <div *ngIf="presenceResponse.succeeded" class="row mt-5 d-flex align-items-center justify-content-left">
+
+            <ul *ngFor="let presence of presenceResponse.data.userPresencesList" class="mr-1 list-unstyled w-20">
+
+                <li *ngIf="presence.isPresent && !presence.isFreeDay"
+                    class="col bg-success mb-1 p-4 border border-primary rounded"
+                    title="{{presence.startTime}} - {{presence.endTime}}">
+                    <div class="row">
+                        {{presence.dayNumber}}
+                    </div>
+                    <div class="row text-light d-flex align-items-center justify-content-end">
+                        {{presence.absenceReason}}
+                    </div>
+                </li>
+
+                <li *ngIf="presence.isPresent && presence.isFreeDay"
+                    class="col bg-primary mb-1 p-4 border border-primary rounded"
+                    title="{{presence.startTime}} - {{presence.endTime}}">
+                    <div class="row">
+                        {{presence.dayNumber}}
+                    </div>
+                    <div class="row text-light d-flex align-items-center justify-content-end">
+                        {{presence.absenceReason}}
+                    </div>
+                </li>
+
+                <li *ngIf="!presence.isPresent && presence.isFreeDay"
+                    class="col bg-info mb-1 p-4 border border-primary rounded">
+                    <div class="row">
+                        {{presence.dayNumber}}
+                    </div>
+                    <div class="row text-light d-flex align-items-center justify-content-end">
+                        {{presence.absenceReason}}
+                    </div>
+                </li>
+
+                <li *ngIf="presence.presentType == holiday"
+                    class="col bg-warning mb-1 p-4 border border-primary rounded">
+                    <div class="row">
+                        {{presence.dayNumber}}
+                    </div>
+                    <div class="row text-muted d-flex align-items-center justify-content-end"
+                        title="{{presence.startTime}} - {{presence.endTime}}">
+                        {{presence.absenceReason}}
+                    </div>
+                </li>
+
+                <li *ngIf="presence.presentType == unauthorizedAbsence"
+                    class="col bg-danger mb-1 p-4 border border-primary rounded">
+                    <div class="row">
+                        {{presence.dayNumber}}
+                    </div>
+                    <div class="row text-muted d-flex align-items-center justify-content-end">
+                        {{presence.absenceReason}}
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</div>

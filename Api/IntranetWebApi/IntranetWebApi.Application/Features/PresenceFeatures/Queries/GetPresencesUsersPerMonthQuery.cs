@@ -33,13 +33,18 @@ public class GetPresencesUsersPerMonthHandler : IRequestHandler<GetPresencesUser
     public async Task<Response<GetPresenceByIdUserListDto>> Handle(GetPresencesUsersPerMonthQuery request, CancellationToken cancellationToken)
     {
         var today = DateTime.Now.Date;
-        var presences = await _presenceRepo.GetManyEntitiesByExpression(x => x.Date.Month == request.MonthNumber && x.Date.Date <= today && x.IdUser == request.IdUser, cancellationToken);
+
+        var presences = await _presenceRepo.GetManyEntitiesByExpression(x => 
+                x.Date.Month == request.MonthNumber && 
+                x.Date.Year == request.Year &&
+                x.Date.Day <= today.Day &&
+                x.IdUser == request.IdUser, cancellationToken);
 
         if (presences is null || !presences.Succeeded || presences.Data is null || !presences.Data.Any())
         {
             return new Response<GetPresenceByIdUserListDto>()
             {
-                Message = "Nie żadnych obecności w bazie danych",
+                Message = "Nie ma żadnych obecności w bazie danych",
                 Data = new()
             };
         }
@@ -69,21 +74,22 @@ public class GetPresencesUsersPerMonthHandler : IRequestHandler<GetPresencesUser
             var rekord = new GetPresenceByIdUserDto()
             {
                 Date = day.Date.ToString("dd.MM.yyyy"),
+                DayNumber = day.Day,
                 IsPresent = presence != null ? presence.IsPresent : false,
+                IsFreeDay = false,
                 PresentType = absenceInfo.presentType,
                 AbsenceReason = absenceInfo.absenceDescription,
-                StartTime = presence != null ? presence.StartTime.ToString("h'h 'm'm 's's'") : "Brak odbicia",
+                StartTime = presence != null ? presence.StartTime.ToString() : "Brak odbicia",
                 EndTime = presence != null
                         ? presence.EndTime.HasValue
-                            ? presence.EndTime.Value.ToString("h'h 'm'm 's's'")
+                            ? presence.EndTime.Value.ToString()
                             : "Pracuje"
                         : "Brak odbicia"
             };
 
             var freeDay = freeDaysVM.FirstOrDefault(x => x.FreeDay.Date == day.Date);
 
-            if (freeDays.Contains(day) || day.DayOfWeek == DayOfWeek.Sunday ||
-                (day.DayOfWeek == DayOfWeek.Saturday && presence == null))
+            if (freeDays.Contains(day))
             {
                 rekord.IsPresent = false;
                 rekord.IsFreeDay = true;
@@ -93,10 +99,21 @@ public class GetPresencesUsersPerMonthHandler : IRequestHandler<GetPresencesUser
                 rekord.EndTime = day.ToString("dd.MM.yyyy");
             }
 
-            if (day.DayOfWeek == DayOfWeek.Saturday && presence != null && !freeDays.Contains(day))
+            if ((day.DayOfWeek == DayOfWeek.Sunday || day.DayOfWeek == DayOfWeek.Saturday) && presence == null)
+            {
+                rekord.IsPresent = false;
+                rekord.IsFreeDay = true;
+                rekord.PresentType = (int)AbsenceReasonsEnum.Weekend;
+                rekord.AbsenceReason = EnumHelper.GetEnumDescription(AbsenceReasonsEnum.Weekend);
+                rekord.StartTime = day.ToString("dd.MM.yyyy");
+                rekord.EndTime = day.ToString("dd.MM.yyyy");
+            }
+
+            if (day.DayOfWeek == DayOfWeek.Saturday && presence != null)
             {
                 rekord.IsFreeDay = true;
-                rekord.PresentType = (int)AbsenceReasonsEnum.FreeDay;
+                rekord.IsPresent = presence != null ? presence.IsPresent : false;
+                rekord.PresentType = (int)AbsenceReasonsEnum.Present;
             }
 
             presenceUsersListDto.Add(rekord);
@@ -104,7 +121,9 @@ public class GetPresencesUsersPerMonthHandler : IRequestHandler<GetPresencesUser
 
         return new GetPresenceByIdUserListDto()
         {
-            UserPresencesList = presenceUsersListDto
+            UserPresencesList = presenceUsersListDto,
+            TotalWorkHour = presences.Sum(x => x.WorkHours),
+            TotalWorkExtraHour = presences.Sum(x => x.ExtraWorkHours)
         };
     }
 
@@ -119,6 +138,6 @@ public class GetPresencesUsersPerMonthHandler : IRequestHandler<GetPresencesUser
         if (presence.AbsenceReason.HasValue)
             return (EnumHelper.GetEnumDescription((AbsenceReasonsEnum)presence.AbsenceReason), (int)presence.AbsenceReason);
 
-        return ("Brak danych!", 0);
+        return ("Brak danych!", default);
     }
 }

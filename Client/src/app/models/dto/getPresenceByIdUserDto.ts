@@ -1,5 +1,6 @@
 export interface GetPresenceByIdUserDto {
     date?: string,
+    dayNumber?: number,
     isFreeDay?: boolean,
     isPresent?: boolean,
     presentType?: number,

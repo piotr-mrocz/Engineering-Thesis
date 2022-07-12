@@ -9,6 +9,7 @@ namespace IntranetWebApi.Domain.Models.Dto;
 public class GetPresenceByIdUserDto
 {
     public string Date { get; set; } = null!;
+    public int DayNumber { get; set; }
     public bool IsFreeDay { get; set; } = true;
     public bool IsPresent { get; set; }
     public int PresentType { get; set; }

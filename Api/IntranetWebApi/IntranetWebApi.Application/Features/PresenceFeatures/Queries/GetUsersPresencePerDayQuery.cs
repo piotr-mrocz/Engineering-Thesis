@@ -16,7 +16,9 @@ namespace IntranetWebApi.Application.Features.PresenceFeatures.Queries;
 
 public class GetUsersPresencePerDayQuery : IRequest<Response<UsersPresencesPerDayDto>>
 {
-    public DateTime Date { get; set; }
+    public int Day { get; set; }
+    public int Month { get; set; }
+    public int Year { get; set; }
 }
 
 public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePerDayQuery, Response<UsersPresencesPerDayDto>>
@@ -32,7 +34,7 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
 
     public async Task<Response<UsersPresencesPerDayDto>> Handle(GetUsersPresencePerDayQuery request, CancellationToken cancellationToken)
     {
-        var date = request.Date.Date;
+        var date =new DateTime(request.Year, request.Month, request.Day);
 
         var users = await _userRepo.GetManyEntitiesByExpression(x => x.IsActive && !x.DateOfRelease.HasValue, cancellationToken);
 
@@ -53,21 +55,24 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
         {
             return new Response<UsersPresencesPerDayDto>()
             {
-                Message = "Nie żadnych obecności w bazie danych",
+                Message = "Nie ma żadnych obecności w bazie danych",
                 Data = new()
             };
         }
 
-        var response = GetUsersPresencesPerDayDto(users.Data, presences.Data);
+        var presenceUsersListDto = GetUsersPresencesPerDayDto(users.Data, presences.Data);
 
         return new Response<UsersPresencesPerDayDto>()
         {
             Succeeded = true,
-            Data = response
+            Data = new UsersPresencesPerDayDto()
+            {
+                UsersPresencesList = presenceUsersListDto
+            }
         };
     }
 
-    private UsersPresencesPerDayDto GetUsersPresencesPerDayDto(IEnumerable<User> users, IEnumerable<Presence> presences)
+    private List<UserPresentsPerDayDto> GetUsersPresencesPerDayDto(IEnumerable<User> users, IEnumerable<Presence> presences)
     {
         var presenceUsersListDto = new List<UserPresentsPerDayDto>();
 
@@ -82,19 +87,17 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
                 IsPresent = presence != null ? presence.IsPresent : false,
                 PresentType = absenceInfo.presentType,
                 AbsenceReason = absenceInfo.absenceDescription,
-                StartTime = presence != null ? presence.StartTime.ToString("h'h 'm'm 's's'") : "Brak odbicia",
+                StartTime = presence != null ? presence.StartTime.ToString("h'h 'm'm") : "Brak odbicia",
                 EndTime = presence != null
                         ? presence.EndTime.HasValue
+
                             ? presence.EndTime.Value.ToString("h'h 'm'm 's's'")
                             : "Pracuje"
                         : "Brak odbicia"
             };
         }
 
-        return new UsersPresencesPerDayDto()
-        {
-            UsersPresencesList = presenceUsersListDto
-        };
+        return presenceUsersListDto;
     }
 
     private (string absenceDescription, int presentType) GetAbsenceReason(Presence presence)

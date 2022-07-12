@@ -14,23 +14,26 @@ public enum AbsenceReasonsEnum
     LeaveAtRequest = 3,
 
     [Description("Urlop okolicznościowy")]
-    SpecialLeave = 3,
+    SpecialLeave = 4,
 
     [Description("Zwolnienie lekarskie")]
-    DoctorExcuse = 4,
+    DoctorExcuse = 5,
 
     [Description("Delegacja")]
-    Delegation = 5,
+    Delegation = 6,
 
     [Description("Nieusprawiedliwiona nieobecność")]
-    UnauthorizedAbsence = 6,
+    UnauthorizedAbsence = 7,
 
     [Description("Urlop bezpłatny")]
-    UnpaidLeave = 7,
+    UnpaidLeave = 8,
 
     [Description("Obecny")]
-    Present = 8,
+    Present = 9,
 
     [Description("Święto")]
-    FreeDay = 9
+    FreeDay = 10,
+
+    [Description("Weekend")]
+    Weekend = 11
 }

@@ -9,6 +9,7 @@ import { GetPresenceByIdUserDto } from '../models/dto/getPresenceByIdUserDto';
 import { PresenceToUpdateDto } from '../models/dto/presenceToUpdateDto';
 import { PresenceToAddDto } from '../models/dto/presenceToAddDto';
 import { UserPresentsPerDayDto } from '../models/dto/userPresentsPerDayDto';
+import { GetPresenceByIdUserListDto } from '../models/dto/getPresenceByIdUserListDto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,19 +21,19 @@ export class PresenceService {
     private endpoints: EndpointsUrl) {
   }
 
-  getAllUserResponse$ = new BehaviorSubject<BackendResponse<GetPresenceByIdUserDto[]>>({});
+  getAllUserResponse$ = new BehaviorSubject<BackendResponse<GetPresenceByIdUserListDto>>({});
   getUsersPresencesPerDayResponse$ = new BehaviorSubject<BackendResponse<UserPresentsPerDayDto[]>>({});
   createPresenceResponse$ = new BehaviorSubject<BaseBackendResponse>({});
   updatePresenceResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
-  private getAllUserPresenceByIdUserResponse(idUser: number, month: number, year: number) : Observable<BackendResponse<GetPresenceByIdUserDto[]>> {
+  private getAllUserPresenceByIdUserResponse(idUser: number, month: number, year: number) : Observable<BackendResponse<GetPresenceByIdUserListDto>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getPresencesUsersPerMonthEndpoint;
-    return this.http.post<BackendResponse<GetPresenceByIdUserDto[]>>(url, {IdUser: idUser, MonthNumber: month, Year: year});
+    return this.http.post<BackendResponse<GetPresenceByIdUserListDto>>(url, {IdUser: idUser, MonthNumber: month, Year: year});
   }
 
-  private getUsersPresencesPerDayResponse(date: Date) : Observable<BackendResponse<UserPresentsPerDayDto[]>> {
+  private getUsersPresencesPerDayResponse(day: number, month: number, year: number) : Observable<BackendResponse<UserPresentsPerDayDto[]>> {
     var url = this.backendSettings.baseAddress + this.endpoints.getUsersPresencePerDayEndpoint;
-    return this.http.post<BackendResponse<UserPresentsPerDayDto[]>>(url, {Date: date});
+    return this.http.post<BackendResponse<UserPresentsPerDayDto[]>>(url, {Day: day, Month: month, Year: year});
   }
 
   private updatePresenceResponse(updatePresence: PresenceToUpdateDto) : Observable<BaseBackendResponse> {
@@ -51,8 +52,8 @@ export class PresenceService {
     });
   }
 
-  getUsersPresencesPerDay(date: Date) {
-    this.getUsersPresencesPerDayResponse(date).subscribe(x => {
+  getUsersPresencesPerDay(day: number, month: number, year: number) {
+    this.getUsersPresencesPerDayResponse(day, month, year).subscribe(x => {
       this.getUsersPresencesPerDayResponse$.next(x);
     });
   }

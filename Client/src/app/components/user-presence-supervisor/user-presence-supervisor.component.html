@@ -1,0 +1,27 @@
+<div class="container-fluid mb-5 p-5">
+
+
+    <div class="col-7 align-self-center mb-5 mt-5 p-5" style="margin: auto;">
+      <h2 *ngIf="month > 9">Ewidencja czasu pracy na dzień {{day}}.{{month}}.{{year}}</h2>
+      <h2 *ngIf="month <= 9" #monthWithZero>Ewidencja czasu pracy na dzień {{day}}.0{{month}}.{{year}}</h2>
+      <hr>
+      <div *ngIf="!presenceResponse.succeeded"
+      class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center rounded">
+      <h2 class="text-center">{{presenceResponse.message}}</h2>
+    </div>
+
+    <div *ngIf="presenceResponse.succeeded" class="row mt-5 d-flex align-items-center justify-content-center">
+      <ul *ngFor="let presence of presenceResponse.data" class="list-unstyled w-100">
+        <li class="col bg-dark mb-1 p-4 border border-primary rounded">
+          <!-- <div class="row">
+            {{info.info}}
+          </div>
+          <div class="row text-muted d-flex align-items-center justify-content-end">
+            ~ {{info.userName}}
+          </div> -->
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  
