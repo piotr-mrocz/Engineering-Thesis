@@ -35,6 +35,7 @@ export class PersonService {
    updateUserDataResponse$ = new BehaviorSubject<BaseBackendResponse>({});
    changeUserPasswordResponse$ = new BehaviorSubject<BaseBackendResponse>({});
    resetUserPasswordResponse$ = new BehaviorSubject<BaseBackendResponse>({});
+   addVacationDaysToNewUserResponse$ = new BehaviorSubject<BaseBackendResponse>({});
 
    private getAllUsersResponse() : Observable<BackendResponse<UserDetailsDto[]>> {
       var url = this.backendSettings.baseAddress + this.endpoints.getAllUsersEndpoint;
@@ -69,6 +70,11 @@ export class PersonService {
    private updateUserResponse(data: UpdateUserDto) : Observable<BaseBackendResponse> {
     var url = this.backendSettings.baseAddress + this.endpoints.updateUserDataEndpoint;
     return this.http.post<BaseBackendResponse>(url, {UserInfo: data});
+   }
+
+   private addVacationDaysToNewUserResponse(vacationDays: number, userId: number) : Observable<BaseBackendResponse> {
+    var url = this.backendSettings.baseAddress + this.endpoints.addVacationDaysToNewUserEndpoint;
+    return this.http.post<BaseBackendResponse>(url, {IdUser: userId, VacationDays: vacationDays});
    }
 
    private changeUserPasswordResponse(data: ChangeUserPasswordDto) : Observable<BaseBackendResponse> {
@@ -120,6 +126,12 @@ export class PersonService {
   updateUser(data: UpdateUserDto) {
     this.updateUserResponse(data).subscribe(x => {
       this.updateUserDataResponse$.next(x);
+    });
+  }
+
+  addVacationDaysToNewUser(vacationDays: number, userId: number) {
+    this.addVacationDaysToNewUserResponse(vacationDays, userId).subscribe(x => {
+      this.addVacationDaysToNewUserResponse$.next(x);
     });
   }
 

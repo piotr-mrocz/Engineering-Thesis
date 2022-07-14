@@ -15,6 +15,7 @@ export class EndpointsUrl {
     public readonly updateUserDataEndpoint = "api/User/UpdateUserData";
     public readonly changeUserPasswordEndpoint = "api/User/ChangeUserPassword";
     public readonly resetUserPasswordEndpoint = "api/User/ResetUserPassword";
+    public readonly addVacationDaysToNewUserEndpoint = "api/User/AddVacationDaysToNewUser";
 
     // department
     public readonly getAllDepartmentsEndpoint = "api/Department/GetAllDepartments";

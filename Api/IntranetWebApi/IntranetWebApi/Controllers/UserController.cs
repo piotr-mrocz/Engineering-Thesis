@@ -42,6 +42,10 @@ public class UserController : ControllerBase
     public async Task<IActionResult> ResetUserPassword(ResetUserPasswordCommand request)
          => Ok(await _mediator.Send(request));
 
+    [HttpPost]
+    public async Task<IActionResult> AddVacationDaysToNewUser(AddVacationDaysToNewUserCommand request)
+        => Ok(await _mediator.Send(request));
+
     #endregion Commands
 
     #region Queries

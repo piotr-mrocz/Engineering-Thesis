@@ -61,14 +61,6 @@ public class UpdateUserDataHandler : IRequestHandler<UpdateUserDataCommand, Base
 
         var response = await _userRepo.UpdateEntity(userToChange.Data, cancellationToken);
 
-        if (response == null || !response.Succeeded)
-        {
-            return new BaseResponse()
-            {
-                Message = "Edycja użytkownika nie powiodła się!"
-            };
-        }
-
         return new BaseResponse()
         {
             Succeeded = response.Succeeded,

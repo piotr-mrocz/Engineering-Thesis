@@ -17,4 +17,5 @@ public class UserDetailsDto
     public string Department { get; set; } = null!;
     public int IdRole { get; set; }
     public string Position { get; set; } = null!;
+    public bool IsNewUser { get; set; }
 }

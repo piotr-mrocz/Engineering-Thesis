@@ -60,7 +60,8 @@ public class GetUsersHandler : IRequestHandler<GetAllUsersQuery, Response<List<U
                 PhotoName = user.Photo.Name,
                 Department = user.Department.DepartmentName,
                 IdRole = user.IdRole,
-                Position = user.Position.Name
+                Position = user.Position.Name,
+                IsNewUser = user.VacationDaysThisYear == 0 && user.VacationDaysLastYear == 0 && user.VacationDaysInRequests == 0
             };
 
             usersList.Add(rekord);

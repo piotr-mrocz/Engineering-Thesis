@@ -24,6 +24,7 @@ export class PersonsListComponent implements OnInit, OnDestroy {
   userRole: string;
   photoBaseAddress: string;
   isAuthorized: boolean;
+  showEditVacationDaysDiv: boolean;
 
   private subscription: Subscription;
 
@@ -123,5 +124,27 @@ export class PersonsListComponent implements OnInit, OnDestroy {
         window.location.reload();
       }
     });
+  }
+
+  toggleEditVacationDays() {
+    this.showEditVacationDaysDiv = !this.showEditVacationDaysDiv;
+  }
+
+  addVacationsDays(vacationDays: number, userId: number) {
+    if (vacationDays > 0 && userId > 0) {
+      this.personService.addVacationDaysToNewUser(vacationDays, userId);
+      this.subscription = this.personService.addVacationDaysToNewUserResponse$.subscribe(x => {
+        if (x.succeeded != undefined) {
+          alert(x.message);
+
+          if (x.succeeded) {
+            window.location.reload();
+          }
+        }
+      });
+    }
+    else {
+      alert("Nie uzupełniono wszystkich danych!");
+    }
   }
 }
