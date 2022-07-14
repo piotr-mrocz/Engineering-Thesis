@@ -91,7 +91,17 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       this.showMessages = this.messageResponse.succeeded;
       this.showTextArea = true;
+
+      this.joinTheGroup(idAddressee);
     }
+  }
+
+  joinTheGroup(idAddressee: number) {
+    var groupName = idAddressee > this.userId
+    ? `${this.userId}_${idAddressee}`
+    : `${idAddressee}_${this.userId}`;
+
+    this.connection.invoke('JoinGroup', groupName);
   }
 
   sendMessage() {
@@ -134,7 +144,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets
       })
-      .configureLogging(signalR.LogLevel.Information)
       .build();
 
     this.connection.start()

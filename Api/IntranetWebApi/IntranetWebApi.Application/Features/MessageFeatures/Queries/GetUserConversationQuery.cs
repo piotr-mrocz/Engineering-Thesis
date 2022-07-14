@@ -40,7 +40,7 @@ public class GetUserConversationHandler : IRequestHandler<GetUserConversationQue
                 (x.IdSender == request.IdAddressee && x.IdAddressee == request.IdSender),
                 cancellationToken);
 
-        if (messages is null || !messages.Succeeded || !messages.Data.Any())
+        if (messages is null || !messages.Succeeded || messages.Data == null || !messages.Data.Any())
         {
             return new Response<List<UserConversationDto>>()
             {

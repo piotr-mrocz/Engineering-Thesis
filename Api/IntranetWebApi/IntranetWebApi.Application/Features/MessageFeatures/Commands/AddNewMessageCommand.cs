@@ -49,6 +49,10 @@ public class AddNewMessageHandler : IRequestHandler<AddNewMessageCommand, BaseRe
             };
         }
 
+        var groupName = request.IdAddressee > request.IdSender
+            ? $"{request.IdSender}_{request.IdAddressee}"
+            : $"{request.IdAddressee}_{request.IdSender}";
+
         await _messageHub.Clients.All.NewMessage();
 
         return new BaseResponse()
