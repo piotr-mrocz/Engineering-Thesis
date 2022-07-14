@@ -18,6 +18,8 @@ import { TimeSpan } from "timespan"
 export class UserPresenceSupervisorComponent implements OnInit {
 
   private subscription: Subscription;
+  canChangePresence: boolean = false;
+  dateToCheck: Date;
   today: Date;
   day: number;
   month: number;
@@ -47,9 +49,11 @@ export class UserPresenceSupervisorComponent implements OnInit {
     this.day = this.today.getDate();
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
-
+    this.dateToCheck = new Date(this.year, this.month - 1, this.day);
+    this.checkIfCanChangePresence();
+    
     this.getNNUsers('allNNUsers');
-
+    
     this.getPresences(this.day, this.month, this.year);
     this.getAllPossibleAbsenceTypeToChoose();
   }
@@ -58,6 +62,38 @@ export class UserPresenceSupervisorComponent implements OnInit {
     if (this.subscription != undefined) {
       this.subscription.unsubscribe();
     }
+  }
+
+  checkIfCanChangePresence() {
+    var today = new Date();
+    var weekAgoFromToday = new Date(today.setDate(today.getDate() - 7));
+    
+    var from = new Date(weekAgoFromToday);
+    var to   = new Date(this.today);
+    var check = new Date(this.dateToCheck);
+    
+    if (check > from && check < to) {
+      this.canChangePresence = true;
+    }
+    else {
+      this.canChangePresence = false;
+    }
+  }
+
+  selectDate(date) {
+    var dates = date.split('-');
+    var month = dates[1];
+    var year = dates[0];
+    var day = dates[2];
+
+    this.day = day;
+    this.month = month;
+    this.year = year;
+
+    this.getPresences(day, month, year);
+
+    this.dateToCheck = new Date(this.year, this.month - 1, this.day);
+    this.checkIfCanChangePresence();
   }
 
   getAllPossibleAbsenceTypeToChoose() {

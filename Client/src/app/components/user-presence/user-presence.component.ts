@@ -21,15 +21,15 @@ export class UserPresenceComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   presenceResponse: BackendResponse<GetPresenceByIdUserListDto>;
   userId: number;
+  today: Date;
   month: number;
   year: number;
-
-  maxDate: string = `${this.year}-${this.month}`;
 
   constructor(private presenceService: PresenceService,
     private authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.today = new Date();
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
     this.userId = this.authService.user.id;

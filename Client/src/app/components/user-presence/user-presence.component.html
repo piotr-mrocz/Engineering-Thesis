@@ -11,8 +11,8 @@
                 <h3 *ngIf="month <= 9 && month[0] != 0">Data: 0{{month}}.{{year}}</h3>
             </div>
             <div class="col">
-                <input #date class="rounded text-light bg-dark" type="month" id="start" name="start" [max]="maxDate"
-                    [value]="maxDate" (change)="selectMonth(date.value)">
+                <input #date class="rounded text-light bg-dark" type="month" id="start" name="start" max="{{today |  date:'yyyy-MM'}}"
+                    value="{{today |  date:'yyyy-MM'}}" (change)="selectMonth(date.value)">
             </div>
         </div>
 

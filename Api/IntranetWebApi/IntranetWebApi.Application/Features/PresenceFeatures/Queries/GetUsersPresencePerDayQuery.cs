@@ -84,7 +84,10 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
             Data = new UsersPresencesPerDayDto()
             {
                 UsersNNPresencesList = presenceUsersListDto.Where(x => !x.IsPresent && x.PresentType == (int)AbsenceReasonsEnum.UnauthorizedAbsence).ToList(),
-                UsersAbsentPresencesList = presenceUsersListDto.Where(x => !x.IsPresent && x.PresentType != (int)AbsenceReasonsEnum.UnauthorizedAbsence).ToList(),
+                UsersAbsentPresencesList = presenceUsersListDto.Where(x => 
+                        !x.IsPresent && x.PresentType != (int)AbsenceReasonsEnum.UnauthorizedAbsence)
+                        .OrderBy(x => x.PresentType)
+                        .ToList(),
                 UsersPresentPresencesList = presenceUsersListDto.Where(x => x.IsPresent).ToList()
             }
         };
