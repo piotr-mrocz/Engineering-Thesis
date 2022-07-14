@@ -19,6 +19,7 @@ public class GetUsersPresencePerDayQuery : IRequest<Response<UsersPresencesPerDa
     public int Day { get; set; }
     public int Month { get; set; }
     public int Year { get; set; }
+
 }
 
 public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePerDayQuery, Response<UsersPresencesPerDayDto>>
@@ -35,6 +36,16 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
     public async Task<Response<UsersPresencesPerDayDto>> Handle(GetUsersPresencePerDayQuery request, CancellationToken cancellationToken)
     {
         var date =new DateTime(request.Year, request.Month, request.Day);
+
+        var isFreeDayByDate = CheckIfDateIsFreeDate(date);
+
+        if (isFreeDayByDate)
+        {
+            return new Response<UsersPresencesPerDayDto>()
+            {
+                Message = "W niedziele i święta firma jest zamknięta! Nie ma żadnych obecności"
+            };
+        }
 
         var users = await _userRepo.GetManyEntitiesByExpression(x => x.IsActive && !x.DateOfRelease.HasValue, cancellationToken);
 
@@ -55,8 +66,13 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
         {
             return new Response<UsersPresencesPerDayDto>()
             {
-                Message = "Nie ma żadnych obecności w bazie danych",
-                Data = new()
+                Succeeded = true,
+                Data = new UsersPresencesPerDayDto()
+                {
+                    UsersNNPresencesList = GetUsersPresencesPerDayDto(users.Data),
+                    UsersAbsentPresencesList = new(),
+                    UsersPresentPresencesList = new()
+                }
             };
         }
 
@@ -67,9 +83,19 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
             Succeeded = true,
             Data = new UsersPresencesPerDayDto()
             {
-                UsersPresencesList = presenceUsersListDto
+                UsersNNPresencesList = presenceUsersListDto.Where(x => !x.IsPresent && x.PresentType == (int)AbsenceReasonsEnum.UnauthorizedAbsence).ToList(),
+                UsersAbsentPresencesList = presenceUsersListDto.Where(x => !x.IsPresent && x.PresentType != (int)AbsenceReasonsEnum.UnauthorizedAbsence).ToList(),
+                UsersPresentPresencesList = presenceUsersListDto.Where(x => x.IsPresent).ToList()
             }
         };
+    }
+
+    private bool CheckIfDateIsFreeDate(DateTime date)
+    {
+        var freeDaysVM = DateTimeHelper.GetFreeDays(date.Year);
+        var freeDays = freeDaysVM.Select(x => x.FreeDay).ToList();
+
+        return freeDays.Contains(date) || date.DayOfWeek == DayOfWeek.Sunday;
     }
 
     private List<UserPresentsPerDayDto> GetUsersPresencesPerDayDto(IEnumerable<User> users, IEnumerable<Presence> presences)
@@ -81,20 +107,41 @@ public class GetUsersPresencePerDayHandler : IRequestHandler<GetUsersPresencePer
             var presence = presences.FirstOrDefault(x => x.IdUser == user.Id);
             var absenceInfo = GetAbsenceReason(presence);
 
-            var rekord = new UserPresentsPerDayDto()
+            presenceUsersListDto.Add(new UserPresentsPerDayDto()
             {
                 UserName = $"{user.FirstName} {user.LastName}",
+                IdUser = user.Id,
                 IsPresent = presence != null ? presence.IsPresent : false,
                 PresentType = absenceInfo.presentType,
                 AbsenceReason = absenceInfo.absenceDescription,
-                StartTime = presence != null ? presence.StartTime.ToString("h'h 'm'm") : "Brak odbicia",
+                StartTime = presence != null ? presence.StartTime.ToString() : "Brak odbicia",
                 EndTime = presence != null
                         ? presence.EndTime.HasValue
-
-                            ? presence.EndTime.Value.ToString("h'h 'm'm 's's'")
+                            ? presence.EndTime.Value.ToString()
                             : "Pracuje"
                         : "Brak odbicia"
-            };
+            });
+        }
+
+        return presenceUsersListDto;
+    }
+
+    private List<UserPresentsPerDayDto> GetUsersPresencesPerDayDto(IEnumerable<User> users)
+    {
+        var presenceUsersListDto = new List<UserPresentsPerDayDto>();
+
+        foreach (var user in users)
+        {
+            presenceUsersListDto.Add(new UserPresentsPerDayDto()
+            {
+                UserName = $"{user.FirstName} {user.LastName}",
+                IdUser = user.Id,
+                IsPresent = false,
+                PresentType = (int)AbsenceReasonsEnum.UnauthorizedAbsence,
+                AbsenceReason = EnumHelper.GetEnumDescription(AbsenceReasonsEnum.UnauthorizedAbsence),
+                StartTime = "Brak odbicia",
+                EndTime = "Brak odbicia"
+            });
         }
 
         return presenceUsersListDto;

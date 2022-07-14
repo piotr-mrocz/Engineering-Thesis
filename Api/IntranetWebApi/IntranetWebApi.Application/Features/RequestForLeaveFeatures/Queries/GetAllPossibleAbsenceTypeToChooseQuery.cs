@@ -11,13 +11,13 @@ using MediatR;
 
 namespace IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries;
 
-public class GetAllPossibleAbsenceTypeToChooseCommand : IRequest<Response<List<PossibleAbsenceToChooseDto>>>
+public class GetAllPossibleAbsenceTypeToChooseQuery : IRequest<Response<List<PossibleAbsenceToChooseDto>>>
 {
 }
 
-public class GetAllPossibleAbsenceTypeToChooseHandler : IRequestHandler<GetAllPossibleAbsenceTypeToChooseCommand, Response<List<PossibleAbsenceToChooseDto>>>
+public class GetAllPossibleAbsenceTypeToChooseHandler : IRequestHandler<GetAllPossibleAbsenceTypeToChooseQuery, Response<List<PossibleAbsenceToChooseDto>>>
 {
-    public async Task<Response<List<PossibleAbsenceToChooseDto>>> Handle(GetAllPossibleAbsenceTypeToChooseCommand request, CancellationToken cancellationToken)
+    public async Task<Response<List<PossibleAbsenceToChooseDto>>> Handle(GetAllPossibleAbsenceTypeToChooseQuery request, CancellationToken cancellationToken)
     {
         var absenceList = new List<PossibleAbsenceToChooseDto>()
         {

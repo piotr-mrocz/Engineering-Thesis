@@ -9,6 +9,7 @@ namespace IntranetWebApi.Domain.Models.Dto;
 public class UserPresentsPerDayDto
 {
     public string UserName { get; set; } = null!;
+    public int IdUser { get; set; }
     public bool IsPresent { get; set; }
     public int PresentType { get; set; }
     public string AbsenceReason { get; set; } = null;

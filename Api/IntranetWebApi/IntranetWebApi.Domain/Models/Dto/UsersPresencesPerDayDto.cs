@@ -8,5 +8,7 @@ namespace IntranetWebApi.Domain.Models.Dto;
 
 public class UsersPresencesPerDayDto
 {
-    public List<UserPresentsPerDayDto> UsersPresencesList { get; set; } = new();
+    public List<UserPresentsPerDayDto> UsersNNPresencesList { get; set; } = new();
+    public List<UserPresentsPerDayDto> UsersPresentPresencesList { get; set; } = new();
+    public List<UserPresentsPerDayDto> UsersAbsentPresencesList { get; set; } = new();
 }

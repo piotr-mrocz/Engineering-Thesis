@@ -55,7 +55,7 @@ public class RequestForLeaveController : ControllerBase
          => Ok(await _mediator.Send(request));
 
     [HttpPost]
-    public async Task<IActionResult> GetAllPossibleAbsenceTypeToChoose(GetAllPossibleAbsenceTypeToChooseCommand request)
+    public async Task<IActionResult> GetAllPossibleAbsenceTypeToChoose(GetAllPossibleAbsenceTypeToChooseQuery request)
         => Ok(await _mediator.Send(request));
 
     #endregion Queries

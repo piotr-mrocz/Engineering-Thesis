@@ -1,27 +1,129 @@
 <div class="container-fluid mb-5 p-5">
 
 
-    <div class="col-7 align-self-center mb-5 mt-5 p-5" style="margin: auto;">
-      <h2 *ngIf="month > 9">Ewidencja czasu pracy na dzień {{day}}.{{month}}.{{year}}</h2>
-      <h2 *ngIf="month <= 9" #monthWithZero>Ewidencja czasu pracy na dzień {{day}}.0{{month}}.{{year}}</h2>
-      <hr>
-      <div *ngIf="!presenceResponse.succeeded"
+  <div class="col-7 align-self-center mb-5 mt-5 p-5" style="margin: auto;">
+    <h2 *ngIf="month > 9">Ewidencja czasu pracy na dzień {{day}}.{{month}}.{{year}}</h2>
+    <h2 *ngIf="month <= 9" #monthWithZero>Ewidencja czasu pracy na dzień {{day}}.0{{month}}.{{year}}</h2>
+    <hr>
+    <div *ngIf="!presenceResponse.succeeded"
       class="m-3 bg-dark text-danger d-flex align-items-center justify-content-center rounded">
       <h2 class="text-center">{{presenceResponse.message}}</h2>
     </div>
 
-    <div *ngIf="presenceResponse.succeeded" class="row mt-5 d-flex align-items-center justify-content-center">
-      <ul *ngFor="let presence of presenceResponse.data" class="list-unstyled w-100">
+    <div class="row bg-primary p-1 rounded" style="height: 50px;">
+      <div class="col-6">
+        <button id="allNNUsers" type="button" class="btn p-1 btn-primary getUsersButton"
+          (click)="getNNUsers('allNNUsers')">Nieusprawiedliwiona nieobecność</button>
+      </div>
+      <div class="col">
+        <button id="allAbsentUsers" type="button" class="btn p-1 btn-primary getUsersButton"
+          (click)="getNNUsers('allAbsentUsers')">Nieobecni</button>
+      </div>
+      <div class="col">
+        <button id="allPresentUsers" type="button" class="btn p-1 btn-primary getUsersButton"
+          (click)="getNNUsers('allPresentUsers')">Obecni</button>
+      </div>
+    </div>
+
+    <div *ngIf="presenceResponse.succeeded" class="row mt-5 d-flex align-items-center justify-content-left">
+      <div
+        *ngIf="clickedButton == 'allNNUsers' && presenceResponse.data.usersNNPresencesList.length > 0; else noNNPresences">
+        <ul *ngFor="let presence of presenceResponse.data.usersNNPresencesList" class="list-unstyled w-100">
+          <li class="col mb-1">
+            <div class="row">
+              <div
+                class="col bg-dark p-4 border border-primary rounded d-flex align-items-center justify-content-center">
+                {{presence.userName}}
+              </div>
+              <div class="col d-flex align-items-center justify-content-left">
+                <a role="button" class="bg-success text-light border border-primary rounded" data-toggle="modal"
+                  href="#presentUserModel_{{presence.idUser}}">Zaznacz obecność użytkownika</a>
+              </div>
+
+              <div class="modal fade" id="presentUserModel_{{presence.idUser}}">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Zaznacz obecność użytkownika</h5>
+                      <button type="button" class="btn btn-close float-right text-danger" data-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body">
+
+                      <div class="row p-2 w-100">
+                        <div *ngIf="absenceResponse.succeeded"
+                          class="col d-flex align-items-center justify-content-left">
+                          <select #selectAbsenceReason class="rounded border border-primary p-1 bg-light w-100"
+                            (change)="showForm($event.target.value, presence.idUser)">
+                            <option disabled>Rodzaj obecności</option>
+                            <option *ngFor="let type of absenceResponse.data" value="{{type.id}}">{{type.absenceName}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div *ngIf="createRangePresence != null && createRangePresence"
+                        class="row w-100 d-flex align-items-center justify-content-center">
+                        <div class="row w-100">
+                          <div class="col">
+                            <input #startDate class="form-control w-100" placeholder="Od kiedy *" value="" type="text"
+                              onfocus="(this.type='date')" onblur="(this.type='text')" autocomplete="off" required />
+                          </div>
+                          <div class="col">
+                            <input #endDate class="form-control w-100" placeholder="Do kiedy *" value="" type="text"
+                              onfocus="(this.type='date')" onblur="(this.type='text')" autocomplete="off" required />
+                          </div>
+                        </div>
+
+                        <div class="row mt-3 p-2 w-100">
+                          <button class="bg-success border-0 text-light btn-close rounded p-3 d-flex align-items-center justify-content-right"
+                            (click)="createRangePresences(startDate.value, endDate.value)">Zapisz</button>
+                        </div>
+
+                      </div>
+
+                      <div *ngIf="createRangePresence != null && !createRangePresence"
+                        class="row w-100 d-flex align-items-center justify-content-center">
+                        <div class="row w-100">
+                          <div class="col">
+                            <input #startTime class="form-control w-100" placeholder="Wejście *" value="" type="text"
+                              onfocus="(this.type='time')" onblur="(this.type='text')" autocomplete="off" required />
+                          </div>
+                          <div class="col">
+                            <input #endTime class="form-control w-100" placeholder="Wyjście *" value="" type="text"
+                              onfocus="(this.type='time')" onblur="(this.type='text')" autocomplete="off" required />
+                          </div>
+                        </div>
+
+                        <div class="row mt-3 p-2 w-100">
+                          <button class="bg-success border-0 text-light btn-close rounded p-3 text-right"
+                            (click)="createPresence(startTime.value, endTime.value)">Zapisz</button>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      <ng-template #noNNPresences>
+        <h3 class="text-danger">Nie ma żadnych nieusprawiedliwionych nieobecności</h3>
+      </ng-template>
+
+      <!-- <ul *ngFor="let presence of presenceResponse.data.usersNNPresencesList" class="list-unstyled w-100">
         <li class="col bg-dark mb-1 p-4 border border-primary rounded">
-          <!-- <div class="row">
+          <div class="row">
             {{info.info}}
           </div>
           <div class="row text-muted d-flex align-items-center justify-content-end">
             ~ {{info.userName}}
-          </div> -->
+          </div>
         </li>
-      </ul>
-    </div>
+      </ul> -->
     </div>
   </div>
-  
+</div>

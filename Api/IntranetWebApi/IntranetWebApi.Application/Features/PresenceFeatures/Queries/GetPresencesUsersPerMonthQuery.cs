@@ -130,7 +130,7 @@ public class GetPresencesUsersPerMonthHandler : IRequestHandler<GetPresencesUser
     private (string absenceDescription, int presentType) GetAbsenceReason(Presence presence)
     {
         if (presence == null)
-            return (EnumHelper.GetEnumDescription(AbsenceReasonsEnum.UnauthorizedAbsence), (int)AbsenceReasonsEnum.UnauthorizedAbsence);
+            return ("NN", (int)AbsenceReasonsEnum.UnauthorizedAbsence);
 
         if (presence.IsPresent)
             return (EnumHelper.GetEnumDescription(AbsenceReasonsEnum.Present), (int)AbsenceReasonsEnum.Present);

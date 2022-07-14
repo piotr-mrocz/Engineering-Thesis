@@ -9,4 +9,6 @@ namespace IntranetWebApi.Domain.Consts;
 public static class WorkTimeConst
 {
     public static int OfficialWorkHoursPerDay = 8;
+    public static int StartWorkHour = 8;
+    public static int EndWorkHour = 16;
 }

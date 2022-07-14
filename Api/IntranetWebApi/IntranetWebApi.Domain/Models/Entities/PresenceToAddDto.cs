@@ -8,8 +8,8 @@ namespace IntranetWebApi.Domain.Models.Entities;
 
 public class PresenceToAddDto
 {
-    public TimeSpan StartTime { get; set; }
-    public TimeSpan EndTime { get; set; }
+    public TimeSpan? StartTime { get; set; }
+    public TimeSpan? EndTime { get; set; }
     public int IdUser { get; set; }
     public bool IsPresent { get; set; }
     public int? AbsenceReason { get; set; }

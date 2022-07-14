@@ -52,7 +52,9 @@ export class EndpointsUrl {
 
     //presence
     public readonly createPresenceEndpoint = "api/Presence/CreatePresence";
+    public readonly createRangePresenceEndpoint = "api/Presence/CreateRangePresence";
     public readonly updatePresenceEndpoint = "api/Presence/UpdatePresence";
     public readonly getPresencesUsersPerMonthEndpoint = "api/Presence/GetPresencesUsersPerMonth";
     public readonly getUsersPresencePerDayEndpoint = "api/Presence/GetUsersPresencePerDay";
+    public readonly getAllPossibleAbsenceTypeToChoosePresenceEndpoint = "api/Presence/GetAllPossibleAbsenceTypeToChoose";
 }

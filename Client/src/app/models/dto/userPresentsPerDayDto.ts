@@ -1,7 +1,8 @@
 export interface UserPresentsPerDayDto {
     userName?: string,
+    idUser?: number,
     isPresent?: boolean,
-    presentType?: Int16Array,
+    presentType?: number,
     absenceReason?: string,
     startTime?: string,
     endTime?: string

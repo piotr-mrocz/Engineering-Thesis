@@ -22,6 +22,10 @@ public class PresenceController : ControllerBase
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
+    public async Task<IActionResult> CreateRangePresence(CreateRangePresenceCommand request)
+        => Ok(await _mediator.Send(request));
+
+    [HttpPost]
     public async Task<IActionResult> UpdatePresence(UpdatePresenceCommand request)
         => Ok(await _mediator.Send(request));
     #endregion Commands
@@ -34,5 +38,9 @@ public class PresenceController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> GetPresencesUsersPerMonth(GetPresencesUsersPerMonthQuery request)
         => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> GetAllPossibleAbsenceTypeToChoose(GetAllPossibleAbsenceTypeToChooseQuery request)
+         => Ok(await _mediator.Send(request));
     #endregion Queries
 }
