@@ -8,6 +8,7 @@ import { AbsenceTypes } from 'src/app/models/enums/absenceType';
 import { PossibleAbsenceToChooseDto } from 'src/app/models/dto/possibleAbsenceToChooseDto';
 import { PresenceToAddRangeDto } from 'src/app/models/dto/presenceToAddRangeDto';
 import { PresenceToAddDto } from 'src/app/models/dto/presenceToAddDto';
+import { TimeSpan } from "timespan"
 
 @Component({
   selector: 'app-user-presence-supervisor',
@@ -105,7 +106,7 @@ export class UserPresenceSupervisorComponent implements OnInit {
   }
 
   showForm(absenceType: number, userId: number) {
-    console.log(absenceType);
+    
       if (absenceType == this.holiday || absenceType == this.l4 || absenceType == this.delagation || absenceType == this.matherFreeDays) {
         this.createRangePresence = true;
       }

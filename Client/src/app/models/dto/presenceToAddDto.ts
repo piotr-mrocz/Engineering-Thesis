@@ -1,8 +1,6 @@
-import { Time } from "@angular/common";
-
 export class PresenceToAddDto {
-  startTime?: Time;
-  endTime?: Time;
+  startTime?: string;
+  endTime?: string;
   idUser?: number;
   isPresent?: boolean;
   absenceReason?: number;

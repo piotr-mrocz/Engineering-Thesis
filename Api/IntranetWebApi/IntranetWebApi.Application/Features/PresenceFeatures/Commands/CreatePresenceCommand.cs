@@ -31,24 +31,39 @@ public class CreatePresenceHandler : IRequestHandler<CreatePresenceCommand, Base
         decimal workHour = WorkTimeConst.OfficialWorkHoursPerDay;
         decimal extraWorkHour = 0;
 
-        if (request.PresenceInfo.StartTime.HasValue && request.PresenceInfo.EndTime.HasValue)
-        {
-            var worksHours = DateTimeHelper.GetWorkHours(request.PresenceInfo.StartTime.Value, request.PresenceInfo.EndTime.Value);
-            workHour = worksHours.workHours;
-            extraWorkHour = worksHours.extraWorkHours;
-        }
+        TimeSpan startTime;
+        TimeSpan endTime;
 
         var presenceToAdd = new Presence()
         {
             Date = DateTime.Now.Date,
-            StartTime = request.PresenceInfo.StartTime.HasValue ? request.PresenceInfo.StartTime.Value : new TimeSpan(WorkTimeConst.StartWorkHour, 0, 0),
-            EndTime = request.PresenceInfo.EndTime.HasValue ? request.PresenceInfo.EndTime.Value : new TimeSpan(WorkTimeConst.EndWorkHour, 0, 0),
             IdUser = request.PresenceInfo.IdUser,
             IsPresent = request.PresenceInfo.IsPresent,
             AbsenceReason = request.PresenceInfo.AbsenceReason,
-            WorkHours = workHour,
-            ExtraWorkHours = extraWorkHour
+            StartTime = new TimeSpan(WorkTimeConst.StartWorkHour, 0, 0),
+            EndTime = new TimeSpan(WorkTimeConst.EndWorkHour, 0, 0)
         };
+
+        if (!string.IsNullOrEmpty(request.PresenceInfo.StartTime) && !string.IsNullOrEmpty(request.PresenceInfo.EndTime))
+        {
+            if (!TimeSpan.TryParse(request.PresenceInfo.StartTime, out startTime) || !TimeSpan.TryParse(request.PresenceInfo.EndTime, out endTime))
+            {
+                return new BaseResponse()
+                {
+                    Message = "Niepoprawna data!"
+                };
+            }
+
+            var worksHours = DateTimeHelper.GetWorkHours(startTime, endTime);
+            workHour = worksHours.workHours;
+            extraWorkHour = worksHours.extraWorkHours;
+
+            presenceToAdd.StartTime = startTime;
+            presenceToAdd.EndTime = endTime;
+        }
+
+        presenceToAdd.WorkHours = workHour;
+        presenceToAdd.ExtraWorkHours = extraWorkHour;
 
         var response = await _presenceRepo.CreateEntity(presenceToAdd, cancellationToken);
 
