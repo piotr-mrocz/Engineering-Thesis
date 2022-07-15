@@ -55,7 +55,8 @@ public class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, BaseResponse
             var systemMessage = new SystemMessage()
             {
                 IdUser = task.Data.IdUser,
-                Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.RemoveUserTask)
+                Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.RemoveUserTask),
+                AddedDate = DateTime.Now
             };
 
             await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);

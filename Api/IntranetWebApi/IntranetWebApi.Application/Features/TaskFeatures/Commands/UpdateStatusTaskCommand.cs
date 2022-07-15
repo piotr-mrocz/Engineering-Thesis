@@ -66,7 +66,8 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
                 IdUser = taskToUpdate.Data.IdUser,
                 Info = request.Status == (int)TaskStatusEnum.InProgress
                      ? EnumHelper.GetEnumDescription(SystemMessageTypeEnum.StartUserTask)
-                     : EnumHelper.GetEnumDescription(SystemMessageTypeEnum.EndUserTask)
+                     : EnumHelper.GetEnumDescription(SystemMessageTypeEnum.EndUserTask),
+                AddedDate = DateTime.Now
             };
 
             await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);

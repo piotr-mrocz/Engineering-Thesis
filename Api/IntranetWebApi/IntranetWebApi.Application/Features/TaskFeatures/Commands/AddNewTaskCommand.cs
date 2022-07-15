@@ -63,7 +63,8 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
             var systemMessage = new SystemMessage()
             {
                 IdUser = request.IdUser,
-                Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AddNewUserTask)
+                Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AddNewUserTask),
+                AddedDate = DateTime.Now
             };
 
             await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);

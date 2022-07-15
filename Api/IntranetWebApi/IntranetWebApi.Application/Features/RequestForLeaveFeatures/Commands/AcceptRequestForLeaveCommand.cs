@@ -94,7 +94,8 @@ public class AcceptRequestForLeaveHandler : IRequestHandler<AcceptRequestForLeav
         var systemMessage = new SystemMessage()
         {
             IdUser = idUser,
-            Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AcceptRequestForLeave)
+            Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AcceptRequestForLeave),
+            AddedDate = DateTime.Now
         };
 
         await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
