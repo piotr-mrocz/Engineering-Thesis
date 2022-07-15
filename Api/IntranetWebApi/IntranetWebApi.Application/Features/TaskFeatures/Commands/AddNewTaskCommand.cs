@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Enums;
+using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
@@ -22,10 +24,12 @@ public class AddNewTaskCommand : IRequest<BaseResponse>
 public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse>
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
+    private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
 
-    public AddNewTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo)
+    public AddNewTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, IGenericRepository<SystemMessage> systemMessageRepo)
     {
         _taskRepo = taskRepo;
+        _systemMessageRepo = systemMessageRepo;
     }
 
     public async Task<BaseResponse> Handle(AddNewTaskCommand request, CancellationToken cancellationToken)
@@ -40,17 +44,35 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
             ProgressDate = null,
             FinishDate = null,
             Status = (int)TaskStatusEnum.ToDo,
-            Priority = request.Priority
+            Priority = request.Priority,
+            WhoAdd = request.WhoAdd
         };
 
         var response = await _taskRepo.CreateEntity(taskToAdd, cancellationToken);
 
+        if (!response.Succeeded)
+        {
+            return new BaseResponse()
+            {
+                Message = "Nie udało się dodać zadania!"
+            };
+        }
+
+        if (request.IdUser != request.WhoAdd)
+        {
+            var systemMessage = new SystemMessage()
+            {
+                IdUser = request.IdUser,
+                Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AddNewUserTask)
+            };
+
+            await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+        }
+
         return new BaseResponse()
         {
             Succeeded = response.Succeeded,
-            Message = response.Succeeded
-                    ? "Zadanie zostało dodane"
-                    : "Nie udało się dodać zadania!"
+            Message = "Zadanie zostało dodane"
         };
     }
 }

@@ -22,11 +22,16 @@ public class RejectRequestForLeaveHandler : IRequestHandler<RejectRequestForLeav
 {
     private readonly IGenericRepository<RequestForLeave> _requestRepo;
     private readonly IGenericRepository<User> _userRepo;
+    private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
 
-    public RejectRequestForLeaveHandler(IGenericRepository<RequestForLeave> requestRepo, IGenericRepository<User> userRepo)
+    public RejectRequestForLeaveHandler(
+        IGenericRepository<RequestForLeave> requestRepo, 
+        IGenericRepository<User> userRepo,
+        IGenericRepository<SystemMessage> systemMessageRepo)
     {
         _requestRepo = requestRepo;
         _userRepo = userRepo;
+        _systemMessageRepo = systemMessageRepo;
     }
 
     public async Task<BaseResponse> Handle(RejectRequestForLeaveCommand request, CancellationToken cancellationToken)
@@ -57,13 +62,22 @@ public class RejectRequestForLeaveHandler : IRequestHandler<RejectRequestForLeav
 
         var response = await _requestRepo.UpdateEntity(requestForLeave.Data, cancellationToken);
 
-        await UpdateUserVacationInfo(requestForLeave.Data.IdApplicant, totalDaysVacation, cancellationToken);
-
-        return new BaseResponse()
+        if (!response.Succeeded)
         {
-            Succeeded = response.Succeeded,
-            Message = response.Succeeded ? response.Message : "Wystąpił błąd podczas akceptowania wniosku!"
-        };
+            return new BaseResponse()
+            {
+                Message = "Nie udało się odrzucić wniosku!"
+            };
+        }
+
+       var updateUserVacationDays = await UpdateUserVacationInfo(requestForLeave.Data.IdApplicant, totalDaysVacation, cancellationToken);
+
+        if (!updateUserVacationDays.Succeeded)
+            return updateUserVacationDays;
+
+        await AddSystemMessage(requestForLeave.Data.IdApplicant, cancellationToken);
+
+        return response;
     }
 
     private async Task<BaseResponse> UpdateUserVacationInfo(int idUser, int totalDaysVacationInThisRequest, CancellationToken cancellationToken)
@@ -88,5 +102,16 @@ public class RejectRequestForLeaveHandler : IRequestHandler<RejectRequestForLeav
             Succeeded = response.Succeeded,
             Message = response.Succeeded ? response.Message : "Nie udało się wyzerować dni urlopowych w requestach"
         };
+    }
+
+    private async System.Threading.Tasks.Task AddSystemMessage(int idUser, CancellationToken cancellationToken)
+    {
+        var systemMessage = new SystemMessage()
+        {
+            IdUser = idUser,
+            Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.RejectRequestForLeave)
+        };
+
+        await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
     }
 }

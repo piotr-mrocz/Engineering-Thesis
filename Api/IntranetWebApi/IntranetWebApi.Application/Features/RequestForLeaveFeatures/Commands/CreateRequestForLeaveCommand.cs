@@ -25,14 +25,18 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
     private readonly IGenericRepository<RequestForLeave> _requestForLeaveRepo;
     private readonly IGenericRepository<User> _userRepo;
     private readonly IGenericRepository<Department> _departmentRepo;
+    private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
 
-    public CreateRequestForLeaveHandler(IGenericRepository<RequestForLeave> requestForLeaveRepo,
+    public CreateRequestForLeaveHandler(
+        IGenericRepository<RequestForLeave> requestForLeaveRepo,
         IGenericRepository<User> userRepo,
-        IGenericRepository<Department> departmentRepo)
+        IGenericRepository<Department> departmentRepo,
+        IGenericRepository<SystemMessage> systemMessageRepo)
     {
         _requestForLeaveRepo = requestForLeaveRepo;
         _userRepo = userRepo;
         _departmentRepo = departmentRepo;
+        _systemMessageRepo = systemMessageRepo;
     }
 
     public async Task<BaseResponse> Handle(CreateRequestForLeaveCommand request, CancellationToken cancellationToken)
@@ -83,10 +87,21 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
 
         var response = await _requestForLeaveRepo.CreateEntity(newRequest, cancellationToken);
 
+        if (!response.Succeeded)
+        {
+            return new BaseResponse()
+            {
+                Message = "Nie udało się przesłać wniosku!"
+            };
+        }
+
+        if (newRequest.IdApplicant != newRequest.IdSupervisor)
+            await AddSystemMessage(newRequest.IdSupervisor, cancellationToken);
+
         return new BaseResponse()
         {
             Succeeded = response.Succeeded,
-            Message = response.Succeeded ? response.Message : "Nie udało się przesłać wniosku!"
+            Message = response.Message
         };
     }
 
@@ -166,6 +181,17 @@ public class CreateRequestForLeaveHandler : IRequestHandler<CreateRequestForLeav
         await _userRepo.UpdateEntity(user, cancellationToken);
 
         return true;
+    }
+
+    private async System.Threading.Tasks.Task AddSystemMessage(int idUser, CancellationToken cancellationToken)
+    {
+        var systemMessage = new SystemMessage()
+        {
+            IdUser = idUser,
+            Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AddNewRequestForLeave)
+        };
+
+        await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
     }
 }
 

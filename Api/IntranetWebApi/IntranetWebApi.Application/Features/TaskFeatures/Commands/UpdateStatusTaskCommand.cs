@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetWebApi.Application.Helpers;
 using IntranetWebApi.Domain.Enums;
+using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
@@ -19,10 +21,12 @@ public class UpdateStatusTaskCommand : IRequest<BaseResponse>
 public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, BaseResponse>
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
+    private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
 
-    public UpdateStatusTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo)
+    public UpdateStatusTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, IGenericRepository<SystemMessage> systemMessageRepo)
     {
         _taskRepo = taskRepo;
+        _systemMessageRepo = systemMessageRepo;
     }
 
     public async Task<BaseResponse> Handle(UpdateStatusTaskCommand request, CancellationToken cancellationToken)
@@ -47,12 +51,31 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
 
         var response = await _taskRepo.UpdateEntity(taskToUpdate.Data, cancellationToken);
 
+        if (!response.Succeeded)
+        {
+            return new BaseResponse()
+            {
+                Message = "Nie udało się zmienić statusu zadania!"
+            };
+        }
+
+        if (taskToUpdate.Data.IdUser != taskToUpdate.Data.WhoAdd)
+        {
+            var systemMessage = new SystemMessage()
+            {
+                IdUser = taskToUpdate.Data.IdUser,
+                Info = request.Status == (int)TaskStatusEnum.InProgress
+                     ? EnumHelper.GetEnumDescription(SystemMessageTypeEnum.StartUserTask)
+                     : EnumHelper.GetEnumDescription(SystemMessageTypeEnum.EndUserTask)
+            };
+
+            await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+        }
+
         return new BaseResponse()
         {
             Succeeded = response.Succeeded,
-            Message = response.Succeeded
-                    ? "Operacja zakończona powodzeniem"
-                    : "Wystąpił błąd! Prosimy o kontakt z działem IT"
+            Message = "Operacja zakończona powodzeniem"
         };
     }
 }
