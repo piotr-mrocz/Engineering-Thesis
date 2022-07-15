@@ -20,6 +20,7 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
     public DbSet<Message> Messages { get; set; }
     public DbSet<Domain.Models.Entities.Task> Tasks { get; set; }
     public DbSet<ImportantInfo> ImportantInfos { get; set; }
+    public DbSet<SystemMessage> SystemMessages { get; set; }
     #endregion DbSets
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -73,7 +74,11 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
             .HasOne(i => i.WhoAdded)
             .WithMany(u => u.ImportantInfos)
             .HasForeignKey(x => x.IdWhoAdded);
-            
+
+        builder.Entity<SystemMessage>()
+            .HasOne(m => m.User)
+            .WithMany(u => u.SystemMessages)
+            .HasForeignKey(x => x.IdUser);
 
         base.OnModelCreating(builder);
     }
