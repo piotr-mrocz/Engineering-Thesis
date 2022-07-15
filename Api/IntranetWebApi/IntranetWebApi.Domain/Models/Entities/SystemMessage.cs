@@ -13,6 +13,7 @@ public class SystemMessage
     public string Info { get; set; } = null!;
     public bool IsRead { get; set; }
     public DateTime? ReadDate { get; set; }
+    public DateTime AddedDate { get; set; }
 
     public User User { get; set; } = null!;
 }
