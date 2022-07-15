@@ -3,8 +3,11 @@
       <div id="navbarmenu" class=" justify-content-right">
       <ul class="list-inline">
         <li class="list-inline-item text-left pr-3">
-          <div>
-            <h5>Powiadomienia</h5>
+          <div class="row">
+            <button class="icon-button" aria-current="page" routerLink="/chat">
+              <span><i class="bi bi-bell-fill"></i></span>
+              <span class="icon-button__badge">2</span>
+            </button>
           </div>
         </li>
         <li class="list-inline-item"> <img class="rounded-circle" alt="100x100" width="100px" [src]="userPhotoSource"
