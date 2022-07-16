@@ -9,4 +9,12 @@ public enum DepartmentsEnum
     [Description("IT")]
     It = 2,
 
+    [Description("Zarząd")]
+    Managers = 1002,
+
+    [Description("Kadry")]
+    HR = 1003,
+
+    [Description("Księgowość")]
+    Accounts = 1004,
 }
