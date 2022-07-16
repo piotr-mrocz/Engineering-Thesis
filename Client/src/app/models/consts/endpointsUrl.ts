@@ -61,4 +61,5 @@ export class EndpointsUrl {
 
     // system's messages
     public readonly getAllSystemMessageEndpoint = "api/SystemMessage/GetAllSystemMessage";
+    public readonly getCountOnlyUnreadSystemMessagesEndpoint = "api/SystemMessage/GetCountOnlyUnreadSystemMessages";
 }

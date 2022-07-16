@@ -78,7 +78,21 @@ ul > li > a {
   right: -10px;
   width: 25px;
   height: 25px;
-  background: red;
+  background: #d9534f;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.icon-button__badge-zero {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 25px;
+  height: 25px;
+  background: #5cb85c;
   color: #ffffff;
   display: flex;
   justify-content: center;

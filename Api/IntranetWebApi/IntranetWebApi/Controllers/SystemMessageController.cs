@@ -21,6 +21,10 @@ public class SystemMessageController : ControllerBase
         => Ok(await _mediator.Send(request));
 
     [HttpPost]
+    public async Task<IActionResult> GetCountOnlyUnreadSystemMessages(GetCountOnlyUnreadSystemMessagesQuery request)
+         => Ok(await _mediator.Send(request));
+
+    [HttpPost]
     public async Task<IActionResult> UpdateUnreadSystemMessages(UpdateUnreadSystemMessagesCommand request)
         => Ok(await _mediator.Send(request));
 }

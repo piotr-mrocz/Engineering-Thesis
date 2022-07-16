@@ -6,7 +6,8 @@
           <div class="row">
             <button class="icon-button" aria-current="page" routerLink="/chat">
               <span><i class="bi bi-bell-fill"></i></span>
-              <span class="icon-button__badge">2</span>
+              <span *ngIf="messagesSystemCountResponse.succeeded && messagesSystemCountResponse.data.countUnreadMessages > 0" class="icon-button__badge">{{messagesSystemCountResponse.data.countUnreadMessages}}</span>
+              <span *ngIf="!messagesSystemCountResponse.succeeded || messagesSystemCountResponse.data.countUnreadMessages == 0" class="icon-button__badge-zero">0</span>
             </button>
           </div>
         </li>
