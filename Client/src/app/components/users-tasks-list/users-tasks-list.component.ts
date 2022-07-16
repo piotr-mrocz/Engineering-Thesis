@@ -6,6 +6,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { BackendResponse } from 'src/app/models/response/backendResponse';
 import { Subscription } from 'rxjs';
 import { TaskUserDto } from 'src/app/models/dto/taskUserDto';
+import * as signalR from '@aspnet/signalr';
+import { BackendSettings } from 'src/app/models/consts/backendSettings';
 
 @Component({
   selector: 'app-users-tasks-list',
@@ -27,21 +29,44 @@ export class UsersTasksListComponent implements OnInit, OnDestroy {
 
   tasksResponse: BackendResponse<TaskUserDto[]>;
   private subscription: Subscription;
+  private connection: signalR.HubConnection;
 
   constructor(private tasksService: TasksService,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private backendSettings: BackendSettings) {
     this.userId = this.authService.user.id;
   }
 
   ngOnInit() {
+    this.startConnection();
+
     this.tasksService.isTaskAddBySupervisor = true;
     this.getToDoTasks("tasksToDo");
+
+    this.connection.on("TaskChanges", () => {
+      this.getToDoTasks("tasksToDo");
+    });
   }
 
   ngOnDestroy() {
     if (this.subscription != undefined) {
       this.subscription.unsubscribe();
     }
+
+    this.connection.stop();
+  }
+
+  public startConnection = () => {
+    this.connection = new signalR.HubConnectionBuilder()
+      .withUrl(this.backendSettings.baseAddress + "tasks", {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
+      })
+      .build();
+
+    this.connection.start()
+      .then(() => console.log("Connection started"))
+      .catch(err => console.log("Error while starting connection: " + err))
   }
 
   private getAllTasks(idClickedButton: string, status: number) {

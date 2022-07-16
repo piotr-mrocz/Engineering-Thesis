@@ -23,15 +23,18 @@ public class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, BaseResponse
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
     private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
+    private readonly IHubContext<TaskHubClient, ITaskHubClient> _taskHub;
 
     public DeleteTaskHandler(
         IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo,
         IGenericRepository<SystemMessage> systemMessageRepo,
-        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub,
+        IHubContext<TaskHubClient, ITaskHubClient> taskHub)
     {
         _taskRepo = taskRepo;
         _systemMessageRepo = systemMessageRepo;
         _systemMessagesHub = systemMessagesHub;
+        _taskHub = taskHub;
     }
 
     public async Task<BaseResponse> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
@@ -58,6 +61,8 @@ public class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, BaseResponse
 
         if (task.Data.IdUser != task.Data.WhoAdd)
             await AddSystemMessage(task.Data.IdUser, cancellationToken);
+
+        await _taskHub.Clients.All.TaskChanges();
 
         return new BaseResponse()
         {

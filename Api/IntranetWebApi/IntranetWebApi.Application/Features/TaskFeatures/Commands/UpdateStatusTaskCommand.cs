@@ -24,15 +24,18 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
     private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
+    private readonly IHubContext<TaskHubClient, ITaskHubClient> _taskHub;
 
     public UpdateStatusTaskHandler(
         IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, 
         IGenericRepository<SystemMessage> systemMessageRepo,
-        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub,
+        IHubContext<TaskHubClient, ITaskHubClient> taskHub)
     {
         _taskRepo = taskRepo;
         _systemMessageRepo = systemMessageRepo;
         _systemMessagesHub = systemMessagesHub;
+        _taskHub = taskHub;
     }
 
     public async Task<BaseResponse> Handle(UpdateStatusTaskCommand request, CancellationToken cancellationToken)
@@ -69,7 +72,7 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
         {
             var systemMessage = new SystemMessage()
             {
-                IdUser = taskToUpdate.Data.IdUser,
+                IdUser = taskToUpdate.Data.WhoAdd,
                 Info = request.Status == (int)TaskStatusEnum.InProgress
                      ? EnumHelper.GetEnumDescription(SystemMessageTypeEnum.StartUserTask)
                      : EnumHelper.GetEnumDescription(SystemMessageTypeEnum.EndUserTask),
@@ -81,6 +84,8 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
             if (addResponse.Succeeded)
                 await _systemMessagesHub.Clients.All.NewSystemMessage();
         }
+
+        await _taskHub.Clients.All.TaskChanges();
 
         return new BaseResponse()
         {

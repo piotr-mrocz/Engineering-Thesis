@@ -27,15 +27,18 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
     private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
+    private readonly IHubContext<TaskHubClient, ITaskHubClient> _taskHub;
 
     public AddNewTaskHandler(
         IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, 
         IGenericRepository<SystemMessage> systemMessageRepo,
-        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub,
+        IHubContext<TaskHubClient, ITaskHubClient> taskHub)
     {
         _taskRepo = taskRepo;
         _systemMessageRepo = systemMessageRepo;
         _systemMessagesHub = systemMessagesHub;
+        _taskHub = taskHub;
     }
 
     public async Task<BaseResponse> Handle(AddNewTaskCommand request, CancellationToken cancellationToken)
@@ -68,6 +71,8 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
         {
             await AddSystemMessage(request.IdUser, cancellationToken);
         }
+
+        await _taskHub.Clients.All.TaskChanges();
 
         return new BaseResponse()
         {

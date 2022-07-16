@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 
@@ -21,10 +22,14 @@ public class UpdateTaskCommand : IRequest<BaseResponse>
 public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, BaseResponse>
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
+    private readonly IHubContext<TaskHubClient, ITaskHubClient> _taskHub;
 
-    public UpdateTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo)
+    public UpdateTaskHandler(
+        IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo,
+        IHubContext<TaskHubClient, ITaskHubClient> taskHub)
     {
         _taskRepo = taskRepo;
+        _taskHub = taskHub;
     }
 
     public async Task<BaseResponse> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
@@ -45,6 +50,8 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, BaseResponse
         taskToUpdate.Data.Priority = request.Priority;
 
         var response = await _taskRepo.UpdateEntity(taskToUpdate.Data, cancellationToken);
+
+        await _taskHub.Clients.All.TaskChanges();
 
         return new BaseResponse()
         {
