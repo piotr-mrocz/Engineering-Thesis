@@ -53,7 +53,9 @@ import { UserPresenceSupervisorComponent } from './components/user-presence-supe
     ChangePasswordComponent, 
     VacationUserInformationComponent, 
     AddNewRequestComponent, 
-    VacationSupervisorComponent, UserPresenceComponent, UserPresenceSupervisorComponent
+    VacationSupervisorComponent, 
+    UserPresenceComponent, 
+    UserPresenceSupervisorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

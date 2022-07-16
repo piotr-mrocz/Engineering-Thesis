@@ -58,4 +58,7 @@ export class EndpointsUrl {
     public readonly getPresencesUsersPerMonthEndpoint = "api/Presence/GetPresencesUsersPerMonth";
     public readonly getUsersPresencePerDayEndpoint = "api/Presence/GetUsersPresencePerDay";
     public readonly getAllPossibleAbsenceTypeToChoosePresenceEndpoint = "api/Presence/GetAllPossibleAbsenceTypeToChoose";
+
+    // system's messages
+    public readonly getAllSystemMessageEndpoint = "api/SystemMessage/GetAllSystemMessage";
 }

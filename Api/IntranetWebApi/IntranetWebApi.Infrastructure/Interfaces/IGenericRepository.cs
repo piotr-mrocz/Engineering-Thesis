@@ -10,6 +10,7 @@ namespace IntranetWebApi.Infrastructure.Repository
         Task<ResponseStruct<int>> CreateEntity(T createEntity, CancellationToken cancellationToken);
         Task<ResponseStruct<bool>> CreateRangeEntities(List<T> entitiesList, CancellationToken cancellationToken);
         Task<BaseResponse> UpdateEntity(T updateEntity, CancellationToken cancellationToken);
+        Task<BaseResponse> UpdateRangeEntities(List<T> updateEntities, CancellationToken cancellationToken);
         Task<BaseResponse> DeleteEntity(T deleteEntity, CancellationToken cancellationToken);
     }
 }

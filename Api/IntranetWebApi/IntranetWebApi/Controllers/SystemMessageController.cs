@@ -1,4 +1,5 @@
-﻿using IntranetWebApi.Application.Features.SystemMessagesFeatures.Queries;
+﻿using IntranetWebApi.Application.Features.SystemMessagesFeatures.Commands;
+using IntranetWebApi.Application.Features.SystemMessagesFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,10 @@ public class SystemMessageController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetAllUnReadSystemMessage(GetAllUnReadSystemMessageQuery request)
+    public async Task<IActionResult> GetAllSystemMessage(GetAllSystemMessageQuery request)
+        => Ok(await _mediator.Send(request));
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateUnreadSystemMessages(UpdateUnreadSystemMessagesCommand request)
         => Ok(await _mediator.Send(request));
 }

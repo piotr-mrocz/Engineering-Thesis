@@ -78,6 +78,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         };
     }
 
+    public async Task<BaseResponse> UpdateRangeEntities(List<T> updateEntities, CancellationToken cancellationToken)
+    {
+        _dbContext.Set<T>().UpdateRange(updateEntities);
+        var result = await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return new BaseResponse()
+        {
+            Succeeded = result > 0,
+            Message = result > 0 ? "Operacja zakończona powodzeniem" : "Can't update entity"
+        };
+    }
+
     public async Task<BaseResponse> DeleteEntity(T deleteEntity, CancellationToken cancellationToken)
     {
          _dbContext.Set<T>().Remove(deleteEntity);
