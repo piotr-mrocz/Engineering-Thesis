@@ -8,6 +8,7 @@ using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace IntranetWebApi.Application.Features.SystemMessagesFeatures.Commands;
 
@@ -19,10 +20,14 @@ public class UpdateUnreadSystemMessagesCommand : IRequest<BaseResponse>
 public class UpdateUnreadSystemMessagesHandler : IRequestHandler<UpdateUnreadSystemMessagesCommand, BaseResponse>
 {
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
+    private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
 
-    public UpdateUnreadSystemMessagesHandler(IGenericRepository<SystemMessage> systemMessageRepo)
+    public UpdateUnreadSystemMessagesHandler(
+        IGenericRepository<SystemMessage> systemMessageRepo,
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
     {
         _systemMessageRepo = systemMessageRepo;
+        _systemMessagesHub = systemMessagesHub;
     }
 
     public async Task<BaseResponse> Handle(UpdateUnreadSystemMessagesCommand request, CancellationToken cancellationToken)
@@ -71,10 +76,13 @@ public class UpdateUnreadSystemMessagesHandler : IRequestHandler<UpdateUnreadSys
 
         var response = await _systemMessageRepo.UpdateRangeEntities(messagesSystem.Data.ToList(), cancellationToken);
 
+        if (response.Succeeded)
+            await _systemMessagesHub.Clients.All.NewSystemMessage();
+
         return new BaseResponse()
         {
             Succeeded = response.Succeeded,
-            Message = response.Succeeded ? response.Message : "Nie udało się odczytać wiadomosći"
+            Message = response.Succeeded ? response.Message : "Nie udało się odczytać wiadomości"
         };
     }
 }

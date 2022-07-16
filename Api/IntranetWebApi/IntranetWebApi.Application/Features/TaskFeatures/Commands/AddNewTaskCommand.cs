@@ -9,6 +9,7 @@ using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 public class AddNewTaskCommand : IRequest<BaseResponse>
@@ -25,11 +26,16 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
+    private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
 
-    public AddNewTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, IGenericRepository<SystemMessage> systemMessageRepo)
+    public AddNewTaskHandler(
+        IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, 
+        IGenericRepository<SystemMessage> systemMessageRepo,
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
     {
         _taskRepo = taskRepo;
         _systemMessageRepo = systemMessageRepo;
+        _systemMessagesHub = systemMessagesHub;
     }
 
     public async Task<BaseResponse> Handle(AddNewTaskCommand request, CancellationToken cancellationToken)
@@ -60,14 +66,7 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
 
         if (request.IdUser != request.WhoAdd)
         {
-            var systemMessage = new SystemMessage()
-            {
-                IdUser = request.IdUser,
-                Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AddNewUserTask),
-                AddedDate = DateTime.Now
-            };
-
-            await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+            await AddSystemMessage(request.IdUser, cancellationToken);
         }
 
         return new BaseResponse()
@@ -75,5 +74,20 @@ public class AddNewTaskHandler : IRequestHandler<AddNewTaskCommand, BaseResponse
             Succeeded = response.Succeeded,
             Message = "Zadanie zostało dodane"
         };
+    }
+
+    private async System.Threading.Tasks.Task AddSystemMessage(int idUser, CancellationToken cancellationToken)
+    {
+        var systemMessage = new SystemMessage()
+        {
+            IdUser = idUser,
+            Info = EnumHelper.GetEnumDescription(SystemMessageTypeEnum.AddNewUserTask),
+            AddedDate = DateTime.Now
+        };
+
+        var response = await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+
+        if (response.Succeeded)
+            await _systemMessagesHub.Clients.All.NewSystemMessage();
     }
 }

@@ -9,6 +9,7 @@ using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace IntranetWebApi.Application.Features.TaskFeatures;
 
@@ -22,11 +23,16 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
 {
     private readonly IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> _taskRepo;
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
+    private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
 
-    public UpdateStatusTaskHandler(IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, IGenericRepository<SystemMessage> systemMessageRepo)
+    public UpdateStatusTaskHandler(
+        IGenericRepository<IntranetWebApi.Domain.Models.Entities.Task> taskRepo, 
+        IGenericRepository<SystemMessage> systemMessageRepo,
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
     {
         _taskRepo = taskRepo;
         _systemMessageRepo = systemMessageRepo;
+        _systemMessagesHub = systemMessagesHub;
     }
 
     public async Task<BaseResponse> Handle(UpdateStatusTaskCommand request, CancellationToken cancellationToken)
@@ -70,7 +76,10 @@ public class UpdateStatusTaskHandler : IRequestHandler<UpdateStatusTaskCommand, 
                 AddedDate = DateTime.Now
             };
 
-            await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+            var addResponse = await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+
+            if (addResponse.Succeeded)
+                await _systemMessagesHub.Clients.All.NewSystemMessage();
         }
 
         return new BaseResponse()

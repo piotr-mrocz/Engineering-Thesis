@@ -47,6 +47,7 @@ if (!app.Environment.IsDevelopment())
 
 IntranetWebApi.Infrastructure.Extensions.ServiceExtensions.SeedDatabase(app.Services.CreateScope());
 app.MapHub<MessageHubClient>("/conversation");
+app.MapHub<SystemMessageHubClient>("/systemMessages");
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseAuthentication();
 app.UseHttpsRedirection();

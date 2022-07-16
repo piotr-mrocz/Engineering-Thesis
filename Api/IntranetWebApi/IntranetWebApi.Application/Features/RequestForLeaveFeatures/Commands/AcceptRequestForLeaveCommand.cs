@@ -9,6 +9,7 @@ using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
 using IntranetWebApi.Models.Response;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands;
 
@@ -22,15 +23,18 @@ public class AcceptRequestForLeaveHandler : IRequestHandler<AcceptRequestForLeav
     private readonly IGenericRepository<RequestForLeave> _requestRepo;
     private readonly IGenericRepository<User> _userRepo;
     private readonly IGenericRepository<SystemMessage> _systemMessageRepo;
+    private readonly IHubContext<SystemMessageHubClient, ISystemMessageHubClient> _systemMessagesHub;
 
     public AcceptRequestForLeaveHandler(
         IGenericRepository<RequestForLeave> requestRepo, 
         IGenericRepository<User> userRepo, 
-        IGenericRepository<SystemMessage> systemMessageRepo)
+        IGenericRepository<SystemMessage> systemMessageRepo,
+        IHubContext<SystemMessageHubClient, ISystemMessageHubClient> systemMessagesHub)
     {
         _requestRepo = requestRepo;
         _userRepo = userRepo;
         _systemMessageRepo = systemMessageRepo;
+        _systemMessagesHub = systemMessagesHub;
     }
 
     public async Task<BaseResponse> Handle(AcceptRequestForLeaveCommand request, CancellationToken cancellationToken)
@@ -98,6 +102,9 @@ public class AcceptRequestForLeaveHandler : IRequestHandler<AcceptRequestForLeav
             AddedDate = DateTime.Now
         };
 
-        await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+        var response = await _systemMessageRepo.CreateEntity(systemMessage, cancellationToken);
+
+        if (response.Succeeded)
+            await _systemMessagesHub.Clients.All.NewSystemMessage();
     }
 }
