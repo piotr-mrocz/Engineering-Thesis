@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using IntranetWebApi.Application.Features.ImportantInfoFeatures.Commands;
 using IntranetWebApi.Application.Features.PresenceFeatures.Commands;
-using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
-using IntranetWebApi.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +18,6 @@ public class GeneralProfile : Profile
         CreateMap<PresenceDto, Presence>();
         CreateMap<List<PresenceDto>, List<Presence>>();
         CreateMap<UpdatePresenceCommand, Presence>();
-        #endregion Presence
-
-        #region Test
-        CreateMap<CreateTestowaTabelaCommand, Test>();
-        CreateMap<UpdateTesowaTabelaCommand, Test>();
-        #endregion
+        #endregion Presence 
     }
 }

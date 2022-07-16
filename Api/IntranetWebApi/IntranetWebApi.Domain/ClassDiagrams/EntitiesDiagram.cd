@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Department">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Department.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.ImportantInfo">
+    <Position X="0.5" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAEACAAA=</HashCode>
+      <FileName>Models\Entities\ImportantInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Message">
+    <Position X="3.5" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgIAACAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Photo">
+    <Position X="6.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Photo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Position">
+    <Position X="3.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Presence">
+    <Position X="0.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAGAAAAAAAAAAAAAAAIIAgAAARACAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Presence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.PresenceToAddDto">
+    <Position X="9.5" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGAAAAAAAAAAAAAAAIAAgAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\PresenceToAddDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.RequestForLeave">
+    <Position X="3.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAEEAABAAAAIQAAAAAwAAAAAAAAgAABAEAAAAA=</HashCode>
+      <FileName>Models\Entities\RequestForLeave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Role">
+    <Position X="9.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.SystemMessage">
+    <Position X="6.5" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAACAAAABAAAAAAEAAAAAAAAAAAAAgAAEAAAAA=</HashCode>
+      <FileName>Models\Entities\SystemMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.Task">
+    <Position X="6.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AQBDAAAECAAiAEAEAAAAAAAAAAAAAAAAAAkAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Task.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Entities.User">
+    <Position X="9.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>QAACAEAgAKAAACIwEQAAAAAAEAAQAAAjAAgdoAAAAAg=</HashCode>
+      <FileName>Models\Entities\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -9,7 +9,6 @@ using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Domain.Models.ViewModels;
 using IntranetWebApi.Infrastructure.Repository;
-using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Response;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;

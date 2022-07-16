@@ -1,13 +1,10 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using IntranetWebApi.Application.Extensions;
-using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Command;
-using IntranetWebApi.Application.Features.TestowaTabelaFeatures.Validators;
 using IntranetWebApi.Application.Repository;
 using IntranetWebApi.Application.Services;
 using IntranetWebApi.Infrastructure.Interfaces;
 using IntranetWebApi.Infrastructure.Repository;
-using IntranetWebApi.Models.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;

@@ -8,7 +8,6 @@ using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Dto;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Repository;
-using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Response;
 using MediatR;
 

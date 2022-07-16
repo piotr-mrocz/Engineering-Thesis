@@ -2,7 +2,6 @@
 using IntranetWebApi.Domain.Enums;
 using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Helper;
-using IntranetWebApi.Models.Entities;
 using IntranetWebApi.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 

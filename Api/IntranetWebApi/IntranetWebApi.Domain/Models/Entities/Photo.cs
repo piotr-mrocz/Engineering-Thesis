@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using IntranetWebApi.Models.Entities;
-
-namespace IntranetWebApi.Domain.Models.Entities;
+﻿namespace IntranetWebApi.Domain.Models.Entities;
 
 public class Photo
 {

@@ -116,3 +116,9 @@ D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\ne
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\net6.0\IntranetWebApi.pdb
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\net6.0\IntranetWebApi.genruntimeconfig.cache
 D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\obj\Debug\net6.0\ref\IntranetWebApi.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Microsoft.AspNet.SignalR.Core.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Microsoft.Owin.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Microsoft.Owin.Host.SystemWeb.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+D:\Nauka\Repos\Engineering-Thesis\Api\IntranetWebApi\IntranetWebApi\bin\Debug\net6.0\Owin.dll

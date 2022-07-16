@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntranetWebApi.Domain.Models.Dto.AddImportantInfoDto">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\Dto\AddImportantInfoDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.ChangeUserPasswordDto">
+    <Position X="0.5" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAFAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\ChangeUserPasswordDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.CountUnReadSystemMessages">
+    <Position X="0.5" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\CountUnReadSystemMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.DepartmentDto">
+    <Position X="3.25" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\DepartmentDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.GetAllRequestsForLeaveToAcceptDto">
+    <Position X="8.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAwAAAAAAAAgAgASEAAAAA=</HashCode>
+      <FileName>Models\Dto\GetAllRequestsForLeaveToAcceptDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.GetAllUserRequestsForLeaveDto">
+    <Position X="11" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAEEAAAAAIAAAAAAAAwAAAAAAAAAgAACEAAAAA=</HashCode>
+      <FileName>Models\Dto\GetAllUserRequestsForLeaveDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.GetImportantInfoDto">
+    <Position X="3.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEAAAAA=</HashCode>
+      <FileName>Models\Dto\GetImportantInfoDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.GetPresenceByIdUserDto">
+    <Position X="0.5" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAEAAAAAAAAAACAAAAIIAgEAARACAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\GetPresenceByIdUserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.GetPresenceByIdUserListDto">
+    <Position X="8.5" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAABAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\GetPresenceByIdUserListDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.GetUsersPositionsAndDepartmentsAndRolesDto">
+    <Position X="13.5" Y="2" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgACAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\GetUsersPositionsAndDepartmentsAndRolesDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.LoginDto">
+    <Position X="13.5" Y="3.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Dto\LoginDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.PhotoToAddDto">
+    <Position X="13.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\PhotoToAddDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.PossibleAbsenceToChooseDto">
+    <Position X="3.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\PossibleAbsenceToChooseDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.PresenceDto">
+    <Position X="3.25" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGAAAAAAAAAAAAAAAIIAgAAARACAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\PresenceDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.PresenceToAddRangeDto">
+    <Position X="8.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGAAAAAAAAAAAAAAgAAAAAAAAACAAAEAAAAA=</HashCode>
+      <FileName>Models\Dto\PresenceToAddRangeDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.PresenceToUpdateDto">
+    <Position X="11" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAGAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\PresenceToUpdateDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.PriorityDto">
+    <Position X="13.5" Y="5.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\PriorityDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.RequestForLeaveToAddDto">
+    <Position X="6" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGAAgAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\Dto\RequestForLeaveToAddDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.SystemMessageDto">
+    <Position X="6" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAEAAAAA=</HashCode>
+      <FileName>Models\Dto\SystemMessageDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.TaskDto">
+    <Position X="6" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEBCAAAECAAiAEAEAAAAAAAAAAAAAAAAAAkAAAACAAA=</HashCode>
+      <FileName>Models\Dto\TaskDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.TaskUserDto">
+    <Position X="11" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEBDAAAECAAiAEAEAAAAAAAAAAAAAAAAAAkAAAAKAAA=</HashCode>
+      <FileName>Models\Dto\TaskUserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserConversationDto">
+    <Position X="0.5" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgIAACAAAACAAAAAAAAAAABgAAAAAAAIAAA=</HashCode>
+      <FileName>Models\Dto\UserConversationDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserDetailsDto">
+    <Position X="13.5" Y="6.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAwAAAAQAAAEAAAAAAAAUAAAAIIAAA=</HashCode>
+      <FileName>Models\Dto\UserDetailsDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserDto">
+    <Position X="11" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\UserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserPresentsPerDayDto">
+    <Position X="8.5" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGAAAAAAAAAACAAAAIAAgAAAAASAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\UserPresentsPerDayDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UsersPresencesPerDayDto">
+    <Position X="6" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\Dto\UsersPresencesPerDayDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserToAddDto">
+    <Position X="6" Y="9.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAQAQAAAAAAAAAQAAAAAAgAIAAIAAg=</HashCode>
+      <FileName>Models\Dto\UserToAddDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserToUpdateDto">
+    <Position X="3.25" Y="8.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAACCAAAAAQAQAAAAAAAAAAAAAAAAgAIAAIAAg=</HashCode>
+      <FileName>Models\Dto\UserToUpdateDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Domain.Models.Dto.UserVacationInfoDto">
+    <Position X="8.5" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAgAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Dto\UserVacationInfoDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

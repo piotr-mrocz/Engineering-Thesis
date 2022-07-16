@@ -1,6 +1,5 @@
 ﻿using IntranetWebApi.Domain.Models.Entities;
 using IntranetWebApi.Infrastructure.Interfaces;
-using IntranetWebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntranetWebApi.Data;
@@ -9,7 +8,6 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
     public IntranetDbContext(DbContextOptions options) : base(options) { }
 
     #region DbSets
-    public DbSet<Test> TestowaTabela { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Photo> Photos { get; set; }
@@ -25,14 +23,6 @@ public class IntranetDbContext : DbContext, IIntranetDbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<Test>()
-                .Property(x => x.Name)
-                .IsRequired();
-
-        builder.Entity<Test>()
-                .Property(x => x.Number)
-                .IsRequired();
-
         builder.Entity<User>(user =>
         {
             user.HasOne(u => u.Role)

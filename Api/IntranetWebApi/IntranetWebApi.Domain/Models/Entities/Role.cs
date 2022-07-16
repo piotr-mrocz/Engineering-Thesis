@@ -1,6 +1,4 @@
-﻿using IntranetWebApi.Models.Entities;
-
-namespace IntranetWebApi.Domain.Models.Entities;
+﻿namespace IntranetWebApi.Domain.Models.Entities;
 
 public class Role
 {
