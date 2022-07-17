@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllPossibleAbsenceTypeToChooseQuery" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllPossibleAbsenceTypeToChooseQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllPossibleAbsenceTypeToChooseHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllPossibleAbsenceTypeToChooseQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllRequestsForLeaveByIdSupervisorQuery" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllRequestsForLeaveByIdSupervisorQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllRequestsForLeaveToAcceptByManagerHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIEAAAAAAAQEAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllRequestsForLeaveToAcceptByManagerQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllUserRequestsForLeaveHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllUserRequestsForLeaveQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.SystemMessagesFeatures.Commands.UpdateUnreadSystemMessagesCommand" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="4" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Features\SystemMessagesFeatures\Commands\UpdateUnreadSystemMessagesCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.SystemMessagesFeatures.Commands.UpdateUnreadSystemMessagesHandler" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="8.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAABAAAAAAAIAAAAAAAQAAAA=</HashCode>
+      <FileName>Features\SystemMessagesFeatures\Commands\UpdateUnreadSystemMessagesCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.SystemMessagesFeatures.Queries.GetAllSystemMessageQuery" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\SystemMessagesFeatures\Queries\GetAllSystemMessageQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.SystemMessagesFeatures.Queries.GetAllUnReadSystemMessageHandler" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="1.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAQAAAA=</HashCode>
+      <FileName>Features\SystemMessagesFeatures\Queries\GetAllSystemMessageQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.SystemMessagesFeatures.Queries.GetCountOnlyUnreadSystemMessagesQuery" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="7.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\SystemMessagesFeatures\Queries\GetCountOnlyUnreadSystemMessagesQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.SystemMessagesFeatures.Queries.GetOnlyUnreadSystemMessagesHandler" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="5.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAAA=</HashCode>
+      <FileName>Features\SystemMessagesFeatures\Queries\GetCountOnlyUnreadSystemMessagesQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.AddNewTaskCommand" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAACAAgAEAEAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\AddNewTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.AddNewTaskHandler" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="2.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAEAAAAAAAAAAAAAAAAAIAAAAAAAQIAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\AddNewTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.DeleteTaskCommand" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="9.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\DeleteTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.DeleteTaskHandler" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="7" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAEAAAAAAAAAAAAAAAAAIAAAAAAAQIAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\DeleteTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.UpdateStatusTaskCommand" BaseTypeListCollapsed="true">
+    <Position X="12" Y="15" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\UpdateStatusTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.UpdateStatusTaskHandler" BaseTypeListCollapsed="true">
+    <Position X="12" Y="10.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAEAAAAAAAAAAAAAAAAAIAAAAAAAQAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\UpdateStatusTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.UpdateTaskCommand" BaseTypeListCollapsed="true">
+    <Position X="12" Y="13" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAEAIAAAAAAAACAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\UpdateTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.UpdateTaskHandler" BaseTypeListCollapsed="true">
+    <Position X="12" Y="5.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAAAQAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Commands\UpdateTaskCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.GetAllUserTasksQuery" BaseTypeListCollapsed="true">
+    <Position X="12" Y="3.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Queries\GetAllUserTasksQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.GetAllUserTaskHandler" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="13" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQEAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Queries\GetAllUserTasksQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Queries.GetAllPriorityQuery" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="12.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Queries\GetAllPriorityQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Queries.GetAllPriorityHandler" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="11" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Queries\GetAllPriorityQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Queries.GetUsersTasksForSupervisorQuery" BaseTypeListCollapsed="true">
+    <Position X="12" Y="9" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Queries\GetUsersTasksForSupervisorQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Queries.GetUsersTasksForSupervisorHandler" BaseTypeListCollapsed="true">
+    <Position X="12" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAQAgEAAAAAAAAAAAAAAAIAAgAAAAQEEAA=</HashCode>
+      <FileName>Features\TaskFeatures\Queries\GetUsersTasksForSupervisorQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Validations.AddNewTaskValidator">
+    <Position X="8.5" Y="5.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Validations\AddNewTaskValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Validations.UpdateStatusTaskValidator">
+    <Position X="12" Y="16.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Validations\UpdateStatusTaskValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.TaskFeatures.Validations.UpdateTaskValidator">
+    <Position X="12" Y="7.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\TaskFeatures\Validations\UpdateTaskValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

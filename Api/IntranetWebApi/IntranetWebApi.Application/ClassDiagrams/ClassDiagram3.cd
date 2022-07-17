@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Commands.CreatePresenceCommand" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Commands\CreatePresenceCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Commands.CreatePresenceHandler" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="6.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Commands\CreatePresenceCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Commands.CreateRangePresenceCommand" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Commands\CreateRangePresenceCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Commands.CreateRangePresenceHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Commands\CreateRangePresenceCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Commands.UpdatePresenceCommand" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Commands\UpdatePresenceCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Commands.UpdatePresenceHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Commands\UpdatePresenceCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Queries.GetAllPossibleAbsenceTypeToChooseQuery" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="11.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Queries\GetAllPossibleAbsenceTypeToChooseQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Queries.GetAllPossibleAbsenceTypeToChooseHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="12" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Queries\GetAllPossibleAbsenceTypeToChooseQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Queries.GetPresencesUsersPerMonthQuery" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Queries\GetPresencesUsersPerMonthQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Queries.GetPresencesUsersPerMonthHandler" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="9" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAQAAAAAAIAAAAIAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Queries\GetPresencesUsersPerMonthQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Queries.GetUsersPresencePerDayQuery" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Queries\GetUsersPresencePerDayQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Queries.GetUsersPresencePerDayHandler" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAQAAAAAAIAAAAIAAAAEQA=</HashCode>
+      <FileName>Features\PresenceFeatures\Queries\GetUsersPresencePerDayQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Validations.CreatePresenceValidation">
+    <Position X="3.5" Y="9.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Validations\CreatePresenceValidation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Validations.GetPresenceByIdUserValidator">
+    <Position X="3.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Validations\GetPresenceByIdUserValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PresenceFeatures.Validations.UpdatePresenceValidator">
+    <Position X="0.5" Y="13.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PresenceFeatures\Validations\UpdatePresenceValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.AcceptRequestForLeaveCommand" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\AcceptRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.AcceptRequestForLeaveHandler" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAgAAIAAAAAAAQIFAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\AcceptRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.CreateRequestForLeaveCommand" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\CreateRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.CreateRequestForLeaveHandler" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAQQEIAAAAAAAAAAAAAAAAAAAAIAAAAAAAQIEAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\CreateRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.RejectRequestForLeaveCommand" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="9.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\RejectRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.RejectRequestForLeaveHandler" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="10.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAgAAIAAAAAAAQIFAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\RejectRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.RemoveRequestForLeaveCommand" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\RemoveRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Commands.RemoveRequestForLeaveHandler" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAgAAIAAAAAAAQIFAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Commands\RemoveRequestForLeaveCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllRequestsForLeaveByIdSupervisorHandler" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="10.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIEAAAAEAAAEAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllRequestsForLeaveByIdSupervisorQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllRequestsForLeaveToAcceptByManagerQuery" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllRequestsForLeaveToAcceptByManagerQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetAllUserRequestsForLeaveQuery" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetAllUserRequestsForLeaveQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetInformationAboutUserVacationDaysQuery" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetInformationAboutUserVacationDaysQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RequestForLeaveFeatures.Queries.GetInformationAboutUserVacationDaysHandler" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAEAA=</HashCode>
+      <FileName>Features\RequestForLeaveFeatures\Queries\GetInformationAboutUserVacationDaysQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

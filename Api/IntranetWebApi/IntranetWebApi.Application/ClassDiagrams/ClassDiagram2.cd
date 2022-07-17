@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntranetWebApi.Application.Features.RoleFeatures.Queries.GetAllDepartmentsQuery" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\DepartmentFeatures\Queries\GetAllDepartmentsQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.RoleFeatures.Queries.GetAllDepartmentsHandler">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\DepartmentFeatures\Queries\GetAllDepartmentsQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.ImportantInfoFeatures.Commands.AddImportantInfoCommand" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Features\ImportantInfoFeatures\Commands\AddImportantInfoCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.ImportantInfoFeatures.Commands.AddImportantInfoHandler" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\ImportantInfoFeatures\Commands\AddImportantInfoCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.ImportantInfoFeatures.Queries.GetImportantInfoQuery" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\ImportantInfoFeatures\Queries\GetImportantInfoQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.ImportantInfoFeatures.Queries.GetImportantInfoHandler" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="3.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAAAAAAAAAEAA=</HashCode>
+      <FileName>Features\ImportantInfoFeatures\Queries\GetImportantInfoQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.MessageFeatures.Commands.AddNewMessageCommand" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Features\MessageFeatures\Commands\AddNewMessageCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.MessageFeatures.Commands.AddNewMessageHandler" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAI=</HashCode>
+      <FileName>Features\MessageFeatures\Commands\AddNewMessageCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.UserFeatures.Commands.AddRangeNewMessagesCommand" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Features\MessageFeatures\Commands\AddRangeNewMessagesCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.UserFeatures.Commands.AddRangeNewMessagesHandler" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\MessageFeatures\Commands\AddRangeNewMessagesCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.MessageFeatures.Queries.GetUserConversationQuery" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Features\MessageFeatures\Queries\GetUserConversationQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.MessageFeatures.Queries.GetUserConversationHandler" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAACAAIAAAAAAAIAAAAAAAAAEAA=</HashCode>
+      <FileName>Features\MessageFeatures\Queries\GetUserConversationQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PhotoFeatures.Queries.GetUserPhotoNameQuery">
+    <Position X="9.5" Y="6.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PhotoFeatures\Queries\GetUserPhotoNameQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="IntranetWebApi.Application.Features.PhotoFeatures.Queries.GetUserPhotoNameHandler">
+    <Position X="9.5" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Features\PhotoFeatures\Queries\GetUserPhotoNameQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

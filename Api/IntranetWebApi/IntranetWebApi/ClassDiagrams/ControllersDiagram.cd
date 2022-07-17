@@ -56,18 +56,18 @@
       <FileName>Controllers\SystemMessageController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IntranetWebApi.Controllers.TaskController">
-    <Position X="11" Y="0.5" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AAABAABAAgAAAAQAAAAAABAABBAAAAAAAAAAAAAAgAA=</HashCode>
-      <FileName>Controllers\TaskController.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="IntranetWebApi.Controllers.UserController">
     <Position X="7.5" Y="5.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAABAAAwAAABAAEAAACAEAIAAAAAEIAAA=</HashCode>
       <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntranetWebApi.Controllers.TaskController">
+    <Position X="0.5" Y="9" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAABAAgAAAAQAAAAAABAABBAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Controllers\TaskController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
