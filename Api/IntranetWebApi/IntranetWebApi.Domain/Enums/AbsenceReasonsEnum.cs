@@ -7,7 +7,7 @@ public enum AbsenceReasonsEnum
     [Description("Urlop wypoczynkowy")]
     Holiday = 1,
 
-    [Description("Urlop macieżyński")]
+    [Description("Urlop macierzyński")]
     MaternityLeave = 2,
 
     [Description("Urlop na żądanie")]
