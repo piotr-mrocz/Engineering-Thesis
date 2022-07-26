@@ -7,7 +7,6 @@ namespace IntranetWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-//[Authorize]
 public class DepartmentController : ControllerBase
 {
     private readonly IMediator _mediator;

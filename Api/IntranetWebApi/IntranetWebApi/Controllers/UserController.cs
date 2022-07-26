@@ -9,7 +9,6 @@ namespace IntranetWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-//[Authorize]
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -22,7 +21,6 @@ public class UserController : ControllerBase
     #region Commands
 
     [HttpPost]
-    //[Authorize(Roles = RolesConst.Admin)]
     public async Task<IActionResult> AddNewUser([FromBody] AddNewUserCommand request)
         => Ok(await _mediator.Send(request));
 

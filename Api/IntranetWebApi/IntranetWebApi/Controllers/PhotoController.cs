@@ -15,9 +15,6 @@ public class PhotoController : ControllerBase
         _mediator = mediator;
     }
 
-    #region Commands
-    #endregion Commands
-
     #region Queries
 
     [HttpPost]
